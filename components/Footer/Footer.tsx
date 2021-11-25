@@ -25,7 +25,7 @@ const Footer = () => {
                 <a className="footer-email-sub-text-link">
                   Política de Privacidad
                 </a>
-                </Link>.
+              </Link>.
             </p>
           </div>
           <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="footer-email-sub-input"/>
@@ -39,30 +39,31 @@ const Footer = () => {
                 <ul className="footer-left-side-column-section-list">
                   <li className="footer-left-side-column-section-item">
                     <Link href ="/">
-                      <a className="footer-left-side-column-section-link"></a>
-                      Cambios y devoluciones
-                      </Link>
+                      <a className="footer-left-side-column-section-link">
+                        Cambios y devoluciones
+                      </a>
+                    </Link>
                   </li>
                   <li className="footer-left-side-column-section-item">
                     <Link href ="/">
                       <a className="footer-left-side-column-section-link">
                         Preguntas frecuentes (FAQ)
                       </a>
-                      </Link>
+                    </Link>
                   </li>
                   <li className="footer-left-side-column-section-item">
                     <Link href ="/">
                       <a className="footer-left-side-column-section-link">
                         Política de cookies
                       </a>
-                      </Link>
+                    </Link>
                   </li>
                   <li className="footer-left-side-column-section-item">
                     <Link href ="/">
                       <a className="footer-left-side-column-section-link">
                         Configuración de cookies
                       </a>
-                      </Link>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -96,9 +97,21 @@ const Footer = () => {
           <div className="footer-legal-issues">
             <p>Reservados todos los derechos @ 2021 Rozaviht</p>
             <div className="legal-links">
-              <Link href="/">Seguridad y Privacidad</Link>
-              <Link href="/">Términos y Condiciones</Link>
-              <Link href="/">Servicio</Link>
+              <Link href="/">
+                <a>
+                  Seguridad y Privacidad
+                </a>
+              </Link>
+              <Link href="/">
+                <a>
+                  Términos y Condiciones
+                </a>
+              </Link>
+              <Link href="/">
+                <a>
+                  Servicio
+                </a>
+              </Link>
             </div>
           </div>
         </div>

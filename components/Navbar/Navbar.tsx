@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="nav-menu">
         <Link href="/aceite-cbd" >
           <a className="nav-menu-item">
-          Aceite CBD
+            Aceite CBD
           </a>
         </Link>
         <Link href="/rozaday" >
