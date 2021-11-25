@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@img/*": ["public/assets/img/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -15,7 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "module": "ESNext",
+    "jsx": "preserve"
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

@@ -22,7 +22,6 @@ yarn-error.log*
 
 
 # multimedia
-
 *.svg
 *.png
 *.jpg
