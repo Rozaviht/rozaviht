@@ -1,0 +1,36 @@
+@import "_medias";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #3f3e3e;
+  font-family: DIN-Medium;
+}
+
+html {
+  height: 100%;
+  font-size: 100%;
+}
+
+body,
+#root {
+  min-height: 100%;
+  display: contents;
+}
+
+body {
+  font-size: 0.8rem;
+
+  @include respond-to(desktop) {
+    font-size: 1;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}

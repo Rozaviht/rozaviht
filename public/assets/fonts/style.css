@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "DIN-Bold";
+  src: url("DIN-Bold.otf");
+}
+@font-face {
+  font-family: "DIN-Medium";
+  src: url("DIN-Medium.otf");
+}
+@font-face {
+  font-family: "DIN-Light";
+  src: url("DIN-Light.otf");
+}
+@font-face {
+  font-family: "Lora-Regular";
+  src: url("Lora-Regular.ttf");
+}
+@font-face {
+  font-family: "Lora-Medium";
+  src: url("Lora-Medium.ttf");
+}
+@font-face {
+  font-family: "Lora-Italic";
+  src: url("Lora-Italic.ttf");
+}
