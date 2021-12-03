@@ -6,7 +6,7 @@
         "components/*"
       ],
       "@img/*": [
-        "public/assets/img/*"
+        "public/img/*"
       ]
     },
     "target": "es6",

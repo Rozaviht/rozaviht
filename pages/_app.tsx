@@ -7,9 +7,28 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <Component {...pageProps} />
-    </Layout>
+      <style jsx global>{`
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          color: #3f3e3e;
+          font-family: DIN-Medium;
+        }
 
-  )
+        html {
+          height: 100vh;
+          font-size: 100%;
+        }
+
+        body,
+        #__next{
+          min-height: 100%;
+          display: contents;
+        }        
+      `}</style>
+    </Layout>
+    )
 }
 
 // Only uncomment this method if you have blocking data requirements for

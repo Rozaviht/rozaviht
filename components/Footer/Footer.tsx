@@ -1,5 +1,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+
+import Logo from '@img/Logo.svg'
+import instagramIcon from '@img/instagram-icon.svg'
+import facebookIcon from '@img/facebook-icon.svg'
 
 const Footer = () => {
   const [click, setClick] = useState(false)
@@ -79,12 +84,14 @@ const Footer = () => {
             <div className="social-icons">
               <Link href="/">
                 <a className="social-icons-links">
-                  <img src={''} alt="Enlace facebook" />
+                  <div className="image-container">
+                    <Image src={facebookIcon} alt="Enlace facebook"  className="image"/>
+                  </div>
                 </a>
               </Link>
               <Link href="/">
                 <a className="social-icons-links">
-                  <img src={''} alt="Enlace imstagram" />
+                  <Image src={instagramIcon} alt="Enlace imstagram" />
                 </a>
               </Link>
             </div>
@@ -92,7 +99,7 @@ const Footer = () => {
         </div>
         <div className="footer-legal">
           <div className="footer-legal-logo">
-            <img  className="footer-logo" src={''} alt="Logo" />
+            <Image  className="footer-logo" src={Logo} alt="Logo"  width={50} height={20}/>
           </div>
           <div className="footer-legal-issues">
             <p>Reservados todos los derechos @ 2021 Rozaviht</p>
