@@ -25,7 +25,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         #__next{
           min-height: 100%;
           display: contents;
-        }        
+        }
+
+        .font-Lora {
+          font-family: Lora-Medium;
+        }
       `}</style>
     </Layout>
     )

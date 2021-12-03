@@ -12,8 +12,8 @@ const index = () => {
     <div className="home-wrapper">
       <div className="home-banner"></div>
       <div className="home-info">
-        <h2>Siempre a tu disposición</h2>
-        <p>Envios solo a Península</p>
+        <h3 className="font-Lora">Siempre a tu disposición</h3>
+        <p className="font-Lora">Envios solo a Península</p>
       </div>
       <div className="section section--oil">
         <div className="section-banner">
