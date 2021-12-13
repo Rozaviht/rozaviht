@@ -49,7 +49,7 @@ const Navbar = () => {
       <button className="nav-basket" onClick={handleShowCart}>
           <Image className="basket" src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
         </button>
-      <Cart handleShowCart={handleShowCart} showCart={showCart} />
+{/*       <Cart handleShowCart={handleShowCart} showCart={showCart} /> */}
     </div>
   </div>
   )
