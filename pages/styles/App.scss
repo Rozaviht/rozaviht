@@ -1,0 +1,12 @@
+/* GLOBAL FEATURES */
+@import "_medias";
+@import "_variables";
+@import "_global";
+
+/* COMPONENTS */
+@import "./components/layout";
+@import "./components/navbar";
+@import "./components/footer";
+
+/* PAGES */
+@import "./pages/index";

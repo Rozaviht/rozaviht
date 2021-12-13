@@ -1,0 +1,16 @@
+@import "../_variables";
+@import "../medias";
+
+/* Styles */
+.wrapper {
+  height: 100%;
+  background-color: $backgroundcolor;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4rem 1fr 0.4fr;
+  grid-template-areas:
+    "navbar"
+    "."
+    "footer";
+}

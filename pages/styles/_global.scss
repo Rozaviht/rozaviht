@@ -1,0 +1,17 @@
+@import "_medias";
+
+body {
+  font-size: 0.8rem;
+
+  @include respond-to(desktop) {
+    font-size: 1;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}

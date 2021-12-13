@@ -1,0 +1,111 @@
+@import "../variables";
+@import "../medias";
+
+.nav {
+  grid-area: navbar;
+}
+
+.nav-wrapper {
+  width: 100%;
+  height: 100%;
+
+  padding-left: 5%;
+  padding-right: 5%;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 0.2fr;
+  grid-template-areas:
+    "logo basket"
+    "navMenu navMenu";
+
+  @include respond-to(mobileLandscape) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 0.3fr 1fr 0.3fr;
+    grid-template-areas: "logo navMenu basket";
+  }
+  @include respond-to(tabletPortrait) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
+.nav-logo {
+  grid-area: logo;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  margin-left: 20%;
+
+  @include respond-to(mobileLandscape) {
+    width: 80%;
+  }
+
+  @include respond-to(tabletLandscape) {
+  }
+}
+
+.nav-menu {
+  grid-area: navMenu;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  border-top: 1px solid $maincolor;
+
+  &-item {
+    font-family: DIN-Medium;
+    font-size: 0.8rem;
+  }
+
+  @include respond-to(mobileLandscape) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding-right: 20%;
+
+    & .nav-menu-item {
+      margin-left: 2rem;
+    }
+  }
+
+  @include respond-to(tabletLandscape) {
+    padding-right: 12%;
+
+    & .nav-menu-item {
+      font-size: initial;
+    }
+  }
+}
+
+.nav-basket {
+  background-color: unset;
+  border: unset;
+  grid-area: basket;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .basket {
+    width: 35%;
+  }
+
+  @include respond-to(mobileLandscape) {
+    & .basket {
+      width: 20%;
+    }
+  }
+}
