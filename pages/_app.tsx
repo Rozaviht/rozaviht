@@ -1,37 +1,40 @@
 import { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
 import Layout from '@components/Layout'
 
 import '../pages/styles/App.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-      <style jsx global>{`
-        *{
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          color: #3f3e3e;
-          font-family: DIN-Medium;
-        }
+    <SessionProvider session={pageProps.session}>
+      <Layout>
+        <Component {...pageProps} />
+        <style jsx global>{`
+          *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #3f3e3e;
+            font-family: DIN-Medium;
+          }
 
-        html {
-          height: 100vh;
-          font-size: 100%;
-        }
+          html {
+            height: 100vh;
+            font-size: 100%;
+          }
 
-        body,
-        #__next{
-          min-height: 100%;
-          display: contents;
-        }
+          body,
+          #__next{
+            min-height: 100%;
+            display: contents;
+          }
 
-        .font-Lora {
-          font-family: Lora-Medium;
-        }
-      `}</style>
-    </Layout>
+          .font-Lora {
+            font-family: Lora-Medium;
+          }
+        `}</style>
+      </Layout>
+    </SessionProvider>
     )
 }
 
