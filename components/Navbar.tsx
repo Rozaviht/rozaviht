@@ -1,13 +1,32 @@
+import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
+import Cart from './Cart'
+
+import Logo from '@img/Logo.svg'
+import Cesta from '@img/Cesta.svg'
+
+export type CartProps = {
+  showCart: boolean
+  handleShowCart: boolean
+}
 
 const Navbar = () => {
+  const [showCart, setShowCart] = useState(false);
+
+  const handleShowCart = () => {
+    setShowCart(!showCart)
+  } 
+
+
+
   return (
     <div className="nav">
     <div className="nav-wrapper">
       <Link href="/">
         <a  className="nav-logo">
-          <img  className="logo"  src={''} alt="Logo" />
+          <Image src={Logo} alt="Logo"/>
         </a>
       </Link>
       <div className="nav-menu">
@@ -27,6 +46,10 @@ const Navbar = () => {
           </a>
         </Link>
       </div>
+      <button className="nav-basket" onClick={handleShowCart}>
+          <Image className="basket" src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
+        </button>
+      <Cart handleShowCart={handleShowCart} showCart={showCart} />
     </div>
   </div>
   )
