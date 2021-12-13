@@ -18,7 +18,7 @@ const index = () => {
     <>
     {!session && (
       <>
-        Not signed in <br />
+        Not signed in hello <br />
         <button onClick={signIn}>Sign in</button>
       </>
     )}
