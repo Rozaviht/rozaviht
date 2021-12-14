@@ -36,5 +36,5 @@
     "types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "pages/index.js"  ]
 }

@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 import Logo from '@img/Logo.svg'
 import oilIllustration from '@img/oil-ilustration.svg'
 import oilSectionBanner from '@img/pexels-cottonbro-seccion-aceite.jpg'
 import rozadaySectionBanner from '@img/pexels-cottonbro-rozaday-section.jpg'
 import rozavihtSectionBanner from '@img/pexels-ganta-guywatching.jpg'
+
+
 
 const index = () => {
   const [session, loading] = useSession()
