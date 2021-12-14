@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Cart from './Cart'
 
 import Logo from '@img/Logo.svg'
 import Cesta from '@img/Cesta.svg'
@@ -49,7 +48,6 @@ const Navbar = () => {
       <button className="nav-basket" onClick={handleShowCart}>
           <Image className="basket" src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
         </button>
-      <Cart handleShowCart={handleShowCart} showCart={showCart} />
     </div>
   </div>
   )
