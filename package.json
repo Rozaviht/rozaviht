@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next build lint"
+    "start": "next build || next lint"
   },
   "dependencies": {
     "next": "^12.0.4",
