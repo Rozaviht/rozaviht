@@ -7,6 +7,9 @@
       ],
       "@img/*": [
         "public/img/*"
+      ],
+      "@styles/*": [
+        "pages/styles/*"
       ]
     },
     "target": "es6",
