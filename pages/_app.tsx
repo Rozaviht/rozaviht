@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         html {
           height: 100vh;
           font-size: 100%;
+          background-color: #cecece
         }
 
         body,

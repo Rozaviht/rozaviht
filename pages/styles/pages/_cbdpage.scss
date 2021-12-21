@@ -1,0 +1,136 @@
+@import "../medias";
+@import "../variables";
+
+.product-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "main"
+    "ingredientes"
+    "info";
+}
+
+.product-details {
+  grid-area: main;
+
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  &-imgs {
+    background-color: lightcoral;
+    width: 100%;
+    height: 30rem;
+  }
+
+  &-cta {
+    width: 12rem;
+    height: 3rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+
+    color: #fff;
+    border: unset;
+    border-radius: 8px;
+    background-color: $maincolor;
+  }
+
+  & .delivery-info {
+    margin-top: 1rem;
+    font-family: DIN-Bold;
+  }
+
+  & .product-title {
+    font-size: 2.5rem;
+    font-family: Lora-Regular;
+    font-weight: 500;
+  }
+
+  & .product-price {
+    font-size: 1.8rem;
+    font-family: Lora-Regular;
+  }
+}
+
+.oil-percentage {
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &-list {
+    width: 10rem;
+    height: 2rem;
+    margin-left: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1rem 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "first . second";
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+
+      &.selected {
+        background-color: $maincolor;
+        color: $backgroundcolor;
+        border-radius: 8px;
+      }
+
+      &:nth-child(1) {
+        grid-area: first;
+      }
+      &:nth-child(2) {
+        grid-area: second;
+      }
+    }
+  }
+}
+
+.amount {
+  width: 3rem;
+  height: 3rem;
+  background-color: $maincolor;
+  border-radius: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "number plus"
+    "number minus";
+
+  &-bt {
+    background-color: unset;
+    border: unset;
+    font-size: 1rem;
+    color: $backgroundcolor;
+    border-left: 0.5px solid $backgroundcolor;
+    &.bt--plus {
+      grid-area: plus;
+      border-bottom: 0.5px solid $backgroundcolor;
+    }
+    &.bt--minus {
+      grid-area: minus;
+    }
+  }
+
+  &-input {
+    grid-area: number;
+    width: 100%;
+
+    background-color: unset;
+    border: unset;
+    color: $backgroundcolor;
+
+    text-align: center;
+    font-size: 1rem;
+  }
+}
