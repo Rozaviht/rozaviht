@@ -1,14 +1,25 @@
 import { useState } from "react"
 
 export type ProductsProps = {
-  oilType: number
-  price: number
-  selected: number
-  finalPrice: number
+  oilType: number;
+  price: number;
+  selected: number;
+  finalPrice: number;
+}
+
+export type CartItemType = {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  amount: number;
 }
 
 
 const cbdPage = () => {
+  const [cartProducts, setCartProducts] = useState([] as CartItemType[])
   const [amount, setAmount] = useState(1)
   const [price, setPrice] = useState(45)
   const [selected, setSelected] = useState(1)
@@ -37,6 +48,24 @@ const cbdPage = () => {
       setSelected(2)
     }
     setAmount(1)
+  }
+
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartProducts(prev => {
+      /* 1. Is the item already add in the cart? */
+      const isItemInCart = prev.find(item => item.id === clickedItem.id)
+
+      if (isItemInCart) {
+        return prev.map(item =>
+            item.id === clickedItem.id
+              ? {...item, amount: item.amount + 1}
+              : item
+          )
+      }
+
+      /* First time the item is added */
+      return[...prev, { ...clickedItem, amount: 1}]
+    })
   }
 
   return(
@@ -71,7 +100,7 @@ const cbdPage = () => {
                 <input className="amount-input" type="number" value={amount} disabled="disabled"/>
                 <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
             </div>
-            <button className="product-details-cta">Añadir a la cesta</button> 
+            <button className="product-details-cta" onClick={() => handleAddToCart(product)}>Añadir a la cesta</button> 
           </div>
           <p className="delivery-info">Tiempo de envío de 3 a 7 días laborales</p>
         </div>

@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//Product schema
+
+model Product {
+  id                 Int               @id @default(autoincrement())
+  name               String
+  description        String
+  price              Int
+  createdAt          DateTime          @default(now()) @map(name: "created_ at")
+  modifiedAt         DateTime          @updatedAt @map(name: "modified_at")
+  deletedAt          DateTime          @default(now()) @map(name: "deleted_at")
+  // A Product can have one ProductCategory
+  ProductCategory    ProductCategory?  @relation(fields: [ProductCategoryId], references: [id])
+  ProductCategoryId  Int?              @unique
+  // A Product can have one ProductInventory
+  ProductInventory   ProductInventory? @relation(fields: [ProductInventoryId], references: [id])
+  ProductInventoryId Int?              @unique
+  // A Product can have many Discounts
+  Discount           Discount[]
+}
+
+model ProductCategory {
+  id          Int       @id @default(autoincrement())
+  name        String?
+  description String?
+  createdAt   DateTime  @default(now()) @map(name: "created_ at")
+  modifiedAt  DateTime  @updatedAt @map(name: "modified_at")
+  deletedAt   DateTime  @default(now()) @map(name: "deleted_at")
+  // A ProductCategory can have many products
+  Product     Product[]
+}
+
+model ProductInventory {
+  id         Int      @id @default(autoincrement())
+  quantity   Int
+  createdAt  DateTime @default(now()) @map(name: "created_ at")
+  modifiedAt DateTime @updatedAt @map(name: "modified_at")
+  deletedAt  DateTime @default(now()) @map(name: "deleted_at")
+  // A ProductInventory can have one Product
+  Product    Product?
+  ProductId  Int?     @unique
+}
+
+model Discount {
+  id          Int      @id @default(autoincrement())
+  name        String?
+  description String?
+  // A Discount can have one Product
+  Product     Product? @relation(fields: [ProductId], references: [id])
+  ProductId   Int?     @unique
+
+}
+
+//Articles schema
+
+model Articles {
+  id                    Int                  @id @default(autoincrement())
+  title                 String
+  content               String?
+  subCategory           String
+  published             Boolean              @default(false)
+  createdAt             DateTime             @default(now()) @map(name: "created_at")
+  modifiedAt            DateTime             @updatedAt @map(name: "modified_at")
+  deletedAt             DateTime             @default(now()) @map(name: "deleted_at")
+  // An article can have one ArticleSubCategorie
+  ArticlesSubCategory   ArticlesSubCategory? @relation(fields: [ArticlesSubCategoryId], references: [id])
+  ArticlesSubCategoryId Int?                 @unique
+}
+
+model ArticlesSubCategory {
+  id                 Int               @id @default(autoincrement())
+  name               String
+  // An ArticleSubCategory can have many Articles
+  Articles           Articles[]
+  // An ArticleSubCategory can have one ArticleCategory
+  ArticlesCategory   ArticlesCategory? @relation(fields: [ArticlesCategoryId], references: [id])
+  ArticlesCategoryId Int?              @unique
+}
+
+model ArticlesCategory {
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  //// An ArticleCategory can have many ArticlesSubCategories
+  ArticlesSubCategory ArticlesSubCategory[]
+}
