@@ -12,21 +12,20 @@ datasource db {
 //Product schema
 
 model Product {
-  id                 Int               @id @default(autoincrement())
-  name               String
-  description        String
-  price              Int
-  createdAt          DateTime          @default(now()) @map(name: "created_ at")
-  modifiedAt         DateTime          @updatedAt @map(name: "modified_at")
-  deletedAt          DateTime          @default(now()) @map(name: "deleted_at")
+  id           Int               @id @default(autoincrement())
+  name         String
+  description  String
+  price        Int
+  createdAt    DateTime          @default(now()) @map(name: "created_ at")
+  modifiedAt   DateTime          @updatedAt @map(name: "modified_at")
+  deletedAt    DateTime          @default(now()) @map(name: "deleted_at")
   // A Product can have one ProductCategory
-  ProductCategory    ProductCategory?  @relation(fields: [ProductCategoryId], references: [id])
-  ProductCategoryId  Int?              @unique
+  categories   ProductCategory   @relation(fields: [categoriesId], references: [id])
+  categoriesId Int
   // A Product can have one ProductInventory
-  ProductInventory   ProductInventory? @relation(fields: [ProductInventoryId], references: [id])
-  ProductInventoryId Int?              @unique
+  inventory    ProductInventory?
   // A Product can have many Discounts
-  Discount           Discount[]
+  discounts    Discount[]
 }
 
 model ProductCategory {
@@ -37,7 +36,7 @@ model ProductCategory {
   modifiedAt  DateTime  @updatedAt @map(name: "modified_at")
   deletedAt   DateTime  @default(now()) @map(name: "deleted_at")
   // A ProductCategory can have many products
-  Product     Product[]
+  products    Product[]
 }
 
 model ProductInventory {
@@ -47,17 +46,16 @@ model ProductInventory {
   modifiedAt DateTime @updatedAt @map(name: "modified_at")
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
   // A ProductInventory can have one Product
-  Product    Product?
-  ProductId  Int?     @unique
+  products   Product  @relation(fields: [productId], references: [id])
+  productId  Int      @unique
 }
 
 model Discount {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String?
   description String?
-  // A Discount can have one Product
-  Product     Product? @relation(fields: [ProductId], references: [id])
-  ProductId   Int?     @unique
+  // A Discount can have many Product
+  products    Product[]
 
 }
 
