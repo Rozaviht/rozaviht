@@ -12,21 +12,20 @@ datasource db {
 //Product schema
 
 model Product {
-  id                 Int               @id @default(autoincrement())
-  name               String
-  description        String
-  price              Int
-  createdAt          DateTime          @default(now()) @map(name: "created_ at")
-  modifiedAt         DateTime          @updatedAt @map(name: "modified_at")
-  deletedAt          DateTime          @default(now()) @map(name: "deleted_at")
+  id                Int               @id @default(autoincrement())
+  name              String
+  description       String
+  price             Int
+  createdAt         DateTime          @default(now()) @map(name: "created_ at")
+  modifiedAt        DateTime          @updatedAt @map(name: "modified_at")
+  deletedAt         DateTime          @default(now()) @map(name: "deleted_at")
   // A Product can have one ProductCategory
-  ProductCategory    ProductCategory?  @relation(fields: [ProductCategoryId], references: [id])
-  ProductCategoryId  Int?              @unique
+  ProductCategory   ProductCategory?  @relation(fields: [ProductCategoryId], references: [id])
+  ProductCategoryId Int
   // A Product can have one ProductInventory
-  ProductInventory   ProductInventory? @relation(fields: [ProductInventoryId], references: [id])
-  ProductInventoryId Int?              @unique
+  ProductInventory  ProductInventory?
   // A Product can have many Discounts
-  Discount           Discount[]
+  Discount          Discount[]
 }
 
 model ProductCategory {
@@ -47,49 +46,54 @@ model ProductInventory {
   modifiedAt DateTime @updatedAt @map(name: "modified_at")
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
   // A ProductInventory can have one Product
-  Product    Product?
-  ProductId  Int?     @unique
+  Product    Product  @relation(fields: [ProductId], references: [id])
+  ProductId  Int      @unique
 }
 
 model Discount {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String?
   description String?
-  // A Discount can have one Product
-  Product     Product? @relation(fields: [ProductId], references: [id])
-  ProductId   Int?     @unique
+  // A Discount can have many Product
+  Product     Product[]
 
 }
 
 //Articles schema
 
 model Articles {
-  id                    Int                  @id @default(autoincrement())
-  title                 String
-  content               String?
-  subCategory           String
-  published             Boolean              @default(false)
-  createdAt             DateTime             @default(now()) @map(name: "created_at")
-  modifiedAt            DateTime             @updatedAt @map(name: "modified_at")
-  deletedAt             DateTime             @default(now()) @map(name: "deleted_at")
+  id            Int                   @id @default(autoincrement())
+  title         String
+  content       String?
+  published     Boolean               @default(false)
+  createdAt     DateTime              @default(now()) @map(name: "created_at")
+  modifiedAt    DateTime              @updatedAt @map(name: "modified_at")
+  deletedAt     DateTime              @default(now()) @map(name: "deleted_at")
   // An article can have one ArticleSubCategorie
-  ArticlesSubCategory   ArticlesSubCategory? @relation(fields: [ArticlesSubCategoryId], references: [id])
-  ArticlesSubCategoryId Int?                 @unique
+  subcategories ArticlesSubCategory[]
 }
 
 model ArticlesSubCategory {
   id                 Int               @id @default(autoincrement())
   name               String
+  description        String
+  createdAt          DateTime          @default(now()) @map(name: "created_at")
+  modifiedAt         DateTime          @updatedAt @map(name: "modified_at")
+  deletedAt          DateTime          @default(now()) @map(name: "deleted_at")
   // An ArticleSubCategory can have many Articles
   Articles           Articles[]
   // An ArticleSubCategory can have one ArticleCategory
   ArticlesCategory   ArticlesCategory? @relation(fields: [ArticlesCategoryId], references: [id])
-  ArticlesCategoryId Int?              @unique
+  ArticlesCategoryId Int?
 }
 
 model ArticlesCategory {
   id                  Int                   @id @default(autoincrement())
   name                String
+  description         String
+  createdAt           DateTime              @default(now()) @map(name: "created_at")
+  modifiedAt          DateTime              @updatedAt @map(name: "modified_at")
+  deletedAt           DateTime              @default(now()) @map(name: "deleted_at")
   //// An ArticleCategory can have many ArticlesSubCategories
   ArticlesSubCategory ArticlesSubCategory[]
 }
