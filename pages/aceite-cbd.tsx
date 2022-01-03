@@ -26,7 +26,7 @@ export type ProductProps = {
 }
 
 export const getStaticProps = async () => {
-  const ProductDetails: ProductProps[] = await prisma.product.findMany({
+  const ProductDetails = await prisma.product.findMany({
     })
     return {
       props: { ProductDetails }
@@ -66,24 +66,6 @@ const cbdPage = ({ProductDetails}) => {
     setAmountSelected(1)
   }
 
-  const handleAddToCart = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      /* 1. Is the item already add in the cart? */
-      const isItemInCart = prev.find(item => item.id === clickedItem.id)
-
-      if (isItemInCart) {
-        return prev.map(item =>
-            item.id === clickedItem.id
-              ? {...item, amount: item.amount + 1}
-              : item
-          )
-      }
-
-      /* First time the item is added */
-      return[...prev, { ...clickedItem, amount: 1}]
-    })
-  }
-
   return(
     <div className="product-page">
       <div className="product-details">
@@ -116,7 +98,7 @@ const cbdPage = ({ProductDetails}) => {
                 <input className="amount-input" type="number" value={amountSelected} disabled="disabled"/>
                 <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
             </div>
-            <button className="product-details-cta" onClick={() => handleAddToCart(product)}>Añadir a la cesta</button> 
+            <button className="product-details-cta">Añadir a la cesta</button> 
           </div>
           <p className="delivery-info">Tiempo de envío de 3 a 7 días laborales</p>
         </div>
