@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
 
@@ -32,13 +32,13 @@ const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
     <div className="cart-item">
       {/* <Image src={'#'} width={200} height={200}></Image> */}
       <h4 className='cart-item-name'>{cartProduct.name}</h4>
-      <h4 className='cart-item-price'>{cartProduct.price}</h4>
-      <div className="amount">
-        <button className="amount-bt bt--plus" onClick={incrementAmount}>+</button>
-        <input className="amount-input" type="number" value={amountInCart} disabled="disabled"/>
-        <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
+      <div className="amount--cart">
+        <button className="amount-bt--cart bt--plus" onClick={incrementAmount}>+</button>
+        <input className="amount-input--cart" type="number" value={amountInCart} disabled="disabled"/>
+        <button className="amount-bt--cart bt--minus" onClick={decrementAmount}>-</button>
       </div>
-      <button className="close-bt" onClick={() => removeFromCart(cartProduct.id)}>
+      <h2 className='cart-item-price'>{`${cartProduct.price},00€`}</h2>
+      <button className="close-bt--cart" onClick={() => removeFromCart(cartProduct.id)}>
         <div className="line-left"></div>
         <div className="line-right"></div>
       </button>

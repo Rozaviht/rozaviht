@@ -31,8 +31,8 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
         <div className="line-left"></div>
         <div className="line-right"></div>
       </button>
-      <h2>Tu cesta de la compra</h2>
-      <div className="containerflx--column">
+      <h2 className="cart-title">Tu cesta de la compra</h2>
+      <div className="containerflx--column extra-pd">
         { cartProducts.length === 0
           ?
             <div className="empty-cart">

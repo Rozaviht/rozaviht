@@ -21,7 +21,7 @@
     transform: translate(0rem);
   }
 
-  h2 {
+  & .cart-title {
     color: $maincolor;
     font-family: Lora-Regular;
     font-size: 1.3rem;
@@ -34,6 +34,10 @@
   width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
+
+  &.extra-pd {
+    padding-top: 2rem;
+  }
 }
 
 .empty-cart {
