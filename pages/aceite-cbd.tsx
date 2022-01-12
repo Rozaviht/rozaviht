@@ -1,14 +1,7 @@
-import { Dispatch, SetStateAction, useState, useContext } from "react"
+import { useState, useContext } from "react"
 import prisma from '../lib/prisma'
 import { CartItemType } from "../services/AppProvider"
 import { AppContext } from 'services/AppContext'
-
-/* export type ProductsProps = {
-  oilType: number;
-  price: number;
-  selected: number;
-  finalPrice: number;
-} */
 
 interface props  {
   ProductDetails : [
@@ -44,18 +37,19 @@ export const getStaticProps = async () => {
 
 const cbdPage = ({ProductDetails}: props) => {
   const [amountSelected, setAmountSelected] = useState(1)
-  const [price, setPrice] = useState(ProductDetails[0].price)
+  const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
   const [selected, setSelected] = useState(ProductDetails[0].id)
-  const [currentProduct, setCurrentProduct] = useState({} as CartItemType)
-  /*     id: selected,
-      price: price,
-      name: ProductDetails[0].name,
-      amount: 0 */
-  var totalAmountPrice: number = amountSelected * price
+  const [currentName, setCurrentName] = useState(ProductDetails[0].name)
+  
+  var currentProduct = {
+    id : selected,
+    price: currentPrice,
+    name: currentName,
+    amount: amountSelected
+  }
+  var totalAmountPrice: number = amountSelected * currentPrice
 
   const { setCartProducts } = useContext( AppContext )
-
-  /* handles functions */
 
 
   function decrementAmount () {
@@ -68,22 +62,23 @@ const cbdPage = ({ProductDetails}: props) => {
   }
 
   const changeOil = (oilType: number) => {
-    if (oilType === 1) {
-      setPrice(ProductDetails[0].price)
-      setSelected(ProductDetails[0].id)
-      
-    }
-    else {
-      setPrice(ProductDetails[1].price)
-      setSelected(ProductDetails[1].id)
-    }
-    setAmountSelected(1)
+      if (oilType === 1) {
+        setCurrentPrice(ProductDetails[0].price)
+        setSelected(ProductDetails[0].id)
+        setCurrentName(ProductDetails[0].name)
+        
+      }
+      else {
+        setCurrentPrice(ProductDetails[1].price)
+        setSelected(ProductDetails[1].id)
+        setCurrentName(ProductDetails[1].name)
+      }
+      setAmountSelected(1)
   }
 
 
   const handleAddToCart = (clickedItem: CartItemType) => {
     setCartProducts(prev => {
-      // 1. Is the item already added in the cart?
       const isItemInCart = prev.find(item => item.id === clickedItem.id);
 
       if (isItemInCart) {
@@ -93,15 +88,9 @@ const cbdPage = ({ProductDetails}: props) => {
             : item
         );
       }
-      // First time the item is added
       return [...prev, { ...clickedItem, amount: amountSelected }];
     });
   };
-
-
-
-
-/*  */
 
 
 
@@ -121,20 +110,20 @@ const cbdPage = ({ProductDetails}: props) => {
           <div className="oil-percentage">
             <h3>Porcentaje:</h3>
             <div className="oil-percentage-list">
-              <div 
+              <button 
               className={selected === 1 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
               onClick={() => changeOil(1)}
-              >10%</div>
-              <div 
+              >10%</button>
+              <button 
               className={selected === 2 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
               onClick={() => changeOil(2)}
-              >20%</div>
+              >20%</button>
             </div>
           </div>
           <div className="container--flexrow">
             <div className="amount">
                 <button className="amount-bt bt--plus" onClick={incrementAmount}>+</button>
-                <input className="amount-input" type="number" value={amountSelected} data-disabled="disabled"/>
+                <input className="amount-input" type="number" value={amountSelected} disabled="disabled"/>
                 <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
             </div>
             <button className="product-details-cta" onClick={() => handleAddToCart(currentProduct)}>Añadir a la cesta</button> 

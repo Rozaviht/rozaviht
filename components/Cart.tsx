@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import Image from 'next/image'
 
 import { AppContext } from 'services/AppContext'
@@ -8,12 +8,23 @@ import CartItem from './CartItem'
 
 import emptyBasket from '@img/empty-basket.svg'
 
+import { CartItemType } from 'services/AppProvider'
+
 
 const Cart = ({handleShowCart, showCart}: CartProps) => {
 
-  const { cartProducts } = useContext(AppContext)
+  const { cartProducts, setCartProducts } = useContext(AppContext)
 
-  console.log(cartProducts)
+  const handleRemoveFromCart = (productId: number) => {
+    let elementProduct = cartProducts.find(element => element.id === productId)
+    setCartProducts(() =>
+      cartProducts.filter(function(element) {
+        return element != elementProduct
+      })
+    );
+  };
+
+
   return (
     <div className={showCart ? "cart dropped" : "cart"}>
       <button className="close-bt" onClick={handleShowCart}>
@@ -33,11 +44,12 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
             </div>
           :
             cartProducts.map(item => (
-              {/* <CartItem
+              <CartItem
+                key={item.id}
+                cartProduct={item}
                 removeFromCart={handleRemoveFromCart}
-              /> */}
+              />
             ))
-              
         }
       </div>
     </div>
