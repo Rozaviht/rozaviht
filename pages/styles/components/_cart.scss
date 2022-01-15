@@ -37,6 +37,7 @@
 
   &.extra-pd {
     padding-top: 2rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -79,5 +80,42 @@
   }
   & .line-right {
     transform: rotate(-45deg);
+  }
+}
+
+.total-price-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 2rem;
+  right: 0rem;
+
+  & .total-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+
+    &-number {
+      font-family: Lora-Medium;
+      margin-left: 1rem;
+    }
+  }
+
+  & .cart-cta-buy {
+    width: 12rem;
+    height: 3rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+
+    color: #fff;
+    border: unset;
+    border-radius: 8px;
+    background-color: $maincolor;
   }
 }

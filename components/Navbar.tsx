@@ -7,10 +7,7 @@ import Cart from '@components/Cart'
 import Logo from '@img/Logo.svg'
 import Cesta from '@img/Cesta.svg'
 
-export type CartProps = {
-  showCart: boolean
-  handleShowCart: (event: React.MouseEvent<HTMLButtonElement>)=>void
-}
+
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);

@@ -1,17 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import { AppContext } from 'services/AppContext'
 
-import { CartProps } from '@components/Navbar'
 import CartItem from './CartItem'
 
 import emptyBasket from '@img/empty-basket.svg'
-
 import { CartItemType } from 'services/AppProvider'
+
+export type CartProps = {
+  showCart: boolean
+  handleShowCart: (event: React.MouseEvent<HTMLButtonElement>)=>void
+}
 
 
 const Cart = ({handleShowCart, showCart}: CartProps) => {
+  const [totalCartPrice, setTotalCartPrice] = useState<number>()
 
   const { cartProducts, setCartProducts } = useContext(AppContext)
 
@@ -23,6 +27,10 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
       })
     );
   };
+
+  useEffect(() => {
+    setTotalCartPrice(cartProducts.reduce((ack: number, item) => ack + item.amount * item.price, 0))
+  }, [cartProducts])
 
 
   return (
@@ -43,13 +51,22 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
               <Image src={emptyBasket} width={200} height={200}/>
             </div>
           :
-            cartProducts.map(item => (
-              <CartItem
-                key={item.id}
-                cartProduct={item}
-                removeFromCart={handleRemoveFromCart}
-              />
-            ))
+            <div>
+              {cartProducts.map(item => (
+                <CartItem
+                  key={item.id}
+                  cartProduct={item}
+                  removeFromCart={handleRemoveFromCart}
+                />
+                ))}
+              <div className="total-price-container">
+                <div className="total-price">
+                  <h3 className="total-price-text">Total en tu cesta:</h3>
+                  <h3 className="total-price-number">{totalCartPrice},00€</h3>
+                </div>
+                <button className="cart-cta-buy">COMPRAR</button>
+              </div>
+            </div>
         }
       </div>
     </div>

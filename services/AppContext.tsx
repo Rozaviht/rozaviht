@@ -2,7 +2,7 @@ import { createContext, Dispatch, SetStateAction, useContext} from 'react'
 import { CartItemType } from './AppProvider'
 
 export type AppContextProps = {
-    cartProducts: CartItemType[];
+    cartProducts: CartItemType[]
     setCartProducts: Dispatch<SetStateAction<CartItemType[]>>
 }
 
