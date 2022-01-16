@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
 import { AppContext } from 'services/AppContext'
 
+import aceite10 from '@img/aceite10-concaja.png'
+
 
 type CartItemProps = {
   removeFromCart: (id: number) => void
@@ -49,18 +51,23 @@ const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
 
   return (
     <div className="cart-item">
-      {/* <Image src={'#'} width={200} height={200}></Image> */}
-      <h4 className='cart-item-name'>{cartProduct.name}</h4>
-      <div className="amount--cart">
-        <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
-        <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
-        <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
+      <div className="image-cartitem-container">
+        <Image src={aceite10} width={200} height={200} layout='responsive'></Image>
       </div>
-      <h2 className='cart-item-price'>{`${totalItemPrice},00€`}</h2>
+      <p className="p-name">Producto:</p>
+      <p className='cart-item-name'>{cartProduct.name}</p>
       <button className="close-bt--cart" onClick={() => removeFromCart(cartProduct.id)}>
         <div className="line-left"></div>
         <div className="line-right"></div>
       </button>
+      <p className="p-price">Precio:</p>
+      <p className='cart-item-price'>{`${totalItemPrice},00€`}</p>
+      <p className="p-amount">Cantidad:</p>
+      <div className="amount--cart">
+        <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
+        <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
+        <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
+      </div>
     </div>
   )
 }

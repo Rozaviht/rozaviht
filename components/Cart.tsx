@@ -6,6 +6,7 @@ import { AppContext } from 'services/AppContext'
 import CartItem from './CartItem'
 
 import emptyBasket from '@img/empty-basket.svg'
+import Logo from '@img/Logo.svg'
 import { CartItemType } from 'services/AppProvider'
 
 export type CartProps = {
@@ -35,11 +36,16 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
 
   return (
     <div className={showCart ? "cart dropped" : "cart"}>
-      <button className="close-bt" onClick={handleShowCart}>
-        <div className="line-left"></div>
-        <div className="line-right"></div>
-      </button>
-      <h2 className="cart-title">Tu cesta de la compra</h2>
+      <div>
+        <button className="close-bt" onClick={handleShowCart}>
+          <div className="line-left"></div>
+          <div className="line-right"></div>
+        </button>
+        <div className="logo-cart-container">
+          <Image src={Logo} height={30} width={80} layout="responsive"></Image>
+        </div>
+        <h2 className="cart-title">Tu cesta de la compra</h2>
+      </div>
       <div className="containerflx--column extra-pd">
         { cartProducts.length === 0
           ?
@@ -51,7 +57,7 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
               <Image src={emptyBasket} width={200} height={200}/>
             </div>
           :
-            <div>
+            <div className="cart-items-container">
               {cartProducts.map(item => (
                 <CartItem
                   key={item.id}
