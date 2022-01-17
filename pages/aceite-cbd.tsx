@@ -2,6 +2,7 @@ import { useState, useContext } from "react"
 import prisma from '../lib/prisma'
 import { CartItemType } from "../services/AppProvider"
 import { AppContext } from 'services/AppContext'
+import ProductImageSlider from '@components/ProductImageSlider'
 
 interface props  {
   ProductDetails : [
@@ -97,9 +98,7 @@ const cbdPage = ({ProductDetails}: props) => {
   return(
     <div className="product-page">
       <div className="product-details">
-        <div className="product-details-imgs">
-          <img src="" alt="" />
-        </div>
+        <ProductImageSlider></ProductImageSlider>
         <div className="container--flexcolumn">
           <h1 className="product-title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>

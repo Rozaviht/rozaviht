@@ -28,7 +28,9 @@ const Navbar = () => {
           </a>
         </Link>
         <button className="nav-cart" onClick={handleShowCart}>
-            <Image className="cart" src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
+          <div className="img-navbar-container">
+            <Image src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
+          </div>
         </button>
         <div className="nav-menu">
           <Link href="/aceite-cbd" >

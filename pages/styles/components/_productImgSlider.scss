@@ -1,0 +1,52 @@
+.slider-container {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "arrowLeft slide arrowRight";
+}
+
+.slide-container {
+  grid-area: slide;
+
+  opacity: 0;
+  transition-duration: 1s ease;
+
+  &.active {
+    opacity: 1;
+    transition-duration: 200ms;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btArrow {
+  border: unset;
+  opacity: 0.8;
+  border-radius: 3px;
+  border-left: 0.2rem solid $maincolor;
+  border-bottom: 0.2rem solid $maincolor;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  cursor: pointer;
+
+  align-self: center;
+  justify-self: center;
+
+  background-color: unset;
+
+  &.left {
+    grid-area: arrowLeft;
+    transform: rotate(45deg);
+  }
+  &.right {
+    grid-area: arrowRight;
+    transform: rotate(225deg);
+  }
+}

@@ -37,6 +37,8 @@
 .nav-logo {
   grid-area: logo;
 
+  justify-self: center;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,14 +100,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  & .cart {
-    width: 35%;
-  }
-
-  @include respond-to(mobileLandscape) {
-    & .cart {
-      width: 20%;
-    }
-  }
 }
