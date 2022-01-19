@@ -2,10 +2,11 @@
 @import "../variables";
 
 .home-wrapper {
+  padding-top: 1rem;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 36rem 7rem 1fr 1fr 1fr;
+  grid-template-rows: 15rem 5rem 1fr 1fr 1fr;
   grid-template-areas:
     "banner"
     "homeInfo"
@@ -17,13 +18,16 @@
 .home-banner {
   grid-area: banner;
   width: 100%;
-  background-color: khaki;
+
+  & .video-banner {
+    width: 100%;
+    display: block;
+  }
 }
 
 .home-info {
   grid-area: homeInfo;
   width: 100%;
-  height: 7rem;
 
   display: flex;
   flex-direction: column;
@@ -34,7 +38,7 @@
 .section-banner {
   position: relative;
   width: 100%;
-  height: 30rem;
+  height: 17rem;
 
   &-title {
     position: absolute;
@@ -113,12 +117,6 @@
   }
 }
 
-.logo-rozaviht-section {
-  width: 14rem;
-  margin-bottom: 2rem;
-}
-
-.img-rozaviht-section {
+.image-container {
   width: 100%;
-  height: 25rem;
 }
