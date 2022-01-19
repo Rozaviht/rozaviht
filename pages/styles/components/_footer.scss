@@ -179,13 +179,14 @@
   padding-bottom: 0.5rem;
 
   border-bottom: 1px solid $maincolor;
+  font-size: 1rem;
   &-title {
     position: relative;
 
     &::after {
       content: "+";
       float: right;
-      font-size: 1.1rem;
+      font-size: 1rem;
 
       transition: transform 0.4s ease, -webkit-transform 0.3s ease;
     }
@@ -196,11 +197,14 @@
       }
     }
   }
+
   &-section {
-    display: none;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.4s ease;
 
     &.showed {
-      display: initial;
+      height: initial;
     }
 
     &-list {
@@ -247,7 +251,7 @@
 .footer-contact {
   display: inherit;
   flex-direction: column;
-  max-width: 8rem;
+  max-width: 10rem;
 
   & p {
     margin-top: 0.5rem;
@@ -271,8 +275,6 @@
   justify-content: center;
   align-items: center;
 
-  margin-left: 10rem;
-
   &-links {
     width: 1.2rem;
     height: 1.2rem;
@@ -294,22 +296,28 @@
 .footer-legal {
   width: 100%;
   margin-top: 4rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "logo"
+    "links";
 }
 
 .footer-legal-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  grid-area: logo;
 
-  & .footer-logo {
-    width: 6rem;
-  }
+  justify-self: center;
+  width: 6rem;
+  height: 3rem;
 
   @include respond-to(mobileLandscape) {
   }
 }
 
 .footer-legal-issues {
+  grid-area: links;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -320,7 +328,6 @@
 
   & p {
     margin-bottom: 0.5rem;
-    color: rgba($maincolor, 0.7);
   }
 
   .legal-links {
@@ -332,7 +339,6 @@
     align-items: center;
 
     & a {
-      color: rgba($maincolor, 0.7);
       border-right: 1px solid rgba($maincolor, 0.7);
       margin-right: 0.35rem;
       padding-right: 0.35rem;

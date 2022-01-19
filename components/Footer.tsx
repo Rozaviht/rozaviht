@@ -7,9 +7,9 @@ import instagramIcon from '@img/instagram-icon.svg'
 import facebookIcon from '@img/facebook-icon.svg'
 
 const Footer = () => {
-  const [click, setClick] = useState(false)
+  const [footerListDropped, setFooterListDropped] = useState(false)
 
-  const handleClick = () => setClick(!click)
+  const dropFooterList = () => setFooterListDropped(!footerListDropped)
 
   return (
     <div className="footer">
@@ -39,8 +39,8 @@ const Footer = () => {
         <div className="footer-down-side-wrapper">
           <div className="footer-left-side">
             <div className="footer-left-side-column" >
-              <h6  className={click ? "footer-left-side-column-title showed" : "footer-left-side-column-title"} onClick={handleClick}> Atención al cliente</h6>
-              <div className={click ? "footer-left-side-column-section showed" : "footer-left-side-column-section"}>
+              <h5  className={footerListDropped ? "footer-left-side-column-title showed" : "footer-left-side-column-title"} onClick={dropFooterList}> Atención al cliente</h5>
+              <div className={footerListDropped ? "footer-left-side-column-section showed" : "footer-left-side-column-section"}>
                 <ul className="footer-left-side-column-section-list">
                   <li className="footer-left-side-column-section-item">
                     <Link href ="/">
@@ -76,10 +76,8 @@ const Footer = () => {
           </div>
           <div className="footer-right-side">
             <div className="footer-contact">
-              <h6>Contáctanos:</h6>
-              <p>+34 685 413 123</p>
-              <p>Lunes - Viernes</p>
-              <p> 09:00 - 20:00</p>
+              <p>Contáctanos y te responderemos con la mayor brevedad posible:</p>
+              <p>info@rozaviht.com</p>
             </div>
             <div className="social-icons">
               <Link href="/">
@@ -99,7 +97,7 @@ const Footer = () => {
         </div>
         <div className="footer-legal">
           <div className="footer-legal-logo">
-            <Image  className="footer-logo" src={Logo} alt="Logo"  width={50} height={20}/>
+            <Image src={Logo} alt="Logo"  width={340} height={270} layout="responsive"/>
           </div>
           <div className="footer-legal-issues">
             <p>Reservados todos los derechos @ 2021 Rozaviht</p>
