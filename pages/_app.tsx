@@ -21,19 +21,24 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
 
           html {
-            height: 100vh;
             font-size: 100%;
-            background-color: #F2F3FA
+            background-color: #F2F3FA;
           }
 
-          body,
-          #__next{
+          body{
             min-height: 100%;
             display: contents;
           }
 
-          .font-Lora {
+          .font-LoraMedium {
             font-family: Lora-Medium;
+          }
+          .font-LoraRegular {
+            font-family: Lora-Medium;
+          }
+
+          h1{
+            font-weight: 500;
           }
         `}</style>
       </Layout>

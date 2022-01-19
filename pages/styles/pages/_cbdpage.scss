@@ -2,19 +2,19 @@
 @import "../variables";
 
 .product-page {
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 0.7fr 1fr 1fr;
   grid-template-areas:
     "main"
     "ingredientes"
-    "info";
+    "explain";
 }
 
 .product-details {
   grid-area: main;
 
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,15 +27,35 @@
   }
 
   &-cta {
-    width: 12rem;
+    width: 13rem;
     height: 3rem;
     font-size: 1rem;
     margin-left: 1rem;
 
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border: unset;
     border-radius: 8px;
     background-color: $maincolor;
+
+    & .cta-plus {
+      margin-right: 1rem;
+      & .cta-plus-line {
+        width: 1.2rem;
+        height: 0.2rem;
+        background-color: #fff;
+
+        &:nth-child(1) {
+          transform: rotate(90deg) translate(3px);
+        }
+      }
+    }
+
+    &-text {
+      color: #fff;
+    }
   }
 
   & .delivery-info {
@@ -97,13 +117,13 @@
 }
 
 .amount {
-  width: 3rem;
+  width: 5rem;
   height: 3rem;
   background-color: $maincolor;
   border-radius: 8px;
 
   display: grid;
-  grid-template-columns: 1fr 0.5fr;
+  grid-template-columns: 1fr 0.7fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
     "number plus"
@@ -135,4 +155,27 @@
     text-align: center;
     font-size: 1rem;
   }
+}
+
+.product-explain {
+  grid-area: explain;
+  background-color: #e2fcd4;
+}
+
+.text-container {
+  padding: 1rem;
+
+  & > p {
+    margin-top: 1rem;
+  }
+}
+
+.img-container {
+  width: 100%;
+}
+
+.product-info {
+  grid-area: info;
+
+  padding: 2rem;
 }
