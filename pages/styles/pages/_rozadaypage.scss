@@ -1,0 +1,41 @@
+.rozaday {
+  margin-top: 3rem;
+  padding: 0rem 1rem 2rem 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.4fr 1fr;
+  grid-template-areas:
+    "hero"
+    "articles";
+}
+
+.rozaday-hero {
+  grid-area: hero;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > h3 {
+    margin-top: 0.5rem;
+    text-align: center;
+    color: $maincolor;
+    font-family: DIN-Light;
+  }
+}
+
+.rozaday-logo {
+  width: 60%;
+}
+
+.rozaday-banner {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.rozaday-articles {
+  margin-top: 6rem;
+  grid-area: articles;
+}

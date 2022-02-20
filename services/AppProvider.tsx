@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { AppContext } from './AppContext'
 
+
 interface props {
   children: JSX.Element | JSX.Element[]
+  
 }
 
 export type CartItemType = {
@@ -13,11 +15,15 @@ export type CartItemType = {
   amount: number
 }
 
+
+
+
+
  const AppProvider = ({ children }: props) => {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
 
   return (
-    <AppContext.Provider value={{cartProducts, setCartProducts}}>
+    <AppContext.Provider value={{cartProducts, setCartProducts }}>
       {children}
     </AppContext.Provider>
   )

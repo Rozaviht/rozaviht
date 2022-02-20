@@ -20,10 +20,13 @@ interface props  {
   ]
 }
 
+
 export type CurrentProductProps = {
     currentId: number
     currentPrice: number
 }
+
+
 
 export const getStaticProps = async () => {
   const ProductDetails = await prisma.product.findMany({
@@ -42,7 +45,10 @@ export const getStaticProps = async () => {
 
 
 
-const cbdPage = ({ProductDetails}: props) => {
+
+const cbdPage = ({ProductDetails}) => {
+  const { setCartProducts } = useContext( AppContext )
+
   const [amountSelected, setAmountSelected] = useState(1)
   const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
   const [selected, setSelected] = useState(ProductDetails[0].id)
@@ -56,7 +62,6 @@ const cbdPage = ({ProductDetails}: props) => {
   }
   var totalAmountPrice: number = amountSelected * currentPrice
 
-  const { setCartProducts } = useContext( AppContext )
 
 
   function decrementAmount () {
