@@ -1,0 +1,22 @@
+.topwarning {
+  background-color: #f1f5bc;
+  position: relative;
+
+  &-text {
+    font-weight: 600;
+    position: absolute;
+    animation-name: movingtext;
+    animation-duration: 25s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes movingtext {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(110%);
+  }
+}

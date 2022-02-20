@@ -6,7 +6,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15rem 5rem 1fr 1fr 1fr;
+  grid-template-rows: 15rem 5rem 0.8fr 1fr 0.6fr;
   grid-template-areas:
     "banner"
     "homeInfo"
@@ -38,43 +38,44 @@
 .section-banner {
   position: relative;
   width: 100%;
-  height: 17rem;
-
-  &-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    color: white;
-    font-family: Lora-Medium;
-    font-size: 2.5rem;
-  }
-
-  &-img {
-    width: 100%;
-    height: 100%;
-  }
 }
 
-.cta--secdry {
+.cta-secdry {
   width: 12rem;
   height: 2.5rem;
-  margin-top: 4rem;
+  margin-top: 3rem;
 
   text-align: center;
   font-size: 1.2rem;
 
-  background-color: unset;
-  border: 2px solid $maincolor;
   border-radius: 10px;
 
-  & a {
-    color: $maincolor;
+  &--cbdsection {
+    background-color: $oilsectiontext;
+    border: 2px solid $oilsectiontext;
+    & a {
+      color: #fff;
+    }
+  }
+  &--rozanewssection {
+    background-color: #000;
+    border: 2px solid #000;
+    & a {
+      color: $rozadaysectionbackground;
+    }
+  }
+  &--rozavihtsection {
+    background-color: $maincolor;
+    border: 2px solid $maincolor;
+    & a {
+      color: $backgroundcolor;
+    }
   }
 }
 
 .section {
-  padding-bottom: 1.5rem;
+  padding-bottom: 3rem;
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -92,7 +93,6 @@
 
   &--rozaviht {
     grid-area: rozavihtSection;
-    padding-top: 2rem;
   }
 }
 
@@ -104,19 +104,36 @@
     margin-bottom: 2rem;
   }
 
-  & .oil-ilustration {
-    float: right;
-    shape-outside: url("../../../public/img/oil-ilustration.svg");
-    shape-margin: 3rem;
-  }
-  & .news-ilustration {
-    width: 11rem;
-    float: right;
-    shape-outside: url("../../../public/img/news-ilustration.svg");
-    shape-margin: 3rem;
+  & .text-white {
+    color: $oilsectiontext;
   }
 }
 
 .image-container {
   width: 100%;
+}
+
+.oilIllustration-container {
+  width: 50%;
+  float: right;
+  shape-outside: polygon(
+    141px -17px,
+    83.54% 110.17%,
+    10.36% 108.59%,
+    11.22% 64.84%,
+    25.73% 41.26%
+  );
+}
+
+.rozanewsIlustration-container {
+  width: 50%;
+  float: left;
+  margin-right: 1rem;
+  /*   shape-outside: polygon(
+    141px -17px,
+    83.54% 110.17%,
+    10.36% 108.59%,
+    11.22% 64.84%,
+    25.73% 41.26%
+  ); */
 }
