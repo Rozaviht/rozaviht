@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import Logo from '@img/Logo.svg'
+import homeIlustration from '@img/home-ilustation2.svg'
 import cbdIlustration from '@img/cbd-ilustration.svg'
 import oilSectionBanner from '@img/cbd-banner.png'
 import rozadaySectionBanner from '@img/rozanews-banner.png'
@@ -16,9 +17,8 @@ const index = () => {
           <source type='video/mp4' src="/rozaviht-banner-video.mp4" />
         </video>
       </div>
-      <div className="home-info">
-        <h3 className="font-Lora">Siempre a tu disposición</h3>
-        <p className="font-Lora">Envios solo a Península</p>
+      <div className="image-separator">
+        <Image src={homeIlustration} height={100} width={400} layout="responsive"/>
       </div>
       <div className="section section--oil">
           <div className="image-container">

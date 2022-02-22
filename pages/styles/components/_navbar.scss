@@ -6,6 +6,7 @@
 }
 
 .nav-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
 
@@ -100,4 +101,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nav-cart-container {
+  position: relative;
+  width: 25px;
+  height: 25px;
+}
+
+.products-counter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  display: none;
+  background-color: $maincolor;
+  border-radius: 30%;
+  color: $backgroundcolor;
+
+  &.active {
+    display: block;
+  }
 }

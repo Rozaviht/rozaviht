@@ -9,6 +9,7 @@ import { AppContext } from 'services/AppContext'
 import ProductImageSlider from '@components/ProductImageSlider'
 
 import MartaBañoAceite from '@img/marta-aceite-baño.jpg'
+import ingredientsImage from '@img/img-cbd-page.png'
 
 interface props  {
   ProductDetails : [
@@ -46,7 +47,7 @@ export const getStaticProps = async () => {
 
 
 
-const cbdPage = ({ProductDetails}) => {
+const cbdPage = ({ProductDetails}: props) => {
   const { setCartProducts } = useContext( AppContext )
 
   const [amountSelected, setAmountSelected] = useState(1)
@@ -152,7 +153,11 @@ const cbdPage = ({ProductDetails}) => {
           <p className="delivery-info">Envíos de momento solo España Península</p>
         </div>
       </div>
-      <div className="product-ingredients"></div>
+      <div className="product-ingredients">
+        <div className="ingredients-image">
+          <Image src={ingredientsImage} height={1.7} width={1} layout="responsive"/>
+        </div>
+      </div>
       {/* PRODCUT INFORMATION */}
       <div className="product-explain">
         <div className="img-container">

@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+
+import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
@@ -12,11 +14,12 @@ import Cesta from '@img/Cesta.svg'
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
 
+  const { cartProducts } = useContext(AppContext)
+
   const handleShowCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     setShowCart(!showCart)
   } 
-
 
 
   return (
@@ -28,8 +31,9 @@ const Navbar = () => {
           </a>
         </Link>
         <button className="nav-cart" onClick={handleShowCart}>
-          <div className="img-navbar-container">
-            <Image src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
+          <div className="nav-cart-container">
+            <Image src={Cesta} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
+            <div className={cartProducts.length === 0 ? "products-counter" : "products-counter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>
         <div className="nav-menu">
