@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import Logo from '@img/Logo.svg'
-import homeIlustration from '@img/home-ilustation2.svg'
-import cbdIlustration from '@img/cbd-ilustration.svg'
-import oilSectionBanner from '@img/cbd-banner.png'
-import rozadaySectionBanner from '@img/rozanews-banner.png'
+import cbdIlustration from '@img/cbd-ilustration2.svg'
+import cbdSectionBanner from '@img/cbd-banner-2.png'
+import cbdSectionBanner2 from '@img/cbd-banner2-2.png'
+import rozadaySectionBanner from '@img/rozanews-banner-2.png'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
 import rozavihtSectionBanner from '@img/rozaviht-section2.png'
 
@@ -17,62 +17,63 @@ const index = () => {
           <source type='video/mp4' src="/rozaviht-banner-video.mp4" />
         </video>
       </div>
-      <div className="image-separator">
-        <Image src={homeIlustration} height={100} width={400} layout="responsive"/>
-      </div>
-      <div className="section section--oil">
-          <div className="image-container">
-            <Image src={oilSectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+      {/* ---------- CBD SECTION --------- */}
+      <div className="section section--cbd">
+        {/* <div className="background-slide"></div> */}
+        <div className="section--cbd-hero">
+          <h1 className="section--cbd-title">ACEITE DE CBD</h1>
+          <div className="section--cbd-img">
+            <div className="animated-slide animated-slide--big"></div>
+            <Image src={cbdSectionBanner} alt=""  width={150} height={100} layout="responsive"/>
           </div>
-        <div className="container--flex ">
-          <p className="text-white">
+          <div className="section--cbd-secndimg">
+            <div className="animated-slide animated-slide--small"></div>
+            <Image src={cbdSectionBanner2} alt=""  width={100} height={150} layout="responsive"/>
+          </div>
+        </div>
+        <div className="section--cbd-text-wrapper">
+          <p className="section--cbd-text">
             Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
-            con un par de gotas en la zona notaras los efectos casi inmediatos. Por otro lado,
-            aunque en España su venta esta restringida para uso tópico,
-            en otros lugares de la Unión Europea y en Estados Únidos esta permitido su uso alimenticio,
-            donde comúnmente se usa de manera sublingual.
+            con un par de gotas en la zona notaras los efectos casi inmediatos. Además, ha demostrado en diferentes
+            estudios ayudar a reducir el estrés, a conciliar mejor el sueño, permitiendo una mejor recuperación, y 
+            ayuda a manejar mejor la ansiedad.
           </p>
-          <div className="oilIllustration-container">
-            <Image src={cbdIlustration} alt=""  width={270} height={340} layout="responsive"/>
-          </div>
-          <p className="text-white">
-            Esto se debe a que el aceite de CBD, ha 
-            demostrado en diferentes estudios ayudar
-            a reducir el estrés, a conciliar mejor el sueño,
-            permitiendo una mejor recuperación,
-            y manejar mejor la ansiedad.
-          </p>
-          <p className="text-white">
-            Además nuestro aceite no contiene THC,
-            que es el componente psicoactivo
-            procedente del cannabis,
-            por lo que puedes estar tranquilo.
-            El aceite de CBD no es adictivo.
+          <p className="section--cbd-text">
+            Y tranquilo que nuestro aceite contiene 0% de THC.
           </p>
         </div>
-        <button className="cta-secdry cta-secdry--cbdsection"><Link href="/aceite-cbd"><a>Ver el aceite</a></Link></button>
-      </div>
-      <div className="section section--rozaday">
-          <div className="image-container">
-            <Image src={rozadaySectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+        <div className="section--cbd-cta-wrapper">
+          <button className="section--cbd-cta"><Link href="/aceite-cbd"><a>Compra el aceite</a></Link></button>
+          <div className="cbdIllustration">
+            <Image src={cbdIlustration} alt=""  width={270} height={340} layout="responsive"/>
           </div>
-        <div className="container--flex">
-          <p>
+        </div>
+      </div>
+      {/* ---------- ROZANEWS SECTION --------- */}
+      <div className="section section--rozanews">
+        <h1 className="section-title">ROZANEWS</h1>
+        <div className="typewriter">
+          <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+        </div>
+        <div className="section--rozanews-img">
+          <Image src={rozadaySectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+        </div>
+        <div className="section-text-container">
+          <p className="rozanews-text">
           Rozaday es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
           Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena, y que cualquiera pueda leerlo.
           </p>
-          <p>
-          Nuestro artículos tienen una duración de lectura de unos 10 minutos, tras estudiarlo, nos dimos cuenta que este tiempo es el necesario para poder entrar en cierto detalle y no darte una idea vaga sobre algún tema, que tras leer el artículo, realmente hayas aprendido algo nuevo. Mas de este tiempo creemos que sería muy pesado y con menos no podríamos explicar bien las cosas.
-          </p>
+        </div>
+        <div className="home-cta">
           <div className="rozanewsIlustration-container">
             <Image src={rozanewsIlustration} alt=""  width={100} height={140} layout="responsive"/>
           </div>
-          <p>
-          Subiremos inicialmente dos artículos cada semana, para que podamos investigar bien sobre los temas escribir, y el día que los subiremos será el domingo, para que puedas en tan solo 20 minutos relajados, aprender algo nuevo.
-          </p>
+          <div className="link-wrapper">
+            <button className="section-cta section-cta--rozanewssection"><Link href="/aceite-cbd"><a>Ir a Rozanews</a></Link></button>
+          </div>
         </div>
-        <button className="cta-secdry cta-secdry--rozanewssection"><Link href="/aceite-cbd"><a>Ir a rozanews</a></Link></button>
       </div>
+      {/* ---------- ROZAVIHT SECTION --------- */}
       <div className="section section--rozaviht">
         <div className="image-container">
           <Image src={rozavihtSectionBanner} alt="" width={150} height={100} layout="responsive"/>
@@ -87,10 +88,7 @@ const index = () => {
           Y siempre recuerda TE CUIDAS, TE CUIDAMOS Y LO CUIDAMOS.
           </p>
         </div>
-        <button className="cta-secdry cta-secdry--rozavihtsection"><Link href="/aceite-cbd"><a>Conocenos</a></Link></button>
-     {/*    <div className="image-container">
-          <Image src={rozavihtSectionBanner} alt="" width={150} height={100} layout='responsive'/>
-        </div> */}
+        <button className="cta-secdry cta-secdry--rozavihtsection"><Link href="/aceite-cbd" ><a>Conocenos más</a></Link></button>
       </div>
     </div>
   )
