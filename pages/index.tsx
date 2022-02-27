@@ -1,15 +1,49 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect } from 'react'
 
 import Logo from '@img/Logo.svg'
 import cbdIlustration from '@img/cbd-ilustration2.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
+/* import cbdSectionBanner2 from '@img/img-cbd-page.png' */
 import cbdSectionBanner2 from '@img/cbd-banner2-2.png'
 import rozadaySectionBanner from '@img/rozanews-banner-2.png'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
-import rozavihtSectionBanner from '@img/rozaviht-section2.png'
+import photoCollageOne from '@img/foto1collage.png'
+import photoCollageTwo from '@img/foto2collage.png'
+import photoCollageThree from '@img/foto3collage.png'
+import photoCollageFour from '@img/foto4collage.png'
+import photoCollageFive from '@img/foto5collage.png'
 
 const index = () => {
+
+  
+  useEffect(() => {
+    let observerOptions = {
+      root: null,
+      threshold: 0.3,
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("anmtionON")
+        }
+      })
+  
+    }, observerOptions)
+
+    let allAnimatedObjects = document.querySelectorAll(
+      ".animated-slide, .section--cbd-text, .section--cbd-title, .section-tagline, .section--cbd-cta, .section--cbd-cta-link")
+
+    allAnimatedObjects.forEach(object => {
+      observer.observe(object)
+    })
+
+  }, [])
+
+
+
   return (
     <div className="home-wrapper">
       <div className="home-banner">
@@ -31,7 +65,7 @@ const index = () => {
             <Image src={cbdSectionBanner2} alt=""  width={100} height={150} layout="responsive"/>
           </div>
         </div>
-        <div className="section--cbd-text-wrapper">
+        <div className="section-text-wrapper">
           <p className="section--cbd-text">
             Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
             con un par de gotas en la zona notaras los efectos casi inmediatos. Además, ha demostrado en diferentes
@@ -43,7 +77,7 @@ const index = () => {
           </p>
         </div>
         <div className="section--cbd-cta-wrapper">
-          <button className="section--cbd-cta"><Link href="/aceite-cbd"><a>Compra el aceite</a></Link></button>
+          <button className="section--cbd-cta"><Link href="/aceite-cbd"><a className="section--cbd-cta-link">Compra el aceite</a></Link></button>
           <div className="cbdIllustration">
             <Image src={cbdIlustration} alt=""  width={270} height={340} layout="responsive"/>
           </div>
@@ -75,20 +109,38 @@ const index = () => {
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}
       <div className="section section--rozaviht">
-        <div className="image-container">
-          <Image src={rozavihtSectionBanner} alt="" width={150} height={100} layout="responsive"/>
-        </div>
-        <div className="container--flex">
-          <p>
-          En Rozaviht buscamos proporcionarte productos que te cuiden, que te hagan sentir mejor y mas sano. A la vez, buscamos usar la manera mas eficiente de usar los recursos para cuidar el medioambiente.
+        <div className="section--rozaviht-banner">
+          <Image src={Logo} width={200} height={100} layout="responsive" />
+        </div> 
+        <div className="section-text-wrapper">
+          <p className="section--rozaviht-text">
+          En Rozaviht buscamos proporcionarte productos que te cuiden, que te hagan sentir mejor y más sano, buscando usar de la manera más eficiente los recursos para cuidar el medioambiente.
+          </p>
+          <p className="section--rozaviht-text">
           No solo nuestros productos físicos te cuidaran, sino que también lo haremos a través, de las redes sociales y con nuestros artículos, donde te brindaremos información valiosa para que te cuides tu mejor y el medio en el que vives. 
+          </p>
+          <p className="section--rozaviht-text">
           A la hora de la verdad no hace falta que todos hagamos grandes cambios, basta con aportar cada uno su granito de arena.
           </p>
-          <p>
-          Y siempre recuerda TE CUIDAS, TE CUIDAMOS Y LO CUIDAMOS.
-          </p>
         </div>
-        <button className="cta-secdry cta-secdry--rozavihtsection"><Link href="/aceite-cbd" ><a>Conocenos más</a></Link></button>
+        <div className="collage-wrapper">
+          <div className="collageMain">
+            <Image src={photoCollageOne} alt="" width={100} height={150} layout="responsive" />
+          </div>
+          <div className="collageScendry">
+            <Image src={photoCollageTwo} alt="" width={150} height={100} layout="responsive" />
+          </div>
+          <div className="collageScendry">
+            <Image src={photoCollageThree} alt="" width={150} height={100} layout="responsive" />
+          </div>
+          <div className="collageScendry">
+            <Image src={photoCollageFour} alt="" width={150} height={100} layout="responsive" />
+          </div>
+          <div className="collageScendry">
+            <Image src={photoCollageFive} alt="" width={100} height={150} layout="responsive" />
+          </div>
+        </div>
+        {/* <button className="cta-secdry cta-secdry--rozavihtsection"><Link href="/aceite-cbd" ><a>Conocenos más</a></Link></button> */}
       </div>
     </div>
   )

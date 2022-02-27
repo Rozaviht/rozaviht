@@ -7,7 +7,7 @@ import { AppContext } from 'services/AppContext'
 import Cart from '@components/Cart'
 
 import Logo from '@img/Logo.svg'
-import Cesta from '@img/Cesta.svg'
+import CartIcon from '@img/cartIcon3.svg'
 
 
 
@@ -32,7 +32,7 @@ const Navbar = () => {
         </Link>
         <button className="nav-cart" onClick={handleShowCart}>
           <div className="nav-cart-container">
-            <Image src={Cesta} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
+            <Image src={CartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
             <div className={cartProducts.length === 0 ? "products-counter" : "products-counter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>
