@@ -1,23 +1,19 @@
-@import "../variables";
-@import "../medias";
-
 .nav {
   grid-area: navbar;
 }
 
 .nav-wrapper {
   position: relative;
-  width: 100%;
-  height: 100%;
 
   padding-left: 5%;
   padding-right: 5%;
 
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 0.5rem 1fr;
   grid-template-columns: 1fr 0.2fr;
   grid-template-areas:
     "logo basket"
+    ". ."
     "navMenu navMenu";
 
   @include respond-to(mobileLandscape) {
@@ -69,6 +65,7 @@
   &-item {
     font-family: DIN-Medium;
     font-size: 0.8rem;
+    color: $maincolor;
   }
 
   @include respond-to(mobileLandscape) {

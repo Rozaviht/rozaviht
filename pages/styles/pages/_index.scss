@@ -2,11 +2,10 @@
 @import "../variables";
 
 .home-wrapper {
-  padding-top: 1rem;
-  width: 100%;
+  padding-top: 1.5rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40rem 0.8fr 1fr 0.6fr;
+  grid-template-rows: 22% 26% 27% 25%;
   grid-template-areas:
     "banner"
     "oilSection"
@@ -16,11 +15,28 @@
 
 .home-banner {
   grid-area: banner;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   & .video-banner {
     width: 100%;
     display: block;
+  }
+
+  & .home-phrase-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    & > p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: GrechenFuemen-Regular;
+      color: $maincolor;
+    }
   }
 }
 
@@ -71,8 +87,6 @@
   padding-bottom: 3rem;
   position: relative;
 
-  margin-top: 3rem;
-
   &-title {
     font-family: Lora-Medium;
     margin-bottom: 1rem;
@@ -81,6 +95,8 @@
   /* ----- CBD SECTION ------- */
 
   &--cbd {
+    padding-top: 4rem;
+    background-color: $oilsectiontext;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,7 +154,7 @@
 
     &-title {
       font-family: Lora-Medium;
-      color: $oilsectiontext;
+      color: $backgroundcolor;
       position: absolute;
       left: 5%;
       bottom: 20%;
@@ -153,7 +169,7 @@
 
     &-text {
       margin-bottom: 1rem;
-      color: $oilsectiontext;
+      color: $backgroundcolor;
     }
 
     &-cta-wrapper {
@@ -173,15 +189,15 @@
       text-align: end;
       font-size: 1.4rem;
 
-      background-color: $oilsectiontext;
-      border: 2px solid $oilsectiontext;
+      background-color: $backgroundcolor;
+      border: none;
 
       &.anmtionON {
         animation: slide-cta 1.5s forwards;
       }
       &-link {
         opacity: 0;
-        color: #fff;
+        color: $oilsectiontext;
 
         &.anmtionON {
           animation: show-up 1s 1s forwards;
@@ -202,12 +218,12 @@
     flex-direction: column;
     align-items: center;
     grid-area: rozadaySection;
-    padding-top: 3rem;
+    padding-top: 5rem;
     padding-left: 1rem;
     padding-right: 1rem;
 
     &-img {
-      margin-top: 1rem;
+      margin-top: 2rem;
       width: 100%;
     }
   }
@@ -216,68 +232,37 @@
 
   &--rozaviht {
     grid-area: rozavihtSection;
+    background-color: $maincolor;
+    padding: 5rem 3rem 4rem 3rem;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 10rem 15rem 20rem 3rem;
-    grid-template-areas:
-      "banner"
-      "text"
-      "collage"
-      "button";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    &-banner {
-      grid-area: banner;
-      width: 80%;
+    &-img {
+      position: absolute;
+      top: 10%;
+      left: -20%;
+      width: 120%;
+      opacity: 0.3;
     }
 
-    & .section-text-wrapper {
-      grid-area: text;
+    &-subtitle {
+      font-family: Lora-Medium;
+      color: #f5a474;
+      font-size: 1.4rem;
     }
 
     &-text {
-      margin-bottom: 1rem;
-      color: $maincolor;
+      margin-bottom: 2rem;
+      color: $backgroundcolor;
     }
 
-    & .collage-wrapper {
-      grid-area: collage;
-      position: relative;
+    & .leaf-container {
+      width: 8rem;
 
-      & div:nth-child(2) {
-        width: 40%;
-        position: absolute;
-        top: 20%;
-        left: 0;
-      }
-      & div:nth-child(3) {
-        z-index: 2;
-        width: 40%;
-        position: absolute;
-        top: 70%;
-        left: 5%;
-      }
-      & div:nth-child(4) {
-        z-index: 2;
-        width: 40%;
-        position: absolute;
-        top: 20%;
-        right: 5%;
-      }
-      & div:last-child {
-        width: 30%;
-        position: absolute;
-        top: 70%;
-        right: 5rem;
-      }
-
-      & .collageMain {
-        z-index: 1;
-        position: absolute;
-        width: 35%;
-        top: 30%;
-        left: 30%;
-        animation: imgDrop 2s forwards, imgScale 3s forwards;
+      & .leaf {
+        fill: $backgroundcolor;
       }
     }
   }
@@ -333,6 +318,8 @@
     animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end);
   }
 }
+
+/* -------- ANIMATIONS --------- */
 
 @keyframes blink {
   from {

@@ -2,18 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect } from 'react'
 
-import Logo from '@img/Logo.svg'
-import cbdIlustration from '@img/cbd-ilustration2.svg'
+import IsotipoNegative from '@img/isotipo-negative.svg'
+import cbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
-/* import cbdSectionBanner2 from '@img/img-cbd-page.png' */
 import cbdSectionBanner2 from '@img/cbd-banner2-2.png'
 import rozadaySectionBanner from '@img/rozanews-banner-2.png'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
-import photoCollageOne from '@img/foto1collage.png'
-import photoCollageTwo from '@img/foto2collage.png'
-import photoCollageThree from '@img/foto3collage.png'
-import photoCollageFour from '@img/foto4collage.png'
-import photoCollageFive from '@img/foto5collage.png'
+
 
 const index = () => {
 
@@ -47,9 +42,13 @@ const index = () => {
   return (
     <div className="home-wrapper">
       <div className="home-banner">
-        <video className="video-banner" autoPlay loop playsInline preload='metadata'>
-          <source type='video/mp4' src="/rozaviht-banner-video.mp4" />
+        <video className="video-banner" autoPlay loop playsInline preload='metadata' muted>
+          <source type='video/mp4' src="/web-banner_2.mp4" />
         </video>
+        <div className="home-phrase-wrapper">
+          <p>"Cuidate, y cuida el medio en el que vives."</p>
+          <p>@rozaviht</p>
+        </div>
       </div>
       {/* ---------- CBD SECTION --------- */}
       <div className="section section--cbd">
@@ -79,7 +78,7 @@ const index = () => {
         <div className="section--cbd-cta-wrapper">
           <button className="section--cbd-cta"><Link href="/aceite-cbd"><a className="section--cbd-cta-link">Compra el aceite</a></Link></button>
           <div className="cbdIllustration">
-            <Image src={cbdIlustration} alt=""  width={270} height={340} layout="responsive"/>
+            <Image src={cbdIlustrationNegative} alt=""  width={270} height={340} layout="responsive"/>
           </div>
         </div>
       </div>
@@ -109,38 +108,34 @@ const index = () => {
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}
       <div className="section section--rozaviht">
-        <div className="section--rozaviht-banner">
-          <Image src={Logo} width={200} height={100} layout="responsive" />
+        <div className="section--rozaviht-img">
+          <Image src={IsotipoNegative} width={114} height={100} layout="responsive" />
         </div> 
         <div className="section-text-wrapper">
+          <h2 className="section--rozaviht-subtitle">Te cuidas</h2>
           <p className="section--rozaviht-text">
           En Rozaviht buscamos proporcionarte productos que te cuiden, que te hagan sentir mejor y más sano, buscando usar de la manera más eficiente los recursos para cuidar el medioambiente.
           </p>
+          <h2 className="section--rozaviht-subtitle">Te cuidamos</h2>
           <p className="section--rozaviht-text">
           No solo nuestros productos físicos te cuidaran, sino que también lo haremos a través, de las redes sociales y con nuestros artículos, donde te brindaremos información valiosa para que te cuides tu mejor y el medio en el que vives. 
           </p>
+          <h2 className="section--rozaviht-subtitle">Y Lo cuidamos</h2>
           <p className="section--rozaviht-text">
-          A la hora de la verdad no hace falta que todos hagamos grandes cambios, basta con aportar cada uno su granito de arena.
+          A la hora de la verdad no hace falta que todos hagamos grandes cambios, basta con aportar cada uno su grano de arena.
           </p>
         </div>
-        <div className="collage-wrapper">
-          <div className="collageMain">
-            <Image src={photoCollageOne} alt="" width={100} height={150} layout="responsive" />
-          </div>
-          <div className="collageScendry">
-            <Image src={photoCollageTwo} alt="" width={150} height={100} layout="responsive" />
-          </div>
-          <div className="collageScendry">
-            <Image src={photoCollageThree} alt="" width={150} height={100} layout="responsive" />
-          </div>
-          <div className="collageScendry">
-            <Image src={photoCollageFour} alt="" width={150} height={100} layout="responsive" />
-          </div>
-          <div className="collageScendry">
-            <Image src={photoCollageFive} alt="" width={100} height={150} layout="responsive" />
-          </div>
-        </div>
-        {/* <button className="cta-secdry cta-secdry--rozavihtsection"><Link href="/aceite-cbd" ><a>Conocenos más</a></Link></button> */}
+
+        <button className="cta-secdry cta-secdry--rozavihtsection">
+          <Link href="/aceite-cbd" >
+            <a>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101.26 59.27" className="leaf-container">
+                <path className="leaf"
+                  d="M99.71.2C94.5,4.13,83.56,10.08,60.86,8.87,34.58,7.47,22.11,17.55,19.75,19.7,18.05,21.23,7.81,33,14.07,44.26A45.6,45.6,0,0,1,1.43,43s-2.4,2.84-1,4.26c.78.78,8.41.06,15.13-.75,2.85,3.69,7.69,7.26,15.43,10.3C63.75,69.72,90.42,27.4,94.29,21.45A40.78,40.78,0,0,0,99.58,9.34l1.66-8.17A1,1,0,0,0,99.71.2Z" />
+              </svg>
+            </a>
+          </Link>
+        </button>
       </div>
     </div>
   )
