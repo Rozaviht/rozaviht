@@ -5,7 +5,7 @@ import { AppContext } from 'services/AppContext'
 
 import CartItem from './CartItem'
 
-import emptyBasket from '@img/empty-basket.svg'
+import emptyBasket from '@img/empty-cart.svg'
 import Logo from '@img/Logo.svg'
 import { CartItemType } from 'services/AppProvider'
 
@@ -50,9 +50,9 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
         { cartProducts.length === 0
           ?
             <div className="empty-cart">
-              <div className="empty-cart-text">
-                <h3>!Vaya¡</h3>
-                <h3>Tu cesta de la compra esta vacía</h3>
+              <div className="empty-cart-text-wrapper">
+                <h1 className="empty-cart-text">! Ups Vaya¡</h1>
+                <h2 className="empty-cart-text">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
               </div>
               <Image src={emptyBasket} width={200} height={200}/>
             </div>

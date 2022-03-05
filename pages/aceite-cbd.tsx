@@ -54,6 +54,7 @@ const cbdPage = ({ProductDetails}: props) => {
   const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
   const [selected, setSelected] = useState(ProductDetails[0].id)
   const [currentName, setCurrentName] = useState(ProductDetails[0].name)
+  const [listDropped, setListDropped] = useState([false, false, false, false])
   
   var currentProduct = {
     id : selected,
@@ -104,7 +105,6 @@ const cbdPage = ({ProductDetails}: props) => {
       return [...prev, { ...clickedItem, amount: amountSelected }];
     });
   };
-
 
 
   return(
@@ -159,16 +159,33 @@ const cbdPage = ({ProductDetails}: props) => {
         </div>
       </div>
       {/* PRODCUT INFORMATION */}
-      <div className="product-explain">
-        <div className="img-container">
-          < Image src={MartaBañoAceite} height={340} width={270} layout="responsive"/>  
-        </div>
+      <div className="product-information">
         <div className="text-container">
-          <h1 className="font-LoraRegular">¿Para que sirve y como se emplea el Aceite de CBD?</h1>
-          <p>Los principales beneficios del Aceite de CBD, son sus efectos antiinflamatorios, antidepresivos y relajantes; de hecho con tan solo un par de gotas notarás sus efectos casí de inmediato. Estas carácteristicas particulares del aceite te ayudaran con dolores e irritaciones, desinflamandola la zona a la vez que sientes una relajacion en la misma. También gracias a él, podrás manejar mejor la ansiedad y el estrés, ya que el CBD reduce estos valores en tu cuerpo; por lo que además te ayudara a conciliar mejor el sueño si lo aplicas antes de dormir.</p>
-          <p>En cuanto a como usar el aceite, existen diferentes formas, pero las más conocidas son el uso topico y el uso sublingual.Actualmente en Españá su venta esta restringido al uso topico solamente, por lo que te recomendamos emplear un par de gotas en la zona donde sientas dolor y masajear hasta que el aceite se haya completamente absorvido. Deberías notar los efectos calmantes casí al momento, ten en cuenta que a mayor porcentaje del producto mayor serán sus efectos por lo que para dolores mas agudos te recomendamos usar porcentajes mas altos, o si deseas emplear menos producto cada que vez que lo uses.</p>
-          <p>Como te hemos mencionado el aceite de CBD en España, de momento, solo se puede vender como uso topico, sin embargo este producto en varios paises de la Union Europea y en Estados Unidos ya esta disponible para venta con uso sublinguanl, donde se extrean los grandes beneficios del producto. Esto surgío a raiz de que la OMS lo considerará un suplemento alimenticio beneficioso para el ser humano, donde a continuación la Union Europea lo aprovo de la misma manera.</p>
-          <p>Estos son los principales beneficios que contiene el aceite de CBD, sin embargo todavía hay más carácteristicas de este producto que explicamos más a fondo en uno de nuestros artículos de Rozaday, te recomendamos leerlo para que estes enterado de lo que estas cosumiendo y no tengas dudas al respecto, pincha aquí para leerlo.</p>
+          <h1 className="product-information-title">Información del Producto</h1>
+          <div className="information-content-wrapper">
+            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"} >QUE HACE</h2>
+            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+              <p>Los principales beneficios del Aceite de CBD, son sus efectos antiinflamatorios, antidepresivos y relajantes; de hecho con tan solo un par de gotas notarás sus efectos casí de inmediato. Estas carácteristicas particulares del aceite te ayudaran con dolores e irritaciones, desinflamandola la zona a la vez que sientes una relajacion en la misma. También gracias a él, podrás manejar mejor la ansiedad y el estrés, ya que el CBD reduce estos valores en tu cuerpo; por lo que además te ayudara a conciliar mejor el sueño si lo aplicas antes de dormir.</p>
+            </div>
+          </div>
+          <div className="information-content-wrapper">
+            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO UTILIZARLO</h2>
+            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <p>En cuanto a como usar el aceite, existen diferentes formas, pero las más conocidas son el uso topico y el uso sublingual.Actualmente en Españá su venta esta restringido al uso topico solamente, por lo que te recomendamos emplear un par de gotas en la zona donde sientas dolor y masajear hasta que el aceite se haya completamente absorvido. Deberías notar los efectos calmantes casí al momento, ten en cuenta que a mayor porcentaje del producto mayor serán sus efectos por lo que para dolores mas agudos te recomendamos usar porcentajes mas altos, o si deseas emplear menos producto cada que vez que lo uses.</p>
+            </div>
+          </div>
+          <div className="information-content-wrapper">
+            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>INGREDIENTES</h2>
+            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <p>Como te hemos mencionado el aceite de CBD en España, de momento, solo se puede vender como uso topico, sin embargo este producto en varios paises de la Union Europea y en Estados Unidos ya esta disponible para venta con uso sublinguanl, donde se extrean los grandes beneficios del producto. Esto surgío a raiz de que la OMS lo considerará un suplemento alimenticio beneficioso para el ser humano, donde a continuación la Union Europea lo aprovo de la misma manera.</p> 
+            </div>
+          </div>
+          <div className="information-content-wrapper">
+            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO RECICLARLO</h2>
+            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <p>Estos son los principales beneficios que contiene el aceite de CBD, sin embargo todavía hay más carácteristicas de este producto que explicamos más a fondo en uno de nuestros artículos de Rozaday, te recomendamos leerlo para que estes enterado de lo que estas cosumiendo y no tengas dudas al respecto, pincha aquí para leerlo.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -8,8 +8,8 @@
   grid-template-rows: 0.7fr 1fr 1fr;
   grid-template-areas:
     "main"
-    "ingredientes"
-    "explain";
+    "ingredients"
+    "information";
 }
 
 .product-details {
@@ -38,7 +38,7 @@
 
     border: unset;
     border-radius: 8px;
-    background-color: $maincolor;
+    background-color: $oilsectiontext;
 
     & .cta-plus {
       margin-right: 1rem;
@@ -101,7 +101,7 @@
       background-color: unset;
 
       &.selected {
-        background-color: $maincolor;
+        background-color: $oilsectiontext;
         color: $backgroundcolor;
         border-radius: 8px;
       }
@@ -119,7 +119,7 @@
 .amount {
   width: 5rem;
   height: 3rem;
-  background-color: $maincolor;
+  background-color: $oilsectiontext;
   border-radius: 8px;
 
   display: grid;
@@ -157,9 +157,36 @@
   }
 }
 
-.product-explain {
-  grid-area: explain;
-  background-color: #e2fcd4;
+.product-information {
+  grid-area: information;
+
+  &-title {
+    font-family: Lora-Medium;
+    color: $oilsectiontext;
+  }
+
+  & .information-content {
+    margin-top: 1rem;
+    overflow: hidden;
+    display: none;
+
+    &.dropped {
+      display: block;
+    }
+
+    &-wrapper {
+      margin-top: 1.5rem;
+      border-top: 1px solid #000;
+    }
+
+    &-title {
+      margin-top: 0.5rem;
+
+      &.colored {
+        color: $oilsectiontext;
+      }
+    }
+  }
 }
 
 .text-container {
@@ -172,12 +199,6 @@
 
 .img-container {
   width: 100%;
-}
-
-.product-info {
-  grid-area: info;
-
-  padding: 2rem;
 }
 
 .ingredients-image {

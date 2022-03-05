@@ -5,10 +5,6 @@ export type SliderDotsProps = {
 }
 
 const SliderDots = ({ arrayParent, activeIndex }:SliderDotsProps) => {
-
-
-  console.log(arrayParent)
-  console.log(activeIndex)
   
   return (
     <div className="containerflex--row">
