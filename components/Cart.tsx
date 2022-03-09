@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { AppContext } from 'services/AppContext'
 
@@ -70,7 +71,13 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
                   <h3 className="total-price-text">Total en tu cesta:</h3>
                   <h3 className="total-price-number">{totalCartPrice},00€</h3>
                 </div>
-                <button className="cart-cta-buy">COMPRAR</button>
+                <button className="cart-cta-buy">
+                  <Link href="/checkout">
+                    <a>
+                      COMPRAR
+                    </a>
+                  </Link>
+                  </button>
               </div>
             </div>
         }

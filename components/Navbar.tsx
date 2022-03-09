@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
-
 import Logo from '@img/Logo.svg'
 import CartIcon from '@img/cartIcon3.svg'
 
