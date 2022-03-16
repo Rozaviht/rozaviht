@@ -1,0 +1,42 @@
+.checkout-wrapper {
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkout-nav {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+
+  margin-bottom: 2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $maincolor;
+}
+
+.goback-link {
+  position: absolute;
+  left: 1rem;
+  width: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  color: $backgroundcolor;
+  &::before {
+    content: "˂";
+    position: absolute;
+    left: 0;
+    bottom: 15%;
+    width: 0.4rem;
+    height: 0.7rem;
+  }
+}
+
+.checkoutlogo-container {
+  width: 30%;
+}

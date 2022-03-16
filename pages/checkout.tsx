@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import type { ReactElement } from 'react'
+
+import CheckoutLayout from '@components/CheckoutLayout'
 
 import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
@@ -38,12 +39,7 @@ export default function checkoutPage ()  {
 
 
   return (
-    <div className="checkout-wrapper">
-      <Link href="/">
-        <a className="goback-link">
-          Volver
-        </a>
-      </Link>
+    <div className="shippingdata">
       <h1 className="checkout-title" >Introduce tus datos de envío</h1>
       <form className="checkout-form">
         <div className="input-wrapper">
@@ -108,8 +104,8 @@ export default function checkoutPage ()  {
 
 checkoutPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <div>
+    <CheckoutLayout>
       {page}
-    </div>
+    </CheckoutLayout>
   )
 }
