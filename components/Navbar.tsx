@@ -12,8 +12,11 @@ import CartIcon from '@img/cartIcon3.svg'
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
-
+  
   const { cartProducts } = useContext(AppContext)
+  console.log(cartProducts)
+
+ 
 
   const handleShowCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()

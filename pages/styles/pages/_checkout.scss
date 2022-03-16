@@ -34,62 +34,49 @@
 .input-wrapper {
   margin-top: 2rem;
   position: relative;
-  overflow: hidden;
-}
-
-.checkout-input {
-  border: none;
-  background-color: unset;
-  padding-top: 1.5rem;
-  height: 3rem;
-  width: 100%;
-  font-size: 1rem;
-  outline: unset;
 }
 
 .checkout-label {
-  position: absolute;
-  bottom: 0px;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-bottom: 2px solid $maincolor;
+  position: relative;
+}
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0%;
-    bottom: -2px;
-    height: 100%;
-    width: 100%;
-    border-bottom: 3px solid #4b9514;
-    transform: translateX(-100%);
-    transition: all 0.3s ease;
-  }
+.checkout-input {
+  border: 2px solid $maincolor;
+  background-color: unset;
+  display: block;
+  padding: calc(0.5rem * 1.5) 0.5rem;
+  width: 100%;
+  font-size: 100%;
+  outline: none;
+  border-radius: 8px;
 }
 
 .checkout-labelcontent {
   position: absolute;
-  bottom: 5px;
-  left: 0px;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  top: 0;
+  left: 0;
+  padding: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+  margin: calc(0.5rem * 0.75 + 3px) calc(0.5rem * 0.5);
   color: $maincolor;
   opacity: 0.8;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background-color: $backgroundcolor;
+  line-height: 1.2;
+  transition: all 0.3s ease;
 }
 
-.checkout-input:focus + .checkout-label .checkout-labelcontent,
-.checkout-input:valid + .checkout-label .checkout-labelcontent {
-  transform: translateY(-150%);
-  font-size: 0.8rem;
+.checkout-input:focus + .checkout-labelcontent,
+.checkout-input:valid + .checkout-labelcontent {
+  transform: translate(0.25rem, -65%) scale(0.8);
   color: #4b9514;
   opacity: 1;
 }
 
-.checkout-input:focus + .checkout-label::after,
-.checkout-input:valid + .checkout-label::after {
-  transform: translateX(0%);
+.checkout-input:focus,
+.checkout-input:valid {
+  border: 2px solid #4b9514;
 }
 
 .select-wrapper {
@@ -146,4 +133,8 @@
   outline: none;
   font-size: 1rem;
   color: $maincolor;
+
+  &:hover {
+    background-color: #4b9514;
+  }
 }

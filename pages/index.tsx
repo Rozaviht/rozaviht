@@ -2,6 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect } from 'react'
 
+import type { ReactElement } from 'react'
+
+import Layout from '@components/Layout'
+
 import IsotipoNegative from '@img/isotipo-negative.svg'
 import cbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
@@ -10,7 +14,10 @@ import rozadaySectionBanner from '@img/rozanews-banner-2.png'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
 
 
-const index = () => {
+
+
+
+export default function index () {
 
   
   useEffect(() => {
@@ -141,4 +148,11 @@ const index = () => {
   )
 }
 
-export default index;
+
+index.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}

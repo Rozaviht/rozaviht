@@ -1,49 +1,29 @@
-import { AppProps } from 'next/app'
-import Layout from '@components/Layout'
+import type { AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from 'react'
+import type {NextPage} from 'next'
+
 import AppProvider from '../services/AppProvider'
 
 import '../pages/styles/App.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
 
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+
+  const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
     <AppProvider>
-      <Layout>
-        <Component {...pageProps} />
-        <style jsx global>{`
-          *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #3f3e3e;
-            font-family: DIN-Medium;
-          }
-
-          html {
-            font-size: 100%;
-            background-color: #F2F3FA;
-          }
-
-          body{
-            min-height: 100%;
-            display: contents;
-          }
-
-          .font-LoraMedium {
-            font-family: Lora-Medium;
-          }
-          .font-LoraRegular {
-            font-family: Lora-Medium;
-          }
-
-          h1{
-            font-weight: 500;
-          }
-        `}</style>
-      </Layout>
+      {getLayout(<Component {...pageProps} />)}
     </AppProvider>
-    )
+  )
 }
 
 // Only uncomment this method if you have blocking data requirements for
@@ -58,4 +38,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default MyApp
+

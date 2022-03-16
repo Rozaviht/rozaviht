@@ -1,9 +1,13 @@
 import Image from 'next/image'
 
+import type { ReactElement } from 'react'
+
+import Layout from '@components/Layout'
+
 import rozadayLogo from '@img/rozaday-logo.png'
 import rozadayBanner from '@img/rozaday-banner.jpeg'
 
-const rozadayPage = () => {
+export default function rozadayPage () {
   return(
     <div className="rozaday">
       <div className="rozaday-hero">
@@ -22,4 +26,10 @@ const rozadayPage = () => {
   )
 }
 
-export default rozadayPage
+rozadayPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}

@@ -1,4 +1,31 @@
-@import "_medias";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #3f3e3e;
+  font-family: DIN-Medium;
+}
+
+html {
+  font-size: 100%;
+  background-color: #f2f3fa;
+}
+
+body {
+  min-height: 100%;
+  display: contents;
+}
+
+.font-LoraMedium {
+  font-family: Lora-Medium;
+}
+.font-LoraRegular {
+  font-family: Lora-Medium;
+}
+
+h1 {
+  font-weight: 500;
+}
 
 body {
   font-size: 0.8rem;

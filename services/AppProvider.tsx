@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { AppContext } from './AppContext'
+import type { ReactElement, ReactNode } from 'react'
 
 
 interface props {
-  children: JSX.Element | JSX.Element[]
-  
+  children: JSX.Element | JSX.Element[] | ReactElement | ReactNode
 }
 
 export type CartItemType = {
@@ -19,7 +19,7 @@ export type CartItemType = {
 
 
 
- const AppProvider = ({ children }: props) => {
+ export default function AppProvider ({ children }: props) {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
 
   return (
@@ -28,5 +28,3 @@ export type CartItemType = {
     </AppContext.Provider>
   )
 }
-
-export default AppProvider

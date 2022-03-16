@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import type { ReactElement } from 'react'
 
 import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
@@ -17,7 +18,7 @@ export type municipiosDataProps = [{
   dc: string,
 }]
 
-const checkoutPage = () => {
+export default function checkoutPage ()  {
   const [currentMunicipio, setCurrentMunicipio] = useState("")
   const [currentProvincia, setCurrentProvincia] = useState("")
 
@@ -46,26 +47,26 @@ const checkoutPage = () => {
       <h1 className="checkout-title" >Introduce tus datos de envío</h1>
       <form className="checkout-form">
         <div className="input-wrapper">
-          <input type="text" className="checkout-input" autoComplete="off" required />
-          <label htmlFor="" className="checkout-label" >
+          <label htmlFor="name" className="checkout-label" >
+            <input type="text" className="checkout-input" autoComplete="off" required id="name" />
             <span className="checkout-labelcontent">Nombre</span>
           </label>
         </div>
         <div className="input-wrapper">
-          <input type="text" className="checkout-input" autoComplete="off" required />
-          <label htmlFor="" className="checkout-label">
+          <label htmlFor="lastname" className="checkout-label">
+            <input type="text" className="checkout-input" autoComplete="off" required id="lastname" />
             <span className="checkout-labelcontent">Apellidos</span>
           </label>
         </div>
         <div className="input-wrapper">
-          <input type="mail" className="checkout-input" autoComplete="off" required />
-          <label htmlFor="" className="checkout-label">
+          <label htmlFor="mail" className="checkout-label">
+            <input type="mail" className="checkout-input" autoComplete="off" required id="mail" />
             <span className="checkout-labelcontent">Email</span>
           </label>
         </div>
         <div className="input-wrapper">
-          <input type="number" className="checkout-input" autoComplete="off" required onWheelCapture={numberInputOnWheelPreventChange} />
-          <label htmlFor="" className="checkout-label">
+          <label htmlFor="phone" className="checkout-label">
+            <input type="number" className="checkout-input" autoComplete="off" required onWheelCapture={numberInputOnWheelPreventChange} id="phone" />
             <span className="checkout-labelcontent">Teléfono</span>
           </label>
         </div>
@@ -88,14 +89,14 @@ const checkoutPage = () => {
           </select>
         </div>
         <div className="input-wrapper">
-          <input type="text" defaultValue={currentMunicipio} className="checkout-input" autoComplete="off" required />
-          <label htmlFor="" className="checkout-label">
+          <label htmlFor="postalcode" className="checkout-label">
+            <input type="text" defaultValue={currentMunicipio} className="checkout-input" autoComplete="off" required id="postalcode" />
             <span className="checkout-labelcontent">Código Postal</span>
           </label>
         </div>
         <div className="input-wrapper">
-          <input type="text" className="checkout-input" autoComplete="off" required />
           <label htmlFor="" className="checkout-label">
+            <input type="text" className="checkout-input" autoComplete="off" required />
             <span className="checkout-labelcontent">Dirección</span>
           </label>
         </div>
@@ -104,4 +105,11 @@ const checkoutPage = () => {
   )
 }
 
-export default checkoutPage
+
+checkoutPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <div>
+      {page}
+    </div>
+  )
+}

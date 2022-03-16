@@ -5,8 +5,10 @@ import Image from 'next/image'
 import { CartItemType } from "../services/AppProvider"
 import { AppContext } from 'services/AppContext'
 
+import type { ReactElement } from "react"
 
 import ProductImageSlider from '@components/ProductImageSlider'
+import Layout from "@components/Layout"
 
 import MartaBañoAceite from '@img/marta-aceite-baño.jpg'
 import ingredientsImage from '@img/img-cbd-page.png'
@@ -47,7 +49,7 @@ export const getStaticProps = async () => {
 
 
 
-const cbdPage = ({ProductDetails}: props) => {
+export default function cbdPage ({ ProductDetails}: props) {
   const { setCartProducts } = useContext( AppContext )
 
   const [amountSelected, setAmountSelected] = useState(1)
@@ -192,6 +194,12 @@ const cbdPage = ({ProductDetails}: props) => {
   )
 }
 
-export default cbdPage
+cbdPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}
 
 
