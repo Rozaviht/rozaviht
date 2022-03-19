@@ -97,7 +97,7 @@ const Footer = () => {
         </div>
         <div className="footer-legal">
           <div className="footer-legal-logo">
-            <Image src={Logo} alt="Logo"  width={340} height={270} layout="responsive"/>
+            <Image src={Logo} alt="Logo"  width={392} height={100} layout="responsive"/>
           </div>
           <div className="footer-legal-issues">
             <p>Reservados todos los derechos @ 2021 Rozaviht</p>

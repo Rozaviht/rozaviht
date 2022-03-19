@@ -8,7 +8,6 @@ import CartItem from './CartItem'
 
 import emptyBasket from '@img/empty-cart.svg'
 import Logo from '@img/Logo.svg'
-import { CartItemType } from 'services/AppProvider'
 
 export type CartProps = {
   showCart: boolean

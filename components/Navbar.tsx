@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="nav-wrapper">
         <Link href="/">
           <a  className="nav-logo">
-            <Image src={Logo} layout="responsive" alt="Logo"/>
+            <Image src={Logo} height={100} width={392} layout="responsive" alt="Logo"/>
           </a>
         </Link>
         <button className="nav-cart" onClick={handleShowCart}>
