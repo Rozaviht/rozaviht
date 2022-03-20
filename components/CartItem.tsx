@@ -39,7 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
 
       if (isItemInCart) {
         return prev.map(item =>
-          item.id === clickedItem.id
+          item.id === clickedItem.id && item.amount > 1
             ? { ...item, amount: item.amount - 1 }
             : item
         );

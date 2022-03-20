@@ -16,9 +16,8 @@ export type CartProps = {
 
 
 const Cart = ({handleShowCart, showCart}: CartProps) => {
-  const [totalCartPrice, setTotalCartPrice] = useState<number>()
 
-  const { cartProducts, setCartProducts } = useContext(AppContext)
+  const { cartProducts, setCartProducts, totalCartPrice } = useContext(AppContext)
 
   const handleRemoveFromCart = (productId: number) => {
     let elementProduct = cartProducts.find(element => element.id === productId)
@@ -28,10 +27,6 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
       })
     );
   };
-
-  useEffect(() => {
-    setTotalCartPrice(cartProducts.reduce((ack: number, item) => ack + item.amount * item.price, 0))
-  }, [cartProducts])
 
 
   return (

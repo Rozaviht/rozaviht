@@ -1,0 +1,39 @@
+.checkout-data-card {
+  position: relative;
+  margin-bottom: 4rem;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: -15%;
+    background-color: $maincolor;
+  }
+}
+
+.checkout-shippingdata {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.checkout-order {
+  margin-bottom: 2rem;
+}
+
+.checkout-product-card {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-product-img {
+  width: 20%;
+}
+
+.checkout-product-amount {
+  width: 20%;
+}
