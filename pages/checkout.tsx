@@ -11,7 +11,7 @@ import CheckoutForm from '@components/CheckoutForm'
 export type shippingDataProps = {
   name: string,
   lastname: string,
-  mail: string,
+  email: string,
   phone: string,
   provincie: string,
   municipie: string,
@@ -33,8 +33,6 @@ export default function checkoutPage ()  {
     window.scroll(0, 0)
   },[shippingData, orderVerified])
 
-  console.log(shippingData)
-
   return (
     <div className="checkout-main">
       <CheckoutSteps shippingData={shippingData} orderVerified={orderVerified} />
@@ -48,7 +46,10 @@ export default function checkoutPage ()  {
             <CheckoutVerify shippingData={shippingData} setOrderVerified={setOrderVerified}/>
 
           :
-            <div>Pagado</div>
+            <div className="checkout-section">
+              <h2 className="font-LoraMedium">Muchas gracias por la compra, tu pedido se ha realizado con exito.</h2>
+              <h3 className="font-LoraMedium">Revisa tu correo electrónico para confirmar que tienes el pedido y la factura correspondiente.</h3>
+            </div>
       }
     </div>
   )

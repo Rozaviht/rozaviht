@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import type { Dispatch, SetStateAction } from 'react'
 import type { shippingDataProps } from 'pages/checkout'
@@ -19,6 +19,25 @@ export type municipiosDataProps = [{
   dc: string,
 }]
 
+export type formDataProps = {
+  name: string,
+  lastname: string,
+  email: string,
+  phone: string,
+  provincie: string,
+  municipie: string,
+  postalcode: string,
+  street: string,
+  streetnumber: string,
+  doordetails: string,
+  shippingcomments: string
+}
+
+export type inputsErrorsProps = [{
+  id: string,
+  message: string
+}]
+
 export type checkoutFormProps = {
   setShippingData: Dispatch<SetStateAction<shippingDataProps>>
 }
@@ -26,6 +45,7 @@ export type checkoutFormProps = {
 export default function checkoutForm ({setShippingData}:checkoutFormProps) {
   const [currentMunicipio, setCurrentMunicipio] = useState("")
   const [currentProvincia, setCurrentProvincia] = useState("")
+  const [errorsMessages, setErrorsMessages] = useState<inputsErrorsProps>()
 
 
 
@@ -42,13 +62,97 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
     }, 0)
   }
 
+  const validateInputsForm = (formData:formDataProps) => {
+
+    const inputsErrors = [{}] as inputsErrorsProps
+
+    if (formData.name.length === 0) {
+      inputsErrors.push({
+        id: "noName",
+        message: "**Debes introducir un nombre"
+      })
+    } 
+
+    if (formData.lastname.length === 0) {
+      inputsErrors.push({
+        id: "noLastname",
+        message: "**Debes introducir un apellido."
+      })
+    } 
+
+    if (formData.provincie === "Provincia") {
+      inputsErrors.push({
+        id: "noProvincie",
+        message: "**Debes introducir una provincia."
+      })
+    }
+
+    if (formData.municipie === "Municipio") {
+      inputsErrors.push({
+        id: "noMunicipie",
+        message: "**Debes introducir un municipio."
+      })
+    }
+
+    if (formData.postalcode.length === 0) {
+      inputsErrors.push({
+        id: "noPostalcode",
+        message: "**Debes introducir un código postal."
+      })
+    }
+
+    if (formData.street.length === 0) {
+      inputsErrors.push({
+        id: "noStreet",
+        message: "**Debes introducir una calle."
+      })
+    }
+
+    if (formData.streetnumber.length === 0) {
+      inputsErrors.push({
+        id: "noStreetnumber",
+        message: "**Debes introducir un número de calle."
+      })
+    }
+
+    if (formData.email.length < 7 || formData.email.split("").filter((i) => i === "@").length !== 1 || formData.email.indexOf(".") === -1) {
+      inputsErrors.push({
+        id: "wrongEmail",
+        message: "**El formato de correo electrónico que has introducido no es correcto. Asegurate que es parecido a esto ****@****.com "
+      })
+    }
+
+    if (formData.phone.length !== 9) {
+      inputsErrors.push({
+        id: "wrongPhone",
+        message: "**El número de teléfono ha de tener 9 dígitos. Asegurate que has introducido el formato adecuado."
+      })
+    }
+
+    return inputsErrors
+  }
+
+
+  function scrollToInvalidInput() {
+    const invalidInputs = Array.from(document.querySelectorAll('.checkout-input--error'))
+    console.log(invalidInputs)
+    invalidInputs.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)                      // sort inputs by offset from top of viewport (handles issues with multi-column layouts, where the first element in the markup isn't necessarily the highest on the page)
+    invalidInputs[0].scrollIntoView({ block: 'center', behavior: 'smooth' })
+  }
+
+
+
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const form: HTMLFormElement = event.currentTarget
+
+    
 
     const formData = {
       name: event.target.name.value,
       lastname: event.target.lastname.value,
-      mail: event.target.mail.value,
+      email: event.target.email.value,
       phone: event.target.phone.value,
       provincie: event.target.provincie.value,
       municipie: event.target.municipie.value,
@@ -59,82 +163,132 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
       shippingcomments: event.target.shippingcomments.value
     }
 
-    setShippingData(formData)
+    const checkedInputsErrors = validateInputsForm(formData)
+    
 
+    if (checkedInputsErrors.length > 1) {
+      console.log(checkedInputsErrors)
+      setErrorsMessages(checkedInputsErrors)
+      return
+    }
+
+    setShippingData(formData)
   }
 
-
+  useEffect(() => {
+    if (errorsMessages?.length > 1)  scrollToInvalidInput()
+  },[errorsMessages])
 
   return (
-    <form className="checkout-section" method="post" onSubmit={handleSubmit}>
+    <form className="checkout-section" id="checkoutForm" method="post" onSubmit={handleSubmit}>
+      {/* INPUT NAME */}
         <div className="input-wrapper">
           <label htmlFor="name" className="checkout-label" >
-            <input type="text" className="checkout-input" autoComplete="off" required id="name" name="name" />
+            <input type="text" autoComplete="off" id="name" name="name" placeholder=" " className={errorsMessages?.some( error => error.id === "noName") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Nombre</span>
           </label>
+            {errorsMessages?.filter(error => error.id === "noName").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT LASTNAME */}
         <div className="input-wrapper">
           <label htmlFor="lastname" className="checkout-label">
-            <input type="text" className="checkout-input" autoComplete="off" required id="lastname" name="lastname" />
+            <input type="text" autoComplete="off" id="lastname" name="lastname" placeholder=" " className={errorsMessages?.some(error => error.id === "noLastname") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Apellidos</span>
           </label>
+            {errorsMessages?.filter(error => error.id === "noLastname").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT EMAIL */}
         <div className="input-wrapper">
           <label htmlFor="mail" className="checkout-label">
-            <input type="email" className="checkout-input" autoComplete="off" required id="mail" name="mail" />
+            <input type="email" autoComplete="off" id="email" name="email" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongEmail") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Email</span>
           </label>
-          <span className="note-span">*Este correo solo se usará para ennviarte la confirmación de compra con la correspondiente factura.</span>
+            {errorsMessages?.filter(error => error.id === "wrongEmail") 
+            ?  
+              errorsMessages?.filter(error => error.id === "wrongEmail").map(error =>
+                <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+              )
+            :
+              <span className="note-span">*Este correo solo se usará para ennviarte la confirmación de compra con la correspondiente factura.</span>}
         </div>
+        {/* INPUT PHONE */}
         <div className="input-wrapper">
           <label htmlFor="phone" className="checkout-label">
-            <input type="number" className="checkout-input" autoComplete="off" required onWheelCapture={numberInputOnWheelPreventChange} id="phone" name="phone" min={100000000} max={999999999} />
+            <input type="number" autoComplete="off" onWheelCapture={numberInputOnWheelPreventChange} id="phone" name="phone" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongPhone") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Teléfono</span>
           </label>
+          {errorsMessages?.filter(error => error.id === "wrongPhone").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT PROVINCIE */}
         <div className="select-wrapper">
-          <select className="checkout-select" name="provincie" id="selProvincias" placeholder="Provincia" defaultValue={"0"} onChange={e => setCurrentProvincia(e.target.value)}>
+          <select className="checkout-select" name="provincie" id="selProvincias" defaultValue={""} onChange={e => setCurrentProvincia(e.target.value)}>
             <option hidden >Provincia</option>
             {provinciasData.map(provincia => (
               <option className="checkout-option" key={"provincia"+provincia.provincia_id} value={provincia.provincia_id} >{provincia.nombre}</option>
             ))}
           </select>
+          {errorsMessages?.filter(error => error.id === "noProvincie").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT MUNICIPIE */}
         <div className="select-wrapper">
-          <select className="checkout-select" name="municipie" id="selMunicipios" placeholder="Localidad" defaultValue={"0"} onChange={e => setCurrentMunicipio(e.target.value)}>
-            <option hidden >Localidad</option>
+          <select className="checkout-select" name="municipie" id="selMunicipios" defaultValue={""} onChange={e => setCurrentMunicipio(e.target.value)}>
+            <option hidden >Municipio</option>
               {municipiosData.filter(municipio =>
                 municipio.provincia_id === currentProvincia
               ).map(municipio => (
                 <option key={"municipio"+municipio.municipio_id} value={municipio.municipio_id} >{municipio.nombre}</option>
               ))}
           </select>
+          {errorsMessages?.filter(error => error.id === "noMunicipie").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT POSTALCODE */}
         <div className="input-wrapper">
           <label htmlFor="postalcode" className="checkout-label">
-            <input type="text" defaultValue={currentMunicipio} className="checkout-input" autoComplete="off" required id="postalcode" name="postalcode"/>
+            <input type="text" defaultValue={currentMunicipio} autoComplete="off" id="postalcode" name="postalcode" placeholder=" " className={errorsMessages?.some(error => error.id === "noPostalcode") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Código Postal</span>
           </label>
+          {errorsMessages?.filter(error => error.id === "noPostalcode").map(error =>
+              <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+            )}
         </div>
+        {/* INPUT STREET & STREETNUMBER */}
         <div className="input-wrapper input-wrapper--multiple">
           <label htmlFor="" className="checkout-label checkout-label--short">
-            <input type="text" className="checkout-input checkout-input--short" autoComplete="off" required name="street" />
+            <input type="text" autoComplete="off" name="street" placeholder=" " className={errorsMessages?.some(error => error.id === "noStreet") ? "checkout-input checkout-input--short checkout-input--error" : "checkout-input checkout-input--short"}/>
             <span className="checkout-labelcontent">Calle</span>
+            {errorsMessages?.filter(error => error.id === "noStreet").map(error =>
+                <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+              )}
           </label>
           <label htmlFor="" className="checkout-label checkout-label--tiny">
-            <input type="number" className="checkout-input checkout-input--tiny" autoComplete="off" required name="streetnumber" />
+            <input type="number" autoComplete="off" name="streetnumber" placeholder=" " onWheelCapture={numberInputOnWheelPreventChange} className={errorsMessages?.some(error => error.id === "noStreetnumber") ? "checkout-input checkout-input--tiny checkout-input--error" : "checkout-input checkout-input--tiny"}/>
             <span className="checkout-labelcontent">Nº</span>
+            {errorsMessages?.filter(error => error.id === "noStreetnumber").map(error =>
+                <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
+              )}
           </label>
         </div>
+        {/* INPUT DOORDETAILS */}
         <div className="input-wrapper">
           <label htmlFor="doordetails" className="checkout-label" >
-            <input type="text" className="checkout-input" autoComplete="off" required id="doordetails" name="doordetails" />
+            <input type="text" className="checkout-input" autoComplete="off" id="doordetails" name="doordetails" placeholder=" "/>
             <span className="checkout-labelcontent">Portal / Puerta / Escalera</span>
           </label>
         </div>
+        {/* INPUT SHIPPINGCOMMENTS */}
         <div className="input-wrapper">
           <label htmlFor="shippingcomments" className="checkout-label" >
-            <textarea className="checkout-input checkout-input--textarea" autoComplete="off" id="shippingcomments" name="shippingcomments" cols={80} rows={20} />
+            <textarea className="checkout-input checkout-input--textarea" autoComplete="off" id="shippingcomments" name="shippingcomments" placeholder=" "/>
             <span className="checkout-labelcontent">Comentarios para facilitar el envío</span>
           </label>
           <span className="note-span">*Opcional:  Escribe cualquier comentario que pueda facilitar el envío al repartirdor.</span>
