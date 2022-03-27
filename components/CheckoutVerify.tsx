@@ -1,16 +1,18 @@
 import Image from 'next/image'
 import { useContext } from 'react'
 
+
 import { AppContext } from 'services/AppContext'
+import { CheckoutContext } from 'services/CheckoutContext'
 
 import type { Dispatch, SetStateAction } from 'react'
-import type { shippingDataProps } from "pages/checkout"
 import type { CartItemType } from 'services/AppProvider'
 
 import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
 
 import aceite10 from '@img/aceite10-concaja.png'
+import editIcon from '@img/edit-icon.svg'
 
 export type provinciasDataProps = [{
   nombre: string,
@@ -26,13 +28,16 @@ export type municipiosDataProps = [{
 }]
 
 export type checkoutVerificationProps = {
-  shippingData: shippingDataProps,
-  setOrderVerified: Dispatch<SetStateAction<boolean>>
+  setOrderVerified: Dispatch<SetStateAction<boolean>>,
 }
 
-export default function CheckoutVerify ({shippingData, setOrderVerified}:checkoutVerificationProps) {
+export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, setCartProducts, totalCartPrice } = useContext(AppContext)
+  const { cartProducts, setCartProducts, totalCartPrice, handleRemoveFromCart } = useContext(AppContext)
+  const { checkoutFormData, setEditingForm } = useContext(CheckoutContext)
+
+  const subTotalCartPrice = totalCartPrice / 1.21
+  const IVA = totalCartPrice - subTotalCartPrice
 
   const incrementAmount = (clickedItem: CartItemType) => {
     setCartProducts(prev => {
@@ -69,26 +74,34 @@ export default function CheckoutVerify ({shippingData, setOrderVerified}:checkou
       <div className="checkout-data-card">
         <h2 className="font-LoraMedium">Datos de envío</h2>
         <div className="checkout-shippingdata">
-          <p>{`${shippingData.name}, ${shippingData.lastname}`}</p>
-          <p>{shippingData.mail}</p>
-          <p>{shippingData.phone}</p>
+          <p>{`${checkoutFormData.name}, ${checkoutFormData.lastname}`}</p>
+          <p>{checkoutFormData.email}</p>
+          <p>{checkoutFormData.phone}</p>
+          <p>{checkoutFormData.cif}</p>
         </div>
         <div className="checkout-shippingdata">
           <p>{provinciasData.filter(provincia =>
-            shippingData.provincie === provincia.provincia_id
+            checkoutFormData.provincie === provincia.provincia_id
             ).map(provincia => provincia.nombre)}</p>
           <p>{`${municipiosData.filter(municipio =>
-            shippingData.municipie === municipio.municipio_id
-            ).map(municipio => municipio.nombre)} ${shippingData.postalcode}`}</p>
-          <p>{`${shippingData.street}, ${shippingData.streetnumber}`}</p>
-          <p>{shippingData.doordetails}</p>
-          <p>{shippingData.shippingcomments}</p>
+            checkoutFormData.municipie === municipio.municipio_id
+            ).map(municipio => municipio.nombre)} ${checkoutFormData.postalcode}`}</p>
+          <p>{`${checkoutFormData.street}, ${checkoutFormData.streetnumber}`}</p>
+          <p>{checkoutFormData.doordetails}</p>
+          <p>{checkoutFormData.shippingcomments}</p>
         </div>
+        <button className="edit-icon-container" onClick={() => setEditingForm(true)}>
+          <Image src={editIcon} height={100} width={120} layout="responsive" />
+        </button>
       </div>
       <div className="checkout-order">
         <h2 className="font-LoraMedium">Pedido</h2>
         {cartProducts.map(cartProduct => 
           <div key={cartProduct.id} className="checkout-product-card">
+            <button className="close-bt--cart" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+              <div className="line-left"></div>
+              <div className="line-right"></div>
+            </button>
             <p className="checkout-product-name">{cartProduct.name}</p>
             <div className="checkout-product-img">
               <Image src={aceite10} height={100} width={100} layout="responsive" />
@@ -101,9 +114,14 @@ export default function CheckoutVerify ({shippingData, setOrderVerified}:checkou
               </div>
           </div>
           )}
-          <p>{`Total: ${totalCartPrice},00€`}</p>
+          <div className="checkout-price-card">
+            <p>{`Subtotal: ${subTotalCartPrice.toFixed(2)}€`}</p>
+            <p>{`IVA: ${IVA.toFixed(2)}€`}</p>
+            <p>envío: 2,5€</p>
+            <p>{`Total: ${(totalCartPrice + 2.5).toFixed(2)}€`}</p>
+          </div>
       </div>
-      <button className="checkoutform-bt" onClick={() => setOrderVerified(true)} >Pagar</button>
+      <button className="checkoutform-bt" onClick={() => setOrderVerified(true)}>Ir a pagar</button>
     </div>
   )
 }

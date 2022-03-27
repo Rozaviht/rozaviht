@@ -24,11 +24,28 @@ export type CartItemType = {
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0)
 
   useEffect(() => {
+    if (window) {
+      console.log(cartProducts)
+      setCartProducts(JSON.parse(window.sessionStorage.getItem('cartProducts') || '[]') || [] as CartItemType[])
+    }
+  }, [])
+
+  useEffect(() => {
+    window.sessionStorage.setItem( 'cartProducts', JSON.stringify(cartProducts))
     setTotalCartPrice(cartProducts.reduce((ack: number, item) => ack + item.amount * item.price, 0))
   }, [cartProducts])
 
+  const handleRemoveFromCart = (productId: number) => {
+    let elementProduct = cartProducts.find(element => element.id === productId)
+    setCartProducts(() =>
+      cartProducts.filter(function(element) {
+        return element !== elementProduct
+      })
+    );
+  };
+
   return (
-    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice }}>
+    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart }}>
       {children}
     </AppContext.Provider>
   )

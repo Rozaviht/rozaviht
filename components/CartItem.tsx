@@ -5,16 +5,13 @@ import { AppContext } from 'services/AppContext'
 
 import aceite10 from '@img/aceite10-concaja.png'
 
-
-type CartItemProps = {
-  removeFromCart: (id: number) => void
+export type CartItemProps = {
   cartProduct: CartItemType
 }
 
+const CartItem = ({cartProduct}: CartItemProps) => {
 
-const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
-
-  const { setCartProducts } = useContext(AppContext)
+  const { setCartProducts, handleRemoveFromCart } = useContext(AppContext)
 
   var totalItemPrice = cartProduct.amount * cartProduct.price
 
@@ -56,7 +53,7 @@ const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
       </div>
       <p className="p-name">Producto:</p>
       <p className='cart-item-name'>{cartProduct.name}</p>
-      <button className="close-bt--cart" onClick={() => removeFromCart(cartProduct.id)}>
+      <button className="close-bt--cart" onClick={() => handleRemoveFromCart(cartProduct.id)}>
         <div className="line-left"></div>
         <div className="line-right"></div>
       </button>

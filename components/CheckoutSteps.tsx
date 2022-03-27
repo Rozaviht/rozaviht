@@ -1,17 +1,19 @@
-import type { shippingDataProps } from "pages/checkout"
+import { useContext } from 'react'
+import  { CheckoutContext } from '../services/CheckoutContext'  
 
 export type checkoutStepsProps = {
-  shippingData: shippingDataProps,
   orderVerified: boolean
 }
 
 
-export default function checkoutSteps ({shippingData, orderVerified}:checkoutStepsProps) {
+export default function checkoutSteps ({ orderVerified}:checkoutStepsProps) {
+
+  const {checkoutFormData, editingForm} = useContext(CheckoutContext)
 
   return (
     <>
-      {shippingData && Object.keys(shippingData).length === 0 && Object.getPrototypeOf(shippingData) === Object.prototype 
-        ?
+      {checkoutFormData && Object.keys(checkoutFormData).length === 0 && Object.getPrototypeOf(checkoutFormData) === Object.prototype || editingForm === true
+        ?/*   ---- FIRST STEP: FORM ------   */
           <div className="checkout-steps-wrapper">
             <div className="checkout-steps-list">
               <div className="checkout-step current">
@@ -31,7 +33,7 @@ export default function checkoutSteps ({shippingData, orderVerified}:checkoutSte
           </div>
         :
           orderVerified === false 
-            ?
+            ?/*   ---- SECOND STEP: VERIFY FORM ------   */
               <div className="checkout-steps-wrapper">
                 <div className="checkout-steps-list">
                   <div className="checkout-step done">
@@ -50,7 +52,7 @@ export default function checkoutSteps ({shippingData, orderVerified}:checkoutSte
                 <h1 className="checkout-title" >Verfica que todo esta correcto</h1>
               </div>
             
-            :
+            :/*   ---- THIRD STEP: PAY ------   */
               <div className="checkout-steps-wrapper">
                 <div className="checkout-steps-list">
                   <div className="checkout-step done">
@@ -66,7 +68,7 @@ export default function checkoutSteps ({shippingData, orderVerified}:checkoutSte
                     <span className="checkout-step-title">Pago</span>
                   </div>
                 </div>
-                <h1 className="checkout-title" >Verfica que todo esta correcto</h1>
+                <h1 className="checkout-title" >Muchas gracias por la compra, tu pedido se ha realizado con exito.</h1>
               </div>
 
       }

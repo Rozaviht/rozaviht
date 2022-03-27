@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
-import type { Dispatch, SetStateAction } from 'react'
-import type { shippingDataProps } from 'pages/checkout'
+import type { checkoutFormDataType } from 'services/CheckoutProvider'
+
+import { CheckoutContext } from 'services/CheckoutContext'
 
 import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
@@ -19,34 +20,18 @@ export type municipiosDataProps = [{
   dc: string,
 }]
 
-export type formDataProps = {
-  name: string,
-  lastname: string,
-  email: string,
-  phone: string,
-  provincie: string,
-  municipie: string,
-  postalcode: string,
-  street: string,
-  streetnumber: string,
-  doordetails: string,
-  shippingcomments: string
-}
 
 export type inputsErrorsProps = [{
   id: string,
   message: string
 }]
 
-export type checkoutFormProps = {
-  setShippingData: Dispatch<SetStateAction<shippingDataProps>>
-}
+export default function checkoutForm () {
+  const { checkoutFormData, setCheckoutFormData, setEditingForm } = useContext(CheckoutContext)
 
-export default function checkoutForm ({setShippingData}:checkoutFormProps) {
   const [currentMunicipio, setCurrentMunicipio] = useState("")
-  const [currentProvincia, setCurrentProvincia] = useState("")
+  const [currentProvincia, setCurrentProvincia] = useState(checkoutFormData.provincie)
   const [errorsMessages, setErrorsMessages] = useState<inputsErrorsProps>()
-
 
 
   const numberInputOnWheelPreventChange = (e) => {
@@ -62,7 +47,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
     }, 0)
   }
 
-  const validateInputsForm = (formData:formDataProps) => {
+  const validateInputsForm = (formData:checkoutFormDataType) => {
 
     const inputsErrors = [{}] as inputsErrorsProps
 
@@ -135,7 +120,6 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
 
   function scrollToInvalidInput() {
     const invalidInputs = Array.from(document.querySelectorAll('.checkout-input--error'))
-    console.log(invalidInputs)
     invalidInputs.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)                      // sort inputs by offset from top of viewport (handles issues with multi-column layouts, where the first element in the markup isn't necessarily the highest on the page)
     invalidInputs[0].scrollIntoView({ block: 'center', behavior: 'smooth' })
   }
@@ -145,15 +129,12 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const form: HTMLFormElement = event.currentTarget
-
-    
-
     const formData = {
       name: event.target.name.value,
       lastname: event.target.lastname.value,
       email: event.target.email.value,
       phone: event.target.phone.value,
+      cif: event.target.cif.value,
       provincie: event.target.provincie.value,
       municipie: event.target.municipie.value,
       postalcode: event.target.postalcode.value,
@@ -161,21 +142,22 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
       streetnumber: event.target.streetnumber.value,
       doordetails: event.target.doordetails.value,
       shippingcomments: event.target.shippingcomments.value
-    }
+    } as checkoutFormDataType
 
     const checkedInputsErrors = validateInputsForm(formData)
     
 
     if (checkedInputsErrors.length > 1) {
-      console.log(checkedInputsErrors)
       setErrorsMessages(checkedInputsErrors)
       return
     }
 
-    setShippingData(formData)
+    setCheckoutFormData(formData)
+    setEditingForm(false)
   }
 
   useEffect(() => {
+    console.log(checkoutFormData)
     if (errorsMessages?.length > 1)  scrollToInvalidInput()
   },[errorsMessages])
 
@@ -184,7 +166,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
       {/* INPUT NAME */}
         <div className="input-wrapper">
           <label htmlFor="name" className="checkout-label" >
-            <input type="text" autoComplete="off" id="name" name="name" placeholder=" " className={errorsMessages?.some( error => error.id === "noName") ? "checkout-input checkout-input--error" : "checkout-input"}/>
+            <input defaultValue={checkoutFormData.name} type="text" autoComplete="off" id="name" name="name" placeholder=" " className={errorsMessages?.some( error => error.id === "noName") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Nombre</span>
           </label>
             {errorsMessages?.filter(error => error.id === "noName").map(error =>
@@ -194,7 +176,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT LASTNAME */}
         <div className="input-wrapper">
           <label htmlFor="lastname" className="checkout-label">
-            <input type="text" autoComplete="off" id="lastname" name="lastname" placeholder=" " className={errorsMessages?.some(error => error.id === "noLastname") ? "checkout-input checkout-input--error" : "checkout-input"}/>
+            <input defaultValue={checkoutFormData.lastname} type="text" autoComplete="off" id="lastname" name="lastname" placeholder=" " className={errorsMessages?.some(error => error.id === "noLastname") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Apellidos</span>
           </label>
             {errorsMessages?.filter(error => error.id === "noLastname").map(error =>
@@ -204,7 +186,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT EMAIL */}
         <div className="input-wrapper">
           <label htmlFor="mail" className="checkout-label">
-            <input type="email" autoComplete="off" id="email" name="email" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongEmail") ? "checkout-input checkout-input--error" : "checkout-input"}/>
+            <input defaultValue={checkoutFormData.email} type="email" autoComplete="off" id="email" name="email" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongEmail") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Email</span>
           </label>
             {errorsMessages?.filter(error => error.id === "wrongEmail") 
@@ -218,16 +200,24 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT PHONE */}
         <div className="input-wrapper">
           <label htmlFor="phone" className="checkout-label">
-            <input type="number" autoComplete="off" onWheelCapture={numberInputOnWheelPreventChange} id="phone" name="phone" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongPhone") ? "checkout-input checkout-input--error" : "checkout-input"}/>
+            <input defaultValue={checkoutFormData.phone} type="number" autoComplete="off" onWheelCapture={numberInputOnWheelPreventChange} id="phone" name="phone" placeholder=" " className={errorsMessages?.some(error => error.id === "wrongPhone") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Teléfono</span>
           </label>
           {errorsMessages?.filter(error => error.id === "wrongPhone").map(error =>
               <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
             )}
         </div>
+        {/* INPUT CIF */}
+        <div className="input-wrapper">
+          <label htmlFor="cif" className="checkout-label">
+            <input defaultValue={checkoutFormData.cif} type="text" autoComplete="off" id="cif" name="cif" placeholder=" " className="checkout-input"/>
+            <span className="checkout-labelcontent">DNI / NIF / CIF</span>
+          </label>
+          <span className="note-span">*Este campo es opcional, para solicitar la factura ampliada con el DNI/NIF/CIF introducido.</span>
+        </div>
         {/* INPUT PROVINCIE */}
         <div className="select-wrapper">
-          <select className="checkout-select" name="provincie" id="selProvincias" defaultValue={""} onChange={e => setCurrentProvincia(e.target.value)}>
+          <select className="checkout-select" name="provincie" id="selProvincias" defaultValue={checkoutFormData.provincie} onChange={e => setCurrentProvincia(e.target.value)}>
             <option hidden >Provincia</option>
             {provinciasData.map(provincia => (
               <option className="checkout-option" key={"provincia"+provincia.provincia_id} value={provincia.provincia_id} >{provincia.nombre}</option>
@@ -239,7 +229,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         </div>
         {/* INPUT MUNICIPIE */}
         <div className="select-wrapper">
-          <select className="checkout-select" name="municipie" id="selMunicipios" defaultValue={""} onChange={e => setCurrentMunicipio(e.target.value)}>
+          <select className="checkout-select" name="municipie" id="selMunicipios" defaultValue={checkoutFormData.municipie} onChange={e => setCurrentMunicipio(e.target.value)}>
             <option hidden >Municipio</option>
               {municipiosData.filter(municipio =>
                 municipio.provincia_id === currentProvincia
@@ -254,7 +244,7 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT POSTALCODE */}
         <div className="input-wrapper">
           <label htmlFor="postalcode" className="checkout-label">
-            <input type="text" defaultValue={currentMunicipio} autoComplete="off" id="postalcode" name="postalcode" placeholder=" " className={errorsMessages?.some(error => error.id === "noPostalcode") ? "checkout-input checkout-input--error" : "checkout-input"}/>
+            <input type="text" defaultValue={checkoutFormData.postalcode} autoComplete="off" id="postalcode" name="postalcode" placeholder=" " className={errorsMessages?.some(error => error.id === "noPostalcode") ? "checkout-input checkout-input--error" : "checkout-input"}/>
             <span className="checkout-labelcontent">Código Postal</span>
           </label>
           {errorsMessages?.filter(error => error.id === "noPostalcode").map(error =>
@@ -264,14 +254,14 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT STREET & STREETNUMBER */}
         <div className="input-wrapper input-wrapper--multiple">
           <label htmlFor="" className="checkout-label checkout-label--short">
-            <input type="text" autoComplete="off" name="street" placeholder=" " className={errorsMessages?.some(error => error.id === "noStreet") ? "checkout-input checkout-input--short checkout-input--error" : "checkout-input checkout-input--short"}/>
+            <input defaultValue={checkoutFormData.street} type="text" autoComplete="off" name="street" placeholder=" " className={errorsMessages?.some(error => error.id === "noStreet") ? "checkout-input checkout-input--short checkout-input--error" : "checkout-input checkout-input--short"}/>
             <span className="checkout-labelcontent">Calle</span>
             {errorsMessages?.filter(error => error.id === "noStreet").map(error =>
                 <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
               )}
           </label>
           <label htmlFor="" className="checkout-label checkout-label--tiny">
-            <input type="number" autoComplete="off" name="streetnumber" placeholder=" " onWheelCapture={numberInputOnWheelPreventChange} className={errorsMessages?.some(error => error.id === "noStreetnumber") ? "checkout-input checkout-input--tiny checkout-input--error" : "checkout-input checkout-input--tiny"}/>
+            <input defaultValue={checkoutFormData.streetnumber} type="number" autoComplete="off" name="streetnumber" placeholder=" " onWheelCapture={numberInputOnWheelPreventChange} className={errorsMessages?.some(error => error.id === "noStreetnumber") ? "checkout-input checkout-input--tiny checkout-input--error" : "checkout-input checkout-input--tiny"}/>
             <span className="checkout-labelcontent">Nº</span>
             {errorsMessages?.filter(error => error.id === "noStreetnumber").map(error =>
                 <span className="checkout-input-errmssg" key={error.id}>{error.message}</span>
@@ -281,17 +271,17 @@ export default function checkoutForm ({setShippingData}:checkoutFormProps) {
         {/* INPUT DOORDETAILS */}
         <div className="input-wrapper">
           <label htmlFor="doordetails" className="checkout-label" >
-            <input type="text" className="checkout-input" autoComplete="off" id="doordetails" name="doordetails" placeholder=" "/>
+            <input defaultValue={checkoutFormData.doordetails} type="text" className="checkout-input" autoComplete="off" id="doordetails" name="doordetails" placeholder=" "/>
             <span className="checkout-labelcontent">Portal / Puerta / Escalera</span>
           </label>
         </div>
         {/* INPUT SHIPPINGCOMMENTS */}
         <div className="input-wrapper">
           <label htmlFor="shippingcomments" className="checkout-label" >
-            <textarea className="checkout-input checkout-input--textarea" autoComplete="off" id="shippingcomments" name="shippingcomments" placeholder=" "/>
+            <textarea defaultValue={checkoutFormData.shippingcomments} className="checkout-input checkout-input--textarea" autoComplete="off" id="shippingcomments" name="shippingcomments" placeholder=" "/>
             <span className="checkout-labelcontent">Comentarios para facilitar el envío</span>
           </label>
-          <span className="note-span">*Opcional:  Escribe cualquier comentario que pueda facilitar el envío al repartirdor.</span>
+          <span className="note-span">*Opcional:  Escribe algún comentario que pueda facilitar la entrega al repartirdor.</span>
         </div>
         <button formAction="post" type="submit" className="checkoutform-bt"  >Verificar los datos</button>
       </form>

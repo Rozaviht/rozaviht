@@ -67,3 +67,27 @@ ul {
 .mrgtop {
   margin-top: 2rem;
 }
+
+.bt-primary {
+  background-color: $maincolor;
+  border: none;
+  color: $backgroundcolor;
+  border-radius: 10px;
+
+  &--small {
+    width: 8rem;
+    height: 2rem;
+  }
+}
+
+.bt-scndry {
+  background-color: unset;
+  border: 2px solid $maincolor;
+  color: $maincolor;
+  border-radius: 10px;
+
+  &--small {
+    width: 8rem;
+    height: 2rem;
+  }
+}

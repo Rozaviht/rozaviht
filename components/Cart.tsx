@@ -17,16 +17,8 @@ export type CartProps = {
 
 const Cart = ({handleShowCart, showCart}: CartProps) => {
 
-  const { cartProducts, setCartProducts, totalCartPrice } = useContext(AppContext)
+  const { cartProducts, totalCartPrice } = useContext(AppContext)
 
-  const handleRemoveFromCart = (productId: number) => {
-    let elementProduct = cartProducts.find(element => element.id === productId)
-    setCartProducts(() =>
-      cartProducts.filter(function(element) {
-        return element != elementProduct
-      })
-    );
-  };
 
 
   return (
@@ -57,7 +49,6 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
                 <CartItem
                   key={item.id}
                   cartProduct={item}
-                  removeFromCart={handleRemoveFromCart}
                 />
                 ))}
               <div className="total-price-container">

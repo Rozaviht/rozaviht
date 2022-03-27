@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useContext } from 'react'
 
 import type { ReactElement } from 'react'
+
+import CheckoutProvider from '../services/CheckoutProvider'
+import { CheckoutContext } from 'services/CheckoutContext'
 
 import CheckoutSteps from '@components/CheckoutSteps'
 import CheckoutVerify from '@components/CheckoutVerify'
@@ -8,46 +11,33 @@ import CheckoutVerify from '@components/CheckoutVerify'
 import CheckoutLayout from '@components/CheckoutLayout'
 import CheckoutForm from '@components/CheckoutForm'
 
-export type shippingDataProps = {
-  name: string,
-  lastname: string,
-  email: string,
-  phone: string,
-  provincie: string,
-  municipie: string,
-  postalcode: string,
-  street: string,
-  streetnumber: string,
-  doordetails: string,
-  shippingcomments: string
-}
-
 
 
 export default function checkoutPage ()  {
-  const [shippingData, setShippingData] = useState<shippingDataProps>({} as shippingDataProps)
   const [orderVerified, setOrderVerified] = useState(false)
+
+
+  const {checkoutFormData, editingForm} = useContext(CheckoutContext)
 
 
   useEffect(() => {
     window.scroll(0, 0)
-  },[shippingData, orderVerified])
+  },[checkoutFormData, orderVerified])
 
   return (
     <div className="checkout-main">
-      <CheckoutSteps shippingData={shippingData} orderVerified={orderVerified} />
+      <CheckoutSteps orderVerified={orderVerified} />
       {/* shippingData && Object.keys(shippingData).length === 0 && Object.getPrototypeOf(shippingData) === Object.prototype, means object === undefined */}
-      {shippingData && Object.keys(shippingData).length === 0 && Object.getPrototypeOf(shippingData) === Object.prototype 
+      {checkoutFormData && Object.keys(checkoutFormData).length === 0 && Object.getPrototypeOf(checkoutFormData) === Object.prototype || editingForm === true
       ?
-        <CheckoutForm setShippingData={setShippingData} />
+        <CheckoutForm />
       : 
         orderVerified === false 
           ?
-            <CheckoutVerify shippingData={shippingData} setOrderVerified={setOrderVerified}/>
+            <CheckoutVerify setOrderVerified={setOrderVerified}/>
 
           :
             <div className="checkout-section">
-              <h2 className="font-LoraMedium">Muchas gracias por la compra, tu pedido se ha realizado con exito.</h2>
               <h3 className="font-LoraMedium">Revisa tu correo electrónico para confirmar que tienes el pedido y la factura correspondiente.</h3>
             </div>
       }
@@ -58,8 +48,10 @@ export default function checkoutPage ()  {
 
 checkoutPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <CheckoutLayout>
-      {page}
-    </CheckoutLayout>
+    <CheckoutProvider>
+      <CheckoutLayout>
+        {page}
+      </CheckoutLayout>
+    </CheckoutProvider>
   )
 }

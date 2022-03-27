@@ -1,0 +1,30 @@
+.cookies-consent-wrapper {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $backgroundcolor;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.cookies-consent-bts {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cookies-consent-wrapper > * {
+  color: $maincolor;
+  margin-top: 0.5rem;
+}
