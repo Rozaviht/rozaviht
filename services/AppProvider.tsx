@@ -22,6 +22,8 @@ export type CartItemType = {
  export default function AppProvider ({ children }: props) {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0)
+  /* This variable is only for now, for testing UI */
+  const [cookiesManageShow, setCookiesManageShow] = useState(false)
 
   useEffect(() => {
     if (window) {
@@ -45,7 +47,7 @@ export type CartItemType = {
   };
 
   return (
-    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart }}>
+    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart, cookiesManageShow, setCookiesManageShow }}>
       {children}
     </AppContext.Provider>
   )

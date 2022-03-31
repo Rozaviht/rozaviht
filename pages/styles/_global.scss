@@ -69,25 +69,27 @@ ul {
 }
 
 .bt-primary {
+  margin-top: 1rem;
   background-color: $maincolor;
   border: none;
   color: $backgroundcolor;
   border-radius: 10px;
 
   &--small {
-    width: 8rem;
+    width: 8.5rem;
     height: 2rem;
   }
 }
 
 .bt-scndry {
+  margin-top: 1rem;
   background-color: unset;
   border: 2px solid $maincolor;
   color: $maincolor;
   border-radius: 10px;
 
   &--small {
-    width: 8rem;
+    width: 8.5rem;
     height: 2rem;
   }
 }

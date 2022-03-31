@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import prisma from '../lib/prisma'
 import Image from 'next/image'
 
@@ -9,6 +9,7 @@ import type { ReactElement } from "react"
 
 import ProductImageSlider from '@components/ProductImageSlider'
 import Layout from "@components/Layout"
+import AddedToCartPopUp from "@components/AddedToCartPopUp"
 
 import MartaBañoAceite from '@img/marta-aceite-baño.jpg'
 import ingredientsImage from '@img/img-cbd-page.png'
@@ -23,12 +24,9 @@ interface props  {
   ]
 }
 
-
-export type CurrentProductProps = {
-    currentId: number
-    currentPrice: number
+export type productAddedType = {
+  name: string
 }
-
 
 
 export const getStaticProps = async () => {
@@ -57,6 +55,8 @@ export default function cbdPage ({ ProductDetails}: props) {
   const [selected, setSelected] = useState(ProductDetails[0].id)
   const [currentName, setCurrentName] = useState(ProductDetails[0].name)
   const [listDropped, setListDropped] = useState([false, false, false, false])
+  const [productAdded, setProductAdded] = useState<productAddedType>({} as productAddedType)
+  const [showAddedPopUp, setShowAddedPopUp] = useState(false)
   
   var currentProduct = {
     id : selected,
@@ -106,11 +106,17 @@ export default function cbdPage ({ ProductDetails}: props) {
       }
       return [...prev, { ...clickedItem, amount: amountSelected }];
     });
-  };
 
+    setProductAdded({
+      name: clickedItem.name
+    })
+    
+    setShowAddedPopUp(true)
+  };
 
   return(
     <div className="product-page">
+      <AddedToCartPopUp productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-details">
         <ProductImageSlider></ProductImageSlider>
         <div className="container--flexcolumn">

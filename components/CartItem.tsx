@@ -53,7 +53,7 @@ const CartItem = ({cartProduct}: CartItemProps) => {
       </div>
       <p className="p-name">Producto:</p>
       <p className='cart-item-name'>{cartProduct.name}</p>
-      <button className="close-bt--cart" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+      <button className="close-bt close-bt--topright" onClick={() => handleRemoveFromCart(cartProduct.id)}>
         <div className="line-left"></div>
         <div className="line-right"></div>
       </button>

@@ -1,0 +1,31 @@
+.popup-wrapper {
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  transition: all 0.4s ease;
+
+  background-color: $backgroundcolor;
+  border-bottom: 3px solid $maincolor;
+  box-shadow: 0 0 0 4000px rgba($color: #000000, $alpha: 0.6);
+
+  &.hidden {
+    box-shadow: none;
+    transform: translateY(-100%);
+  }
+}
+
+.popup-img {
+  width: 15%;
+}

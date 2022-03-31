@@ -1,0 +1,112 @@
+.cookies-manage {
+  z-index: 101;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  width: 90vw;
+  height: 85vh;
+  padding: 1rem;
+  overflow-y: scroll;
+
+  background-color: $backgroundcolor;
+  border: 2px solid $maincolor;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.cookies-manage-nav {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 1rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -15%;
+    background-color: $maincolor;
+    height: 1px;
+    width: 100%;
+  }
+}
+
+.cookies-manage-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cookies-container {
+  margin-top: 1rem;
+
+  &-top {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.switch {
+  display: inline-block;
+  position: relative;
+  height: 1.5rem;
+  width: 3rem;
+
+  & input {
+    display: none;
+  }
+}
+
+.cookies-slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+
+  &::before {
+    background-color: #fff;
+    bottom: 1.5px;
+    content: "";
+    height: 1.3rem;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 1.3rem;
+  }
+}
+
+.switch > input:checked + .cookies-slider {
+  background-color: $maincolor;
+}
+
+.switch > input:checked + .cookies-slider:before {
+  transform: translateX(1.2rem);
+}
+
+.cookies-slider.round {
+  border-radius: 34px;
+}
+
+.cookies-slider.round:before {
+  border-radius: 50%;
+}

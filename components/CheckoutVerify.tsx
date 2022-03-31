@@ -98,7 +98,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 className="font-LoraMedium">Pedido</h2>
         {cartProducts.map(cartProduct => 
           <div key={cartProduct.id} className="checkout-product-card">
-            <button className="close-bt--cart" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+            <button className="close-bt" onClick={() => handleRemoveFromCart(cartProduct.id)}>
               <div className="line-left"></div>
               <div className="line-right"></div>
             </button>
