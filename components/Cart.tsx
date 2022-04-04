@@ -19,8 +19,6 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
 
   const { cartProducts, totalCartPrice } = useContext(AppContext)
 
-
-
   return (
     <div className={showCart ? "cart dropped" : "cart"}>
       <div>

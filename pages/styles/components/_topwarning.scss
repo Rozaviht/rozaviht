@@ -1,22 +1,29 @@
 .topwarning {
-  background-color: #f1f5bc;
-  position: relative;
+  grid-area: topWarning;
+  background-color: rgba($color: $maincolor, $alpha: 0.2);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
 
   &-text {
+    white-space: nowrap;
     font-weight: 600;
-    position: absolute;
     animation-name: movingtext;
-    animation-duration: 25s;
+    animation-duration: 20s;
+    animation-delay: 0ms;
     animation-fill-mode: both;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
   }
 }
 
 @keyframes movingtext {
-  from {
-    transform: translateX(-100%);
+  0% {
+    transform: translateX(100%);
   }
-  to {
-    transform: translateX(110%);
+
+  100% {
+    transform: translateX(-100%);
   }
 }

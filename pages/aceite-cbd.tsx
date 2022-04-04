@@ -11,8 +11,7 @@ import ProductImageSlider from '@components/ProductImageSlider'
 import Layout from "@components/Layout"
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 
-import MartaBañoAceite from '@img/marta-aceite-baño.jpg'
-import ingredientsImage from '@img/img-cbd-page.png'
+import cbdIllustration from '@img/cbd-ilustration-negative.svg'
 
 interface props  {
   ProductDetails : [
@@ -54,7 +53,7 @@ export default function cbdPage ({ ProductDetails}: props) {
   const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
   const [selected, setSelected] = useState(ProductDetails[0].id)
   const [currentName, setCurrentName] = useState(ProductDetails[0].name)
-  const [listDropped, setListDropped] = useState([false, false, false, false])
+  const [infoList, setInfoList] = useState([false, false, false, false])
   const [productAdded, setProductAdded] = useState<productAddedType>({} as productAddedType)
   const [showAddedPopUp, setShowAddedPopUp] = useState(false)
   
@@ -114,6 +113,12 @@ export default function cbdPage ({ ProductDetails}: props) {
     setShowAddedPopUp(true)
   };
 
+  const handleDropInfo = (index:number) => {
+    let infoCopy = [...infoList]
+    infoCopy[index] = !infoList[index]
+    setInfoList(infoCopy)
+  }
+
   return(
     <div className="product-page">
       <AddedToCartPopUp productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
@@ -156,41 +161,38 @@ export default function cbdPage ({ ProductDetails}: props) {
               </h4>
             </button> 
           </div>
-          <p className="delivery-info">Envío Estandar (1,5€):  3 a 5 días laborales</p>
-          <p className="delivery-info">Envío Express (3€):  2 a 3 días laborales</p>
-          <p className="delivery-info">Envíos de momento solo España Península</p>
         </div>
       </div>
-      <div className="product-ingredients">
-        <div className="ingredients-image">
-          <Image src={ingredientsImage} height={1.7} width={1} layout="responsive"/>
+      <div className="product-first-section">
+        <div className="animated-text-container">
+          <p className="product-animated-text">Este aceite te ayudara a relajar la tensión que tengas acumulada, te ayudara a conciliar un mejor sueño, y te ayudara a manejar el estrés y la ansiedad. Y todo con tan solo un par de gotas...</p>
         </div>
       </div>
-      {/* PRODCUT INFORMATION */}
+      {/* PRODUCT INFORMATION */}
       <div className="product-information">
         <div className="text-container">
           <h1 className="product-information-title">Información del Producto</h1>
           <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"} >QUE HACE</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUE HACE</h2>
+            <div className={ infoList[0] === true ? "information-content dropped" : "information-content" }>
               <p>Los principales beneficios del Aceite de CBD, son sus efectos antiinflamatorios, antidepresivos y relajantes; de hecho con tan solo un par de gotas notarás sus efectos casí de inmediato. Estas carácteristicas particulares del aceite te ayudaran con dolores e irritaciones, desinflamandola la zona a la vez que sientes una relajacion en la misma. También gracias a él, podrás manejar mejor la ansiedad y el estrés, ya que el CBD reduce estos valores en tu cuerpo; por lo que además te ayudara a conciliar mejor el sueño si lo aplicas antes de dormir.</p>
             </div>
           </div>
           <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO UTILIZARLO</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>COMO UTILIZARLO</h2>
+            <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
             <p>En cuanto a como usar el aceite, existen diferentes formas, pero las más conocidas son el uso topico y el uso sublingual.Actualmente en Españá su venta esta restringido al uso topico solamente, por lo que te recomendamos emplear un par de gotas en la zona donde sientas dolor y masajear hasta que el aceite se haya completamente absorvido. Deberías notar los efectos calmantes casí al momento, ten en cuenta que a mayor porcentaje del producto mayor serán sus efectos por lo que para dolores mas agudos te recomendamos usar porcentajes mas altos, o si deseas emplear menos producto cada que vez que lo uses.</p>
             </div>
           </div>
           <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>INGREDIENTES</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <h2 className={infoList[2] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(2)}>INGREDIENTES</h2>
+            <div className={ infoList[2] === true ? "information-content dropped" : "information-content" }>
             <p>Como te hemos mencionado el aceite de CBD en España, de momento, solo se puede vender como uso topico, sin embargo este producto en varios paises de la Union Europea y en Estados Unidos ya esta disponible para venta con uso sublinguanl, donde se extrean los grandes beneficios del producto. Esto surgío a raiz de que la OMS lo considerará un suplemento alimenticio beneficioso para el ser humano, donde a continuación la Union Europea lo aprovo de la misma manera.</p> 
             </div>
           </div>
           <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO RECICLARLO</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
+            <h2 className={infoList[3] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(3)}>COMO RECICLARLO</h2>
+            <div className={ infoList[3] === true ? "information-content dropped" : "information-content" }>
             <p>Estos son los principales beneficios que contiene el aceite de CBD, sin embargo todavía hay más carácteristicas de este producto que explicamos más a fondo en uno de nuestros artículos de Rozaday, te recomendamos leerlo para que estes enterado de lo que estas cosumiendo y no tengas dudas al respecto, pincha aquí para leerlo.</p>
             </div>
           </div>

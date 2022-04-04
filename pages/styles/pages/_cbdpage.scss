@@ -5,10 +5,10 @@
   padding-top: 2rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.7fr 1fr 1fr;
+  grid-template-rows: 50rem 100vh 0.2fr;
   grid-template-areas:
     "main"
-    "ingredients"
+    "firstSection"
     "information";
 }
 
@@ -17,7 +17,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   &-imgs {
@@ -157,6 +157,36 @@
   }
 }
 
+
+/* PRODUCT FIRST SECTION */
+
+.product-first-section {
+  grid-area: firstSection;
+  margin-top: 2rem;
+
+  background-color: $oilsectiontext;
+
+
+  & .animated-text-container {
+    position: relative;
+    padding: 3rem 1.2rem 1.2rem 1.2rem;
+    height: 100%;
+    overflow: hidden;
+
+    & .product-animated-text {
+      font-size: 2.3rem;
+      color: $backgroundcolor;
+      font-weight: 600;
+      font-family: Lora-Medium;
+    }
+  }
+
+}
+
+
+/* PRODUCT INFORMATION */
+
+
 .product-information {
   grid-area: information;
 
@@ -175,15 +205,31 @@
     }
 
     &-wrapper {
-      margin-top: 1.5rem;
-      border-top: 1px solid #000;
+      margin-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #000;
     }
 
     &-title {
       margin-top: 0.5rem;
+      position: relative;
+
+      &::after {
+        content: '▼';
+        width: 1.5rem;
+        height: 1.5rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+      }
 
       &.colored {
         color: $oilsectiontext;
+
+        &::after {
+          transform: rotate(180deg);
+        }
       }
     }
   }
@@ -198,9 +244,5 @@
 }
 
 .img-container {
-  width: 100%;
-}
-
-.ingredients-image {
   width: 100%;
 }

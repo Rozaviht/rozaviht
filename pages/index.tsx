@@ -100,7 +100,7 @@ export default function index () {
         </div>
         <div className="section-text-container">
           <p className="rozanews-text">
-          Rozaday es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
+          Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
           Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena, y que cualquiera pueda leerlo.
           </p>
         </div>

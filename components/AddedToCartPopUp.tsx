@@ -34,7 +34,7 @@ export default function AddedToCartPopUp ({productAdded, showAddedPopUp, setShow
       <div className="popup-img">
         <Image src={aceite10} height={100} width={100} layout="responsive" />
       </div>
-      <p>{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta.`}</p>
+      <p className="popup-text">{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta de la compra.`}</p>
       <button className="close-bt close-bt--topright" onClick={() => setShowAddedPopUp(false)}>
           <div className="line-left"></div>
           <div className="line-right"></div>

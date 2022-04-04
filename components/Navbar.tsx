@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import { useContext, Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -8,13 +8,14 @@ import Cart from '@components/Cart'
 import Logo from '@img/Logo.svg'
 import CartIcon from '@img/cartIcon3.svg'
 
+type NavbarProps = {
+  showCart: boolean,
+  setShowCart: Dispatch<SetStateAction<boolean>>
+}
 
+const Navbar = ({showCart, setShowCart}: NavbarProps) => {
 
-const Navbar = () => {
-  const [showCart, setShowCart] = useState(false);
-  
   const { cartProducts } = useContext(AppContext)
-  console.log(cartProducts)
 
  
 
