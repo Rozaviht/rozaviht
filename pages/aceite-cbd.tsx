@@ -122,9 +122,9 @@ export default function cbdPage ({ ProductDetails}: props) {
   return(
     <div className="product-page">
       <AddedToCartPopUp productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
-      <div className="product-details">
+      <div className="product-hero">
         <ProductImageSlider></ProductImageSlider>
-        <div className="container--flexcolumn">
+        <div className="container--flexcolumn product-actions">
           <h1 className="product-title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>
           <p className="p--textCenter mrgtop">
@@ -151,12 +151,12 @@ export default function cbdPage ({ ProductDetails}: props) {
                 <input className="amount-input" type="number" value={amountSelected} disabled="disabled"/>
                 <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
             </div>
-            <button className="product-details-cta" onClick={() => handleAddToCart(currentProduct)}>
+            <button className="product-hero-cta" onClick={() => handleAddToCart(currentProduct)}>
               <div className="cta-plus">
                 <div className="cta-plus-line"></div>
                 <div className="cta-plus-line"></div>
               </div>
-              <h4 className="product-details-cta-text">
+              <h4 className="product-hero-cta-text">
                 Añadir a la cesta
               </h4>
             </button> 
@@ -165,7 +165,7 @@ export default function cbdPage ({ ProductDetails}: props) {
       </div>
       <div className="product-first-section">
         <div className="animated-text-container">
-          <p className="product-animated-text">Este aceite te ayudara a relajar la tensión que tengas acumulada, te ayudara a conciliar un mejor sueño, y te ayudara a manejar el estrés y la ansiedad. Y todo con tan solo un par de gotas...</p>
+          <p className="product-animated-text">Este aceite te ayudara a realajar toda la tension que tengas acumulada, te ayudara a conciliar de mejor manera el sueño, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
         </div>
       </div>
       {/* PRODUCT INFORMATION */}

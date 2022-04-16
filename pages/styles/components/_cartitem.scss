@@ -1,79 +1,39 @@
-.cart-item {
-  margin-top: 1.5rem;
-  width: 100%;
-  height: 100%;
+.cartItem {
+  margin-bottom: 1.5rem;
 
-  padding-top: 1rem;
+  border-top: 1px solid $maincolor;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr 1rem;
-  grid-template-rows: 1rem 1fr 0.3fr 0.3fr 0.3fr;
-  grid-template-areas:
-    " . . btClose"
-    " img img ."
-    "p-name name name"
-    "p-amount btAmount btAmount"
-    "p-price price price";
-
-  &:nth-child(2n) {
-    margin-top: 3rem;
-    border-top: 1px solid $maincolor;
+  & > div:nth-child(n) {
+    margin-top: 1rem;
   }
 }
 
-.p-amount,
-.p-name,
-.p-price {
-  justify-self: start;
-  align-self: center;
-  font-weight: 600;
-}
-
-.p-price {
-  grid-area: p-price;
-}
-.p-name {
-  grid-area: p-name;
-}
-.p-amount {
-  grid-area: p-amount;
-}
-
 .amount--cart {
-  grid-area: btAmount;
-  width: 70%;
-  height: 50%;
+  width: 40%;
   background-color: unset;
   border-radius: 8px;
   border: 1px solid $maincolor;
 
-  align-self: center;
-  justify-self: center;
+  display: flex;
+  flex-direction: row;
 
-  display: grid;
-  grid-template-columns: 0.5fr 1fr 0.5fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "minus number plus";
 
   & .amount-bt--cart {
     background-color: $maincolor;
     border: $maincolor;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: $backgroundcolor;
+    width: 3rem;
+
     &.bt--plus {
-      border-radius: 1px 6px 6px 1px;
-      grid-area: plus;
-      border-left: 1px solid $maincolor;
+      border-radius: 1px 8px 8px 1px;
     }
     &.bt--minus {
-      border-radius: 6px 1px 1px 6px;
-      grid-area: minus;
-      border-right: 1px solid $maincolor;
+      border-radius: 8px 1px 1px 8px;
     }
   }
 
   & .amount-input--cart {
-    grid-area: number;
     width: 100%;
 
     background-color: unset;
@@ -85,60 +45,9 @@
   }
 }
 
-.cart-item-name,
-.cart-item-price,
-.amount--cart {
-  justify-self: end;
-}
-
-.cart-item-name {
-  grid-area: name;
-  align-self: center;
-  text-align: center;
-  font-size: 1.2rem;
-  font-family: Lora-Regular;
-}
-
-.cart-item-price {
-  grid-area: price;
-  font-size: 1.2rem;
-  align-self: center;
-  text-align: center;
-  font-family: Lora-Regular;
-  color: #000;
-}
-
-.close-bt {
-  grid-area: btClose;
-  background-color: unset;
-  border: unset;
-  position: relative;
-  width: 1.5rem;
-  height: 1.5rem;
-  & .line-left,
-  .line-right {
-    width: 1rem;
-    height: 0.1rem;
-    background-color: $maincolor;
-    border-radius: 5px;
-    position: absolute;
-    left: 0.2rem;
-    top: 0.7rem;
-  }
-
-  & .line-left {
-    transform: rotate(45deg);
-  }
-  & .line-right {
-    transform: rotate(-45deg);
-  }
-}
-
 .image-cartitem-container {
-  grid-area: img;
   width: 200px;
   height: 200px;
 
   align-self: center;
-  justify-self: center;
 }

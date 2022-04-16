@@ -1,109 +1,78 @@
-.nav {
-  grid-area: navbar;
-}
-
-.nav-wrapper {
+.navbar {
   position: relative;
+  padding: 1rem;
 
-  padding-left: 5%;
-  padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  display: grid;
-  grid-template-rows: 1fr 0.5rem 1fr;
-  grid-template-columns: 1fr 0.2fr;
-  grid-template-areas:
-    "logo basket"
-    ". ."
-    "navMenu navMenu";
-
-  @include respond-to(mobileLandscape) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 0.3fr 1fr 0.3fr;
-    grid-template-areas: "logo navMenu basket";
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row;
+    padding: 1rem 3rem 1rem 3rem;
   }
-  @include respond-to(tabletPortrait) {
+  @include respond-to(tabletPortrait, protraitOrientation) {
     padding-left: 20%;
     padding-right: 20%;
   }
 }
 
-.nav-logo {
-  grid-area: logo;
 
-  justify-self: center;
-
+.navbar__logoImg {
   width: 35%;
-  margin-left: 20%;
 
-  @include respond-to(mobileLandscape) {
-    width: 80%;
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    width: 30%;
   }
 
-  @include respond-to(tabletLandscape) {
+  @include respond-to(tabletLandscape, landscapeOrientation) {
   }
 }
 
-.nav-menu {
-  grid-area: navMenu;
+.navbar__menu {
   width: 100%;
-  height: 100%;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
 
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
 
   border-top: 1px solid $maincolor;
 
-  &-item {
-    font-family: DIN-Medium;
-    font-size: 0.8rem;
+  & > a {
     color: $maincolor;
   }
 
-  @include respond-to(mobileLandscape) {
-    display: flex;
+  @include respond-to(mobileLandscape, landscapeOrientation) {
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
 
-    padding-right: 20%;
-
-    & .nav-menu-item {
-      margin-left: 2rem;
-    }
+    border: none;
   }
 
-  @include respond-to(tabletLandscape) {
+  @include respond-to(tabletLandscape, landscapeOrientation) {
     padding-right: 12%;
-
-    & .nav-menu-item {
-      font-size: initial;
-    }
   }
 }
 
-.nav-cart {
-  background-color: unset;
-  border: unset;
-  grid-area: basket;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.navbar__cartBt {
+  position: absolute;
+  right: 1rem;
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    position: initial;
+  }
 }
 
-.nav-cart-container {
+.navbar__cartIcon {
   position: relative;
   width: 25px;
   height: 25px;
 }
 
-.products-counter {
+.navbar__cartCounter {
   position: absolute;
   bottom: 0;
   right: 0;

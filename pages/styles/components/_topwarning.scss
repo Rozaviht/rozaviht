@@ -1,8 +1,7 @@
 .topwarning {
-  grid-area: topWarning;
+  height: 1.5rem;
   background-color: rgba($color: $maincolor, $alpha: 0.2);
   overflow: hidden;
-  margin-bottom: 0.5rem;
   display: flex;
   flex-wrap: wrap;
 

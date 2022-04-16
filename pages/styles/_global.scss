@@ -1,3 +1,5 @@
+/* -------GENERAL FEATURES AND PRESETS------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +10,7 @@
 
 html {
   font-size: 100%;
-  background-color: #f2f3fa;
+  background-color: $backgroundcolor;
 }
 
 body {
@@ -16,32 +18,153 @@ body {
   display: contents;
 }
 
-.font-LoraMedium {
-  font-family: Lora-Medium;
-}
-.font-LoraRegular {
-  font-family: Lora-Medium;
+button {
+  border: none;
+  background: none;
 }
 
-h1 {
-  font-weight: 500;
-}
-
-body {
-  font-size: 0.8rem;
-
-  @include respond-to(desktop) {
-    font-size: 1;
-  }
+input {
+  outline: $maincolor;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: unset;
 }
 
 ul {
   list-style: none;
 }
+
+
+
+/* -------TEXT------- */
+
+h1,h2 {
+  font-family: Lora-Medium;
+}
+
+h3,h4,h5,h6 {
+  font-family: Lora-Regular;
+}
+
+.h--maincolor {
+  color: $maincolor;
+}
+
+.h--aligncenter {
+  text-align: center;
+}
+
+
+body {
+  font-size: 0.8rem;
+
+  @include respond-to(desktop, noneOrientation) {
+    font-size: 1;
+  }
+}
+
+
+.p {
+  &--textCenter {
+    text-align: center;
+  }
+}
+
+/* -------BUTTONS------- */
+
+.closeBt {
+  background-color: unset;
+  border: unset;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .closeBt__lineL,
+  .closeBt__lineR {
+    width: 1rem;
+    height: 0.1rem;
+    background-color: $maincolor;
+    position: absolute;
+  }
+
+  & .closeBt__lineL {
+    transform: rotate(45deg);
+  }
+  & .closeBt__lineR {
+    transform: rotate(-45deg);
+  }
+
+  &--topRight {
+    top: 5%;
+    right: 2%;
+  }
+}
+
+.closeBtSlide {
+  background-color: unset;
+  border: unset;
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  & .closeBtSlide__lineT,
+  .closeBtSlide__lineC, .closeBtSlide__lineB {
+    width: 1.8rem;
+    height: 0.2rem;
+    background-color: $maincolor;
+    border-radius: 5px;
+    position: absolute;
+    left: 0.5rem;
+    top: 1.5rem;
+  }
+
+  & .closeBtSlide__lineT {
+    width: 1.2rem;
+    transform: translateY(-0.38rem) translateX(78%) rotate(45deg);
+  }
+  & .closeBtSlide__lineB {
+    width: 1.2rem;
+    transform: translateY(0.38rem) translateX(78%) rotate(-45deg);
+  }
+
+  &--topLeft {
+    top: 5%;
+    left: 2%;
+  }
+}
+
+.cta {
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 1.2rem;
+  border: unset;
+  border-radius: 8px;
+
+  &--maincolor {
+    background-color: $maincolor;
+  }
+  
+  &--negative {
+    border: 2px solid $maincolor;
+    background-color: $backgroundcolor;
+    color: $maincolor;
+  }
+}
+
+/* -------INPUTS------- */
+
+.input--negative {
+  border: 2px solid $maincolor;
+  background-color: $backgroundcolor;
+}
+
+
+
+/* -------WRAPPERS------- */
 
 .container--flexcolumn {
   padding: 1rem;
@@ -58,11 +181,82 @@ ul {
   align-items: center;
 }
 
-.p {
-  &--textCenter {
-    text-align: center;
+.flexcolum {
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &--around {
+    justify-content: space-around;
+    align-items: center;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &--separate {
+    & > *:nth-child(n+2) {
+      margin-top: 1rem;
+    }
   }
 }
+
+.flexrow {
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  &--between {
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--separate {
+    & > *:nth-child(2n+1) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.flexrow-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* -------MENUS------- */
+
+.dropMenu {
+  padding: 0.5rem;
+  border-bottom: 1px solid $maincolor;
+
+  &__title {
+    &::after {
+      content: "+";
+      float: right;
+      font-size: 1rem;
+
+      transition: transform 0.4s ease, -webkit-transform 0.3s ease;
+    }
+
+    &.dropped {
+      &::after {
+        transform: rotateZ(45deg);
+      }
+    }
+  }
+
+  &__content {
+    overflow: hidden;
+    display: none;
+
+    &.dropped {
+      display: initial;
+    }
+  }
+}
+
 
 .mrgtop {
   margin-top: 2rem;
@@ -91,5 +285,34 @@ ul {
   &--small {
     width: 8.5rem;
     height: 2rem;
+  }
+}
+
+
+.link-negative {
+  color: $backgroundcolor;
+}
+
+/* -------PAGES------- */
+
+
+.legalPage {
+  display: flex;
+  flex-direction: column;
+  
+  &__banner {
+    position: relative;
+    width: 100%;
+  }
+
+  &__title {
+    width: 80%;
+    position: absolute;
+    z-index: 201;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
   }
 }

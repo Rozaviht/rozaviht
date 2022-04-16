@@ -12,116 +12,103 @@ const Footer = () => {
   const dropFooterList = () => setFooterListDropped(!footerListDropped)
 
   return (
-    <div className="footer">
-      <div className="footer-wrapper">
-        <div className="footer-email-sub">
-          <h2 className="footer-email-sub-title">¡Únete a la comunidad!</h2>
-          <div className="footer-email-sub-text">
-            <p >
+      <div className="footer">
+        <div className="flexcolum flexcolum--separate">
+          <h2>¡Únete a la comunidad!</h2>
+          <div>
+            <p>
               Mantente enterado de nuestras novedades, y tranquilo solo te escribiremos cuando publiquemos 
               nuevos artículos o saquemos un nuevo producto.
             </p>
-            <p>
+            <strong>
               No haremos spam, no es ecológico.
-            </p>
+            </strong>
             <p>
               Tus datos personales se usarán tal y como se describe en nuestra
-              <Link href="/">
-                <a className="footer-email-sub-text-link">
+              <Link href="/privacidad-seguridad">
+                <a style={{textDecoration: "underline", marginLeft: "5px"}}>
                   Política de Privacidad
                 </a>
               </Link>.
             </p>
           </div>
-          <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="footer-email-sub-input"/>
-          <button className="footer-email-sub-bt">UNIRSE</button>
+          <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
+          <button className="cta cta--negative">UNIRSE</button>
         </div>
-        <div className="footer-down-side-wrapper">
-          <div className="footer-left-side">
-            <div className="footer-left-side-column" >
-              <h5  className={footerListDropped ? "footer-left-side-column-title showed" : "footer-left-side-column-title"} onClick={dropFooterList}> Atención al cliente</h5>
-              <div className={footerListDropped ? "footer-left-side-column-section showed" : "footer-left-side-column-section"}>
-                <ul className="footer-left-side-column-section-list">
-                  <li className="footer-left-side-column-section-item">
+        <div className="footer__downSide">
+          <div className="dropMenu">
+              <h4  className={footerListDropped ? "dropMenu__title dropped" : "dropMenu__title"} onClick={dropFooterList}> Atención al cliente</h4>
+              <div className={footerListDropped ? "dropMenu__content dropped" : "dropMenu__content"}>
+                <ul className="flexcolum flexcolum--separate">
+                  <li>
                     <Link href ="/">
-                      <a className="footer-left-side-column-section-link">
+                      <a>
                         Cambios y devoluciones
                       </a>
                     </Link>
                   </li>
-                  <li className="footer-left-side-column-section-item">
+                  <li>
                     <Link href ="/">
-                      <a className="footer-left-side-column-section-link">
+                      <a>
                         Preguntas frecuentes (FAQ)
                       </a>
                     </Link>
                   </li>
-                  <li className="footer-left-side-column-section-item">
+                  <li>
                     <Link href ="/">
-                      <a className="footer-left-side-column-section-link">
+                      <a>
                         Política de cookies
                       </a>
                     </Link>
                   </li>
-                  <li className="footer-left-side-column-section-item">
+                  <li>
                     <Link href ="/">
-                      <a className="footer-left-side-column-section-link">
+                      <a>
                         Configuración de cookies
                       </a>
                     </Link>
                   </li>
                 </ul>
-              </div>
             </div>
           </div>
-          <div className="footer-right-side">
-            <div className="footer-contact">
+          <div className="flexrow flexrow--between">
+            <div className="flexcolum flexcolum--separate">
               <p>Contáctanos y te responderemos con la mayor brevedad posible:</p>
               <p>info@rozaviht.com</p>
             </div>
-            <div className="social-icons">
+            <div className="flexrow">
               <Link href="/">
-                <a className="social-icons-links">
-                  <div className="image-container">
-                    <Image src={facebookIcon} alt="Enlace facebook"  className="image"/>
-                  </div>
+                <a className="footer__mediaIcon">
+                    <Image src={facebookIcon} alt="Enlace facebook"/>
                 </a>
               </Link>
-              <Link href="/">
-                <a className="social-icons-links">
+              <Link href="https://www.instagram.com/rozaviht">
+                <a className="footer__mediaIcon">
                   <Image src={instagramIcon} alt="Enlace imstagram" />
                 </a>
               </Link>
             </div>
           </div>
         </div>
-        <div className="footer-legal">
-          <div className="footer-legal-logo">
+        <div className="flexcolum flexcolum--around">
+          <div className="footer__logoImg">
             <Image src={Logo} alt="Logo"  width={392} height={100} layout="responsive"/>
           </div>
-          <div className="footer-legal-issues">
-            <p>Reservados todos los derechos @ 2021 Rozaviht</p>
-            <div className="legal-links">
-              <Link href="/">
-                <a>
-                  Seguridad y Privacidad
-                </a>
-              </Link>
-              <Link href="/">
-                <a>
-                  Términos y Condiciones
-                </a>
-              </Link>
-              <Link href="/">
-                <a>
-                  Servicio
-                </a>
-              </Link>
-            </div>
+          <p style={{fontSize: "0.6rem"}}>Reservados todos los derechos @ 2022 Rozaviht</p>
+          <div className="flexrow">
+            <Link href="/privacidad-seguridad" >
+              <a style={{borderRight: "1px solid #9b532b", paddingRight: "0.5rem", fontSize: "0.6rem"}}>
+                Seguridad y Privacidad
+              </a>
+            </Link>
+            <Link href="/terminos-condiciones">
+              <a style={{paddingLeft: "0.5rem", fontSize: "0.6rem"}}>
+                Términos y Condiciones
+              </a>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
   )
 }
   

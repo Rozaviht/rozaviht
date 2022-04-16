@@ -7,9 +7,9 @@ import type { ReactElement } from 'react'
 import Layout from '@components/Layout'
 
 import IsotipoNegative from '@img/isotipo-negative.svg'
-import cbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
+import cbdIlustrationNegative from '@img/cbd-section-illustration.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
-import cbdSectionBanner2 from '@img/cbd-banner2-2.png'
+import cbdSectionImg2 from '@img/cbd-section-img2.webp'
 import rozadaySectionBanner from '@img/rozanews-banner-2.png'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
 
@@ -36,7 +36,7 @@ export default function index () {
     }, observerOptions)
 
     let allAnimatedObjects = document.querySelectorAll(
-      ".animated-slide, .section--cbd-text, .section--cbd-title, .section-tagline, .section--cbd-cta, .section--cbd-cta-link")
+      ".section--cbd-title, .section-tagline")
 
     allAnimatedObjects.forEach(object => {
       observer.observe(object)
@@ -47,46 +47,66 @@ export default function index () {
 
 
   return (
-    <div className="home-wrapper">
+    <div className="landingPage">
       <div className="home-banner">
-        <video className="video-banner" autoPlay loop playsInline preload='metadata' muted>
+        <video className="landingPage__banner" autoPlay loop playsInline preload='metadata' muted>
           <source type='video/mp4' src="/web-banner_2.mp4" />
         </video>
-        <div className="home-phrase-wrapper">
+        <div className="flexcolum flexcolum--around">
           <p>"Cuidate, y cuida el medio en el que vives."</p>
           <p>@rozaviht</p>
         </div>
       </div>
       {/* ---------- CBD SECTION --------- */}
-      <div className="section section--cbd">
-        {/* <div className="background-slide"></div> */}
-        <div className="section--cbd-hero">
-          <h1 className="section--cbd-title">ACEITE DE CBD</h1>
-          <div className="section--cbd-img">
-            <div className="animated-slide animated-slide--big"></div>
-            <Image src={cbdSectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+      <div className="cbdSection">
+        <div className="cbdSection__hero">
+          <h1 className="cbdSection__title">ACEITE DE CBD</h1>
+          <div className="cbdSection__frstimg">
+            <Image src={cbdSectionBanner} alt="" layout="responsive"/>
           </div>
-          <div className="section--cbd-secndimg">
-            <div className="animated-slide animated-slide--small"></div>
-            <Image src={cbdSectionBanner2} alt=""  width={100} height={150} layout="responsive"/>
+          <div className="cbdSection__scndimg">
+            <Image src={cbdSectionImg2} alt="" layout="responsive"/>
           </div>
         </div>
-        <div className="section-text-wrapper">
-          <p className="section--cbd-text">
+        <div className="flexcolum flexcolum--separate">
+          <p style={{color: "#f2f3fa"}}>
             Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
             con un par de gotas en la zona notaras los efectos casi inmediatos. Además, ha demostrado en diferentes
             estudios ayudar a reducir el estrés, a conciliar mejor el sueño, permitiendo una mejor recuperación, y 
             ayuda a manejar mejor la ansiedad.
           </p>
-          <p className="section--cbd-text">
+          <p style={{color: "#f2f3fa"}}>
             Y tranquilo que nuestro aceite contiene 0% de THC.
           </p>
         </div>
-        <div className="section--cbd-cta-wrapper">
-          <button className="section--cbd-cta"><Link href="/aceite-cbd"><a className="section--cbd-cta-link">Compra el aceite</a></Link></button>
-          <div className="cbdIllustration">
-            <Image src={cbdIlustrationNegative} alt=""  width={270} height={340} layout="responsive"/>
+        <div className="liquidContainer">
+          <div className="flexrow flexrow--between" style={{width: "100%"}}>
+            <button className="cbdSection__cta">
+              <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
+              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
+              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
+              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
+              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
+              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
+            </button>
+            <div className="cbdSection__illustration">
+            <Image src={cbdIlustrationNegative} alt="" layout="responsive"/>
           </div>
+          </div>
+            <svg className="liquidFilter" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="liquid">
+                  <feGaussianBlur in='SourceGraphic' stdDeviation="7" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix"
+                    values="1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 18 -7" result="liquid" />
+                  <feBlend in='SourceGraphic' />
+                </filter>
+              </defs>
+            </svg>
+            <div className="liquidBorder"></div>
         </div>
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
@@ -136,10 +156,6 @@ export default function index () {
         <button className="cta-secdry cta-secdry--rozavihtsection">
           <Link href="/aceite-cbd" >
             <a>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 101.26 59.27" className="leaf-container">
-                <path className="leaf"
-                  d="M99.71.2C94.5,4.13,83.56,10.08,60.86,8.87,34.58,7.47,22.11,17.55,19.75,19.7,18.05,21.23,7.81,33,14.07,44.26A45.6,45.6,0,0,1,1.43,43s-2.4,2.84-1,4.26c.78.78,8.41.06,15.13-.75,2.85,3.69,7.69,7.26,15.43,10.3C63.75,69.72,90.42,27.4,94.29,21.45A40.78,40.78,0,0,0,99.58,9.34l1.66-8.17A1,1,0,0,0,99.71.2Z" />
-              </svg>
             </a>
           </Link>
         </button>

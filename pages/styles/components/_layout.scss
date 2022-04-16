@@ -1,21 +1,8 @@
-@import "../_variables";
-@import "../medias";
-
-/* Styles */
-.wrapper {
+.layout {
   height: 100%;
 
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1.8rem 4rem 86% 12%;
-  grid-template-areas:
-    "topWarning"
-    "navbar"
-    "."
-    "footer";
-
-    &.non-scroll {
-      overflow: hidden;
-    }
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    grid-template-rows: 1% 5% 81% 12%;
+  }
 }

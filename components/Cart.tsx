@@ -20,49 +20,50 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
   const { cartProducts, totalCartPrice } = useContext(AppContext)
 
   return (
-    <div className={showCart ? "cart dropped" : "cart"}>
-      <div>
-        <button className="close-bt" onClick={handleShowCart}>
-          <div className="line-left"></div>
-          <div className="line-right"></div>
+    <div className={showCart ? "cart cart--showed" : "cart"}>
+      <div className="flexcolum flexcolum--around">
+        <button className="closeBtSlide closeBtSlide--topLeft" onClick={handleShowCart}>
+          <div className="closeBtSlide__lineT"></div>
+          <div className="closeBtSlide__lineC"></div>
+          <div className="closeBtSlide__lineB"></div>
         </button>
-        <div className="logo-cart-container">
+        <div className="cart__logoImg">
           <Image src={Logo} height={30} width={80} layout="responsive"></Image>
         </div>
-        <h2 className="cart-title">Tu cesta de la compra</h2>
+        <h2 className="h--maincolor">Tu cesta de la compra</h2>
       </div>
-      <div className="containerflx--column extra-pd">
+      <div className="flexcolum flexcolum--around">
         { cartProducts.length === 0
           ?
-            <div className="empty-cart">
-              <div className="empty-cart-text-wrapper">
-                <h1 className="empty-cart-text">! Ups Vaya¡</h1>
-                <h2 className="empty-cart-text">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
-              </div>
-              <Image src={emptyBasket} width={200} height={200}/>
-            </div>
+            <>
+                <h1>! Ups Vaya¡</h1>
+                <h2 className="h--aligncenter">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
+                <div className="cart__emptyImg">
+                  <Image src={emptyBasket} width={200} height={200} layout="responsive"/>
+                </div>
+            </>
           :
-            <div className="cart-items-container">
+            <>
               {cartProducts.map(item => (
                 <CartItem
                   key={item.id}
                   cartProduct={item}
                 />
                 ))}
-              <div className="total-price-container">
-                <div className="total-price">
-                  <h3 className="total-price-text">Total en tu cesta:</h3>
-                  <h3 className="total-price-number">{totalCartPrice},00€</h3>
+              <div className="flexcolum flexcolum--around">
+                <div className="flexrow">
+                  <h2>Total en tu cesta:</h2>
+                  <h2 style={{marginLeft: "2rem"}}>{totalCartPrice},00€</h2>
                 </div>
-                <button className="cart-cta-buy">
-                  <Link href="/checkout">
-                    <a>
+                <Link href="/checkout">
+                  <button className="cta cta--maincolor">
+                    <a className="link-negative">
                       COMPRAR
                     </a>
-                  </Link>
                   </button>
+                </Link>
               </div>
-            </div>
+            </>
         }
       </div>
     </div>

@@ -1,4 +1,4 @@
-.popup-wrapper {
+.popUp {
   z-index: 200;
   position: fixed;
   top: 0;
@@ -20,17 +20,12 @@
   border-bottom: 3px solid $maincolor;
   box-shadow: 0 0 0 4000px rgba($color: #000000, $alpha: 0.6);
 
-  &.hidden {
+  &--hidden {
     box-shadow: none;
     transform: translateY(-100%);
   }
 }
 
-.popup-img {
+.popUp__img {
   width: 6rem;
-}
-
-.popup-text {
-  font-size: 0.9rem;
-  width: 12rem;
 }

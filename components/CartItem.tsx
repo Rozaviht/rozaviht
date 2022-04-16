@@ -9,7 +9,7 @@ export type CartItemProps = {
   cartProduct: CartItemType
 }
 
-const CartItem = ({cartProduct}: CartItemProps) => {
+export default function CartItem ({cartProduct}: CartItemProps) {
 
   const { setCartProducts, handleRemoveFromCart } = useContext(AppContext)
 
@@ -47,26 +47,31 @@ const CartItem = ({cartProduct}: CartItemProps) => {
 
 
   return (
-    <div className="cart-item">
+    <div className="flexcolum cartItem">
+      <button className="closeBt closeBt--topRight" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+        <div className="closeBt__lineL"></div>
+        <div className="closeBt__lineR"></div>
+      </button>
       <div className="image-cartitem-container">
         <Image src={aceite10} width={200} height={200} layout='responsive'></Image>
       </div>
-      <p className="p-name">Producto:</p>
-      <p className='cart-item-name'>{cartProduct.name}</p>
-      <button className="close-bt close-bt--topright" onClick={() => handleRemoveFromCart(cartProduct.id)}>
-        <div className="line-left"></div>
-        <div className="line-right"></div>
-      </button>
-      <p className="p-price">Precio:</p>
-      <p className='cart-item-price'>{`${totalItemPrice},00€`}</p>
-      <p className="p-amount">Cantidad:</p>
-      <div className="amount--cart">
-        <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
-        <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
-        <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
+      <div className="flexrow-between">
+        <p>Producto:</p>
+        <h3>{cartProduct.name}</h3>
+      </div>
+      <div className="flexrow-between">
+        <p>Precio:</p>
+        <h3>{`${totalItemPrice},00€`}</h3>
+      </div>
+      <div className="flexrow-between">
+        <p>Cantidad:</p>
+        <div className="amount--cart">
+          <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
+          <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
+          <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default CartItem

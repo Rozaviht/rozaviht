@@ -30,14 +30,14 @@ export default function AddedToCartPopUp ({productAdded, showAddedPopUp, setShow
     }, [popUpRef])
 
   return (
-    <div ref={popUpRef} className={showAddedPopUp === true ? "popup-wrapper" : "popup-wrapper hidden"}>
-      <div className="popup-img">
+    <div ref={popUpRef} className={showAddedPopUp === true ? "popUp" : "popUp popUp--hidden"}>
+      <div className="popUp__img">
         <Image src={aceite10} height={100} width={100} layout="responsive" />
       </div>
-      <p className="popup-text">{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta de la compra.`}</p>
-      <button className="close-bt close-bt--topright" onClick={() => setShowAddedPopUp(false)}>
-          <div className="line-left"></div>
-          <div className="line-right"></div>
+      <p>{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta de la compra.`}</p>
+      <button className="closeBt closeBt--topRight" onClick={() => setShowAddedPopUp(false)}>
+          <div className="closeBt__lineL"></div>
+          <div className="closeBt__lineR"></div>
         </button>
     </div>
   )

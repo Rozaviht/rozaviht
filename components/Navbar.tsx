@@ -26,39 +26,37 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
 
 
   return (
-    <div className="nav">
-      <div className="nav-wrapper">
+      <div className="navbar">
         <Link href="/">
-          <a  className="nav-logo">
+          <a  className="navbar__logoImg">
             <Image src={Logo} height={100} width={392} layout="responsive" alt="Logo"/>
           </a>
         </Link>
-        <button className="nav-cart" onClick={handleShowCart}>
-          <div className="nav-cart-container">
-            <Image src={CartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
-            <div className={cartProducts.length === 0 ? "products-counter" : "products-counter active"}>{`${cartProducts.length}`}</div>
-          </div>
-        </button>
-        <div className="nav-menu">
+        <div className="navbar__menu">
           <Link href="/aceite-cbd" >
-            <a className="nav-menu-item">
+            <a>
               Aceite CBD
             </a>
           </Link>
-          <Link href="/rozaday" >
-            <a className="nav-menu-item">
-              Rozaday
+          <Link href="/rozanews" >
+            <a>
+              Rozanews
             </a>
           </Link>
           <Link href="/about" >
-            <a className="nav-menu-item">
+            <a>
               Sobre nosotros
             </a>
           </Link>
         </div>
+        <button className="navbar__cartBt" onClick={handleShowCart}>
+          <div className="navbar__cartIcon">
+            <Image src={CartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
+            <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
+          </div>
+        </button>
         <Cart handleShowCart={handleShowCart} showCart={showCart}></Cart>
       </div>
-    </div>
   )
 }
 

@@ -1,0 +1,151 @@
+.rozanews {
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    > h4 {
+      margin-top: 0.5rem;
+      text-align: center;
+      color: $maincolor;
+    }
+  }
+
+  &__logo {
+    width: 60%;
+  }
+
+  &__banner {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  & > div:nth-child(n+2) {
+    margin-top: 2rem;
+  }
+}
+
+.rozanewsNav {
+  width: 100%;
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__bt {
+    color: $backgroundcolor;
+    background-color: $maincolor;
+    padding: 0.8rem;
+    border-radius: 10px;
+  }
+
+  &::after {
+    content: '';
+    background-color: $maincolor;
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+  }
+}
+
+.searchField {
+  position: relative;
+  min-width: 15rem;
+
+  &__label {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    border-bottom: 1px solid $maincolor;
+
+  }
+  &__input {
+    border: none;
+    padding: calc(0.5rem * 1.5) 0.5rem;
+    width: 100%;
+    background: transparent;
+  }
+
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+    margin: calc(0.5rem * 0.75 + 3px) calc(0.5rem * 0.5);
+    color: #000;
+    opacity: 0.8;
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    background-color: $backgroundcolor;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+  }
+
+  &__button {
+    padding: 0.8rem;
+    width: 20%;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 1px;
+      background-color: $maincolor;
+      height: 80%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 5px;
+    }
+  }
+}
+
+.searchField__input:focus + .searchField__placeholder,
+.searchField__input:not(:placeholder-shown) + .searchField__placeholder {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: $maincolor;
+  opacity: 1;
+}
+
+
+.articleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 90%;
+  height: 18rem;
+  background-color: #fff;
+  border-radius: 10px;
+  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+
+  &__img {
+    width: 100%;
+  }
+
+  & > h2 {
+    text-align: center;
+  }
+
+  & > a {
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+
+  & > *:nth-child(n+2) {
+    margin-top: 0.5rem;
+  }
+}

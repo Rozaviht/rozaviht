@@ -8,7 +8,7 @@ import useScrollBlock from '@hooks/useScrollBlock'
 
 type LayoutProps = {
   children?: React.ReactNode,
-  showCart:boolean
+  showCart?:boolean
 }
 
 const Layout = ({children}: LayoutProps) => {
@@ -23,15 +23,17 @@ const Layout = ({children}: LayoutProps) => {
       allowScroll()
     }
   }, [showCart])
+
+  
   return (
-    <div className="wrapper">
+    <>
       <TopWarning/>
       <Navbar showCart={showCart} setShowCart={setShowCart} />
       {children}
       <CookiesConsent/>
       <CookiesManage/>
       <Footer />
-    </div>
+    </>
   )
 }
 

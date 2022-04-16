@@ -16,17 +16,43 @@ $breakpoints: (
   ),
 );
 
-@mixin respond-to($breakpoint) {
-  // If the key exists in the map
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Prints a media query based on the value
+$orientations: (
+  "protraitOrientation": (
+    orientation: portrait,
+  ),
+  "landscapeOrientation": (
+    orientation: landscape,
+  ),
+  "noneOrientation": (
+    orientation: none,
+  )
+);
 
-    @media screen and #{inspect(map-get($breakpoints, $breakpoint))} {
-      @content;
+@mixin respond-to($breakpoint, $orientation) {
+  // If the keys exists in the maps
+  @if map-has-key($orientations, $orientation) and map-has-key($breakpoints, $breakpoint) {
+    // Check the orientation variable and print a media based on orientation and breakpoint value
+
+    @if $orientation == portrait {
+      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}, and , #{inspect(map-get($orientations, $orientation))}  {
+        @content;
+      }
+    }
+
+    @else if $orientation == landscape {
+      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}, and , #{inspect(map-get($orientations, $orientation))}  {
+        @content;
+      }
+    }
+
+    @else {
+      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}  {
+        @content;
+      }
     }
   }
 
-  // If the key doesn't exist in the map
+  // If the keys doesn't exist in the maps
   @else {
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         + "Please make sure it is defined in `$breakpoints` map.";
