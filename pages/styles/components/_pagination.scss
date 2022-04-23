@@ -1,0 +1,7 @@
+.pagination__link {
+  margin-top: 5px;
+  &.active {
+    color: $maincolor;
+    font-weight: 600;
+  }
+}

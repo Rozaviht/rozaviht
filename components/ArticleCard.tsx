@@ -8,6 +8,8 @@ type ArticleCardProps = {
 }
 
 export default function ArticleCard ({article}:ArticleCardProps) {
+
+
   return (
     <div className="articleCard">
       <div className="articleCard__img">
@@ -15,7 +17,7 @@ export default function ArticleCard ({article}:ArticleCardProps) {
       </div>
       <h2>{article.title}</h2>
       <p>{article.date}</p>
-      <Link href={"/rozanews"}><a>LEER</a></Link>
+      <Link href={`/rozanews/${article.id}-${article.title.normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/[¿?¡!"#()]/g, "").replace(/\s/g, "-").toLowerCase()}`}><a className="articleCard__link">LEER</a></Link>
     </div>
   )
 }

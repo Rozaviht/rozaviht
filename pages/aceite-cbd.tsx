@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import prisma from '../lib/prisma'
-import Image from 'next/image'
 
 import { CartItemType } from "../services/AppProvider"
 import { AppContext } from 'services/AppContext'
@@ -11,16 +10,20 @@ import ProductImageSlider from '@components/ProductImageSlider'
 import Layout from "@components/Layout"
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 
-import cbdIllustration from '@img/cbd-ilustration-negative.svg'
-
 interface props  {
-  ProductDetails : [
+  productData : [
     {
       id: number
       price: number
       name: string
+      image: string
     }
-  ]
+  ],
+  productCategorieData : {
+    name: string
+    description: string
+    images: string[]
+  }
 }
 
 export type productAddedType = {
@@ -29,30 +32,42 @@ export type productAddedType = {
 
 
 export const getStaticProps = async () => {
-  const ProductDetails = await prisma.product.findMany({
+  const productData = await prisma.product.findMany({
     select: {
       id: true,
       price: true,
-      name: true
+      name: true,
+      image: true
     }
-    })
-    return {
-      props: { ProductDetails }
+  })
+
+  const productCategorieData = await prisma.productCategory.findUnique({
+    where: {
+      name: "Aceite de CBD"
+    },
+    select: {
+      name: true,
+      description: true,
+      images: true
     }
+  })
+  return {
+    props: { productData, productCategorieData }
   }
+}
 
 
 
 
 
 
-export default function cbdPage ({ ProductDetails}: props) {
+export default function cbdPage ({ productData, productCategorieData}: props) {
   const { setCartProducts } = useContext( AppContext )
 
   const [amountSelected, setAmountSelected] = useState(1)
-  const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
-  const [selected, setSelected] = useState(ProductDetails[0].id)
-  const [currentName, setCurrentName] = useState(ProductDetails[0].name)
+  const [currentPrice, setCurrentPrice] = useState(productData[0].price)
+  const [selected, setSelected] = useState(productData[0].id)
+  const [currentName, setCurrentName] = useState(productData[0].name)
   const [infoList, setInfoList] = useState([false, false, false, false])
   const [productAdded, setProductAdded] = useState<productAddedType>({} as productAddedType)
   const [showAddedPopUp, setShowAddedPopUp] = useState(false)
@@ -61,7 +76,8 @@ export default function cbdPage ({ ProductDetails}: props) {
     id : selected,
     price: currentPrice,
     name: currentName,
-    amount: amountSelected
+    amount: amountSelected,
+    image: productData[0].image
   }
   var totalAmountPrice: number = amountSelected * currentPrice
 
@@ -78,15 +94,15 @@ export default function cbdPage ({ ProductDetails}: props) {
 
   const changeOil = (oilType: number) => {
       if (oilType === 1) {
-        setCurrentPrice(ProductDetails[0].price)
-        setSelected(ProductDetails[0].id)
-        setCurrentName(ProductDetails[0].name)
+        setCurrentPrice(productData[0].price)
+        setSelected(productData[0].id)
+        setCurrentName(productData[0].name)
         
       }
       else {
-        setCurrentPrice(ProductDetails[1].price)
-        setSelected(ProductDetails[1].id)
-        setCurrentName(ProductDetails[1].name)
+        setCurrentPrice(productData[1].price)
+        setSelected(productData[1].id)
+        setCurrentName(productData[1].name)
       }
       setAmountSelected(1)
   }
@@ -123,7 +139,7 @@ export default function cbdPage ({ ProductDetails}: props) {
     <div className="product-page">
       <AddedToCartPopUp productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
-        <ProductImageSlider></ProductImageSlider>
+        <ProductImageSlider productImageData={productCategorieData.images} ></ProductImageSlider>
         <div className="container--flexcolumn product-actions">
           <h1 className="product-title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>

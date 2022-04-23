@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
 import { AppContext } from 'services/AppContext'
 
-import aceite10 from '@img/aceite10-concaja.png'
-
 export type CartItemProps = {
   cartProduct: CartItemType
 }
@@ -53,7 +51,7 @@ export default function CartItem ({cartProduct}: CartItemProps) {
         <div className="closeBt__lineR"></div>
       </button>
       <div className="image-cartitem-container">
-        <Image src={aceite10} width={200} height={200} layout='responsive'></Image>
+        <Image src={cartProduct.image} width={200} height={200} layout='responsive'></Image>
       </div>
       <div className="flexrow-between">
         <p>Producto:</p>

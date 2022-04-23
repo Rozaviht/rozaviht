@@ -1,42 +1,72 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+//Image schema
+
+model Images {
+  id               Int                 @id @default(autoincrement())
+  url              String
+  alt              String
+  // An Image can has many Product
+  product          Products[]
+  // An Image can only be relate to one ArticleMainImage
+  articleMainImage ArticleMainImages?
+  // An Image can has many Article
+  article          Articles[]
+  // An Image can has many ProductCategory
+  productCategory  ProductCategories[]
+
+  @@index([id, url])
+}
+
+model ArticleMainImages {
+  id      Int       @id @default(autoincrement())
+  // An articleMainImage can only be relate to one Image
+  image   Images    @relation(fields: [imageId], references: [id])
+  imageId Int       @unique
+  // An articleMainImage can only be relate to one Article
+  article Articles?
 }
 
 //Product schema
 
-model Product {
-  id                Int               @id @default(autoincrement())
+model Products {
+  id                Int                @id @default(autoincrement())
   name              String
-  description       String
-  price             Int
-  createdAt         DateTime          @default(now()) @map(name: "created_ at")
-  modifiedAt        DateTime          @updatedAt @map(name: "modified_at")
-  deletedAt         DateTime          @default(now()) @map(name: "deleted_at")
-  // A Product can have one ProductCategory
-  ProductCategory   ProductCategory?  @relation(fields: [ProductCategoryId], references: [id])
-  ProductCategoryId Int
-  // A Product can have one ProductInventory
-  ProductInventory  ProductInventory?
+  description       String?
+  price             Decimal            @db.Decimal(5, 2)
+  createdAt         DateTime           @default(now()) @map(name: "created_ at")
+  modifiedAt        DateTime           @updatedAt @map(name: "modified_at")
+  deletedAt         DateTime           @default(now()) @map(name: "deleted_at")
+  // An Product can have many Image
+  image             Images[]
+  // A Product can only have one ProductCategory
+  productCategory   ProductCategories? @relation(fields: [productCategoryId], references: [id])
+  productCategoryId Int
+  // A Product can only has one ProductInventory
+  productInventory  ProductInventory?
   // A Product can have many Discounts
-  Discount          Discount[]
+  Discount          Discounts[]
 }
 
-model ProductCategory {
-  id          Int       @id @default(autoincrement())
-  name        String?
+model ProductCategories {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
-  createdAt   DateTime  @default(now()) @map(name: "created_ at")
-  modifiedAt  DateTime  @updatedAt @map(name: "modified_at")
-  deletedAt   DateTime  @default(now()) @map(name: "deleted_at")
-  // A ProductCategory can have many products
-  products    Product[]
+  // A ProductCategory can has many Image
+  images      Images[]
+  createdAt   DateTime   @default(now()) @map(name: "created_ at")
+  modifiedAt  DateTime   @updatedAt @map(name: "modified_at")
+  deletedAt   DateTime   @default(now()) @map(name: "deleted_at")
+  // A ProductCategory can has many products
+  products    Products[]
 }
 
 model ProductInventory {
@@ -45,55 +75,92 @@ model ProductInventory {
   createdAt  DateTime @default(now()) @map(name: "created_ at")
   modifiedAt DateTime @updatedAt @map(name: "modified_at")
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
-  // A ProductInventory can have one Product
-  Product    Product  @relation(fields: [ProductId], references: [id])
+  // A ProductInventory can only has one Product
+  Product    Products @relation(fields: [ProductId], references: [id])
   ProductId  Int      @unique
 }
 
-model Discount {
-  id          Int       @id @default(autoincrement())
-  name        String?
+model Discounts {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
-  // A Discount can have many Product
-  Product     Product[]
-
+  // A Discount can has many Product
+  Product     Products[]
 }
 
 //Articles schema
 
 model Articles {
-  id            Int                   @id @default(autoincrement())
-  title         String
-  content       String?
-  published     Boolean               @default(false)
-  createdAt     DateTime              @default(now()) @map(name: "created_at")
-  modifiedAt    DateTime              @updatedAt @map(name: "modified_at")
-  deletedAt     DateTime              @default(now()) @map(name: "deleted_at")
-  // An article can have one ArticleSubCategorie
-  subcategories ArticlesSubCategory[]
+  id          Int                 @id @default(autoincrement())
+  title       String              @unique
+  content     String?
+  published   Boolean             @default(false)
+  createdAt   DateTime            @default(now()) @map(name: "created_at")
+  modifiedAt  DateTime            @updatedAt @map(name: "modified_at")
+  deletedAt   DateTime            @default(now()) @map(name: "deleted_at")
+  // an Article can onyl has one ArticleMainImage
+  mainImage   ArticleMainImages   @relation(fields: [mainImageId], references: [id])
+  mainImageId Int                 @unique
+  // An Article can has many Image
+  image       Images[]
+  // An Article can has many ArticleCategory
+  categories  ArticleCategories[]
+
+  @@index([title, content])
 }
 
-model ArticlesSubCategory {
-  id                 Int               @id @default(autoincrement())
-  name               String
-  description        String
-  createdAt          DateTime          @default(now()) @map(name: "created_at")
-  modifiedAt         DateTime          @updatedAt @map(name: "modified_at")
-  deletedAt          DateTime          @default(now()) @map(name: "deleted_at")
-  // An ArticleSubCategory can have many Articles
-  Articles           Articles[]
-  // An ArticleSubCategory can have one ArticleCategory
-  ArticlesCategory   ArticlesCategory? @relation(fields: [ArticlesCategoryId], references: [id])
-  ArticlesCategoryId Int?
+model ArticleCategories {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  createdAt  DateTime   @default(now()) @map(name: "created_at")
+  modifiedAt DateTime   @updatedAt @map(name: "modified_at")
+  deletedAt  DateTime   @default(now()) @map(name: "deleted_at")
+  // An ArticleCategory can has many Articles
+  Articles   Articles[]
 }
 
-model ArticlesCategory {
-  id                  Int                   @id @default(autoincrement())
-  name                String
-  description         String
-  createdAt           DateTime              @default(now()) @map(name: "created_at")
-  modifiedAt          DateTime              @updatedAt @map(name: "modified_at")
-  deletedAt           DateTime              @default(now()) @map(name: "deleted_at")
-  //// An ArticleCategory can have many ArticlesSubCategories
-  ArticlesSubCategory ArticlesSubCategory[]
+//Users schema
+
+model Users {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  modifiedAt DateTime @updatedAt @map(name: "modified_at")
+  deletedAt  DateTime @default(now()) @map(name: "deleted_at")
+}
+
+//OrderDetails schema
+
+model OrderDetails {
+  id               Int      @id @default(autoincrement())
+  customerName     String
+  customerLastName String
+  phone            String
+  email            String
+  address          String
+  provincie        String
+  city             String
+  comment          String?
+  amount           Decimal  @db.Decimal(6, 2)
+  createdAt        DateTime @default(now()) @map(name: "created_at")
+  modifiedAt       DateTime @updatedAt @map(name: "modified_at")
+}
+
+//PaymentDetails schema
+
+model PaymentDetails {
+  id         Int           @id @default(autoincrement())
+  amount     Decimal       @db.Decimal(6, 2)
+  provider   String
+  status     PaymentStatus
+  createdAt  DateTime      @default(now()) @map(name: "created_at")
+  modifiedAt DateTime      @updatedAt @map(name: "modified_at")
+}
+
+enum PaymentStatus {
+  OPEN
+  CLOS
+  PEND
+  PROG
 }

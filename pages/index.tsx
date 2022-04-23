@@ -7,10 +7,9 @@ import type { ReactElement } from 'react'
 import Layout from '@components/Layout'
 
 import IsotipoNegative from '@img/isotipo-negative.svg'
-import cbdIlustrationNegative from '@img/cbd-section-illustration.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
 import cbdSectionImg2 from '@img/cbd-section-img2.webp'
-import rozadaySectionBanner from '@img/rozanews-banner-2.png'
+import rozanewsSectionBanner from '@img/rozanews-section-banner.webp'
 import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
 
 
@@ -90,7 +89,7 @@ export default function index () {
               <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
             </button>
             <div className="cbdSection__illustration">
-            <Image src={cbdIlustrationNegative} alt="" layout="responsive"/>
+            <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-ilustration-negative.svg"} alt="" layout="responsive"/>
           </div>
           </div>
             <svg className="liquidFilter" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +115,7 @@ export default function index () {
           <h3 className="section-tagline">"Informate de lo que te importa"</h3>
         </div>
         <div className="section--rozanews-img">
-          <Image src={rozadaySectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+          <Image src={rozanewsSectionBanner} alt=""  width={150} height={100} layout="responsive"/>
         </div>
         <div className="section-text-container">
           <p className="rozanews-text">

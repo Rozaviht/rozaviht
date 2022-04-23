@@ -120,32 +120,4 @@
 }
 
 
-.articleCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  width: 90%;
-  height: 18rem;
-  background-color: #fff;
-  border-radius: 10px;
-  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
-  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
 
-  &__img {
-    width: 100%;
-  }
-
-  & > h2 {
-    text-align: center;
-  }
-
-  & > a {
-    font-size: 1rem;
-    text-decoration: underline;
-  }
-
-  & > *:nth-child(n+2) {
-    margin-top: 0.5rem;
-  }
-}

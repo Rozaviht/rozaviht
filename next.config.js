@@ -5,11 +5,17 @@ module.exports = (phase, {defaultConfig}) => {
     return {
       /* development only config options here */
       reactStrictMode: true,
+      images: {
+        domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
+      }
     }
   }
 
   return {
     /* config options for all phases except development here */
     reactStrictMode: true,
+    images: {
+      domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
+    }
   }
 }
