@@ -78,7 +78,6 @@ export default function index () {
             Y tranquilo que nuestro aceite contiene 0% de THC.
           </p>
         </div>
-        <div className="liquidContainer">
           <div className="flexrow flexrow--between" style={{width: "100%"}}>
             <button className="cbdSection__cta">
               <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
@@ -92,21 +91,6 @@ export default function index () {
             <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-ilustration-negative.svg"} alt="" layout="responsive"/>
           </div>
           </div>
-            <svg className="liquidFilter" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="liquid">
-                  <feGaussianBlur in='SourceGraphic' stdDeviation="7" result="blur" />
-                  <feColorMatrix in="blur" mode="matrix"
-                    values="1 0 0 0 0
-                            0 1 0 0 0
-                            0 0 1 0 0
-                            0 0 0 18 -7" result="liquid" />
-                  <feBlend in='SourceGraphic' />
-                </filter>
-              </defs>
-            </svg>
-            <div className="liquidBorder"></div>
-        </div>
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="section section--rozanews">
