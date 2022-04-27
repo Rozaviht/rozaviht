@@ -16,16 +16,6 @@ export type categorieSelectedType = {
   name: string
 }
 
-export const getStaticProps  = async () => {
-  const articlesData = await prisma.article.findMany({
-    select: {
-      title: true,
-      mainImageId:
-    }
-  })
-}
-
-
 
 export default function rozanews () {
   const [showCategories, setShowCategories] = useState(false)
@@ -39,7 +29,7 @@ export default function rozanews () {
     <div className="rozanews">
       <div className="rozanews__hero">
         <div className="rozanews__logo">
-          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-logo.svg"} layout="responsive" />
+          <Image src={rozanewsLogo} layout="responsive" />
         </div>
         <h4>Nunca te quedes desinformado de lo que te importa</h4>
         <div className="rozanews__banner">

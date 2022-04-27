@@ -1,3 +1,15 @@
+export const articlesCategories = [
+  {
+    "name": "CBD"
+  },
+  {
+    "name": "Medioambiente"
+  },
+  {
+    "name": "Reciclaje"
+  }
+]
+
 export const articles = [
     {
       "title": "Beneficios del CBD",

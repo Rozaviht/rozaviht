@@ -6,8 +6,8 @@ import { AppContext } from 'services/AppContext'
 
 import CartItem from './CartItem'
 
-import emptyBasket from '@img/empty-cart.svg'
-import Logo from '@img/Logo.svg'
+import emptyBasket from '@img/empty-cart-image.svg'
+import Logo from '@img/Logo.webp'
 
 export type CartProps = {
   showCart: boolean

@@ -4,7 +4,7 @@ import type { ReactElement } from "react"
 
 import Layout from '@components/Layout'
 
-import privacyBanner from '@img/privacy-banner4.webp'
+import privacyBanner from '@img/privacy-banner-portrait.webp'
 
 export default function PrivacyPage () {
   return (

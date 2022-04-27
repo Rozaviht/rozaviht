@@ -6,11 +6,13 @@ import type { ReactElement } from 'react'
 
 import Layout from '@components/Layout'
 
+
 import IsotipoNegative from '@img/isotipo-negative.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
-import cbdSectionImg2 from '@img/cbd-section-img2.webp'
+import cbdSectionImg2 from '@img/cbd-banner2-2.png'
 import rozanewsSectionBanner from '@img/rozanews-section-banner.webp'
-import rozanewsIlustration from '@img/rozanews-ilustration2.svg'
+import rozanewsIlustration from '@img/rozanews-ilustration.svg'
+import cbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 
 
 
@@ -49,7 +51,7 @@ export default function index () {
     <div className="landingPage">
       <div className="home-banner">
         <video className="landingPage__banner" autoPlay loop playsInline preload='metadata' muted>
-          <source type='video/mp4' src="/web-banner_2.mp4" />
+          <source type='video/mp4' src="/web-banner.mp4" />
         </video>
         <div className="flexcolum flexcolum--around">
           <p>"Cuidate, y cuida el medio en el que vives."</p>
@@ -88,7 +90,7 @@ export default function index () {
               <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
             </button>
             <div className="cbdSection__illustration">
-            <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-ilustration-negative.svg"} alt="" layout="responsive"/>
+            <Image src={cbdIlustrationNegative} alt="" layout="responsive"/>
           </div>
           </div>
       </div>
@@ -122,15 +124,16 @@ export default function index () {
           <Image src={IsotipoNegative} width={114} height={100} layout="responsive" />
         </div> 
         <div className="section-text-wrapper">
-          <h2 className="section--rozaviht-subtitle">Te cuidas</h2>
+          <h2>Nuestro Lema</h2>
+          <h3 className="section--rozaviht-subtitle">Te cuidas</h3>
           <p className="section--rozaviht-text">
           En Rozaviht buscamos proporcionarte productos que te cuiden, que te hagan sentir mejor y más sano, buscando usar de la manera más eficiente los recursos para cuidar el medioambiente.
           </p>
-          <h2 className="section--rozaviht-subtitle">Te cuidamos</h2>
+          <h3 className="section--rozaviht-subtitle">Te cuidamos</h3>
           <p className="section--rozaviht-text">
           No solo nuestros productos físicos te cuidaran, sino que también lo haremos a través, de las redes sociales y con nuestros artículos, donde te brindaremos información valiosa para que te cuides tu mejor y el medio en el que vives. 
           </p>
-          <h2 className="section--rozaviht-subtitle">Y Lo cuidamos</h2>
+          <h3 className="section--rozaviht-subtitle">Y Lo cuidamos</h3>
           <p className="section--rozaviht-text">
           A la hora de la verdad no hace falta que todos hagamos grandes cambios, basta con aportar cada uno su grano de arena.
           </p>

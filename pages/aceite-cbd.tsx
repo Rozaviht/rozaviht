@@ -11,14 +11,12 @@ import Layout from "@components/Layout"
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 
 interface props  {
-  productData : [
-    {
-      id: number
-      price: number
-      name: string
-      image: string
-    }
-  ],
+  productData : [{
+    id: number,
+    name: string,
+    price: number,
+    image: string
+  }],
   productCategorieData : {
     name: string
     description: string
@@ -26,22 +24,29 @@ interface props  {
   }
 }
 
+export type cleanedProductData = [{
+  id: number
+  name: string
+  price: number
+  image: string
+}]
+
 export type productAddedType = {
   name: string
 }
 
 
 export const getStaticProps = async () => {
-  const productData = await prisma.product.findMany({
+  const productData = await prisma.products.findMany({
     select: {
       id: true,
-      price: true,
       name: true,
+      price: true,
       image: true
     }
   })
 
-  const productCategorieData = await prisma.productCategory.findUnique({
+  const productCategorieData = await prisma.product_categories.findUnique({
     where: {
       name: "Aceite de CBD"
     },
@@ -62,6 +67,7 @@ export const getStaticProps = async () => {
 
 
 export default function cbdPage ({ productData, productCategorieData}: props) {
+  console.log(productData)
   const { setCartProducts } = useContext( AppContext )
 
   const [amountSelected, setAmountSelected] = useState(1)
@@ -69,7 +75,7 @@ export default function cbdPage ({ productData, productCategorieData}: props) {
   const [selected, setSelected] = useState(productData[0].id)
   const [currentName, setCurrentName] = useState(productData[0].name)
   const [infoList, setInfoList] = useState([false, false, false, false])
-  const [productAdded, setProductAdded] = useState<productAddedType>({} as productAddedType)
+  const [productAdded, setProductAdded] = useState<CartItemType>({} as CartItemType)
   const [showAddedPopUp, setShowAddedPopUp] = useState(false)
   
   var currentProduct = {
@@ -122,9 +128,7 @@ export default function cbdPage ({ productData, productCategorieData}: props) {
       return [...prev, { ...clickedItem, amount: amountSelected }];
     });
 
-    setProductAdded({
-      name: clickedItem.name
-    })
+    setProductAdded(clickedItem)
     
     setShowAddedPopUp(true)
   };
@@ -137,7 +141,7 @@ export default function cbdPage ({ productData, productCategorieData}: props) {
 
   return(
     <div className="product-page">
-      <AddedToCartPopUp productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
+      <AddedToCartPopUp  productAdded={productAdded} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
         <ProductImageSlider productImageData={productCategorieData.images} ></ProductImageSlider>
         <div className="container--flexcolumn product-actions">

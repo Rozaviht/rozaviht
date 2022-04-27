@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import CheckoutSteps from './CheckoutSteps'
 
-import LogoNegative from '@img/logo-negative3.svg'
+import LogoNegative from '../public/img/logo-negative.svg'
 
 type LayoutProps = {
   children?: React.ReactNode
@@ -21,7 +21,7 @@ export default function checkoutLayout ({children}: LayoutProps) {
           </a>
         </Link>
         <div className="checkoutlogo-container">
-          <Image src={LogoNegative} height={100} width={392} layout="responsive" alt="Logo" />
+          <Image src={'/img/logo-negative.svg'} height={100} width={392} layout="responsive" alt="Logo" />
         </div>
       </div>
       {children}

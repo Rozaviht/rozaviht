@@ -1,7 +1,6 @@
 import ArticleCard from './ArticleCard'
-import Pagination from './Pagination'
 
-import {ArticleData} from './ArticlesData'
+import {articles} from '../data/articlesData'
 
 import type {categorieSelectedType} from '../pages/rozanews'
 import { useState } from 'react'
@@ -24,24 +23,20 @@ export default function ArticlesBoard ({categorieSelected}: ArticlesBoardProps) 
   
   const articlesPerPage = 6
 
-  const [articleListSorted, setArticleListSorted] = useState(ArticleData.slice().sort((article1, article2) => Date.parse(article1.date) - Date.parse(article2.date)))
+  const [articleListSorted, setArticleListSorted] = useState(articles.slice().sort((article1, article2) => Date.parse(article1.date) - Date.parse(article2.date)))
 
 
   const indexOfLastPost = currentArticlesBoard *  articlesPerPage
   const indexOfFirstPost = indexOfLastPost - articlesPerPage
-  const currentArticles = ArticleData.slice(indexOfFirstPost, indexOfLastPost)
+  const currentArticles = articles.slice(indexOfFirstPost, indexOfLastPost)
 
-  const paginate = (pageNumber: number) => {
+/*   const paginate = (pageNumber: number) => {
     setCurrentArticlesBoard(pageNumber)
     window.scrollTo({
       top: 500,
       behavior: "smooth"
     })
-  }
-
-  var name = "¿Miguel& angel& serrano?"
-  console.log(name.replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s/g, "-"))
-
+  } */
 
 
   return (
@@ -70,12 +65,6 @@ export default function ArticlesBoard ({categorieSelected}: ArticlesBoardProps) 
           )}
         </>
       }
-      <Pagination 
-        articlesPerPage={articlesPerPage}
-        totalArticles={ArticleData.length}
-        paginate={paginate}
-        currentArticlesBoard={currentArticlesBoard}
-      />
     </div>
   )
 }

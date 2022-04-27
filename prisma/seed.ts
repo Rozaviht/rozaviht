@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 import { articles } from '../data/articlesData'
+import { articlesCategories } from '../data/articlesData'
 import { products } from '../data/productsData'
+import { productsCategories } from '../data/productsData'
 import { images } from '../data/imagesData'
 
 
@@ -11,35 +13,26 @@ const load = async () => {
   console.log("Deleted records in product table")
 
   await prisma.product_categories.deleteMany()
-  console.log("Deleted records in category table")
+  console.log("Deleted records in product_categories table")
 
   await prisma.articles.deleteMany()
   console.log("Deleted records in article table")
 
-  await prisma.article_main_images.deleteMany()
-  console.log("Deleted records in article table")
-
+  await prisma.article_categories.deleteMany()
+  console.log("Deleted records in article_categories table")
+  
   await prisma.images.deleteMany()
   console.log("Deleted records in article table")
 
-  await prisma.$queryRaw`ALTER SEQUENCE products_id_seq RESTART WITH 1`
-  console.log("reset products_id auto increment to 1")
-
-  await prisma.$queryRaw`ALTER SEQUENCE product_categories_id_seq RESTART WITH 1`
-  console.log("reset categories_id auto increment to 1")
-
-  await prisma.$queryRaw`ALTER SEQUENCE articles_id_seq RESTART WITH 1`
-  console.log("reset articles_id auto increment to 1")
-
-  await prisma.$queryRaw`ALTER SEQUENCE images_id_seq RESTART WITH 1`
-  console.log("reset Images_id auto increment to 1")
-
-  await prisma.$queryRaw`ALTER SEQUENCE article_main_images_id_seq RESTART WITH 1`
-  console.log("reset Images_id auto increment to 1")
 
 
+  await prisma.product_categories.create({
+    data: productsCategories
+  })
+  console.log("Added product category data")
 
-  await Promise.all(
+
+/*   await Promise.all(
     products.map(async (product) => {
       prisma.products.create({
         data: {
@@ -49,23 +42,17 @@ const load = async () => {
             connect: {
               id: 1
             }
+          },
+          image: {
+            connect: {
+              id: product.id
+            }
           }
         }
       })
     })
   )
-  console.log("Added products data")
-
-
-  
-  await prisma.product_categories.create({
-    data: {
-      name: "Aceite de CBD",
-      description: "Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vengano"
-    }
-  })
-  console.log("Added product category data")
-  
+  console.log("Added products data") */
 
 
   await prisma.images.createMany({
@@ -74,29 +61,18 @@ const load = async () => {
   console.log("Added images data")
 
 
-  await prisma.article_main_images.createMany({
-    data: {
-      imageId: 6
-    }
+  await prisma.articles.createMany({
+    data: articles
   })
-
-  await Promise.all(
-    articles.map(async (article) =>{
-      prisma.articles.create({
-        data: {
-          title: article.title,
-          content: article.content,
-          mainImage: {
-            connect: {
-              id: 1
-            }
-          }
-        }
-      })
-    })
-  )
-  
   console.log("Added articles data")
+
+
+  await prisma.article_categories.createMany({
+    data: articlesCategories
+  })
+  console.log("Added articles_categories data")
+
+
 
 
 }

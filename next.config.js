@@ -1,21 +1,17 @@
-const { PHASE_DEVELOPMENT_SERVER} = require('next/constants')
-
-module.exports = (phase, {defaultConfig}) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      /* development only config options here */
-      reactStrictMode: true,
-      images: {
-        domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
-      }
-    }
-  }
-
-  return {
-    /* config options for all phases except development here */
-    reactStrictMode: true,
-    images: {
-      domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
-    }
-  }
+export const reactStrictMode = true
+export const images = {
+  domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
 }
+export function webpack(config) {
+  const fileLoaderRule = config.module.rules.find(
+    (rule) => rule.test && rule.test.test('.svg')
+  )
+  fileLoaderRule.exclude = /\.svg$/
+  config.module.rules.push({
+    test: /\.svg$/,
+    loader: require.resolve('@svgr/webpack')
+  })
+  return config
+}
+  
+

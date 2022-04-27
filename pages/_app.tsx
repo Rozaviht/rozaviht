@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import type { ReactElement, ReactNode } from 'react'
 import type {NextPage} from 'next'
@@ -20,9 +21,19 @@ type AppPropsWithLayout = AppProps & {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-    <AppProvider>
-      {getLayout(<Component {...pageProps} />)}
-    </AppProvider>
+    <>
+      <Head>
+          <link rel="stylesheet" href="fonts/style.css" />
+          <link rel="shortcut icon" type='image/ico' href="img/favicon.ico" />
+          <title>Rozaviht: Te cuidas, Te cuidamos y Lo cuidamos</title>
+          <meta name='description' content='En Rozaviht nuestro objetivo es proveer de productos a las personas que cuiden de ellas. Siempre sin dejar de lado el cuido medioambiental que nos define también como marca.' />
+          <meta name='viewport' content='width=device-width,initial-scale=1.0' />
+      </Head>
+      <AppProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </AppProvider>
+    </>
+
   )
 }
 

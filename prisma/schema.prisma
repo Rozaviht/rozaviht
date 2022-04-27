@@ -11,45 +11,40 @@ datasource db {
 //Image schema
 
 model images {
-  id               Int                  @id @default(autoincrement())
-  url              String
-  alt              String
+  id                String              @id @default(uuid())
+  url               String              @unique
+  name              String              @unique
+  alt               String
+  height            Int?
+  width             Int?
   // An Image can has many Product
-  product          products[]
-  // An Image can only be relate to one ArticleMainImage
-  articleMainImage article_main_images?
+  product           products?
   // An Image can has many Article
-  article          articles[]
+  article           articles?           @relation(fields: [articleId], references: [id])
+  articleId         String?             @unique
   // An Image can has many ProductCategory
-  productCategory  product_categories[]
+  productCategory   product_categories? @relation(fields: [productCategoryId], references: [id])
+  productCategoryId String?
 
-  @@index([id, url])
-}
-
-model article_main_images {
-  id      Int       @id @default(autoincrement())
-  // An articleMainImage can only be relate to one Image
-  image   images    @relation(fields: [imageId], references: [id])
-  imageId Int       @unique
-  // An articleMainImage can only be relate to one Article
-  article articles?
+  @@index([id, url, name])
 }
 
 //Product schema
 
 model products {
-  id                Int                 @id @default(autoincrement())
-  name              String
+  id                String             @id @default(uuid())
+  name              String             @unique
   description       String?
-  price             Decimal             @db.Decimal(5, 2)
-  createdAt         DateTime            @default(now()) @map(name: "created_ at")
-  modifiedAt        DateTime            @updatedAt @map(name: "modified_at")
-  deletedAt         DateTime            @default(now()) @map(name: "deleted_at")
+  price             Int
+  createdAt         DateTime           @default(now()) @map(name: "created_ at")
+  modifiedAt        DateTime           @updatedAt @map(name: "modified_at")
+  deletedAt         DateTime           @default(now()) @map(name: "deleted_at")
   // An Product can have many Image
-  image             images[]
+  image             images             @relation(fields: [imageId], references: [id])
+  imageId           String             @unique
   // A Product can only have one ProductCategory
-  productCategory   product_categories? @relation(fields: [productCategoryId], references: [id])
-  productCategoryId Int
+  productCategory   product_categories @relation(fields: [productCategoryId], references: [id])
+  productCategoryId String
   // A Product can only has one ProductInventory
   productInventory  product_inventory?
   // A Product can have many Discounts
@@ -57,7 +52,7 @@ model products {
 }
 
 model product_categories {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(uuid())
   name        String     @unique
   description String?
   // A ProductCategory can has many Image
@@ -70,18 +65,18 @@ model product_categories {
 }
 
 model product_inventory {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(uuid())
   quantity   Int
   createdAt  DateTime @default(now()) @map(name: "created_ at")
   modifiedAt DateTime @updatedAt @map(name: "modified_at")
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
   // A ProductInventory can only has one Product
   product    products @relation(fields: [productId], references: [id])
-  productId  Int      @unique
+  productId  String   @unique
 }
 
 model discounts {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(uuid())
   name        String     @unique
   description String?
   // A Discount can has many Product
@@ -91,26 +86,23 @@ model discounts {
 //Articles schema
 
 model articles {
-  id          Int                  @id @default(autoincrement())
-  title       String               @unique
-  content     String?
-  published   Boolean              @default(false)
-  createdAt   DateTime             @default(now()) @map(name: "created_at")
-  modifiedAt  DateTime             @updatedAt @map(name: "modified_at")
-  deletedAt   DateTime             @default(now()) @map(name: "deleted_at")
-  // an Article can onyl has one ArticleMainImage
-  mainImage   article_main_images  @relation(fields: [mainImageId], references: [id])
-  mainImageId Int                  @unique
+  id         String               @id @default(uuid())
+  title      String               @unique
+  content    String?
+  published  Boolean              @default(false)
+  createdAt  DateTime             @default(now()) @map(name: "created_at")
+  modifiedAt DateTime             @updatedAt @map(name: "modified_at")
+  deletedAt  DateTime             @default(now()) @map(name: "deleted_at")
   // An Article can has many Image
-  image       images[]
+  image      images[]
   // An Article can has many ArticleCategory
-  categories  article_categories[]
+  categories article_categories[]
 
-  @@index([title, content])
+  @@index([id, title])
 }
 
 model article_categories {
-  id         Int        @id @default(autoincrement())
+  id         String     @id @default(uuid())
   name       String     @unique
   createdAt  DateTime   @default(now()) @map(name: "created_at")
   modifiedAt DateTime   @updatedAt @map(name: "modified_at")
@@ -122,7 +114,7 @@ model article_categories {
 //Users schema
 
 model users {
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(uuid())
   name       String
   email      String   @unique
   createdAt  DateTime @default(now()) @map(name: "created_at")
@@ -133,7 +125,7 @@ model users {
 //OrderDetails schema
 
 model order_details {
-  id               Int      @id @default(autoincrement())
+  id               String           @id @default(uuid())
   customerName     String
   customerLastName String
   phone            String
@@ -142,20 +134,23 @@ model order_details {
   provincie        String
   city             String
   comment          String?
-  amount           Decimal  @db.Decimal(6, 2)
-  createdAt        DateTime @default(now()) @map(name: "created_at")
-  modifiedAt       DateTime @updatedAt @map(name: "modified_at")
+  amount           Int
+  createdAt        DateTime         @default(now()) @map(name: "created_at")
+  modifiedAt       DateTime         @updatedAt @map(name: "modified_at")
+  paymentDetails   payment_details?
 }
 
 //PaymentDetails schema
 
 model payment_details {
-  id         Int            @id @default(autoincrement())
-  amount     Decimal        @db.Decimal(6, 2)
-  provider   String
-  status     payment_status
-  createdAt  DateTime       @default(now()) @map(name: "created_at")
-  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
+  id             String         @id @default(uuid())
+  amount         Int
+  provider       String
+  status         payment_status
+  createdAt      DateTime       @default(now()) @map(name: "created_at")
+  modifiedAt     DateTime       @updatedAt @map(name: "modified_at")
+  orderDetaisl   order_details  @relation(fields: [orderDetailsId], references: [id])
+  orderDetailsId String         @unique
 }
 
 enum payment_status {

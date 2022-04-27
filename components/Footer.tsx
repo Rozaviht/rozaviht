@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Logo from '@img/Logo.svg'
+import Logo from '@img/Logo.webp'
 import instagramIcon from '@img/instagram-icon.svg'
 import facebookIcon from '@img/facebook-icon.svg'
 

@@ -4,7 +4,7 @@ import type { ReactElement } from "react"
 
 import Layout from '@components/Layout'
 
-import privacyBanner from '@img/terms-banner2.webp'
+import privacyBanner from '@img/terms-banner-portrait.webp'
 
 export default function termsPage () {
   return (
@@ -14,6 +14,7 @@ export default function termsPage () {
         <Image src={privacyBanner} layout="responsive"/>
       </div>
       <div className='flexcolum flexcolum--separate'>
+        <h2>NUESTROS TERMINOS Y CONDICIONES DE USO DE LA PÁGINA WEB</h2>
         <p>Las ventas realizadas a través de la página web de www.rozaviht.com son gestionadas únicamente por Rozaviht, los presentes términos y condiciones de compra es el suministro de producto por parte de Rozaviht ofrecidos en la tienda online. Dicha marca, es también, la titular de la presente página web.
         </p>
         <p>

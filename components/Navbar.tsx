@@ -6,9 +6,16 @@ import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
+import logo from '@img/logo.webp'
+import cartIcon from '@img/cart-icon.svg'
+
 type NavbarProps = {
   showCart: boolean,
   setShowCart: Dispatch<SetStateAction<boolean>>
+}
+
+export const getStaticProps = async () => {
+  
 }
 
 const Navbar = ({showCart, setShowCart}: NavbarProps) => {
@@ -27,7 +34,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
       <div className="navbar">
         <Link href="/">
           <a  className="navbar__logoImg">
-            <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/logo.webp"} height={100} width={392} layout="responsive" alt="Logo"/>
+            <Image src={logo} height={100} width={392} layout="responsive" alt="Logo"/>
           </a>
         </Link>
         <div className="navbar__menu">
@@ -49,7 +56,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
         </div>
         <button className="navbar__cartBt" onClick={handleShowCart}>
           <div className="navbar__cartIcon">
-            <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cart-icon.webp"} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
+            <Image src={cartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
             <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>
