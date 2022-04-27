@@ -1,14 +1,9 @@
-.wrapper-qr{
-  height: 100%;
-  width: 100%;
-
-}
-
 .first-svg{
   opacity: 0;
 }
 
 .liquid-svg {
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
@@ -17,6 +12,7 @@
 }
 
 .logo {
+  z-index: 1;
   width: 20rem;
   position: absolute;
   top: 40%;
@@ -35,4 +31,14 @@
   display: inline-block;
   line-height: 1em;
   color: #fff;
+}
+
+.qrPage-card-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: #F9E5E4;
+  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
 }

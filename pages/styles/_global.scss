@@ -144,6 +144,11 @@ body {
   border: unset;
   border-radius: 8px;
 
+  &--oilColor{
+    background-color: $oilsectiontext;
+    color: $backgroundcolor;
+  }
+
   &--maincolor {
     background-color: $maincolor;
   }
