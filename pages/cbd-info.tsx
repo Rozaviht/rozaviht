@@ -1,82 +1,16 @@
-import anime from 'animejs'
-import { ReactElement, useEffect } from 'react'
+import Link from 'next/link'
+import useScrollBlock from '@hooks/useScrollBlock'
+import useQROilAnimation from '@hooks/useQROilAnimation'
+import { ReactElement } from 'react'
 import LogoNegative from '../public/img/logo-negative.svg'
 
 
 
 export default function cbdInfo () {
 
-  useEffect(() => {
-    var textWrapper: HTMLHeadingElement = document.querySelector('.logo-tagline') as HTMLHeadingElement
-    textWrapper.innerHTML = textWrapper?.textContent?.replace(/\S/g, "<span class='letter'>$&</span>")!
+  const [blockScroll, allowScroll] = useScrollBlock()
 
-    window.addEventListener("load", () => {
-      anime.timeline({})
-      .add({
-        targets: "#firstSvgLiquid",
-        d: [
-          {value: "M0,0S37.424,182.072,121.183,210.289,268.8,124.154,335.037,112.867s4.752,46.632,51.087,52.275,68.908-60.295,134.252-29.7S585.72,321.374,647.5,287.514,767.5,0,767.5,0Z"},
-          {value: "M0,0S44.449,1846.395,143.931,2132.541s175.327-873.5,254-987.957,5.644,472.894,60.677,530.123,81.843-611.449,159.453-301.206,77.61,1885.551,150.986,1542.176S911.56,0,911.56,0Z"}
-        ],
-        translateY: [-600, 0],
-          easing: "easeInQuad",
-          opacity: 1,
-          duration: 4000,
-      })
-      .add({
-        targets: ".first-svg",
-        opacity: 1,
-      }, "-=4000")
-      .add({
-        targets: "#secondSvgLiquid",
-        d: [
-          {value: "M0,0S37.424,182.072,121.183,210.289,268.8,124.154,335.037,112.867s4.752,46.632,51.087,52.275,68.908-60.295,134.252-29.7S585.72,321.374,647.5,287.514,767.5,0,767.5,0Z"},
-          {value: "M0,0S44.449,1846.395,143.931,2132.541s175.327-873.5,254-987.957,5.644,472.894,60.677,530.123,81.843-611.449,159.453-301.206,77.61,1885.551,150.986,1542.176S911.56,0,911.56,0Z"}
-        ],
-        translateY: [-700, 0],
-          easing: "easeInQuad",
-          opacity: 1,
-          duration: 4000,
-      }, "-=3800")
-      .add({
-        targets: ".second-svg",
-        opacity: 1,
-      }, "-=3800")
-      .add({
-        targets: '.logo',
-        scale: [14, 1],
-        opacity: [0,1],
-        easing: 'easeOutCirc',
-        duration: 600
-      }, "+=500")
-      .add({
-        targets: '.logo-tagline .letter',
-        translateY: [-10, 0],
-        opacity: [0, 1],
-        easing: 'easeOutExpo',
-        duration: 1400,
-        delay: (el, i) => 30 * i
-      })
-      .add({
-        targets: '.liquid-wrapper, .logo',
-        duration: 1000,
-        opacity: [1, 0],
-        easing: 'easeOutExpo',
-        complete: (anim) => {
-          document.querySelector<HTMLDivElement>(".logo")!.style.display="none" 
-          document.querySelectorAll<HTMLDivElement>(".liquid-wrapper")!.forEach(element => {
-            element.style.display="none"
-          })
-        }
-      }, '+=1000')
-      .add({
-        targets: '#qrPageContent',
-        opacity: [0, 1],
-        duration: 800,
-        easing: 'easeOutExpo'
-      })
-    })
-  })
+   useQROilAnimation()
 
   return (
     <div style={{ 'backgroundColor': '#ac5850', 'display': 'flex' }}>
@@ -126,15 +60,15 @@ export default function cbdInfo () {
         <h3 className='logo-tagline'>Te cuidas, Te cuidamos y Lo cuidamos</h3>
       </div>
       <div id='qrPageContent' className='flexcolum  flexcolum--separate' style={{ 'boxShadow': '6px 10px 15px 3px rgba(0,0,0,0.1)', 'margin': '1rem', 'marginRight': '1rem', 'backgroundColor': '#f2f3fa', 'borderRadius': '10px', 'opacity': '0' }} >
-        <h1 style={{ 'color': '#ac5850' }} >Muchas gracias por tu compra!!</h1>
-        <p>Nos alegra saber que has decidido adquirir uno de nuestros aceites de CBD. En esta página nos gustaría brindarte un poco más de información que no esta representada en el packaging/estuche del producto, para no malgastar tanta tinta; ya que dispones del medio digital, que no es contaminante. Sin más dilación:</p>
+        <h1 style={{ 'color': '#ac5850' }}>Información adicional sobre nuestro Aceite de CBD</h1>
+        <p>Nos alegra saber que has decidido adquirir uno de nuestros aceites de CBD. En esta página nos gustaría brindarte un poco más de información que no esta representada en el packaging/estuche del producto, para no malgastar tanta tinta; ya que dispones del medio digital, que no es contaminante.</p>
         <div className='qrPage-card-section'>
           <h2 style={{ 'color': '#ac5850' }}>Ingredientes</h2>
           <p>Lo primero y más básico son los ingredientes de nuestro producto, que consta de los siguientes:</p>
           <ul style={{ 'marginTop': '0.5rem' }} >
             <li>
               <strong>- Aceite de Semilla de Cannabis Sativa:</strong>
-              <p>El aceite de semilla de cannabis sativa más conocido como Aceite de Cañamo, cumple la función de aceite transportador en el producto. Este se debe a sus propiedades nutritivas y a su aroma relativamente ligero, en nuestro caso el aceite procede de la semilla de la planta. </p>
+              <p>El aceite de semilla de cannabis sativa más conocido como Aceite de Cañamo, cumple la función de aceite transportador en el producto. Esto se debe a sus propiedades nutritivas y a su aroma relativamente ligero, en nuestro caso el aceite procede de la semilla de la planta. </p>
               <br />
             </li>
             <li>
@@ -159,8 +93,10 @@ export default function cbdInfo () {
           <p>Al ser totalmente natural nuestro aceite de CBD, se recomienda conservarlo a una temperatura ambiente entre 15ºC y 25ºC grados, ya que podría estropearse el producto de lo contrario; sobre todo si se expone a temperaturas muy elevadas. Por eso mismo evitar dejarlo expuesto al solo por mucho tiempo.</p>
         </div>
         <p style={{ 'marginTop': '1rem' }} >Bueno eso sería la información principal de esta página, esperamos que te sirva para entender un poco más el producto que has comprado. También te recomendamos explorar nuestra página de Rozanews donde iremos subiendo pequeños árticulos rapidos de leer, para irte informando de temas relacionados con nuestra marca.</p>
-        <h3 style={{ 'color': '#ac5850', 'marginTop': '1rem' }}>Y una vez más, te agradecemos por confiar en nuestro producto.</h3>
-        <button className='cta cta--oilColor' style={{ }}>Ir a ROZANEWS</button>
+        <h3 style={{ 'color': '#ac5850', 'marginTop': '1rem' }}>Y una vez más, te agradecemos por confiar en nuestro producto. Que lo disfrutes!!</h3>
+        <Link href="/rozanews">
+          <button className='cta cta--oilColor'><a className='link-negative'>Ir a ROZANEWS</a></button>
+        </Link>
       </div>
     </div>
   )
