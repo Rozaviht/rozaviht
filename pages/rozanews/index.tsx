@@ -7,8 +7,6 @@ import ArticlesCategories from '@components/ArticlesCategories'
 import ArticlesBoard from '@components/ArticlesBoard'
 
 import rozanewsLogo from '@img/rozanews-logo.svg'
-import lupaIcon from '@img/lupa-icon.svg'
-import prisma from '../../lib/prisma'
 
 
 export type categorieSelectedType = {
@@ -43,15 +41,6 @@ export default function rozanews () {
             title: "Últimos artículos agregados",
             name: "orderListDate"
           })}>Últimos agregados</button>
-        </div>
-        <div className="searchField">
-          <label htmlFor="searchArticles" className="searchField__label" >
-            <input className="searchField__input" type="search" placeholder=" " autoComplete="off" id="searchArticles" name="searchArticles" />
-            <span className="searchField__placeholder" >Busca el árticulo que desees...</span>
-            <button type="submit" className="searchField__button">
-                <Image src={lupaIcon} layout="responsive"/>
-            </button>
-          </label>
         </div>
       </div>
       <ArticlesBoard categorieSelected={categorieSelected}/>

@@ -3,10 +3,11 @@
 
 
 type Article {
-  categories: [ArticleCategory]
+  category: ArticleCategory
+  categoryId: String!
   content: String!
   id: String!
-  images: [Image]
+  images: Image
   published: Boolean!
   title: String!
 }
@@ -20,11 +21,12 @@ type ArticleCategory {
 type Image {
   alt: String
   article: Article
+  articleId: String
   height: Int
   id: String!
-  name: String
   product: Product
   productCategory: ProductCategory
+  productCategoryId: String
   url: String!
   width: Int
 }
@@ -59,10 +61,12 @@ enum PaymentStatus {
 type Product {
   description: String
   id: String!
-  images: [Image]
+  image: Image
+  imageId: String!
   name: String!
   price: Int!
   productCategory: ProductCategory
+  productCategoryId: String!
 }
 
 type ProductCategory {
@@ -73,7 +77,10 @@ type ProductCategory {
 }
 
 type Query {
-  articles: [Article]!
+  getArticles: [Article]!
+  getArticlesCategories: [ArticleCategory]!
+  getImages: [Image]!
+  getProductsCategories: [ProductCategory]!
   products: [Product]!
 }
 

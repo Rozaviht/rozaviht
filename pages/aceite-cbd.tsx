@@ -168,7 +168,7 @@ export default function cbdPage ({ productData, productCategorieData}: props) {
           <div className="container--flexrow">
             <div className="amount">
                 <button className="amount-bt bt--plus" onClick={incrementAmount}>+</button>
-                <input className="amount-input" type="number" value={amountSelected} disabled="disabled"/>
+                <input className="amount-input" type="number" value={amountSelected} disabled={true}/>
                 <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
             </div>
             <button className="product-hero-cta" onClick={() => handleAddToCart(currentProduct)}>

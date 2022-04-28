@@ -1,7 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { articles } from '../data/articlesData'
-import { articlesCategories } from '../data/articlesData'
-import { products } from '../data/productsData'
 import { productsCategories } from '../data/productsData'
 import { images } from '../data/imagesData'
 
@@ -9,7 +6,7 @@ import { images } from '../data/imagesData'
 const prisma = new PrismaClient()
 
 const load = async () => {
-  await prisma.products.deleteMany()
+/*   await prisma.products.deleteMany()
   console.log("Deleted records in product table")
 
   await prisma.product_categories.deleteMany()
@@ -20,39 +17,32 @@ const load = async () => {
 
   await prisma.article_categories.deleteMany()
   console.log("Deleted records in article_categories table")
-  
+  */
   await prisma.images.deleteMany()
-  console.log("Deleted records in article table")
+  console.log("Deleted records in article table") 
 
 
 
-  await prisma.product_categories.create({
+/*   await prisma.product_categories.create({
     data: productsCategories
   })
-  console.log("Added product category data")
+  console.log("Added product category data") */
 
 
-/*   await Promise.all(
-    products.map(async (product) => {
-      prisma.products.create({
-        data: {
-          name: product.name,
-          price: product.price,
-          productCategory: {
-            connect: {
-              id: 1
-            }
-          },
-          image: {
-            connect: {
-              id: product.id
-            }
+/*   for ( let i=0; i<products.length -1; i++ ) {
+    await prisma.products.create({
+      data: {
+        name: products[i].name,
+        price: products[i].price,
+        productCategory: {
+          connect: {
+            id: 
           }
         }
-      })
+      }
     })
-  )
-  console.log("Added products data") */
+  } */
+/*   console.log("Added products data") */
 
 
   await prisma.images.createMany({
@@ -60,17 +50,29 @@ const load = async () => {
   })
   console.log("Added images data")
 
-
-  await prisma.articles.createMany({
-    data: articles
-  })
-  console.log("Added articles data")
-
-
-  await prisma.article_categories.createMany({
+ /*  await prisma.article_categories.createMany({
     data: articlesCategories
   })
-  console.log("Added articles_categories data")
+  console.log("Added articles_categories data") */
+
+
+/*   for ( let i=0; i < articles.length - 1; i++ ) {
+    await prisma.articles.create({
+      data: {
+        title: articles[i].title,
+        content: articles[i].content,
+        category: {
+          connect: {
+            id: articles[i].categoryId
+          }
+        }
+      }
+    })
+  }
+  console.log("Added articles data") */
+
+
+
 
 
 

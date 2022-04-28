@@ -6,7 +6,7 @@ import { AppContext } from 'services/AppContext'
 
 import CartItem from './CartItem'
 
-import emptyBasket from '@img/empty-cart-image.svg'
+import EmptyBasket from '@img/empty-cart-image.svg'
 import Logo from '@img/Logo.webp'
 
 export type CartProps = {
@@ -39,7 +39,7 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
                 <h1>! Ups Vaya¡</h1>
                 <h2 className="h--aligncenter">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
                 <div className="cart__emptyImg">
-                  <Image src={emptyBasket} width={200} height={200} layout="responsive"/>
+                  <EmptyBasket />
                 </div>
             </>
           :

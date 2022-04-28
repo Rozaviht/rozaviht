@@ -7,7 +7,7 @@ import { AppContext } from 'services/AppContext'
 import Cart from '@components/Cart'
 
 import logo from '@img/logo.webp'
-import cartIcon from '@img/cart-icon.svg'
+import CartIcon from '@img/cart-icon.svg'
 
 type NavbarProps = {
   showCart: boolean,
@@ -56,7 +56,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
         </div>
         <button className="navbar__cartBt" onClick={handleShowCart}>
           <div className="navbar__cartIcon">
-            <Image src={cartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
+            <CartIcon />
             <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>

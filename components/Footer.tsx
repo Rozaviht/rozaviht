@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import Logo from '@img/Logo.webp'
-import instagramIcon from '@img/instagram-icon.svg'
-import facebookIcon from '@img/facebook-icon.svg'
+import InstagramIcon from '@img/instagram-icon.svg'
+import FacebookIcon from '@img/facebook-icon.svg'
 
 const Footer = () => {
   const [footerListDropped, setFooterListDropped] = useState(false)
@@ -79,12 +79,12 @@ const Footer = () => {
             <div className="flexrow">
               <Link href="/">
                 <a className="footer__mediaIcon">
-                    <Image src={facebookIcon} alt="Enlace facebook"/>
+                  <FacebookIcon />
                 </a>
               </Link>
               <Link href="https://www.instagram.com/rozaviht">
                 <a className="footer__mediaIcon">
-                  <Image src={instagramIcon} alt="Enlace imstagram" />
+                  <InstagramIcon />
                 </a>
               </Link>
             </div>

@@ -12,7 +12,7 @@ import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
 
 import aceite10 from '@img/aceite10-concaja.png'
-import editIcon from '@img/edit-icon.svg'
+import EditIcon from '@img/edit-icon.svg'
 
 export type provinciasDataProps = [{
   nombre: string,
@@ -91,7 +91,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <p>{checkoutFormData.shippingcomments}</p>
         </div>
         <button className="edit-icon-container" onClick={() => setEditingForm(true)}>
-          <Image src={editIcon} height={100} width={120} layout="responsive" />
+          <EditIcon />
         </button>
       </div>
       <div className="checkout-order">
@@ -109,7 +109,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
               <p className="checkout-product-price">{`${cartProduct.price*cartProduct.amount},00€`}</p>
               <div className="amount--cart checkout-product-amount">
                 <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
-                <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
+                <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled={true} />
                 <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
               </div>
           </div>

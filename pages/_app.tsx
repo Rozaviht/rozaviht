@@ -5,7 +5,7 @@ import type {NextPage} from 'next'
 
 import AppProvider from '../services/AppProvider'
 
-import '../pages/styles/App.scss'
+import '../styles/App.scss'
 
 
 type NextPageWithLayout = NextPage & {

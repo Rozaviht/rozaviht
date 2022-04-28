@@ -11,8 +11,8 @@ import IsotipoNegative from '@img/isotipo-negative.svg'
 import cbdSectionBanner from '@img/cbd-banner-2.png'
 import cbdSectionImg2 from '@img/cbd-banner2-2.png'
 import rozanewsSectionBanner from '@img/rozanews-section-banner.webp'
-import rozanewsIlustration from '@img/rozanews-ilustration.svg'
-import cbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
+import RozanewsIlustration from '@img/rozanews-ilustration.svg'
+import CbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 
 
 
@@ -90,7 +90,7 @@ export default function index () {
               <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
             </button>
             <div className="cbdSection__illustration">
-            <Image src={cbdIlustrationNegative} alt="" layout="responsive"/>
+            <CbdIlustrationNegative />
           </div>
           </div>
       </div>
@@ -111,7 +111,7 @@ export default function index () {
         </div>
         <div className="home-cta">
           <div className="rozanewsIlustration-container">
-            <Image src={rozanewsIlustration} alt=""  width={100} height={140} layout="responsive"/>
+            <RozanewsIlustration />
           </div>
           <div className="link-wrapper">
             <button className="section-cta section-cta--rozanewssection"><Link href="/aceite-cbd"><a>Ir a Rozanews</a></Link></button>

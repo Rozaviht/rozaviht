@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { extendType, objectType } from "nexus";
 import { Product } from "./Product";
 import { Image } from "./Image";
 
@@ -27,6 +27,19 @@ export const ProductCategory = objectType({
           }
         })
         .images()
+      }
+    })
+  }
+})
+
+
+export const ProductCategoriesQuery = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.list.field('getProductsCategories', {
+      type: 'ProductCategory',
+      resolve(_parent, _args, context) {
+        return context.prisma.product_categories.findMany()
       }
     })
   }

@@ -13,20 +13,19 @@ datasource db {
 model images {
   id                String              @id @default(uuid())
   url               String              @unique
-  name              String              @unique
   alt               String
   height            Int?
   width             Int?
-  // An Image can has many Product
+  // An Image can has onyly one Product
   product           products?
-  // An Image can has many Article
+  // An Image can has only one Article
   article           articles?           @relation(fields: [articleId], references: [id])
   articleId         String?             @unique
-  // An Image can has many ProductCategory
+  // An Image can has only one ProductCategory
   productCategory   product_categories? @relation(fields: [productCategoryId], references: [id])
   productCategoryId String?
 
-  @@index([id, url, name])
+  @@index([id, url])
 }
 
 //Product schema
@@ -86,17 +85,18 @@ model discounts {
 //Articles schema
 
 model articles {
-  id         String               @id @default(uuid())
-  title      String               @unique
+  id         String             @id @default(uuid())
+  title      String             @unique
   content    String?
-  published  Boolean              @default(false)
-  createdAt  DateTime             @default(now()) @map(name: "created_at")
-  modifiedAt DateTime             @updatedAt @map(name: "modified_at")
-  deletedAt  DateTime             @default(now()) @map(name: "deleted_at")
+  published  Boolean            @default(false)
+  createdAt  DateTime           @default(now()) @map(name: "created_at")
+  modifiedAt DateTime           @updatedAt @map(name: "modified_at")
+  deletedAt  DateTime           @default(now()) @map(name: "deleted_at")
   // An Article can has many Image
   image      images[]
   // An Article can has many ArticleCategory
-  categories article_categories[]
+  category   article_categories @relation(fields: [categoryId], references: [id])
+  categoryId String
 
   @@index([id, title])
 }

@@ -6,29 +6,28 @@ export const Article = objectType({
   name: 'Article',
   definition(t) {
     t.nonNull.string('id')
-    t.nonNull.string('title')!
-    t.nonNull.string('content')!
-    t.nonNull.boolean('published')!
-    t.list.field('images', {
+    t.nonNull.string('title')
+    t.nonNull.string('content')
+    t.nonNull.boolean('published')
+    t.nonNull.string('categoryId')
+    t.field('images', {
       type: Image,
       async resolve(_parent, _args, context) {
-        return await context.prisma.articles.findUnique({
+        return await context.prisma.images.findUnique({
           where: {
-            id: _parent.id,
+            articleId: _parent.id
           }
         })
-        .image()
       }
     })
-    t.list.field('categories', {
+    t.field('category', {
       type: ArticleCategory,
       async resolve(_parent, _args, context) {
-        return await context.prisma.articles.findUnique({
+        return await context.prisma.article_categories.findUnique({
           where: {
-            id: _parent.id
+            id: _parent.categoryId
           }
         })
-        .categories()
       }
     })
   }
@@ -37,7 +36,7 @@ export const Article = objectType({
 export const ArticlesQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.field('articles', {
+    t.nonNull.list.field('getArticles', {
       type: 'Article',
       resolve(_parent, _args, context) {
         return context.prisma.articles.findMany()
