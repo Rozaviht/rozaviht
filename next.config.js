@@ -1,3 +1,10 @@
+const securityHeaders = [
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block'
+  }
+]
+
 module.exports =  {
       reactStrictMode: true,
       images: {
@@ -13,6 +20,14 @@ module.exports =  {
           loader: require.resolve('@svgr/webpack')
         })
         return config
+      },
+      async headers() {
+        return [
+          {
+            source: '/:path*',
+            headers: securityHeaders
+          }
+        ]
       }
       
 }

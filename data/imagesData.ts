@@ -24,6 +24,12 @@ export const images = [
     "width": 859
   },
   {
+    "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/logo.webp",
+    "alt": "Logo de Rozaviht",
+    "height": 289,
+    "width": 1128
+  },
+  {
     "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-landscape.webp",
     "alt": "Libro y cafe para la pagina de Privacidad y Seguridad de Rozaviht en tamaño horizonal",
     "height": 959,
@@ -77,11 +83,12 @@ export const images = [
     "height": 554,
     "width": 304
   },
+ 
   {
     "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-section-banner.webp",
     "alt": "Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe",
-    "height": 1024,
-    "width": 682
+    "height": 682,
+    "width": 1024
   },
   {
     "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/ahorro-o-desperdicio-de-eneriga-electrica-banner.webp",
@@ -100,5 +107,44 @@ export const images = [
     "alt": "Titulo CBD en grande con subtitulo cannabidiol mas la molecula del CBD, todo en verde con fondo blanco",
     "height": 769,
     "width": 1367
+  },
+]
+
+export const svgFiles = [
+  {
+    "url": "@img/cart-icon.svg",
+    "alt": "Icono del carrito de la compra de Rozaviht"
+  },
+  {
+    "url": "@img/cbd-ilustration-negative.svg",
+    "alt": "Ilustracion en negativo de aceite de cbd de Rozaviht"
+  },
+  {
+    "url": "@img/edit-icon.svg",
+    "alt": "Icono de enlace para editar los datos de envio"
+  },
+  {
+    "url": "@img/empty-cart-image.svg",
+    "alt": "Carrito de la compra de Rozaviht con cero productos"
+  },
+  {
+    "url": "@img/facebook-icon.svg",
+    "alt": "Icono de facebook de enlace para la pagina de Rozaviht facebook"
+  },
+  {
+    "url": "@img/instagram-icon.svg",
+    "alt": "Icono de instagram de enlace para la pagina de Rozaviht instagram"
+  },
+  {
+    "url": "@img/rozanews-ilustration.svg",
+    "alt": "Ilustracion de varios articulos de Rozanews"
+  },
+  {
+    "url": "@img/rozanews-logo.svg",
+    "alt": "Logo de Rozanews"
+  },
+  {
+    "url": "@img/Logo.svg",
+    "alt": "Logo de Rozaviht"
   },
 ]

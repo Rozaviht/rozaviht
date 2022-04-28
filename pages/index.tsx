@@ -7,19 +7,13 @@ import type { ReactElement } from 'react'
 import Layout from '@components/Layout'
 
 
-import IsotipoNegative from '@img/isotipo-negative.svg'
-import cbdSectionBanner from '@img/cbd-banner-2.png'
-import cbdSectionImg2 from '@img/cbd-banner2-2.png'
-import rozanewsSectionBanner from '@img/rozanews-section-banner.webp'
+import Isotipo from '@img/Isotipo.svg'
 import RozanewsIlustration from '@img/rozanews-ilustration.svg'
 import CbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 
 
 
-
-
 export default function index () {
-
   
   useEffect(() => {
     let observerOptions = {
@@ -49,24 +43,20 @@ export default function index () {
 
   return (
     <div className="landingPage">
-      <div className="home-banner">
+      <div style={{ 'marginBottom': '4rem' }}>
         <video className="landingPage__banner" autoPlay loop playsInline preload='metadata' muted>
           <source type='video/mp4' src="/web-banner.mp4" />
         </video>
-        <div className="flexcolum flexcolum--around">
-          <p>"Cuidate, y cuida el medio en el que vives."</p>
-          <p>@rozaviht</p>
-        </div>
       </div>
       {/* ---------- CBD SECTION --------- */}
       <div className="cbdSection">
         <div className="cbdSection__hero">
           <h1 className="cbdSection__title">ACEITE DE CBD</h1>
           <div className="cbdSection__frstimg">
-            <Image src={cbdSectionBanner} alt="" layout="responsive"/>
+            <Image src={'/img/cbd-section-img-horizontally.webp'} alt="" height={1076} width={1500} layout="responsive"/>
           </div>
           <div className="cbdSection__scndimg">
-            <Image src={cbdSectionImg2} alt="" layout="responsive"/>
+            <Image src={'/img/cbd-section-img-vertically.webp'} alt="" height={1600} width={1200} layout="responsive"/>
           </div>
         </div>
         <div className="flexcolum flexcolum--separate">
@@ -83,11 +73,6 @@ export default function index () {
           <div className="flexrow flexrow--between" style={{width: "100%"}}>
             <button className="cbdSection__cta">
               <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
-              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
-              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
-              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
-              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
-              <svg className="liquidParticle" xmlns="http://www.w3.org/2000/svg"></svg>
             </button>
             <div className="cbdSection__illustration">
             <CbdIlustrationNegative />
@@ -95,20 +80,18 @@ export default function index () {
           </div>
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
-      <div className="section section--rozanews">
+      <div className="flexcolum flexcolum--around flexcolum--separate2" style={{ 'position': 'relative', 'marginTop': '2rem' }} >
         <h1 className="section-title">ROZANEWS</h1>
         <div className="typewriter">
           <h3 className="section-tagline">"Informate de lo que te importa"</h3>
         </div>
-        <div className="section--rozanews-img">
-          <Image src={rozanewsSectionBanner} alt=""  width={150} height={100} layout="responsive"/>
+        <div className="rozanews-section-img">
+          <Image src={'/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
-        <div className="section-text-container">
-          <p className="rozanews-text">
+          <p style={{ 'fontSize': '1rem' }} > 
           Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
           Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena, y que cualquiera pueda leerlo.
           </p>
-        </div>
         <div className="home-cta">
           <div className="rozanewsIlustration-container">
             <RozanewsIlustration />
@@ -119,29 +102,33 @@ export default function index () {
         </div>
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}
-      <div className="section section--rozaviht">
-        <div className="section--rozaviht-img">
-          <Image src={IsotipoNegative} width={114} height={100} layout="responsive" />
-        </div> 
-        <div className="section-text-wrapper">
-          <h2>Nuestro Lema</h2>
-          <h3 className="section--rozaviht-subtitle">Te cuidas</h3>
-          <p className="section--rozaviht-text">
-          En Rozaviht buscamos proporcionarte productos que te cuiden, que te hagan sentir mejor y más sano, buscando usar de la manera más eficiente los recursos para cuidar el medioambiente.
-          </p>
-          <h3 className="section--rozaviht-subtitle">Te cuidamos</h3>
-          <p className="section--rozaviht-text">
-          No solo nuestros productos físicos te cuidaran, sino que también lo haremos a través, de las redes sociales y con nuestros artículos, donde te brindaremos información valiosa para que te cuides tu mejor y el medio en el que vives. 
-          </p>
-          <h3 className="section--rozaviht-subtitle">Y Lo cuidamos</h3>
-          <p className="section--rozaviht-text">
-          A la hora de la verdad no hace falta que todos hagamos grandes cambios, basta con aportar cada uno su grano de arena.
-          </p>
-        </div>
-
-        <button className="cta-secdry cta-secdry--rozavihtsection">
-          <Link href="/aceite-cbd" >
-            <a>
+      <div className="rozaviht-section" >
+        <Isotipo alt="" className="rozaviht-section__img" />
+        <h1>NUESTRO LEMA</h1>
+        <ul className='rozaviht-section__list' >
+          <li>
+            <h2 >Te cuidas</h2>
+            <p>
+              Aunque nuestra misión en Rozaviht es buscar lo mejor para tu cuidado personal, nada funcionará si no eres tu el que realmente se preocupa de su salud. Por ello debes ser tú el que tome la desición de buscar lo mejor para tí y cuidar de tí.
+            </p>
+          </li>
+          <li>
+            <h2 >Te cuidamos</h2>
+            <p>
+              Por supuesto nuestra misión será siempre buscar los mejores productos para tu cuidado personal, y no solo lo haremos a través de productos físicos. También usaremos la vía digital para proporcinarte información que te sirva de ayuda para que te cuides de mejor manera.
+            </p>
+          </li>
+          <li>
+            <h2>Y Lo cuidamos</h2>
+            <p>
+              Además, y nos menos importante, nos preocuremos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
+            </p>
+          </li>
+        </ul>
+        <button className="cta cta--maincolor">
+          <Link href="/quienes-somos" >
+            <a style={{ 'color': '#f2f3fa' }} >
+              Conocenos mejor
             </a>
           </Link>
         </button>

@@ -1,12 +1,11 @@
 import { useContext, Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
-import logo from '@img/logo.webp'
+import Logo from '@img/logo.svg'
 import CartIcon from '@img/cart-icon.svg'
 
 type NavbarProps = {
@@ -34,7 +33,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
       <div className="navbar">
         <Link href="/">
           <a  className="navbar__logoImg">
-            <Image src={logo} height={100} width={392} layout="responsive" alt="Logo"/>
+            <Logo alt="Logo de Rozaviht"/>
           </a>
         </Link>
         <div className="navbar__menu">
@@ -50,13 +49,13 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
           </Link>
           <Link href="/about" >
             <a>
-              Sobre nosotros
+              Quienes somos
             </a>
           </Link>
         </div>
         <button className="navbar__cartBt" onClick={handleShowCart}>
           <div className="navbar__cartIcon">
-            <CartIcon />
+            <CartIcon alt="Icono del carrito de la compra de Rozaviht" />
             <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>

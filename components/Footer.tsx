@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
-import Logo from '@img/Logo.webp'
+import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
 import FacebookIcon from '@img/facebook-icon.svg'
 
@@ -79,12 +78,12 @@ const Footer = () => {
             <div className="flexrow">
               <Link href="/">
                 <a className="footer__mediaIcon">
-                  <FacebookIcon />
+                  <FacebookIcon alt="Icono de facebook de enlace para la pagina de Rozaviht facebook" />
                 </a>
               </Link>
               <Link href="https://www.instagram.com/rozaviht">
                 <a className="footer__mediaIcon">
-                  <InstagramIcon />
+                  <InstagramIcon alt="Icono de facebook de enlace para la pagina de Rozaviht instagram" />
                 </a>
               </Link>
             </div>
@@ -92,7 +91,7 @@ const Footer = () => {
         </div>
         <div className="flexcolum flexcolum--around">
           <div className="footer__logoImg">
-            <Image src={Logo} alt="Logo"  width={392} height={100} layout="responsive"/>
+            <Logo alt="logo de Rozaviht" />
           </div>
           <p style={{fontSize: "0.6rem"}}>Reservados todos los derechos @ 2022 Rozaviht</p>
           <div className="flexrow">

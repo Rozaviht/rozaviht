@@ -11,13 +11,14 @@ const load = async () => {
 
   await prisma.product_categories.deleteMany()
   console.log("Deleted records in product_categories table")
+  */
 
   await prisma.articles.deleteMany()
   console.log("Deleted records in article table")
 
   await prisma.article_categories.deleteMany()
   console.log("Deleted records in article_categories table")
-  */
+  
   await prisma.images.deleteMany()
   console.log("Deleted records in article table") 
 

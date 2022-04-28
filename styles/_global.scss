@@ -204,6 +204,12 @@ body {
       margin-top: 1rem;
     }
   }
+
+  &--separate2 {
+    & > *:nth-child(n+2) {
+      margin-top: 2rem;
+    }
+  }
 }
 
 .flexrow {

@@ -5,7 +5,10 @@ import type {NextPage} from 'next'
 
 import AppProvider from '../services/AppProvider'
 
+import apolloClient from 'lib/apollo'
+
 import '../styles/App.scss'
+import { ApolloProvider } from '@apollo/client'
 
 
 type NextPageWithLayout = NextPage & {
@@ -32,9 +35,11 @@ type AppPropsWithLayout = AppProps & {
           <meta name="format-detection" content="telephone=no"/>
           <meta name="format-detection" content="address=no"/>   
       </Head>
-      <AppProvider>
-        {getLayout(<Component {...pageProps} />)}
-      </AppProvider>
+      <ApolloProvider client={apolloClient} >
+        <AppProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </AppProvider>
+      </ApolloProvider>
     </>
 
   )
