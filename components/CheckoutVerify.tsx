@@ -11,7 +11,6 @@ import type { CartItemType } from 'services/AppProvider'
 import provinciasData from "../lib/data/pronviciasData.json"
 import municipiosData from "../lib/data/municipiosData.json"
 
-import aceite10 from '@img/aceite10-concaja.png'
 import EditIcon from '@img/edit-icon.svg'
 
 export type provinciasDataProps = [{
@@ -104,7 +103,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             </button>
             <p className="checkout-product-name">{cartProduct.name}</p>
             <div className="checkout-product-img">
-              <Image src={aceite10} height={100} width={100} layout="responsive" />
+              <Image src={cartProduct.image.id} height={cartProduct.image.height} width={cartProduct.image.width} alt={cartProduct.image.alt} layout="responsive" />
             </div>
               <p className="checkout-product-price">{`${cartProduct.price*cartProduct.amount},00€`}</p>
               <div className="amount--cart checkout-product-amount">

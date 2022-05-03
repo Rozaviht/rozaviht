@@ -1,17 +1,43 @@
 import Image from 'next/image'
+import prisma from 'lib/prisma'
 
+import type { imageType } from 'services/AppProvider'
 import type { ReactElement } from "react"
 
 import Layout from '@components/Layout'
 
-import privacyBanner from '@img/privacy-banner-portrait.webp'
+export async function getStaticProps () {
+  const privacyBanners = await prisma.images.findMany({
+    where: {
+      url: {
+        in: ['https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-portrait.webp', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-landscape.webp']
+      }
+    },
+    select: {
+      url: true,
+      alt: true,
+      height: true,
+      width: true
+    }
+  })
 
-export default function PrivacyPage () {
+  return {
+    props: {privacyBanners}
+  }
+}
+
+interface rivacyPageProps {
+  privacyBanners: imageType[]
+}
+
+
+export default function PrivacyPage ({privacyBanners}:rivacyPageProps) {
+  console.log(privacyBanners)
   return (
     <div className="legalPage">
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >POLÍTICA DE PRIVACIDAD Y SEGURIDAD DE ROZAVIHT</h1>
-        <Image src={'/img/privacy-banner-portrait.webp'} layout="responsive"/>
+        <Image src={privacyBanners[0].url} height={privacyBanners[0].height} width={privacyBanners[0].width} alt={privacyBanners[0].alt} layout="responsive"/>
       </div>
       <div className='flexcolum flexcolum--separate'>
         <h2>NOSOTROS</h2>

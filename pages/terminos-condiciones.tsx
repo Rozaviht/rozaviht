@@ -1,17 +1,44 @@
 import Image from 'next/image'
+import prisma from 'lib/prisma'
 
 import type { ReactElement } from "react"
+import type { imageType } from 'services/AppProvider'
 
 import Layout from '@components/Layout'
 
-import privacyBanner from '@img/terms-banner-portrait.webp'
+export async function getStaticProps () {
+  const termsBanners = await prisma.images.findMany({
+    where: {
+      url: {
+        in: ['https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-portrait.webp', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-landscape.webp']
+      }
+    },
+    select: {
+      url: true,
+      alt: true,
+      height: true,
+      width: true
+    }
+  })
 
-export default function termsPage () {
+  return {
+    props: {termsBanners}
+  }
+}
+
+
+
+interface termsPageProps {
+  termsBanners: imageType[]
+}
+
+export default function termsPage ({termsBanners}:termsPageProps) {
+
   return (
     <div className="legalPage">
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >TERMINOS Y CONDICIONES DE USO</h1>
-        <Image src={privacyBanner} layout="responsive"/>
+        <Image src={termsBanners[1].url} height={termsBanners[1].height} width={termsBanners[1].width} alt={termsBanners[1].alt} layout="responsive"/>
       </div>
       <div className='flexcolum flexcolum--separate'>
         <h2>NUESTROS TERMINOS Y CONDICIONES DE USO DE LA PÁGINA WEB</h2>
