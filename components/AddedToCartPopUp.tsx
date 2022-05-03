@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+
 import { CartItemType } from '../services/AppProvider'
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react'
 
@@ -10,7 +11,7 @@ export type AddedToCartPopUpProps = {
   setShowAddedPopUp: Dispatch<SetStateAction<boolean>>
 }
 
-export default function AddedToCartPopUp ({productAdded, showAddedPopUp, setShowAddedPopUp}: AddedToCartPopUpProps) {
+export default function AddedToCartPopUp ({ productAdded, showAddedPopUp, setShowAddedPopUp}: AddedToCartPopUpProps) {
   const popUpRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
@@ -27,9 +28,9 @@ export default function AddedToCartPopUp ({productAdded, showAddedPopUp, setShow
     }, [popUpRef])
 
   return (
-    <div ref={popUpRef} className={showAddedPopUp === true ? "popUp" : "popUp popUp--hidden"}>
+    <div ref={popUpRef} className={showAddedPopUp === true ? 'popUp' : 'popUp popUp--hidden'}>
       <div className="popUp__img">
-        <Image src={productAdded.image} height={100} width={100} layout="responsive" />
+        <Image src={productAdded.image.url} height={productAdded.image.height} width={productAdded.image.width} layout="responsive" />
       </div>
       <p>{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta de la compra.`}</p>
       <button className="closeBt closeBt--topRight" onClick={() => setShowAddedPopUp(false)}>

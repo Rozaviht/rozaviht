@@ -51,7 +51,7 @@ export default function CartItem ({cartProduct}: CartItemProps) {
         <div className="closeBt__lineR"></div>
       </button>
       <div className="image-cartitem-container">
-        <Image src={cartProduct.image} width={200} height={200} layout='responsive'></Image>
+        <Image src={cartProduct.image.url} width={cartProduct.image.width} height={cartProduct.image.height} layout='responsive' objectFit='contain' ></Image>
       </div>
       <div className="flexrow-between">
         <p>Producto:</p>

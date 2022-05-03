@@ -11,7 +11,7 @@ export default function PrivacyPage () {
     <div className="legalPage">
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >POLÍTICA DE PRIVACIDAD Y SEGURIDAD DE ROZAVIHT</h1>
-        <Image src={privacyBanner} layout="responsive"/>
+        <Image src={'/img/privacy-banner-portrait.webp'} layout="responsive"/>
       </div>
       <div className='flexcolum flexcolum--separate'>
         <h2>NOSOTROS</h2>

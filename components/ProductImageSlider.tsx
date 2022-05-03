@@ -1,43 +1,47 @@
-
 import Image from 'next/image'
 import { useState } from "react"
 import Dots from '@components/SliderDots'
 
+import type { imageType } from 'services/AppProvider'
+
 type ProductImageSliderProps = {
-  productImageData: string[]
+  productImageData: imageType[]
 }
 
 const ProductImageSlider = ({productImageData}: ProductImageSliderProps) => {
+
+  const cleanedProductImgs = productImageData.slice(0,4)
+
   const [currentImage, setCurrentImage] = useState(0)
 
   const nextSlide = () => {
-    setCurrentImage(currentImage === productImageData.length - 1 ? 0 : currentImage + 1)
+    setCurrentImage(currentImage === cleanedProductImgs.length - 1 ? 0 : currentImage + 1)
   }
   
   const prevSlide = () => {
-    setCurrentImage(currentImage === 0 ? productImageData.length - 1 : currentImage - 1)
+    setCurrentImage(currentImage === 0 ? cleanedProductImgs.length - 1 : currentImage - 1)
   }
 
-  if (!Array.isArray(productImageData) || productImageData.length <= 0) {
+  if (!Array.isArray(cleanedProductImgs) || cleanedProductImgs.length <= 0) {
     return null
   }
-
-  console.log(currentImage)
 
   return (
     <div className="slider-container">
       <button className={currentImage === 0 ? "btArrow btArrow--left hidden" : "btArrow btArrow--left"} onClick={prevSlide}></button>
-      {productImageData.map((imageUrl, index) => {
+      {cleanedProductImgs.map((image, index) => {
         return (
           <div className={index === currentImage ? "slide-container active" : "slide-container"} key={index}>
             {index === currentImage && (
-              <Image src={imageUrl} layout="responsive" objectFit="scale-down"/>
+              <div className={ index === 0 || index == 1 ?  'slide slide--half' : 'slide'}>
+                <Image src={image.url} height={image.height} width={image.width} alt={image.alt}  layout="responsive" objectFit='contain' className='image' sizes='50vw' />
+              </div>
             )}
           </div>
         )
       })}
-      <button className={currentImage === productImageData.length - 1 ? "btArrow btArrow--right hidden" : "btArrow btArrow--right"} onClick={nextSlide}></button>
-      <Dots arrayParent={productImageData} activeIndex={currentImage}/>
+      <button className={currentImage === cleanedProductImgs.length - 1 ? "btArrow btArrow--right hidden" : "btArrow btArrow--right"} onClick={nextSlide}></button>
+      <Dots arrayParent={cleanedProductImgs} activeIndex={currentImage}/>
     </div>
   )
 }

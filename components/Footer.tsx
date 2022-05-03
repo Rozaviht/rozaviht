@@ -76,7 +76,7 @@ const Footer = () => {
               <p>info@rozaviht.com</p>
             </div>
             <div className="flexrow">
-              <Link href="/">
+              <Link href="https://www.facebook.com/rozaviht">
                 <a className="footer__mediaIcon">
                   <FacebookIcon alt="Icono de facebook de enlace para la pagina de Rozaviht facebook" />
                 </a>

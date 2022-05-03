@@ -1,5 +1,5 @@
 .slider-container {
-  grid-area: imgSlider;
+  width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
 
@@ -18,14 +18,25 @@
   opacity: 0;
   transition-duration: 1s ease;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
   &.active {
     opacity: 1;
     transition-duration: 200ms;
   }
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  & .slide {
+    width: 90%;
+
+    &--half {
+      width: 35%;
+    }
+  } 
+
 }
 
 .btArrow {

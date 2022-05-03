@@ -7,11 +7,19 @@ interface props {
   children: JSX.Element | JSX.Element[] | ReactElement | ReactNode
 }
 
+export type imageType = {
+  id: string
+  url: string
+  alt: string
+  height: number
+  width: number
+}
+
 export type CartItemType = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+  id: number
+  name: string
+  price: number
+  image: imageType
   amount: number
 }
 
@@ -27,7 +35,6 @@ export type CartItemType = {
 
   useEffect(() => {
     if (window) {
-      console.log(cartProducts)
       setCartProducts(JSON.parse(window.sessionStorage.getItem('cartProducts') || '[]') || [] as CartItemType[])
     }
   }, [])

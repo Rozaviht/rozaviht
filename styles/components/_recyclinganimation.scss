@@ -1,0 +1,15 @@
+.recycling-animation-container {
+  margin-top: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'scene';
+}
+
+.recycling-img {
+  grid-area: scene;
+  align-self: center;
+  justify-self: center;
+  width: 30%;
+}

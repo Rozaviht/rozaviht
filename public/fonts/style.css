@@ -23,6 +23,10 @@
   src: url("Lora-Italic.ttf");
 }
 @font-face {
+  font-family: "Lora-MediumItalic";
+  src: url("Lora-MediumItalic.ttf");
+}
+@font-face {
   font-family: "GrechenFuemen-Regular";
   src: url("GrechenFuemen-Regular.ttf");
 }

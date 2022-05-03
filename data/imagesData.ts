@@ -108,6 +108,18 @@ export const images = [
     "height": 769,
     "width": 1367
   },
+  {
+    "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-image-section.webp",
+    "alt": "Aceite de CBD 20 porciento de Rozaviht con packaging encima de un tronco con un piñon y aceite goteando",
+    "height": 1382,
+    "width": 921
+  },
+  {
+    "url": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-info-image.webp",
+    "alt": "Packaging de los aceites de cbd de Rozaviht encima de unos libros y un hombre detras viendo informacion en tablet",
+    "height": 682,
+    "width": 1024
+  },
 ]
 
 export const svgFiles = [
