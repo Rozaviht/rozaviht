@@ -11,16 +11,12 @@ export default function CookiesManage () {
     <div className={cookiesManageShow === true ? "cookies-manage" : "cookies-manage hidden"}>
       <div className="cookies-manage-nav">
         <h2>Gestionar cookies</h2>
-        <button className="close-bt--cart" onClick={() => setCookiesManageShow(false)}>
-          <div className="line-left"></div>
-          <div className="line-right"></div>
-        </button>
       </div>
       <div className="cookies-manage-main">
         <h3>Listado e información de las cookies</h3>
         <p>Explora cada categoría para obtener más información y modificar la configuración. Desactivar la recopilación de datos puede afectar a tu experiencia y a los servicios que podemos ofrecerte. Si necesitas más información y quieres ver más opciones, consulta la 
-          <Link href="/">
-            <a>Política de privacidad</a>
+          <Link href="/politica-seguridad">
+            <a style={{ 'textDecoration': 'underline' }}>Política de privacidad</a>
           </Link>
         </p>
         <div className="cookies-container">
@@ -60,7 +56,7 @@ export default function CookiesManage () {
           </div>
           <p>Nosotros o nuestras redes sociales y socios de publicidad podemos utilizar estas cookies para mostrarte anuncios publicitarios que sean de tu interés. Si no las autorizas, continuarás recibiendo anuncios, pero no serán personalizados.</p>
         </div>
-        <button className="bt-primary bt-primary--small">Guardar preferencias</button>
+        <button className="bt-primary bt-primary--small" onClick={() => setCookiesManageShow(false)} >Guardar preferencias</button>
       </div>
     </div>
   )

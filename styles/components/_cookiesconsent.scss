@@ -3,28 +3,28 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 30%;
-  padding: 0 0.5rem 0.5rem 0.5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: $backgroundcolor;
+  border-top: 2px solid $maincolor;
 
   &.hidden {
     display: none;
   }
+
+  & > * {
+    color: $maincolor;
+    margin-top: 0.5rem;
+  }
 }
 
 .cookies-consent-bts {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-.cookies-consent-wrapper > * {
-  color: $maincolor;
-  margin-top: 0.5rem;
 }
