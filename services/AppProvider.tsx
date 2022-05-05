@@ -11,8 +11,8 @@ export type imageType = {
   id: string
   url: string
   alt: string
-  height: number
-  width: number
+  height: number | null
+  width: number | null
 }
 
 export type CartItemType = {
