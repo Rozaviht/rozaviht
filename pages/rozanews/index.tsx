@@ -1,6 +1,5 @@
 import prisma from 'lib/prisma'
 import { ReactElement, useState } from 'react'
-import superjson from 'superjson'
 
 import type { imageType } from 'services/AppProvider'
 
@@ -26,6 +25,8 @@ export type articleCategorieType = {
   name: string
   articles: articleType[]
 }
+
+export const dateOptions = { year: 'numeric', month: 'long', day: 'numeric'}
 
 export async function getStaticProps() {
   const articlesRawData = await prisma.articles.findMany({
@@ -75,12 +76,14 @@ export async function getStaticProps() {
 
 
   //Changed the Date value to string, to be able to
-  //serialized as JSON.
+  //serialized as JSON.j
+
+  
 
   const articlesData: articleType[] = []
   articlesRawData.forEach( article => articlesData.push({
     ...article,
-      createdAt: article.createdAt.toDateString()
+      createdAt: article.createdAt.toLocaleDateString('es-ES', dateOptions)
   }))
 
 
@@ -89,7 +92,7 @@ export async function getStaticProps() {
     ...categorie,
     articles: categorie.articles.map( article => ({
       ...article,
-      createdAt: article.createdAt.toDateString()
+      createdAt: article.createdAt.toLocaleDateString('es-ES', dateOptions)
     }) )
   }))
   articlesCategoriesData.unshift({
@@ -99,7 +102,8 @@ export async function getStaticProps() {
 
 
   return {
-    props: { articlesData, articlesCategoriesData }
+    props: { articlesData, articlesCategoriesData },
+    revalidate: 60 * 60 * 24 * 3
   }
 }
 
@@ -108,7 +112,6 @@ export async function getStaticProps() {
 export default function rozanews ({ articlesCategoriesData }: rozanewsProps) {
   const [showCategories, setShowCategories] = useState(false)
 
-  
 
   const [categorieSelected, setCategorieSelected] = useState<articleCategorieType>(articlesCategoriesData[0])
 

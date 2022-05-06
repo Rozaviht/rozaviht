@@ -26,7 +26,7 @@ type AppPropsWithLayout = AppProps & {
   return (
     <>
       <Head>
-          <link rel="stylesheet" href="fonts/style.css" />
+          <link rel="stylesheet" href="../fonts/style.css" />
           <link rel="shortcut icon" sizes='224x256' type='image/ico' href="img/favicon.ico" />
           <title>Rozaviht: Te cuidas, Te cuidamos y Lo cuidamos</title>
           <meta name='description' content='En Rozaviht nuestro objetivo es proveer de productos a las personas que cuiden de ellas. Siempre sin dejar de lado el cuido medioambiental que nos define también como marca.' />

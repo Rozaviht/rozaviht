@@ -13,7 +13,7 @@ export default function ArticleCard ({article}:ArticleCardProps) {
   return (
     <div className="articleCard">
       <div className="articleCard__img">
-        <Image src={article.image[0].url} height={article.image[0].height} width={article.image[0].width} alt={article.image[0].alt} layout="responsive" />
+        <Image src={article.image[0].url} height={article.image[0].height!} width={article.image[0].width!} alt={article.image[0].alt} layout="responsive" />
       </div>
       <h2>{article.title}</h2>
       <p>{article.createdAt}</p>
