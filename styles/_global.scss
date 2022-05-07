@@ -148,9 +148,10 @@ body {
     background-color: $oilsectiontext;
     color: $backgroundcolor;
   }
-
+  
   &--maincolor {
     background-color: $maincolor;
+    color: $backgroundcolor;
   }
   
   &--negative {

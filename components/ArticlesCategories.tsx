@@ -23,7 +23,6 @@ export default function ArticlesCategories ({showCategories, setShowCategories, 
           <div className="closeBt__lineL"></div>
           <div className="closeBt__lineR"></div>
         </button>
-
       <div className='articlesCategories__bts'>
         {articlesCategoriesData.map((categorie, index) => 
           <button key={index} className='categorie-bt' onClick={() => handleCategorieSelected(categorie)}>{categorie.name}</button>

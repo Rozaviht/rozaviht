@@ -4,9 +4,11 @@ import Link from 'next/link'
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
 import FacebookIcon from '@img/facebook-icon.svg'
+import SubcriptionAlert from './SubcriptionAlert'
 
 const Footer = () => {
   const [footerListDropped, setFooterListDropped] = useState(false)
+  const [showSubAlert, setShowSubAlert] = useState(false)
 
   const dropFooterList = () => setFooterListDropped(!footerListDropped)
 
@@ -32,7 +34,8 @@ const Footer = () => {
             </p>
           </div>
           <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
-          <button className="cta cta--negative">UNIRSE</button>
+          <button className="cta cta--maincolor" onClick={() => setShowSubAlert(true)}>UNIRSE</button>
+          < SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} />
         </div>
         <div className="footer__downSide">
           <div className="dropMenu">
@@ -40,32 +43,16 @@ const Footer = () => {
               <div className={footerListDropped ? "dropMenu__content dropped" : "dropMenu__content"}>
                 <ul className="flexcolum flexcolum--separate">
                   <li>
-                    <Link href ="/">
-                      <a>
-                        Cambios y devoluciones
-                      </a>
-                    </Link>
+                    <Link href ="/"><a>- Cambios y devoluciones</a></Link>
                   </li>
                   <li>
-                    <Link href ="/">
-                      <a>
-                        Preguntas frecuentes (FAQ)
-                      </a>
-                    </Link>
+                    <Link href ="/preguntas-frecuentes"><a>- Preguntas frecuentes ( FAQ )</a></Link>
                   </li>
                   <li>
-                    <Link href ="/">
-                      <a>
-                        Política de cookies
-                      </a>
-                    </Link>
+                    <Link href ="/"><a>- Política de cookies</a></Link>
                   </li>
                   <li>
-                    <Link href ="/">
-                      <a>
-                        Configuración de cookies
-                      </a>
-                    </Link>
+                    <Link href ="/"><a>- Configuración de cookies</a></Link>
                   </li>
                 </ul>
             </div>
