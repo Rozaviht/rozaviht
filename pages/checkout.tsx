@@ -35,10 +35,11 @@ export default function checkoutPage ()  {
         orderVerified === false 
           ?
             <CheckoutVerify setOrderVerified={setOrderVerified}/>
-
           :
             <div className="checkout-section">
-              <h3 className="font-LoraMedium">Revisa tu correo electrónico para confirmar que tienes el pedido y la factura correspondiente.</h3>
+              <p style={{ 'fontSize': '1rem' }}>Deberías recibir un correo electrónico confirmando la compra realizada y con su factura correspondiente. Revisa en tu correo la bandeja de Spam en caso de no verlo en la bandeja principal.</p>
+              <p style={{ 'fontSize': '1rem' }}>Después te enviaremos un correo con tu número de pedido para que le puedas hacer seguimiento. En el propio correo te explicamos como puedes hacer dicho seguimiento.</p>
+              <p>De no ser así, ponte en contacto con nosotros, en nuestra página de contacto, para resolverte el incidente.</p>
             </div>
       }
     </div>

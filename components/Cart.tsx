@@ -1,5 +1,4 @@
-import { useContext } from 'react'
-import Image from 'next/image'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import Link from 'next/link'
 
 import { AppContext } from 'services/AppContext'
@@ -7,15 +6,16 @@ import { AppContext } from 'services/AppContext'
 import CartItem from './CartItem'
 
 import EmptyBasket from '@img/empty-cart-image.svg'
-import Logo from '@img/Logo.webp'
+import Logo from '@img/Logo.svg'
 
 export type CartProps = {
   showCart: boolean
   handleShowCart: (event: React.MouseEvent<HTMLButtonElement>)=>void
+  setShowCart: Dispatch<SetStateAction<boolean>>
 }
 
 
-const Cart = ({handleShowCart, showCart}: CartProps) => {
+const Cart = ({handleShowCart, showCart, setShowCart}: CartProps) => {
 
   const { cartProducts, totalCartPrice } = useContext(AppContext)
 
@@ -28,7 +28,7 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
           <div className="closeBtSlide__lineB"></div>
         </button>
         <div className="cart__logoImg">
-          <Image src={Logo} height={30} width={80} layout="responsive"></Image>
+          < Logo />
         </div>
         <h2 className="h--maincolor">Tu cesta de la compra</h2>
       </div>
@@ -55,12 +55,10 @@ const Cart = ({handleShowCart, showCart}: CartProps) => {
                   <h2>Total en tu cesta:</h2>
                   <h2 style={{marginLeft: "2rem"}}>{totalCartPrice},00€</h2>
                 </div>
-                <Link href="/checkout">
-                  <button className="cta cta--maincolor">
-                    <a className="link-negative">
+                <Link href="/checkout" >
+                    <a className="link-cta" onClick={() => setShowCart(false)}>
                       COMPRAR
                     </a>
-                  </button>
                 </Link>
               </div>
             </>

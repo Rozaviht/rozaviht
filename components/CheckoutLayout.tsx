@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import CheckoutSteps from './CheckoutSteps'
 
+import Logo from '@img/logo.svg'
 import LogoNegative from '@img/logo-negative.svg'
 
 type LayoutProps = {
@@ -12,39 +12,35 @@ export default function checkoutLayout ({children}: LayoutProps) {
 
   return (
     /* ----CHECKOUT NAVBAR---- */
-    <div className="checkout-wrapper">
-      <div className="checkout-nav">
+    <div className="checkoutPage">
+      <div className="checkoutPage__nav">
         <Link href="/">
           <a className="goback-link">
             Volver
           </a>
         </Link>
-        <div className="checkoutlogo-container">
+        <div className="checkoutPage__logo">
           <LogoNegative />
         </div>
       </div>
       {children}
       {/* ----CHECKOUT FOOTER---- */}
-      <div className="footer-legal">
-          <div className="footer-legal-issues">
-            <p>Reservados todos los derechos @ 2021 Rozaviht</p>
-            <div className="legal-links">
-              <Link href="/">
-                <a>
-                  Seguridad y Privacidad
-                </a>
-              </Link>
-              <Link href="/">
-                <a>
-                  Términos y Condiciones
-                </a>
-              </Link>
-              <Link href="/">
-                <a>
-                  Servicio
-                </a>
-              </Link>
-            </div>
+      <div className="flexcolum flexcolum--around" style={{ 'marginTop': '6rem' }}>
+          <div className="footer__logoImg">
+            <Logo alt="logo de Rozaviht" />
+          </div>
+          <p style={{fontSize: "0.6rem"}}>Reservados todos los derechos @ 2022 Rozaviht</p>
+          <div className="flexrow">
+            <Link href="/privacidad-seguridad" >
+              <a style={{borderRight: "1px solid #9b532b", paddingRight: "0.5rem", fontSize: "0.6rem"}}>
+                Seguridad y Privacidad
+              </a>
+            </Link>
+            <Link href="/terminos-condiciones">
+              <a style={{paddingLeft: "0.5rem", fontSize: "0.6rem"}}>
+                Términos y Condiciones
+              </a>
+            </Link>
           </div>
         </div>
     </div>

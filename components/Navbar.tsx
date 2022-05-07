@@ -59,7 +59,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
             <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>
-        <Cart handleShowCart={handleShowCart} showCart={showCart}></Cart>
+        <Cart handleShowCart={handleShowCart} showCart={showCart} setShowCart={setShowCart}></Cart>
       </div>
   )
 }

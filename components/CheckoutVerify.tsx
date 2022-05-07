@@ -97,13 +97,13 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 className="font-LoraMedium">Pedido</h2>
         {cartProducts.map(cartProduct => 
           <div key={cartProduct.id} className="checkout-product-card">
-            <button className="close-bt" onClick={() => handleRemoveFromCart(cartProduct.id)}>
-              <div className="line-left"></div>
-              <div className="line-right"></div>
+            <button className="closeBt closeBt--left" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+              <div className="closeBt__lineL"></div>
+              <div className="closeBt__lineR"></div>
             </button>
             <p className="checkout-product-name">{cartProduct.name}</p>
             <div className="checkout-product-img">
-              <Image src={cartProduct.image.id} height={cartProduct.image.height} width={cartProduct.image.width} alt={cartProduct.image.alt} layout="responsive" />
+              <Image src={cartProduct.image.url} height={cartProduct.image.height} width={cartProduct.image.width} alt={cartProduct.image.alt} layout="responsive" />
             </div>
               <p className="checkout-product-price">{`${cartProduct.price*cartProduct.amount},00€`}</p>
               <div className="amount--cart checkout-product-amount">

@@ -38,6 +38,18 @@ ul {
   list-style: none;
 }
 
+/* -------LINKS------- */
+
+.link-cta {
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 1.2rem;
+  border: unset;
+  border-radius: 8px;
+
+  background-color: $maincolor;
+  color: $backgroundcolor;
+}
+
 
 
 /* -------TEXT------- */
@@ -103,6 +115,11 @@ body {
   &--topRight {
     top: 5%;
     right: 2%;
+  }
+
+  &--left {
+    left: 0;
+    top: 5%;
   }
 }
 

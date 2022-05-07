@@ -218,7 +218,7 @@ export default function checkoutForm () {
         {/* INPUT PROVINCIE */}
         <div className="select-wrapper">
           <select className="checkout-select" name="provincie" id="selProvincias" defaultValue={checkoutFormData.provincie} onChange={e => setCurrentProvincia(e.target.value)}>
-            <option hidden >Provincia</option>
+            <option className="checkout-option">Elige tu provincia</option>
             {provinciasData.map(provincia => (
               <option className="checkout-option" key={"provincia"+provincia.provincia_id} value={provincia.provincia_id} >{provincia.nombre}</option>
             ))}
@@ -230,7 +230,7 @@ export default function checkoutForm () {
         {/* INPUT MUNICIPIE */}
         <div className="select-wrapper">
           <select className="checkout-select" name="municipie" id="selMunicipios" defaultValue={checkoutFormData.municipie} onChange={e => setCurrentMunicipio(e.target.value)}>
-            <option hidden >Municipio</option>
+            <option className="checkout-option">Elige tu municipio</option>
               {municipiosData.filter(municipio =>
                 municipio.provincia_id === currentProvincia
               ).map(municipio => (

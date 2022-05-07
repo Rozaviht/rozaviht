@@ -3,8 +3,14 @@
 
   border-top: 1px solid $maincolor;
 
-  & > div:nth-child(n) {
+  & > div:nth-child(n+3) {
     margin-top: 1rem;
+  }
+
+  &__img {
+    width: 50%;
+  
+    align-self: center;
   }
 }
 
@@ -45,9 +51,3 @@
   }
 }
 
-.image-cartitem-container {
-  width: 200px;
-  height: 200px;
-
-  align-self: center;
-}
