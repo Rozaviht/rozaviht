@@ -62,9 +62,9 @@ export default function index () {
         <div className="flexcolum flexcolum--separate">
           <p style={{color: "#f2f3fa"}}>
             Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
-            con un par de gotas en la zona notaras los efectos casi inmediatos. Además, ha demostrado en diferentes
-            estudios ayudar a reducir el estrés, a conciliar mejor el sueño, permitiendo una mejor recuperación, y 
-            ayuda a manejar mejor la ansiedad.
+            con un par de gotas en la zona notaras los efectos casi inmediatos. Además, se ha demostrado en diferentes
+            estudios que ayuda a reducir el estrés, a conciliar mejor el sueño; permitiendo una mejor recuperación, y 
+            ayudar a manejar mejor la ansiedad.
           </p>
           <p style={{color: "#f2f3fa"}}>
             Y tranquilo que nuestro aceite contiene 0% de THC.
@@ -88,9 +88,9 @@ export default function index () {
         <div className="rozanews-section-img">
           <Image src={'/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
-          <p style={{ 'fontSize': '1rem' }} > 
+          <p > 
           Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
-          Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena, y que cualquiera pueda leerlo.
+          Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
           </p>
         <div className="home-cta">
           <div className="rozanewsIlustration-container">
@@ -121,7 +121,7 @@ export default function index () {
           <li>
             <h2>Y Lo cuidamos</h2>
             <p>
-              Además, y nos menos importante, nos preocuremos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
+              Además, y no menos importante, nos preocuremos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
             </p>
           </li>
         </ul>

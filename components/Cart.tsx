@@ -6,7 +6,7 @@ import { AppContext } from 'services/AppContext'
 import CartItem from './CartItem'
 
 import EmptyBasket from '@img/empty-cart-image.svg'
-import Logo from '@img/Logo.svg'
+import Logo from '@img/logo.svg'
 
 export type CartProps = {
   showCart: boolean
@@ -28,7 +28,7 @@ const Cart = ({handleShowCart, showCart, setShowCart}: CartProps) => {
           <div className="closeBtSlide__lineB"></div>
         </button>
         <div className="cart__logoImg">
-          < Logo />
+          < Logo alt="Logo de Rozaviht"/>
         </div>
         <h2 className="h--maincolor">Tu cesta de la compra</h2>
       </div>

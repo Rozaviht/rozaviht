@@ -47,7 +47,7 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
               Rozanews
             </a>
           </Link>
-          <Link href="/about" >
+          <Link href="/quienes-somos" >
             <a>
               Quienes somos
             </a>

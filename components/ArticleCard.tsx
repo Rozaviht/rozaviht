@@ -16,7 +16,7 @@ export default function ArticleCard ({article}:ArticleCardProps) {
         <Image src={article.image[0].url} height={article.image[0].height!} width={article.image[0].width!} alt={article.image[0].alt} layout="responsive" />
       </div>
       <h2>{article.title}</h2>
-      <p>{article.createdAt}</p>
+      <p style={{ 'opacity': '0.6'}} >{article.createdAt}</p>
       <Link href={`/rozanews/${article.title.normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/[¿?¡!"#()]/g, "").replace(/\s/g, "-").toLowerCase()}`}><a className="articleCard__link">LEER</a></Link>
     </div>
   )

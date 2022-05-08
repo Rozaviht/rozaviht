@@ -27,7 +27,6 @@ input {
   outline: $maincolor;
   font-size: 1rem;
   padding: 1rem;
-  border-radius: 8px;
 }
 
 a {
@@ -72,10 +71,10 @@ h3,h4,h5,h6 {
 
 
 body {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 
   @include respond-to(desktop, noneOrientation) {
-    font-size: 1;
+    font-size: 1rem;
   }
 }
 
@@ -159,7 +158,6 @@ body {
   padding: 1rem 2rem 1rem 2rem;
   font-size: 1.2rem;
   border: unset;
-  border-radius: 8px;
 
   &--oilColor{
     background-color: $oilsectiontext;

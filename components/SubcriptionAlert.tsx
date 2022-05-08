@@ -15,7 +15,7 @@ export default function SubcriptionAlert ({showSubAlert, setShowSubAlert}: Subcr
         <div className="closeBt__lineR"></div>
       </button>
       <h3>Muchas gracias por subscribirte!!!</h3>
-      <p>En algún momento de hoy, recibirás un correo electrónico confirmando la subcripción.</p>
+      <p>En el transcurso del día, recibirás un correo electrónico confirmando la subcripción.</p>
       <p>Que tengas un buen día, saludos desde</p>
       <div className="subAlert__logo">< Logo /></div>
     </div>

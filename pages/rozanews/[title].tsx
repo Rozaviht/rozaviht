@@ -105,7 +105,6 @@ interface articlePageProps {
 
 export default function articlePage ({ articleData, articleCatagorieData }: articlePageProps) {
 
-  console.log(articleCatagorieData)
 
   return (
     <div className="article-page" >

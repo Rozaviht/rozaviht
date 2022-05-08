@@ -159,3 +159,20 @@ enum payment_status {
   PEND
   PROG
 }
+
+//FAQ cuestions
+
+model faq_category {
+  id             String         @id @default(uuid())
+  title          String         @unique
+  icon           String
+  themeCuestions faq_cuestion[]
+}
+
+model faq_cuestion {
+  id                 String       @id @default(uuid())
+  cuestion           String
+  content            String?
+  cuestionCategory   faq_category @relation(fields: [cuestionCategoryId], references: [id])
+  cuestionCategoryId String
+}

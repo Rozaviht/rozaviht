@@ -118,7 +118,7 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
           <div className="information-content-wrapper">
             <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUE HACE</h2>
             <div className={ infoList[0] === true ? "information-content dropped" : "information-content" }>
-              <p>Nuestro aceite de CBD cuenta con varios beneficios, entre ellos que es un antiinflamatorio, antidepresivo, anti convulsionante y relajante muscular; los cuales con tan solo un par de gotas notarás sus efectos casí de inmediato. Debido a estos beneficios podrás notar mejoras en tus dolores musculares e irritaciones, a la misma vez sintiéndote relajado. También gracias a él podrás mejorar el estrés del día a día y conciliar de una mejor manera el sueño, si lo aplicas antes de dormir.</p>
+              <p>Nuestro aceite de CBD cuenta con varios beneficios, entre ellas propiedades antiinflamatorias, antidepresivas, y relajante muscular; los cuales con tan solo un par de gotas notarás sus efectos casí de inmediato. Debido a estos beneficios podrás notar mejoras en tus dolores musculares e irritaciones, a la misma vez sintiéndote relajado. También gracias a él podrás mejorar el estrés del día a día y conciliar de una mejor manera el sueño, si lo aplicas antes de dormir.</p>
             </div>
           </div>
           <div className="information-content-wrapper">
