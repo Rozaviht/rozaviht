@@ -75,7 +75,7 @@ h3,h4,h5,h6 {
 body {
   font-size: 0.9rem;
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(mobileLandscape, landscapeOrientation) {
     font-size: 1rem;
   }
 }

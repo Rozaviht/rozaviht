@@ -6,7 +6,7 @@ import type { ReactElement } from 'react'
 
 import Layout from '@components/Layout'
 
-
+import Logo from '@img/logo.svg'
 import Isotipo from '@img/Isotipo.svg'
 import RozanewsIlustration from '@img/rozanews-ilustration.svg'
 import CbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
@@ -39,73 +39,108 @@ export default function index () {
 
   }, [])
 
+  useEffect(() => {
+    var windowWidth = window.matchMedia(' (max-width: 640px) ')
+    var landingVideo = document.getElementById('landingVideo')
+    var videoSource = document.createElement('source')
+    videoSource.id = 'videoSourceID'
+    videoSource.setAttribute('type', 'video/mp4')
+    landingVideo?.appendChild(videoSource)
+
+    if (windowWidth.matches) {
+      landingVideo?.pause()
+      videoSource.removeAttribute('src')
+      videoSource.setAttribute('src', '/web-banner.mp4')
+      landingVideo?.load()
+      landingVideo?.play()
+    } else {
+      landingVideo?.pause()
+      videoSource.removeAttribute('src')
+      videoSource.setAttribute('src', '/landing-video-horizontally.mp4')
+      landingVideo?.load()
+      landingVideo?.play()
+    }
+
+    window.addEventListener('resize', () => {
+      var windowWidth = window.matchMedia(' (max-width: 640px) ')
+      var landingVideo = document.getElementById('landingVideo')
+      var videoSource = document.createElement('videoSourceID')
+      videoSource.setAttribute('type', 'video/mp4')
+      landingVideo?.appendChild(videoSource)
+  
+      if (windowWidth.matches) {
+        landingVideo?.pause()
+        videoSource.removeAttribute('src')
+        videoSource.setAttribute('src', '/web-banner.mp4')
+        landingVideo?.load()
+        landingVideo?.play()
+      } else {
+        landingVideo?.pause()
+        videoSource.removeAttribute('src')
+        videoSource.setAttribute('src', '/landing-video-horizontally.mp4')
+        landingVideo?.load()
+        landingVideo?.play()
+      }
+    })
+  })
 
 
   return (
     <div className="landingPage">
       <div style={{ 'marginBottom': '4rem' }}>
-        <video className="landingPage__banner" autoPlay loop playsInline preload='metadata' muted>
-          <source type='video/mp4' src="/web-banner.mp4" />
+        <video id='landingVideo' className="landingPage__banner" autoPlay loop playsInline preload='metadata' muted>
         </video>
       </div>
       {/* ---------- CBD SECTION --------- */}
       <div className="cbdSection">
-        <div className="cbdSection__hero">
-          <h1 className="cbdSection__title">ACEITE DE CBD</h1>
-          <div className="cbdSection__frstimg">
-            <Image src={'/img/cbd-section-img-horizontally.webp'} alt="" height={1076} width={1500} layout="responsive"/>
-          </div>
-          <div className="cbdSection__scndimg">
-            <Image src={'/img/cbd-section-img-vertically.webp'} alt="" height={1600} width={1200} layout="responsive"/>
-          </div>
+        <div className="cbdSection__img">
+          <div className='cbdSection__img-back'></div>
+          <Image src='/img/cbd-section-img-vertically.webp' alt="" height={1600} width={1200} layout="responsive"/>
         </div>
-        <div className="flexcolum flexcolum--separate">
-          <p style={{color: "#f2f3fa"}}>
-            Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
-            con un par de gotas en la zona notaras los efectos casi inmediatos. Además, se ha demostrado en diferentes
-            estudios que ayuda a reducir el estrés, a conciliar mejor el sueño; permitiendo una mejor recuperación, y 
-            ayudar a manejar mejor la ansiedad.
-          </p>
-          <p style={{color: "#f2f3fa"}}>
-            Y tranquilo que nuestro aceite contiene 0% de THC.
-          </p>
+        <div className="cbdSection__content">
+          <div className="flexcolum flexcolum--separate">
+            <h1>ACEITE DE CBD</h1>
+            <p>
+              Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
+              con un par de gotas en la zona notaras los efectos casi inmediatos. Además, se ha demostrado en diferentes
+              estudios que ayuda a reducir el estrés, a conciliar mejor el sueño; permitiendo una mejor recuperación, y 
+              ayudar a manejar mejor la ansiedad.
+            </p>
+            <p>
+              Y tranquilo que nuestro aceite contiene 0% de THC.
+            </p>
+          </div>
+          <CbdIlustrationNegative className="cbdSection__illustration" />
+          <button className="cbdSection__cta">
+            <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
+          </button>
         </div>
-          <div className="flexrow flexrow--between" style={{width: "100%"}}>
-            <button className="cbdSection__cta">
-              <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
-            </button>
-            <div className="cbdSection__illustration">
-            <CbdIlustrationNegative />
-          </div>
-          </div>
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
-      <div className="flexcolum flexcolum--around flexcolum--separate2" style={{ 'position': 'relative', 'marginTop': '2rem' }} >
-        <h1 className="section-title">ROZANEWS</h1>
-        <div className="typewriter">
-          <h3 className="section-tagline">"Informate de lo que te importa"</h3>
-        </div>
-        <div className="rozanews-section-img">
+      <div className="rozanewsSection" >
+        <div className="rozanewsSection__img">
           <Image src={'/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
+        <div className="rozanewsSection__content">
+          <div className="rozanewsSection__title">
+            <h1>ROZANEWS</h1>
+            <div className="typewriter">
+              <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+            </div>
+          </div>
           <p > 
           Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
           Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
           </p>
-        <div className="home-cta">
-          <div className="rozanewsIlustration-container">
-            <RozanewsIlustration />
-          </div>
-          <div className="link-wrapper">
-            <button className="section-cta section-cta--rozanewssection"><Link href="/aceite-cbd"><a>Ir a Rozanews</a></Link></button>
-          </div>
+          <RozanewsIlustration className="rozanewsSection__illustration"/>
+          <button className="rozanewsSection__cta"><Link href="/aceite-cbd"><a>Ir a Rozanews</a></Link></button>
         </div>
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}
-      <div className="rozaviht-section" >
-        <Isotipo alt="" className="rozaviht-section__img" />
+      <div className="rozavihtSection" >
+        <Logo alt="" className="rozavihtSection__img" />
         <h1>NUESTRO LEMA</h1>
-        <ul className='rozaviht-section__list' >
+        <ul className='rozavihtSection__list' >
           <li>
             <h2 >Te cuidas</h2>
             <p>
@@ -125,13 +160,6 @@ export default function index () {
             </p>
           </li>
         </ul>
-        <button className="cta cta--maincolor">
-          <Link href="/quienes-somos" >
-            <a style={{ 'color': '#f2f3fa' }} >
-              Conocenos mejor
-            </a>
-          </Link>
-        </button>
       </div>
     </div>
   )

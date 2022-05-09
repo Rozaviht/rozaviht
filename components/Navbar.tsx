@@ -47,11 +47,6 @@ const Navbar = ({showCart, setShowCart}: NavbarProps) => {
               Rozanews
             </a>
           </Link>
-          <Link href="/quienes-somos" >
-            <a>
-              Quienes somos
-            </a>
-          </Link>
         </div>
         <button className="navbar__cartBt" onClick={handleShowCart}>
           <div className="navbar__cartIcon">

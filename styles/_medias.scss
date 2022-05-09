@@ -14,6 +14,9 @@ $breakpoints: (
   "desktop": (
     min-width: 1440px,
   ),
+  "Largedesktop": (
+    min-width: 1600px,
+  ),
 );
 
 $orientations: (
