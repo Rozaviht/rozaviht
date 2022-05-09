@@ -1,12 +1,18 @@
+import FaqCuestionsLayout from "@components/FaqCuestionsLayout"
 import Layout from "@components/Layout"
 import prisma from "lib/prisma"
 import { GetStaticPaths } from "next/types"
-import type { ReactElement } from "react"
+import { ReactElement, useContext, useEffect, useState } from "react"
+import { FaqContext } from "services/FaqContext"
+import FaqProvider from "services/FaqProvider"
 import type { faqCategory } from "."
 
 
 interface faqCategoryProps {
   faqCategory: faqCategory
+  faqCategoriesTitles: [{
+    title: string
+  }]
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,19 +51,40 @@ export const getStaticProps = async ({params}: {params: {title:string}}) => {
       }
     }
   })
+
+  const faqCategoriesTitles = await prisma.faq_category.findMany({
+    select: {
+      title: true
+    }
+  })
   return {
-    props: {faqCategory}
+    props: {faqCategory, faqCategoriesTitles}
   }
 }
 
-export default function faqCategoryPage ({faqCategory}:faqCategoryProps) {
+export default function faqCategoryPage ({faqCategory, faqCategoriesTitles}:faqCategoryProps) {
+
+  const {setFaqTitles,faqTitles} = useContext(FaqContext)
+
+  useEffect(() => {
+    setFaqTitles(faqCategoriesTitles.map( category => {return category.title}))
+}, [])
+
+  const [dropFaqCuestion, setDropFaqCuestion] = useState(faqCategory.themeCuestions.map( cuestion => {return false}))
+
+  const handleDropCuestion = (index:number) => {
+    let faqCuestionCopy = [...dropFaqCuestion]
+    faqCuestionCopy[index] = !dropFaqCuestion[index]
+    setDropFaqCuestion(faqCuestionCopy)
+  }
+
   return (
-    <div className="flexcolum flexcolum--around flexcolum--separate">
+    <div className="faqCategoryPage">
       <h1>{faqCategory.title}</h1>
       <div className="flexcolum flexcolum--around flexcolum--separate">
-        {faqCategory.themeCuestions.map( cuestion => 
-          <div className="faq-cuestion">
-            <h3>{cuestion.cuestion}</h3>
+        {faqCategory.themeCuestions.map( (cuestion, index) => 
+          <div key={index} className={dropFaqCuestion[index] === false ? "faq-cuestion" : "faq-cuestion dropped"}>
+            <h3 onClick={() => handleDropCuestion(index)} >{cuestion.cuestion}</h3>
             <p>{cuestion.content}</p>
           </div>
         )}
@@ -67,9 +94,16 @@ export default function faqCategoryPage ({faqCategory}:faqCategoryProps) {
 }
 
 faqCategoryPage.getLayout = function getLayout(page: ReactElement) {
+
+
+
   return (
     <Layout>
-      {page}
+      <FaqProvider>
+        <FaqCuestionsLayout>
+          {page}
+        </FaqCuestionsLayout>
+      </FaqProvider>
     </Layout>
   )
 }

@@ -3,7 +3,7 @@ import { AppContext } from './AppContext'
 import type { ReactElement, ReactNode } from 'react'
 
 
-interface props {
+interface AppProviderProps {
   children: JSX.Element | JSX.Element[] | ReactElement | ReactNode
 }
 
@@ -27,7 +27,7 @@ export type CartItemType = {
 
 
 
- export default function AppProvider ({ children }: props) {
+ export default function AppProvider ({ children }: AppProviderProps) {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0)
   /* This variable is only for now, for testing UI */

@@ -1,7 +1,10 @@
 import FAQCard from "@components/FAQCard"
 import Layout from "@components/Layout"
 import prisma from "lib/prisma"
-import type { ReactElement } from "react"
+
+import { ReactElement, useContext, useEffect } from "react"
+import { FaqContext } from "services/FaqContext"
+import FaqProvider from "services/FaqProvider"
 
 interface FAQPageProps {
   faqCategories: faqCategory[]
@@ -42,6 +45,13 @@ export const getStaticProps = async () => {
 
 
 export default function FAQPage ({faqCategories}:FAQPageProps) {
+
+  const {setFaqTitles,faqTitles} = useContext(FaqContext)
+
+  useEffect(() => {
+      setFaqTitles(faqCategories.map( category => {return category.title}))
+  }, [faqTitles])
+
   return (
     <div className="faqPage">
       <h1>Preguntas frecuentes Rozaviht</h1>
@@ -60,7 +70,9 @@ export default function FAQPage ({faqCategories}:FAQPageProps) {
 FAQPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      {page}
+      <FaqProvider>
+        {page}
+      </FaqProvider>
     </Layout>
   )
 }
