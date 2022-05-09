@@ -22,4 +22,8 @@
   &__icon {
     width: 3rem;
   }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    height: 100%;
+  }
 }

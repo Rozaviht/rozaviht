@@ -81,7 +81,7 @@ export default function faqCategoryPage ({faqCategory, faqCategoriesTitles}:faqC
   return (
     <div className="faqCategoryPage">
       <h1>{faqCategory.title}</h1>
-      <div className="flexcolum flexcolum--around flexcolum--separate">
+      <div className="flexcolum flexcolum--around flexcolum--separate" style={{ 'width': '100%' }} >
         {faqCategory.themeCuestions.map( (cuestion, index) => 
           <div key={index} className={dropFaqCuestion[index] === false ? "faq-cuestion" : "faq-cuestion dropped"}>
             <h3 onClick={() => handleDropCuestion(index)} >{cuestion.cuestion}</h3>

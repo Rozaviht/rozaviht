@@ -10,21 +10,86 @@
     margin-top: 2rem;
   }
 
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    & > div:first-child{
+      & > input, > button {
+        width: 50%;
+      }
+    }
+  }
+
   @include respond-to(tabletPortrait, protraitOrientation) {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 15%;
+    padding-right: 15%;
   }
   @include respond-to(desktop, noneOrientation) {
-    padding-left: 18%;
-    padding-right: 18%;
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}
+
+.footer__sub {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &-text {
+    & > h2 {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  &-input {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & > button {
+      margin-top: 1rem;
+    }
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row;
+
+    &-input {
+      width: 50%;
+      height: 4rem;
+      flex-direction: row;
+      justify-content: space-between;
+
+      & > input {
+        width: 100%;
+      }
+
+      & > button {
+        width: 70%;
+        margin-top: 0;
+        margin-left: 1rem;
+      }
+    }
   }
 }
 
 .footer__downSide {
+  position: relative;
+  padding: 1rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
+  &::before {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-color: $maincolor;
+    position: absolute;
+    top: -1rem;
+    left: 0;
+  }
 
   & > div:nth-child(2n) {
     margin-top: 2rem;
@@ -32,7 +97,19 @@
 
   @include respond-to(mobileLandscape, landscapeOrientation) {
     flex-direction: row;
+    align-items: flex-start;
+    height: 13.5rem;
+
+    & > div:nth-child(2n) {
+      margin: 0;
+    }
   }
+}
+
+.footer__mediaIcons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer__mediaIcon {
@@ -41,6 +118,10 @@
 
   &:nth-child(2) {
     margin-left: 1rem;
+  }
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    width: 1.6rem;
+    height: 1.6rem;
   }
 }
 

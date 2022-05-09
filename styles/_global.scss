@@ -21,6 +21,7 @@ body {
 button {
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 input {
@@ -31,6 +32,7 @@ input {
 
 a {
   text-decoration: unset;
+  cursor: pointer;
 }
 
 ul {
@@ -255,14 +257,27 @@ body {
 /* -------MENUS------- */
 
 .dropMenu {
-  padding: 0.5rem;
+  position: relative;
+
   border-bottom: 1px solid $maincolor;
 
   &__title {
+    position: relative;
+    padding: 1rem 3rem 1rem 0;
+    cursor: pointer;
     &::after {
       content: "+";
-      float: right;
-      font-size: 1rem;
+      position: absolute;
+      font-size: 1.5rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      position: absolute;
+      top: 0.7rem;
+      right: 0;
 
       transition: transform 0.4s ease, -webkit-transform 0.3s ease;
     }
@@ -275,11 +290,11 @@ body {
   }
 
   &__content {
-    overflow: hidden;
     display: none;
+    padding-bottom: 1rem;
 
     &.dropped {
-      display: initial;
+      display: block;
     }
   }
 }

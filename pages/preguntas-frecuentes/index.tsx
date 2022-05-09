@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import FAQCard from "@components/FAQCard"
 import Layout from "@components/Layout"
 import prisma from "lib/prisma"
@@ -46,21 +48,20 @@ export const getStaticProps = async () => {
 
 export default function FAQPage ({faqCategories}:FAQPageProps) {
 
-  const {setFaqTitles,faqTitles} = useContext(FaqContext)
-
-  useEffect(() => {
-      setFaqTitles(faqCategories.map( category => {return category.title}))
-  }, [faqTitles])
 
   return (
     <div className="faqPage">
-      <h1>Preguntas frecuentes Rozaviht</h1>
-      <p>En esta página encontrarás las preguntas frecuentes que podrían hacerse nuestros clientes, con sus respectivas soluciones.</p>
-      <p>Si aún trás haber visto las posibles preguntas sigues teniendo alguna duda, no dudes en consultarnos en nuestro campo de contacto.</p>
-      <div className="faqPage__cuestions">
-        {faqCategories.map( (faqCategory, index) => 
-          < FAQCard faqCategory={faqCategory} key={index}  />
-        )}
+      <div className="faqPage__img">
+        <Image src={'/img/faq-banner.webp'} height={1352} width={1849} layout="responsive" />
+      </div>
+      <div className="faqPage__content">
+        <p>En esta página encontrarás las preguntas frecuentes que podrían hacerse nuestros clientes, con sus respectivas soluciones.</p>
+        <p>Si aún trás haber visto las posibles preguntas sigues teniendo alguna duda, no dudes en consultarnos en nuestro campo de contacto.</p>
+        <div className="faqPage__cuestions">
+          {faqCategories.map( (faqCategory, index) => 
+            < FAQCard faqCategory={faqCategory} key={index}  />
+          )}
+        </div>
       </div>
     </div>
   )

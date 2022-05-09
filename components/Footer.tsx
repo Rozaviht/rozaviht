@@ -14,9 +14,9 @@ const Footer = () => {
 
   return (
       <div className="footer">
-        <div className="flexcolum flexcolum--separate">
-          <h2>¡Únete a la comunidad!</h2>
-          <div>
+        <div className="footer__sub">
+          <div className="footer__sub-text">
+            <h2>¡Únete a la comunidad!</h2>
             <p>
               Mantente enterado de nuestras novedades, y tranquilo solo te escribiremos cuando publiquemos 
               nuevos artículos o saquemos un nuevo producto.
@@ -33,9 +33,11 @@ const Footer = () => {
               </Link>.
             </p>
           </div>
-          <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
-          <button className="cta cta--maincolor" onClick={() => setShowSubAlert(true)}>UNIRSE</button>
-          < SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} />
+          <div className="footer__sub-input">
+            <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
+            <button className="cta cta--maincolor" onClick={() => setShowSubAlert(true)}>UNIRSE</button>
+            <SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} /> 
+          </div>
         </div>
         <div className="footer__downSide">
           <div className="dropMenu">
@@ -43,7 +45,7 @@ const Footer = () => {
               <div className={footerListDropped ? "dropMenu__content dropped" : "dropMenu__content"}>
                 <ul className="flexcolum flexcolum--separate">
                   <li>
-                    <Link href ="/"><a>- Cambios y devoluciones</a></Link>
+                    <Link href ="/preguntas-frecuentes/devolucion"><a>- Cambios y devoluciones</a></Link>
                   </li>
                   <li>
                     <Link href ="/preguntas-frecuentes"><a>- Preguntas frecuentes ( FAQ )</a></Link>
@@ -57,11 +59,7 @@ const Footer = () => {
                 </ul>
             </div>
           </div>
-          <div className="flexrow flexrow--between">
-            <div className="flexcolum flexcolum--separate">
-              <p>Contáctanos y te responderemos con la mayor brevedad posible:</p>
-              <p>info@rozaviht.com</p>
-            </div>
+          <div className="footer__mediaIcons-container">
             <div className="flexrow">
               <Link href="https://www.facebook.com/rozaviht">
                 <a className="footer__mediaIcon">

@@ -46,6 +46,7 @@
   @include respond-to(mobileLandscape, landscapeOrientation) {
     flex-direction: row;
     margin: 0;
+    padding: 0;
 
     border: none;
   }
