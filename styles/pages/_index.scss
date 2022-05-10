@@ -207,6 +207,7 @@
     flex-direction: column;
     padding: 1rem;
 
+    background-color: #fff;
     border-radius: 5px;
     -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
     box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
@@ -455,7 +456,7 @@
   margin: 0 auto;
   letter-spacing: 0.13em;
 
-  &.anmtionON {
+  &.aniON {
     animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end);
   }
 }

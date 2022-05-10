@@ -24,14 +24,14 @@ export default function index () {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("anmtionON")
+          entry.target.classList.add("aniON")
         }
       })
   
     }, observerOptions)
 
     let allAnimatedObjects = document.querySelectorAll(
-      ".section--cbd-title, .section-tagline")
+      " .section-tagline")
 
     allAnimatedObjects.forEach(object => {
       observer.observe(object)
