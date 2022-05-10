@@ -93,9 +93,10 @@ export default function index () {
       </div>
       {/* ---------- CBD SECTION --------- */}
       <div className="cbdSection">
-        <div className="cbdSection__img">
-          <div className='cbdSection__img-back'></div>
-          <Image src='/img/cbd-section-img-vertically.webp' alt="" height={1600} width={1200} layout="responsive"/>
+        <div className="cbdSection__img-wrapper">
+          <div className="cbdSection__img">
+            <Image className="cbdSection__img-content" src='/img/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
+          </div>
         </div>
         <div className="cbdSection__content">
           <div className="flexcolum flexcolum--separate">
@@ -110,10 +111,12 @@ export default function index () {
               Y tranquilo que nuestro aceite contiene 0% de THC.
             </p>
           </div>
-          <CbdIlustrationNegative className="cbdSection__illustration" />
-          <button className="cbdSection__cta">
-            <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
-          </button>
+          <div className="flexrow flexrow--between">
+            <button className="cbdSection__cta">
+              <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
+            </button>
+            <CbdIlustrationNegative className="cbdSection__illustration" />
+          </div>
         </div>
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}

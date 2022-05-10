@@ -31,8 +31,9 @@
 /* ++++++++++++++CBD SECTION+++++++++++++++++ */
 
 .cbdSection {
+  max-height: 880px;
   position: relative;
-  padding-top: 4rem;
+  padding: 0;
 
   display: grid;
   grid-template-columns: 1fr;
@@ -45,23 +46,22 @@
   &__img {
     position: relative;
     width: 100%;
+    bottom: 0;
+    left: 0;
 
-    &-back {
-      border-radius: 5px;
-      position: absolute;
-      top: -2rem;
-      left: -50%;
-      width: 155%;
-      height: 107%;
-      background-color: $backgroundcolor;
-      opacity: 0.9;
+    &-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
     }
   }
 
   &__content {
     height: 100%;
     position: relative;
-    padding: 1rem;
+      padding-top: 1rem;
+      padding-right: 3rem;
+      padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -96,18 +96,12 @@
   @include respond-to(mobileLandscape, landscapeOrientation) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    padding: 5rem 5% 5rem 5%;
     font-size: 1.4rem;
 
     &__img{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      &-back {
-        top: 0;
-        height: 100%;
-      }
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
     }
 
     &__content {
@@ -125,31 +119,36 @@
   }
 
   @include respond-to(tabletLandscape, landscapeOrientation) {
+
+    &__content {
+      padding-top: 1rem;
+      padding-right: 3rem;
+      padding-bottom: 2rem;
+    }
     &__img {
-      &-back{
-        height: 107%;
-        top: -2rem;
-      }
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
     }
   }
 
   @include respond-to(desktop, noneOrientation) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    padding: 5rem 10% 5rem 10%;
 
     font-size: 1.8rem;
 
     &__img {
-      &-back {
-        height: 107%;
-        top: -2rem;
-      }
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
     }
 
 
     &__content {
-      margin-left: 3rem;
+      padding-top: 5rem;
+      padding-right: 5rem;
+      padding-bottom: 5rem;
     }
 
     &__illustration {
@@ -162,7 +161,20 @@
   }
 
   @include respond-to(Largedesktop, noneOrientation) {
-    padding: 5rem 15% 5rem 15%;
+    padding: 0;
+
+    &__content {
+      padding-top: 5rem;
+      padding-right: 10rem;
+      padding-bottom: 5rem;
+    }
+
+    &__img {
+      width: 120%;
+      bottom: -5%;
+      left: -20%;
+
+    }
   }
 }
 

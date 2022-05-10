@@ -57,54 +57,54 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
   const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
 
   return(
-    <div className="product-page">
+    <div className="cbdPage">
       <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
         <ProductImageSlider productImageData={CbdProductsData.images} ></ProductImageSlider>
-        <div className="container--flexcolumn product-actions">
-          <h1 className="product-title">Aceite de CBD</h1>
+        <div className="container--flexcolumn">
+          <h1 className="product-hero__title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>
-          <p className="product-hero__text">
+          <p className="product-hero__desc">
             Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cañamo. No contiene nada de THC, y es completamente natural y vegano.
           </p>
-          <h2 className="product-price mrgtop">{`${totalAmountPrice},00€`}</h2>
+          <h2 className="product-hero__price">{`${totalAmountPrice},00€`}</h2>
           <p>(IVA incluido)</p>
           <div className="oil-percentage">
             <h3>Porcentaje:</h3>
-            <div className="oil-percentage-list">
+            <div className="oil-percentage__list">
               <button 
-              className={currentProduct.price === 45 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
+              className={currentProduct.price === 45 ? "oil-percentage__item selected" : "oil-percentage__item"}
               onClick={() => changeOil(10)}
               >10%</button>
               <button 
-              className={currentProduct.price === 65 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
+              className={currentProduct.price === 65 ? "oil-percentage__item selected" : "oil-percentage__item"}
               onClick={() => changeOil(20)}
               >20%</button>
             </div>
           </div>
           <div className="container--flexrow">
             <div className="amount">
-                <button className="amount-bt bt--plus" onClick={incrementAmount}>+</button>
-                <input className="amount-input" type="number" value={currentProduct.amount} disabled={true}/>
-                <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
+                <input className="amount__input" type="number" value={currentProduct.amount} disabled={true}/>
+                <div className="amount__bts">
+                  <button onClick={incrementAmount}>+</button>
+                  <button onClick={decrementAmount}>-</button>
+                </div>
             </div>
-            <button className="product-hero-cta" onClick={() => handleAddToCart(currentProduct)}>
-              <div className="cta-plus">
-                <div className="cta-plus-line"></div>
-                <div className="cta-plus-line"></div>
+            <button className="product-hero__cta" onClick={() => handleAddToCart(currentProduct)}>
+              <div className="product-hero__cta-plus">
+                <div className="product-hero__cta-plus-line"></div>
+                <div className="product-hero__cta-plus-line"></div>
               </div>
-              <h4 className="product-hero-cta-text">
-                Añadir a la cesta
-              </h4>
+              Añadir a la cesta
             </button> 
           </div>
         </div>
       </div>
-      <div className="product-first-section">
-        <div className="animated-text-container">
-          <p className="product-animated-text">Este aceite te ayudara a relajar toda la tension que tengas acumulada, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
+      <div className="product-frstSect">
+        <div className="product-frstSect__text">
+          <p>Este aceite te ayudara a relajar toda la tension que tengas acumulada, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
         </div>
-        <div className='product-first-section__img' >
+        <div className='product-frstSect__img' >
           < Image src={CbdProductsData.images[4].url} height={CbdProductsData.images[4].height} width={CbdProductsData.images[4].width} alt={CbdProductsData.images[4].alt} layout='responsive' />
         </div>
       </div>

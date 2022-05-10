@@ -1,4 +1,4 @@
-.product-page {
+.cbdPage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,15 +13,26 @@
   flex-direction: column;
   align-items: center;
 
-  &__text {
+  &__title {
+    font-size: 2.5rem;
+    font-family: Lora-Regular;
+    font-weight: 500;
+  }
+
+  &__desc {
     text-align: center;
     font-family: 'Lora-MediumItalic';
     margin-top: 1rem;
   }
 
-  &-cta {
-    width: 13rem;
-    height: 3rem;
+  &__price {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    font-family: Lora-Regular;
+  }
+
+  &__cta {
+    padding: 1rem;
     font-size: 1rem;
     margin-left: 1rem;
 
@@ -30,12 +41,14 @@
     align-items: center;
 
     border: unset;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: $oilsectiontext;
 
-    & .cta-plus {
+    color: #fff;
+
+    &-plus {
       margin-right: 1rem;
-      & .cta-plus-line {
+      &-line {
         width: 1.2rem;
         height: 0.2rem;
         background-color: #fff;
@@ -45,10 +58,6 @@
         }
       }
     }
-
-    &-text {
-      color: #fff;
-    }
   }
 
   & .delivery-info {
@@ -56,20 +65,28 @@
     font-family: DIN-Bold;
   }
 
-  & .product-title {
-    font-size: 2.5rem;
-    font-family: Lora-Regular;
-    font-weight: 500;
-  }
 
-  & .product-price {
-    font-size: 1.8rem;
-    font-family: Lora-Regular;
-  }
 
 
   @include respond-to(mobileLandscape, landscapeOrientation) {
     flex-direction: row;
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 1.4rem;
+    &__title {
+      font-size: 4rem;
+    }
+    &__price {
+      font-size: 2.3rem;
+    }
+
+    &__cta {
+      font-size: 1.6rem;
+    }
   }
 }
 
@@ -82,95 +99,116 @@
   justify-content: center;
   align-items: center;
 
-  &-list {
-    width: 10rem;
-    height: 2rem;
+  &__list {
+    width: 100%;
     margin-left: 2rem;
     display: grid;
     grid-template-columns: 1fr 1rem 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "first . second";
+  }
+  &__item {
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border: none;
+    background-color: unset;
 
-    &-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
-      border: none;
-      background-color: unset;
+    &.selected {
+      background-color: $oilsectiontext;
+      color: $backgroundcolor;
+      border-radius: 5px;
+    }
 
-      &.selected {
-        background-color: $oilsectiontext;
-        color: $backgroundcolor;
-        border-radius: 8px;
-      }
+    &:nth-child(1) {
+      grid-area: first;
+    }
+    &:nth-child(2) {
+      grid-area: second;
+    }
+  }
 
-      &:nth-child(1) {
-        grid-area: first;
-      }
-      &:nth-child(2) {
-        grid-area: second;
-      }
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__item {
+      font-size: 1.5rem;
     }
   }
 }
 
 .amount {
-  width: 5rem;
-  height: 3rem;
   background-color: $oilsectiontext;
-  border-radius: 8px;
+  border-radius: 5px;
+  max-height: 4rem;
 
-  display: grid;
-  grid-template-columns: 1fr 0.7fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "number plus"
-    "number minus";
+  display: flex;
+  flex-direction: row;
 
-  &-bt {
-    background-color: unset;
-    border: unset;
-    font-size: 1rem;
-    color: $backgroundcolor;
+  &__bts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-left: 0.5px solid $backgroundcolor;
-    &.bt--plus {
-      grid-area: plus;
-      border-bottom: 0.5px solid $backgroundcolor;
-    }
-    &.bt--minus {
-      grid-area: minus;
+    
+    & > button {
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: unset;
+      border: unset;
+      font-size: 1rem;
+      color: $backgroundcolor;
+      &:nth-child(1) {
+        border-bottom: 0.5px solid $backgroundcolor;
+      }
     }
   }
 
-  &-input {
-    grid-area: number;
-    width: 100%;
+
+  &__input {
+    display: flex;
+    max-width: 4rem;
+
 
     background-color: unset;
     border: unset;
     color: $backgroundcolor;
 
     text-align: center;
-    font-size: 1rem;
+  }
+
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__input {
+      font-size: 1.4rem;
+    }
+
+    &__bts {
+      & > button {
+        padding: 3px 8px 3px 8px;
+        font-size: 1.2rem;
+      }
+    }
   }
 }
 
 
 /* PRODUCT FIRST SECTION */
 
-.product-first-section {
+.product-frstSect {
   background-color: $oilsectiontext;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
 
 
-  & .animated-text-container {
+  &__text {
     padding: 1.2rem;
     height: 100%;
 
-    & .product-animated-text {
+    & > p {
       font-size: 2.3rem;
       color: $backgroundcolor;
       font-weight: 600;
@@ -185,6 +223,21 @@
   @include respond-to(mobileLandscape, landscapeOrientation) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    padding: 5rem 10% 5rem 10%;
+
+    &__text {
+      & >p {
+        font-size: 3.5rem;
+      }
+    }
+    &__img {
+      padding: 3rem;
+      border: 2px solid $backgroundcolor;
+      width: 55%;
+    }
   }
 
 }

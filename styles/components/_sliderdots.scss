@@ -22,4 +22,9 @@
   &.active {
     opacity: 1;
   }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
 }
