@@ -48,13 +48,29 @@ export const Image = objectType({
 })
 
 
-export const ImagesQuery = extendType({
+export const getImages = extendType({
   type: 'Query',
   definition(t) {
     t.nonNull.list.field('getImages', {
       type: 'Image',
-      resolve(_parent, _args, context) {
+      resolve(_, _args, context) {
         return context.prisma.images.findMany()
+      }
+    })
+  }
+})
+
+export const getImage = extendType({
+  type: 'Query',
+  definition(t) {
+    t.nonNull.field('getOneImage', {
+      type: 'Image',
+      resolve(_, _args, context) {
+        return context.prisma.images.findUnique({
+          where: {
+            id: _args.id
+          }
+        })
       }
     })
   }

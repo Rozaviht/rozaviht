@@ -1,15 +1,13 @@
 import Head from 'next/head'
-import type { AppProps } from 'next/app'
+import AppProvider from '../services/AppProvider'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from 'lib/apolloClient'
+
+import type { AppContext, AppProps } from 'next/app'
 import type { ReactElement, ReactNode } from 'react'
 import type {NextPage} from 'next'
 
-import AppProvider from '../services/AppProvider'
-
-import apolloClient from 'lib/apollo'
-
 import '../styles/App.scss'
-import { ApolloProvider } from '@apollo/client'
-
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -19,7 +17,9 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
- export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+ export default function MyApp({ Component, pageProps }: AppContext & AppPropsWithLayout) {
+
+  const apolloClient = useApollo(pageProps)
 
   const getLayout = Component.getLayout ?? ((page) => page)
 

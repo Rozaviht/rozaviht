@@ -246,32 +246,27 @@
 /* PRODUCT INFORMATION */
 
 
-.product-info {
+.product-inf {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column ;
   align-items: center;
 
-  & > div:nth-child(n) {
-    margin-top: 1rem;
+  &__content {
+    width: 100%;
+    padding: 1rem;
+    align-self: flex-start;
+    & > h1 {
+      color: $oilsectiontext;
+      margin-bottom: 2rem;
+    }
   }
 
-  &::before{
-    content: '';
-    height: 1px;
-    width: 90%;
-    position: absolute;
-    top: -2rem;
-    background-color: $oilsectiontext;
-  }
-
-  &__title {
-    font-family: Lora-Medium;
-    color: $oilsectiontext;
-  }
 
   &__img {
+
+    padding: 1rem;
     width: 100%;
   }
 
@@ -312,5 +307,21 @@
         }
       }
     }
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row-reverse;
+
+    &__img {
+      border-left: 1px solid #000;
+    }
+
+    &__content {
+      margin-right: 2rem;
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    padding: 5rem 10% 5rem 10%;
   }
 }

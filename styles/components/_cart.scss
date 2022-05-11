@@ -21,13 +21,29 @@
   &--showed {
     transform: translate(0rem);
   }
+
+  &__logoImg {
+    width: 120px;
+  }
+
+  &__emptyImg {
+    margin-top: 3rem;
+    width: 70%;
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    width: 30%;
+  } 
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+
+    &__logoImg {
+      width: 0;
+    }
+
+    &__emptyImg {
+      width: 30%;
+    }
+  }
 }
 
-.cart__logoImg {
-  width: 120px;
-}
-
-.cart__emptyImg {
-  margin-top: 3rem;
-  width: 70%;
-}

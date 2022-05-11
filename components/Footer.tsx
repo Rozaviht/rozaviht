@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
+import { userRules } from '../middleware/validations'
 
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
@@ -33,11 +35,33 @@ const Footer = () => {
               </Link>.
             </p>
           </div>
-          <div className="footer__sub-input">
-            <input type="mail" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
-            <button className="cta cta--maincolor" onClick={() => setShowSubAlert(true)}>UNIRSE</button>
-            <SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} /> 
-          </div>
+          <Formik
+            initialValues={{ email: ''}}
+            validate={values => {
+              try {
+                validateYupSchema(values, userRules, true, values)
+              } catch (err) {
+                return yupToFormErrors(err)
+              }
+              return {}
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+
+              }, 400)
+            }}
+          >
+            {({
+              isSubmitting
+            }) => (
+              <Form className="footer__sub-input">
+                  <Field name='email' type="email" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
+                  < ErrorMessage name='email' component={'span'} />
+                  <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>UNIRSE</button>
+              </Form>
+            )}
+          </Formik>
+          <SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} /> 
         </div>
         <div className="footer__downSide">
           <div className="dropMenu">

@@ -10,6 +10,8 @@ import Layout from "@components/Layout"
 import ProductImageSlider from '@components/ProductImageSlider'
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 import RecyclingAnimation from '@components/RecyclingAnimatino'
+import { initializeApollo } from 'lib/apolloClient'
+import { getImages } from 'graphql/types'
 
 export type CbdProductsData = {
   name: string
@@ -26,31 +28,6 @@ export type CbdProductsData = {
 export interface CbdPageProps  {
   CbdProductsData : CbdProductsData
 }
-
-export const getStaticProps = async () => {
-  const CbdProductsData = await prisma.product_categories.findUnique({
-    where: {
-      name: "Aceite de CBD"
-    },
-    select: {
-      name: true,
-      description: true,
-      images: true,
-      products: {
-        select: {
-          id: true,
-          name: true,
-          price: true,
-          image: true
-        }
-      }
-    }
-  })
-  return {
-    props: { CbdProductsData }
-  }
-}
-
 
 export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
 
@@ -109,12 +86,12 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
         </div>
       </div>
       {/* PRODUCT INFORMATION */}
-      <div className="product-info">
-        <h1 className="product-info__title">Información del Producto</h1>
-        <div className='product-info__img'>
+      <div className="product-inf">
+        <div className='product-inf__img'>
           < Image src={CbdProductsData.images[5].url} height={CbdProductsData.images[5].height} width={CbdProductsData.images[5].width} alt={CbdProductsData.images[5].alt} layout='responsive' />
         </div>
-        <div className="flexcolum flexcolum--separate" style={{ 'width': '100%' }}>
+        <div className="product-inf__content">
+          <h1 className="product-info__title">Información del Producto</h1> 
           <div className="information-content-wrapper">
             <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUE HACE</h2>
             <div className={ infoList[0] === true ? "information-content dropped" : "information-content" }>
@@ -158,6 +135,32 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
     </div>
   )
 }
+
+
+export const getStaticProps = async () => {
+  const CbdProductsData = await prisma.product_categories.findUnique({
+    where: {
+      name: "Aceite de CBD"
+    },
+    select: {
+      name: true,
+      description: true,
+      images: true,
+      products: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          image: true
+        }
+      }
+    }
+  })
+  return {
+    props: { CbdProductsData }
+  }
+}
+
 
 cbdPage.getLayout = function getLayout(page: ReactElement) {
   return (

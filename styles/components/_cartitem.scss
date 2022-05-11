@@ -6,19 +6,36 @@
   & > div:nth-child(n+3) {
     margin-top: 1rem;
   }
-
+  
   &__img {
     width: 50%;
-  
+    
     align-self: center;
+  }
+  
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    & > div > p {
+      margin-right: 1rem;
+    }
+    &__img {
+      width: 40%;
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    &__img {
+      width: 30%;
+    }
   }
 }
 
 .amount--cart {
   width: 40%;
+  max-width: 7rem;
   background-color: unset;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid $maincolor;
+  overflow: hidden;
 
   display: flex;
   flex-direction: row;
@@ -29,14 +46,7 @@
     border: $maincolor;
     font-size: 1.2rem;
     color: $backgroundcolor;
-    width: 3rem;
-
-    &.bt--plus {
-      border-radius: 1px 8px 8px 1px;
-    }
-    &.bt--minus {
-      border-radius: 8px 1px 1px 8px;
-    }
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem ;
   }
 
   & .amount-input--cart {
@@ -48,6 +58,7 @@
 
     text-align: center;
     font-size: 1rem;
+    padding: 1rem 0.5rem 1rem 0.5rem;
   }
 }
 

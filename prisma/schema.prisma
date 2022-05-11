@@ -115,7 +115,7 @@ model article_categories {
 
 model users {
   id         String   @id @default(uuid())
-  name       String
+  name       String?
   email      String   @unique
   createdAt  DateTime @default(now()) @map(name: "created_at")
   modifiedAt DateTime @updatedAt @map(name: "modified_at")

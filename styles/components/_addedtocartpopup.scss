@@ -28,8 +28,25 @@
   & > p {
     padding: 1rem;
   }
-}
 
-.popUp__img {
-  width: 6rem;
+  &__img {
+    width: 6rem;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    padding-left: 15%;
+    padding-right: 15%;
+    font-size: 1.4rem;
+  }
+  
+  @include respond-to(desktop,noneOrientation) {
+    padding-left: 25%;
+    padding-right: 25%;
+
+  }
 }

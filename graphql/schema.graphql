@@ -18,6 +18,11 @@ type ArticleCategory {
   name: String!
 }
 
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
 type Image {
   alt: String
   article: Article
@@ -29,6 +34,10 @@ type Image {
   productCategoryId: String
   url: String!
   width: Int
+}
+
+type Mutation {
+  createUser(email: subEmail!): subcriptionResponse
 }
 
 type OrderDetails {
@@ -80,6 +89,7 @@ type Query {
   getArticles: [Article]!
   getArticlesCategories: [ArticleCategory]!
   getImages: [Image]!
+  getOneImage: Image!
   getProductsCategories: [ProductCategory]!
   products: [Product]!
 }
@@ -88,4 +98,13 @@ type User {
   email: String!
   id: String!
   name: String
+}
+
+input subEmail {
+  email: String!
+}
+
+type subcriptionResponse {
+  error: Boolean!
+  message: String!
 }

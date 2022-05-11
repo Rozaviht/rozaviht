@@ -4,8 +4,8 @@ import type { checkoutFormDataType } from 'services/CheckoutProvider'
 
 import { CheckoutContext } from 'services/CheckoutContext'
 
-import provinciasData from "../lib/data/pronviciasData.json"
-import municipiosData from "../lib/data/municipiosData.json"
+import provinciasData from "../data/pronviciasData.json"
+import municipiosData from "../data/municipiosData.json"
 
 export type provinciasDataProps = [{
   nombre: string,
