@@ -37,7 +37,7 @@ type Image {
 }
 
 type Mutation {
-  createUser(email: subEmail!): subcriptionResponse
+  createUser(email: String!): subcriptionResponse
 }
 
 type OrderDetails {
@@ -98,10 +98,6 @@ type User {
   email: String!
   id: String!
   name: String
-}
-
-input subEmail {
-  email: String!
 }
 
 type subcriptionResponse {

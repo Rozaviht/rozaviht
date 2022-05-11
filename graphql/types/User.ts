@@ -1,4 +1,4 @@
-import { extendType, inputObjectType, nonNull, objectType, stringArg } from 'nexus'
+import { extendType, nonNull, objectType, stringArg } from 'nexus'
 import { validateCreateUser } from '../../middleware/validateCreateUser'
 
 
@@ -19,19 +19,12 @@ const subcriptionResponse = objectType({
   }
 })
 
-const subEmail = inputObjectType({
-  name: 'subEmail',
-  definition(t) {
-    t.nonNull.string('email')
-  }
-})
-
 export const createUser = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('createUser', {
       type: subcriptionResponse,
-      args: { email: nonNull(subEmail) },
+      args: { email: nonNull(stringArg()) },
       resolve: validateCreateUser,
     })
   }

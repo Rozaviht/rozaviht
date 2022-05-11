@@ -1,14 +1,27 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
-import { userRules } from '../middleware/validations'
+import { userValidation } from '../middleware/validations'
 
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
 import FacebookIcon from '@img/facebook-icon.svg'
 import SubcriptionAlert from './SubcriptionAlert'
+import { gql, useMutation } from '@apollo/client'
+
+
+const CREATE_USER = gql`
+  mutation Mutation($email: String!) {
+    createUser(email: $email) {
+      message
+      error
+    }
+  }
+`
 
 const Footer = () => {
+  const [ createUser, {data, loading, error} ] = useMutation(CREATE_USER)
+
   const [footerListDropped, setFooterListDropped] = useState(false)
   const [showSubAlert, setShowSubAlert] = useState(false)
 
@@ -32,23 +45,31 @@ const Footer = () => {
                 <a style={{textDecoration: "underline", marginLeft: "5px"}}>
                   Política de Privacidad
                 </a>
-              </Link>.
+              </Link>
             </p>
           </div>
           <Formik
             initialValues={{ email: ''}}
             validate={values => {
               try {
-                validateYupSchema(values, userRules, true, values)
+                validateYupSchema(values, userValidation, true, values)
               } catch (err) {
                 return yupToFormErrors(err)
               }
               return {}
             }}
             onSubmit={(values, { setSubmitting }) => {
+              console.log(values)
               setTimeout(() => {
-
-              }, 400)
+                createUser({variables:  values})
+                  .then(({data}) => {
+                    console.log(data)
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  })
+                setSubmitting(false)
+              }, 200)
             }}
           >
             {({

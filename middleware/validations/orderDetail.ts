@@ -54,5 +54,3 @@ export const orderDetailRules = yup.object().shape({
   city,
   comment
 })
-
-type orderDetail = yup.TypeOf<typeof orderDetailRules>
