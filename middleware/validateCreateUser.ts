@@ -2,6 +2,8 @@ import { userValidation } from './validations'
 import prisma from 'lib/prisma';
 import { FieldResolver } from 'nexus';
 import * as yup from 'yup'
+import { postSub } from '../pages/api/sendSub'
+
 
 export const validateCreateUser: FieldResolver<
   'Mutation',
@@ -9,37 +11,35 @@ export const validateCreateUser: FieldResolver<
 > = async (_, {email}) => {
   try {
     await userValidation.validate(email)
-
   } catch (err) {
-    const message = (err as yup.ValidationError).message || 'Email no valido'
-
     return {
-      message,
+      message: (err as yup.ValidationError).message || 'Email no valido',
       error: true
     }
   }
 
-  let userExist = await prisma.users.findUnique({
-    where: {
-      email: email
+    let userExist = await prisma.users.findUnique({
+      where: {
+        email: email
+      }
+    })
+  
+    if (userExist) {
+      return {
+        message: 'Este email ya esta registrado',
+        error: true
+      }
     }
-  })
 
-  if (userExist) {
-    return {
-      message: 'Este email ya esta registrado',
-      error: true
-    }
-  }
-
-  await prisma.users.create({
-    data: {
-      email: email
-    }
-  })
-
-  return {
-    message: 'Se ha registrado el email correctamente',
-    error: false
-  }
+    await postSub(email)
+  
+    await prisma.users.create({
+      data: {
+        email: email
+      }
+    })
+      return {
+        message: 'Se ha registrado el email correctamente',
+        error: false
+      }
 }

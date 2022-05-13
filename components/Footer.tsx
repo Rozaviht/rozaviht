@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
 import { userValidation } from '../middleware/validations'
+import { postSub } from '../pages/api/sendSub'
 
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
@@ -59,17 +60,18 @@ const Footer = () => {
               return {}
             }}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values)
-              setTimeout(() => {
                 createUser({variables:  values})
                   .then(({data}) => {
-                    console.log(data)
+                    if (data.createUser.error === true) {
+
+                    } else {
+                      setShowSubAlert(true)
+                    }
                   })
                   .catch(err => {
                     console.log(err)
                   })
                 setSubmitting(false)
-              }, 200)
             }}
           >
             {({
