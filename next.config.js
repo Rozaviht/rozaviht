@@ -10,7 +10,7 @@ module.exports =  {
       images: {
         domains: ["rozaviht-media.s3.eu-west-3.amazonaws.com"]
       },
-      webpack(config) {
+      webpack: (config) => {
         const fileLoaderRule = config.module.rules.find(
           (rule) => rule.test && rule.test.test('.svg')
         )

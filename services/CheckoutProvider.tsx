@@ -14,12 +14,12 @@ export type checkoutFormDataType = {
   phone: string,
   cif: string,
   provincie: string,
-  municipie: string,
+  city: string,
   postalcode: string,
-  street: string,
-  streetnumber: string,
-  doordetails: string,
-  shippingcomments: string
+  address: string,
+  addressNumber: string,
+  doorDetails: string,
+  shippingComment: string
 }
 
 

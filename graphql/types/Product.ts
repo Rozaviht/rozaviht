@@ -1,5 +1,6 @@
 import { objectType, extendType } from "nexus";
 import { Image } from "./Image";
+import { OrderDetails } from "./OrderDetails";
 import { ProductCategory } from "./ProductCategory";
 
 export const Product = objectType({
@@ -29,6 +30,12 @@ export const Product = objectType({
             id: _parent.productCategoryId
           }
         })
+      }
+    })
+    t.list.field('orders', {
+      type: OrderDetails,
+      async resolve(_parent, _args, context) {
+        return await context.prisma.order_details.findMany({})
       }
     })
   }

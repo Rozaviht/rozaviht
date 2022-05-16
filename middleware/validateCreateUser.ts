@@ -2,7 +2,7 @@ import { userValidation } from './validations'
 import prisma from 'lib/prisma';
 import { FieldResolver } from 'nexus';
 import * as yup from 'yup'
-import { postSub } from '../pages/api/sendSub'
+import { sendSubMail } from '../pages/api/sendSubMail'
 
 
 export const validateCreateUser: FieldResolver<
@@ -31,7 +31,7 @@ export const validateCreateUser: FieldResolver<
       }
     }
 
-    await postSub(email)
+    await sendSubMail(email)
   
     await prisma.users.create({
       data: {

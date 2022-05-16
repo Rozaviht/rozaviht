@@ -1,12 +1,12 @@
 import Image from 'next/image'
-import { useContext } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
 
 import { AppContext } from 'services/AppContext'
 import { CheckoutContext } from 'services/CheckoutContext'
+import useCartActions from '@hooks/useCartActions'
+import { orderType } from '../pages/api/sendOrderMail'
 
 import type { Dispatch, SetStateAction } from 'react'
-import type { CartItemType } from 'services/AppProvider'
 
 import provinciasData from "../data/pronviciasData.json"
 import municipiosData from "../data/municipiosData.json"
@@ -32,41 +32,25 @@ export type checkoutVerificationProps = {
 
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, setCartProducts, totalCartPrice, handleRemoveFromCart } = useContext(AppContext)
+  const { cartProducts, totalCartPrice } = useContext(AppContext)
   const { checkoutFormData, setEditingForm } = useContext(CheckoutContext)
 
+  const { incrementAmount, decrementAmount, handleRemoveFromCart } = useCartActions()
+
   const subTotalCartPrice = totalCartPrice / 1.21
-  const IVA = totalCartPrice - subTotalCartPrice
+  const iva = totalCartPrice - subTotalCartPrice
 
-  const incrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
+  const [orderDetails, setOrderDetails] = useState<orderType>({} as orderType)
 
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
-  
-  const decrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
-
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id && item.amount > 1
-            ? { ...item, amount: item.amount - 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
+  useEffect(() => {
+    setOrderDetails({
+      totalPrice: totalCartPrice,
+      subtotalPrice: subTotalCartPrice,
+      iva: iva,
+      customerEmail: checkoutFormData.email,
+      items: cartProducts
+    })
+  }, [cartProducts || checkoutFormData])
 
   return (
     <div className="checkout-section">
@@ -115,12 +99,12 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           )}
           <div className="checkout-price-card">
             <p>{`Subtotal: ${subTotalCartPrice.toFixed(2)}€`}</p>
-            <p>{`IVA: ${IVA.toFixed(2)}€`}</p>
+            <p>{`IVA: ${iva.toFixed(2)}€`}</p>
             <p>envío: 2,5€</p>
             <p>{`Total: ${(totalCartPrice + 2.5).toFixed(2)}€`}</p>
           </div>
       </div>
-      <button className="checkoutform-bt" onClick={() => setOrderVerified(true)}>Pagar</button>
+      <button className="checkoutform-bt" >Pagar</button>
     </div>
   )
 }

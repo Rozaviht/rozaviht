@@ -48,6 +48,8 @@ model products {
   productInventory  product_inventory?
   // A Product can have many Discounts
   discount          discounts[]
+  // A Product can be in many orders
+  orders            order_details[]
 }
 
 model product_categories {
@@ -122,35 +124,54 @@ model users {
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
 }
 
+//CustomerInformation schema
+
+model customer_information {
+  id         String          @id @default(uuid())
+  name       String
+  lastName   String
+  phone      String
+  cif        String?
+  email      String
+  address    String
+  provincie  String
+  city       String
+  comment    String?
+  createdAt  DateTime        @default(now()) @map(name: "created_at")
+  modifiedAt DateTime        @updatedAt @map(name: "modified_at")
+  //A customer can have many orders
+  order      order_details[]
+}
+
 //OrderDetails schema
 
 model order_details {
-  id               String           @id @default(uuid())
-  customerName     String
-  customerLastName String
-  phone            String
-  email            String
-  address          String
-  provincie        String
-  city             String
-  comment          String?
+  id               String               @id @default(uuid())
+  // An order can only has a customer
+  customer         customer_information @relation(fields: [customerId], references: [id])
+  customerId       String
+  // An order can has many products
+  products         products[]
   amount           Int
-  createdAt        DateTime         @default(now()) @map(name: "created_at")
-  modifiedAt       DateTime         @updatedAt @map(name: "modified_at")
-  paymentDetails   payment_details?
+  // An order can only has one payment details
+  paymentDetails   payment_details      @relation(fields: [paymentDetailsId], references: [id])
+  paymentDetailsId String               @unique
+  createdAt        DateTime             @default(now()) @map(name: "created_at")
+  modifiedAt       DateTime             @updatedAt @map(name: "modified_at")
+  deletedAt        DateTime             @default(now()) @map(name: "deleted_at")
 }
 
 //PaymentDetails schema
 
 model payment_details {
-  id             String         @id @default(uuid())
-  amount         Int
-  provider       String
-  status         payment_status
-  createdAt      DateTime       @default(now()) @map(name: "created_at")
-  modifiedAt     DateTime       @updatedAt @map(name: "modified_at")
-  orderDetaisl   order_details  @relation(fields: [orderDetailsId], references: [id])
-  orderDetailsId String         @unique
+  id         String         @id @default(uuid())
+  amount     Int
+  provider   String
+  status     payment_status
+  createdAt  DateTime       @default(now()) @map(name: "created_at")
+  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
+  // A payment can only has one order
+  order      order_details?
 }
 
 enum payment_status {

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
 import { AppContext } from 'services/AppContext'
+import useCartActions from '@hooks/useCartActions'
 
 export type CartItemProps = {
   cartProduct: CartItemType
@@ -9,39 +10,11 @@ export type CartItemProps = {
 
 export default function CartItem ({cartProduct}: CartItemProps) {
 
-  const { setCartProducts, handleRemoveFromCart } = useContext(AppContext)
+  const { incrementAmount, decrementAmount, handleRemoveFromCart } = useCartActions()
 
   var totalItemPrice = cartProduct.amount * cartProduct.price
 
-  const incrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
 
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
-  
-  const decrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
-
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id && item.amount > 1
-            ? { ...item, amount: item.amount - 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
 
 
   return (

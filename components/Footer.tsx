@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
 import { userValidation } from '../middleware/validations'
-import { postSub } from '../pages/api/sendSub'
 
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
@@ -63,7 +62,7 @@ const Footer = () => {
                 createUser({variables:  values})
                   .then(({data}) => {
                     if (data.createUser.error === true) {
-
+                      console.log(data.createUser)
                     } else {
                       setShowSubAlert(true)
                     }
@@ -75,6 +74,7 @@ const Footer = () => {
             }}
           >
             {({
+              errors,
               isSubmitting
             }) => (
               <Form className="footer__sub-input">

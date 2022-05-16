@@ -38,24 +38,13 @@ type Image {
 
 type Mutation {
   createUser(email: String!): subcriptionResponse
-}
-
-type OrderDetails {
-  address: String!
-  amount: String!
-  city: String!
-  comment: String
-  customerLastName: String!
-  customerName: String!
-  email: String!
-  id: String!
-  phone: String!
-  provincie: String!
+  validateShippingForm(shippingFormData: shippingFormData): shippingFormResponse
 }
 
 type PaymentDetails {
   amount: Int!
   id: String!
+  order: orderDetails!
   provider: String!
   status: PaymentStatus!
 }
@@ -73,6 +62,7 @@ type Product {
   image: Image
   imageId: String!
   name: String!
+  orders: [orderDetails]
   price: Int!
   productCategory: ProductCategory
   productCategoryId: String!
@@ -98,6 +88,46 @@ type User {
   email: String!
   id: String!
   name: String
+}
+
+type customerInformation {
+  address: String!
+  cif: String
+  city: String!
+  email: String!
+  id: String!
+  lastName: String!
+  name: String!
+  phone: String!
+  provincie: String!
+  shippingComment: String
+}
+
+type orderDetails {
+  amount: Int!
+  customer: customerInformation!
+  customerId: String!
+  id: String!
+  paymentDetails: PaymentDetails!
+  paymentDetailsId: String!
+  products: [Product]!
+}
+
+input shippingFormData {
+  address: String!
+  cif: String
+  city: String!
+  email: String!
+  lastName: String!
+  name: String!
+  phone: String!
+  provincie: String!
+  shippingComment: String
+}
+
+type shippingFormResponse {
+  error: Boolean!
+  message: String!
 }
 
 type subcriptionResponse {

@@ -136,7 +136,7 @@ export default function index () {
           Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
           </p>
           <RozanewsIlustration className="rozanewsSection__illustration"/>
-          <button className="rozanewsSection__cta"><Link href="/aceite-cbd"><a>Ir a Rozanews</a></Link></button>
+          <button className="rozanewsSection__cta"><Link href="/rozanews"><a>Ir a Rozanews</a></Link></button>
         </div>
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}

@@ -1,9 +1,8 @@
 const SENDGRID_API_KEY  = process.env.SENDGRID_API_KEY 
 
 
-export async function postSub (email: string) {
-  console.log('ENVIANDO EMAIL DE SENDGRID')
-
+export async function sendSubMail (email: string) {
+  
   const sgMail = require('@sendgrid/mail')
 
   sgMail.setApiKey(SENDGRID_API_KEY)
