@@ -1,12 +1,14 @@
 .cookies-manage {
   z-index: 101;
   position: fixed;
-  top: 5%;
-  left: 5%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 90vw;
-  height: 85vh;
+  max-width: 700px;
+  max-height: 85vh;
   padding: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   background-color: $backgroundcolor;
   border: 2px solid $maincolor;

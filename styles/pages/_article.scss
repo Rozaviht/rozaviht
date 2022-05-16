@@ -47,6 +47,19 @@
     }
   }
 
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    &__content {
+      width: 70%;
+      padding: 2rem;
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    &__content {
+      width: 60%;
+    }
+  }
+
 }
 
 .recomendations {

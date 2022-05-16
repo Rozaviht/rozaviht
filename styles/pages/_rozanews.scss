@@ -31,6 +31,12 @@
   & > div:nth-child(n+2) {
     margin-top: 2rem;
   }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    &__logo {
+      width: 40%;
+    }
+  }
 }
 
 .rozanewsNav {

@@ -78,7 +78,7 @@ const Footer = () => {
               isSubmitting
             }) => (
               <Form className="footer__sub-input">
-                  <Field name='email' type="email" placeholder="Introduce aquí tu correo electrónico" className="input--negative"/>
+                  <Field name='email' type="email" placeholder="Introduce aquí tu correo" className="input--negative"/>
                   < ErrorMessage name='email' component={'span'} />
                   <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>UNIRSE</button>
               </Form>
