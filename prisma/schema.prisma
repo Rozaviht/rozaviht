@@ -130,12 +130,13 @@ model customer_information {
   id         String          @id @default(uuid())
   name       String
   lastName   String
+  email      String
   phone      String
   cif        String?
-  email      String
-  address    String
   provincie  String
   city       String
+  address    String
+  door       String
   comment    String?
   createdAt  DateTime        @default(now()) @map(name: "created_at")
   modifiedAt DateTime        @updatedAt @map(name: "modified_at")

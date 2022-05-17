@@ -9,7 +9,7 @@ interface props {
 
 export type checkoutFormDataType = {
   name: string,
-  lastname: string,
+  lastName: string,
   email: string,
   phone: string,
   cif: string,
@@ -18,7 +18,7 @@ export type checkoutFormDataType = {
   postalcode: string,
   address: string,
   addressNumber: string,
-  doorDetails: string,
+  door: string,
   shippingComment: string
 }
 

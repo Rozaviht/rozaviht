@@ -1,36 +1,21 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
+import { gql, useMutation } from '@apollo/client'
 
 import { CheckoutContext } from 'services/CheckoutContext'
+import { ErrorMessage, Field, Form, Formik, validateYupSchema, yupToFormErrors } from 'formik'
+import { customerInfoRules } from 'middleware/validations'
+import CheckoutInput from './CheckoutInput'
 
 import provinciasData from "../data/pronviciasData.json"
 import municipiosData from "../data/municipiosData.json"
-import { ErrorMessage, Field, Form, Formik, validateYupSchema, yupToFormErrors } from 'formik'
-import { customerInfoRules } from 'middleware/validations'
-import { gql, useMutation } from '@apollo/client'
-
-export type provinciasDataProps = [{
-  nombre: string,
-  provincia_id: string
-}]
-
-export type municipiosDataProps = [{
-  nombre: string,
-  provincia_id: string,
-  municipio_id: string,
-  cmun: string,
-  dc: string,
-}]
+import { inputsParams } from '../data/checkoutInputsParams'
 
 
-export type inputsErrorsProps = [{
-  id: string,
-  message: string
-}]
 
 
 const VALIDATE_CHECKOUT_FORM = gql`
-  mutation Mutation($shippingFormData: shippingFormData) {
-    validateShippingForm(shippingFormData: $shippingFormData) {
+  mutation Mutation($input: shippingFormData) {
+    validateShippingForm(input: $input) {
       message
       error
     }
@@ -38,11 +23,10 @@ const VALIDATE_CHECKOUT_FORM = gql`
 `
 
 export default function checkoutForm () {
-  const [ validateShippingForm, {data, loading, error} ] = useMutation(VALIDATE_CHECKOUT_FORM)
+  const [ validateShippingForm ] = useMutation(VALIDATE_CHECKOUT_FORM)
   const { checkoutFormData, setCheckoutFormData, setEditingForm } = useContext(CheckoutContext)
 
-  const [currentMunicipio, setCurrentMunicipio] = useState("")
-  const [currentProvincia, setCurrentProvincia] = useState(checkoutFormData.provincie)
+  const firstInputs = inputsParams.slice(0, 4)
 
 
   const numberInputOnWheelPreventChange = (e: any) => {
@@ -68,31 +52,37 @@ export default function checkoutForm () {
   return (
     <Formik 
       initialValues={{
-        name: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        cif: '',
-        provincie: '',
-        city: '',
-        postalcode: '',
-        address: '',
-        addressNumber: '',
-        doorDetails: '',
-        shippingComment: ''
+        name: checkoutFormData.name,
+        lastName: checkoutFormData.lastName,
+        email: checkoutFormData.email,
+        phone: checkoutFormData.phone,
+        cif: checkoutFormData.cif,
+        provincie: checkoutFormData.provincie,
+        city: checkoutFormData.city,
+        postalcode: checkoutFormData.postalcode,
+        address: checkoutFormData.address,
+        addressNumber: checkoutFormData.addressNumber,
+        door: checkoutFormData.door,
+        shippingComment: checkoutFormData.shippingComment
       }}
-      validationSchema={customerInfoRules}
+      validate={values => {
+        try {
+          validateYupSchema(values, customerInfoRules, true, values)
+        } catch (err) {
+          return yupToFormErrors(err)
+        }
+        return {}
+      }}
       onSubmit={(values, {setSubmitting}) => {
-
-        validateShippingForm({variables: values})
-          .then(({data}) => {
+        const input = values
+        validateShippingForm({variables:  {input}})
+        .then(({data}) => {
             if (data.validateShippingForm.error === true) {
-              console.log(data.validateShippingForm)
               scrollToInvalidInput()
             } else {
               setCheckoutFormData({
                 name: values.name,
-                lastname: values.lastName,
+                lastName: values.lastName,
                 phone: values.phone,
                 email: values.email,
                 cif: values.cif,
@@ -101,7 +91,7 @@ export default function checkoutForm () {
                 postalcode: values.postalcode,
                 address: values.address,
                 addressNumber: values.addressNumber,
-                doorDetails: values.doorDetails,
+                door: values.door,
                 shippingComment: values.shippingComment
               })
               setEditingForm(false)
@@ -120,47 +110,9 @@ export default function checkoutForm () {
         values
       }) => (
         <Form className="checkout-section">
-          {/* INPUT NAME */}
-            <div className="input-wrapper">
-              <label htmlFor="name" className="checkout-label" >
-                <Field  type="text" autoComplete="off" name="name" placeholder=" " className={errors.name ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Nombre</span>
-              </label>
-                <ErrorMessage name='name' component={'span'} className="checkout-input-errmssg" />
-            </div>
-            {/* INPUT LASTNAME */}
-            <div className="input-wrapper">
-              <label htmlFor="lastName" className="checkout-label">
-                <Field  type="text" autoComplete="off" name="lastName" placeholder=" " className={errors.lastName ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Apellidos</span>
-              </label>
-              <ErrorMessage name='lastName' component={'span'} className="checkout-input-errmssg" />
-            </div>
-            {/* INPUT EMAIL */}
-            <div className="input-wrapper">
-              <label htmlFor="email" className="checkout-label">
-                <Field  type="email" autoComplete="off" name="email" placeholder=" " className={errors.email ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Email</span>
-              </label>
-              <ErrorMessage name='email' component={'span'} className="checkout-input-errmssg" />
-            </div>
-            {/* INPUT PHONE */}
-            <div className="input-wrapper">
-              <label htmlFor="phone" className="checkout-label">
-                <Field  type="number" autoComplete="off" onWheelCapture={numberInputOnWheelPreventChange} name="phone" placeholder=" " className={errors.phone ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Teléfono</span>
-              </label>
-              <ErrorMessage name='phone' component={'span'} className="checkout-input-errmssg" />
-            </div>
-            {/* INPUT CIF */}
-            <div className="input-wrapper">
-              <label htmlFor="cif" className="checkout-label">
-                <Field  type="text" autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>
-                <span className="checkout-labelcontent">DNI / NIF / CIF</span>
-              </label>
-              <span className="note-span">*Este campo es opcional, para solicitar la factura ampliada con el DNI/NIF/CIF introducido.</span>
-              <ErrorMessage name='cif' component={'span'} className="checkout-input-errmssg" />
-            </div>
+            {firstInputs.map( (input, index) =>
+              <CheckoutInput key={index} errors={errors} inputName={input.inputName} inputPlaceHolder={input.inputPlaceHolder} inputType={input.inputType} />
+            )}
             {/* INPUT PROVINCIE */}
             <div className="select-wrapper">
               <Field as="select" className="checkout-select" name="provincie">
@@ -178,19 +130,13 @@ export default function checkoutForm () {
                   {municipiosData.filter(municipio =>
                     municipio.provincia_id === values.provincie
                   ).map(municipio => (
-                    <option key={"municipio"+municipio.municipio_id} value={municipio.municipio_id} >{municipio.nombre}</option>
+                    <option key={"municipio"+municipio.municipio_id} value={municipio.nombre} >{municipio.nombre}</option>
                   ))}
               </Field>
               <ErrorMessage name='city' component={'span'} className="checkout-input-errmssg" />
             </div>
             {/* INPUT POSTALCODE */}
-            <div className="input-wrapper">
-              <label htmlFor="postalcode" className="checkout-label">
-                <Field type="text"  autoComplete="off" name="postalcode" placeholder=" " className={errors.postalcode ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Código Postal</span>
-              </label>
-              <ErrorMessage name='postalcode' component={'span'} className="checkout-input-errmssg" />
-            </div>
+            <CheckoutInput errors={errors} inputName={inputsParams[5].inputName} inputPlaceHolder={inputsParams[5].inputPlaceHolder} inputType={inputsParams[5].inputType} />
             {/* INPUT STREET & STREETNUMBER */}
             <div className="input-wrapper input-wrapper--multiple">
               <label htmlFor="address" className="checkout-label checkout-label--short">
@@ -199,23 +145,17 @@ export default function checkoutForm () {
               </label>
               <ErrorMessage name='address' component={'span'} className="checkout-input-errmssg" />
               <label htmlFor="addressNumber" className="checkout-label checkout-label--tiny">
-                <Field  type="number" autoComplete="off" name="addressNumber" placeholder=" " onWheelCapture={numberInputOnWheelPreventChange} className={errors.addressNumber ? "checkout-input checkout-input--tiny checkout-input--error" : "checkout-input checkout-input--tiny"}/>
+                <Field  type="text" autoComplete="off" name="addressNumber" placeholder=" " onWheelCapture={numberInputOnWheelPreventChange} className={errors.addressNumber ? "checkout-input checkout-input--tiny checkout-input--error" : "checkout-input checkout-input--tiny"}/>
                 <span className="checkout-labelcontent">Nº</span>
               </label>
               <ErrorMessage name='addressNumber' component={'span'} className="checkout-input-errmssg" />
             </div>
             {/* INPUT DOORDETAILS */}
-            <div className="input-wrapper">
-              <label htmlFor="doorDetails" className="checkout-label" >
-                <Field  type="text" autoComplete="off" name="doorDetails" placeholder=" " className={errors.doorDetails ? "checkout-input checkout-input--error" : "checkout-input"}/>
-                <span className="checkout-labelcontent">Portal / Puerta / Escalera</span>
-              </label>
-              <ErrorMessage name='doorDetails' component={'span'} className="checkout-input-errmssg" />
-            </div>
+            <CheckoutInput errors={errors} inputName={inputsParams[6].inputName} inputPlaceHolder={inputsParams[6].inputPlaceHolder} inputType={inputsParams[6].inputType} />
             {/* INPUT SHIPPINGCOMMENTS */}
             <div className="input-wrapper">
               <label htmlFor="shippingComment" className="checkout-label" >
-                <textarea  className="checkout-input checkout-input--textarea" autoComplete="off" name="shippingComment" placeholder=" "/>
+                <Field as="textarea"  className="checkout-input checkout-input--textarea" autoComplete="off" name="shippingComment" placeholder=" "/>
                 <span className="checkout-labelcontent">Comentarios para facilitar el envío</span>
               </label>
               <ErrorMessage name='shippingComment' component={'span'} className="checkout-input-errmssg" />

@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { gql, useMutation } from '@apollo/client'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
 import { userValidation } from '../middleware/validations'
+
+import SubcriptionAlert from './SubcriptionAlert'
 
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
 import FacebookIcon from '@img/facebook-icon.svg'
-import SubcriptionAlert from './SubcriptionAlert'
-import { gql, useMutation } from '@apollo/client'
 
 
 const CREATE_USER = gql`
@@ -20,7 +21,7 @@ const CREATE_USER = gql`
 `
 
 const Footer = () => {
-  const [ createUser, {data, loading, error} ] = useMutation(CREATE_USER)
+  const [ createUser ] = useMutation(CREATE_USER)
 
   const [footerListDropped, setFooterListDropped] = useState(false)
   const [showSubAlert, setShowSubAlert] = useState(false)

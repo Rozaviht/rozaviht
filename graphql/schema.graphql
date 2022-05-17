@@ -38,7 +38,7 @@ type Image {
 
 type Mutation {
   createUser(email: String!): subcriptionResponse
-  validateShippingForm(shippingFormData: shippingFormData): shippingFormResponse
+  validateShippingForm(input: shippingFormData): shippingFormResponse
 }
 
 type PaymentDetails {
@@ -92,13 +92,16 @@ type User {
 
 type customerInformation {
   address: String!
+  addressNumber: String!
   cif: String
   city: String!
+  door: String!
   email: String!
   id: String!
   lastName: String!
   name: String!
   phone: String!
+  postalcode: String!
   provincie: String!
   shippingComment: String
 }
@@ -115,19 +118,22 @@ type orderDetails {
 
 input shippingFormData {
   address: String!
+  addressNumber: String!
   cif: String
   city: String!
+  door: String!
   email: String!
   lastName: String!
   name: String!
   phone: String!
+  postalcode: String!
   provincie: String!
   shippingComment: String
 }
 
 type shippingFormResponse {
   error: Boolean!
-  message: String!
+  message: [String]!
 }
 
 type subcriptionResponse {

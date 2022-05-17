@@ -56,19 +56,17 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     <div className="checkout-section">
       <div className="checkout-data-card">
         <h2 className="font-LoraMedium">Datos de envío</h2>
-          <p>{`${checkoutFormData.name}, ${checkoutFormData.lastname}`}</p>
+          <p>{`${checkoutFormData.name}, ${checkoutFormData.lastName}`}</p>
           <p>{checkoutFormData.email}</p>
           <p>{checkoutFormData.phone}</p>
           <p>{checkoutFormData.cif}</p>
           <p style={{ 'marginTop': '1rem' }}>{provinciasData.filter(provincia =>
             checkoutFormData.provincie === provincia.provincia_id
             ).map(provincia => provincia.nombre)}</p>
-          <p>{`${municipiosData.filter(municipio =>
-            checkoutFormData.municipie === municipio.municipio_id
-            ).map(municipio => municipio.nombre)}, ${checkoutFormData.postalcode}`}</p>
-          <p>{`${checkoutFormData.street}, ${checkoutFormData.streetnumber}`}</p>
-          <p>{checkoutFormData.doordetails}</p>
-          <p>{checkoutFormData.shippingcomments}</p>
+          <p>{`${checkoutFormData.city}, ${checkoutFormData.postalcode}`}</p>
+          <p>{`${checkoutFormData.address}, ${checkoutFormData.addressNumber}`}</p>
+          <p>{checkoutFormData.door}</p>
+          <p>{checkoutFormData.shippingComment}</p>
         <button className="editIcon" onClick={() => setEditingForm(true)}>
           <EditIcon />
         </button>
@@ -104,7 +102,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             <p>{`Total: ${(totalCartPrice + 2.5).toFixed(2)}€`}</p>
           </div>
       </div>
-      <button className="checkoutform-bt" >Pagar</button>
+      <button className="checkoutform-bt" onClick={() => setOrderVerified(true)} >Pagar</button>
     </div>
   )
 }

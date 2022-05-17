@@ -4,13 +4,13 @@ const name = yup
   .string()
   .required('Es obligatorio introducir un nombre')
   .min(2, 'El nombre debe ser al menos de 2 caracteres.')
-  .matches(/^[A-Za-z]+$/, 'El nombre solo debe contener letras.')
+  .matches(/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/, 'El nombre solo debe contener letras.')
 
 const lastName = yup
   .string()
   .required('Es obligatorio introducir un apellido')
   .min(2, 'El nombre debe ser al menos de 2 caracteres.')
-  .matches(/^[A-Za-z]+$/, 'El nombre solo debe contener letras.')
+  .matches(/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/, 'El nombre solo debe contener letras.')
 
 const phone = yup
   .string()
@@ -46,7 +46,7 @@ const postalcode = yup
 const address = yup
   .string()
   .required('La direccion es obligatoria.')
-  .matches(/^[A-Za-z0-9 -/_]*[A-Za-z0-9][A-Za-z0-9 -/_]+$/, 'Parece que hay un caracter no permitido en el campo de la calle.')
+  .matches(/^[ñA-Za-z0-9 -/_]*[ñA-Za-z0-9][ñA-Za-z0-9 -/_]*$/, 'Parece que hay un caracter no permitido en el campo de la calle.')
 
 const addressNumber = yup
   .string()
@@ -54,14 +54,14 @@ const addressNumber = yup
   .matches(/^[0-9]+$/, 'El número de calle solo debe contener números.')
   
 
-const doorDetails = yup
+const door = yup
   .string()
   .required('El campo de portal/puerta/escalera es obligatorio.')
-  .matches(/^[A-Za-z0-9 -/_]*[A-Za-z0-9][A-Za-z0-9 -/_]+$/,'Parece que hay un caracter no permitido en el campo de portal/puerta/escalera.')
+  .matches(/^[ñA-Za-z0-9 -/_]*[ñA-Za-z0-9][ñA-Za-z0-9 -/_]*$/, 'Parece que hay un caracter no permitido en el campo de portal/puerta/escalera.')
 
 const shippingComment = yup
   .string()
-  .matches(/^[A-Za-z0-9 -/_]*[A-Za-z0-9][A-Za-z0-9 -/_]+$/, 'Parece que hay un caracter no permitido en el campo de comentarios de envío.')
+  .matches(/^$|^[ñA-Za-z0-9 -/_]*[ñA-Za-z0-9][ñA-Za-z0-9 -/_]*$/, 'Parece que hay un caracter no permitido en el campo de comentarios de envío.')
 
 export const customerInfoRules = yup.object().shape({
   name,
@@ -74,6 +74,6 @@ export const customerInfoRules = yup.object().shape({
   postalcode,
   address,
   addressNumber,
-  doorDetails,
+  door,
   shippingComment
 })
