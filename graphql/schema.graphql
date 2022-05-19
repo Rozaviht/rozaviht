@@ -39,7 +39,8 @@ type Image {
 type Mutation {
   createUser(email: String!): subcriptionResponse
   paymentRequest(totalCartPrice: Float!): paymentResponse
-  validateShippingForm(input: shippingFormData): shippingFormResponse
+  validateBillingForm(input: billingFormInputs): checkoutFormResponse
+  validateShippingForm(input: shippingFormInputs): checkoutFormResponse
 }
 
 type PaymentDetails {
@@ -91,6 +92,24 @@ type User {
   name: String
 }
 
+input billingFormInputs {
+  address: String!
+  addressNumber: String!
+  city: String!
+  door: String!
+  email: String!
+  lastName: String!
+  name: String!
+  phone: String!
+  postalcode: String!
+  provincie: String!
+}
+
+type checkoutFormResponse {
+  error: Boolean!
+  message: [String]!
+}
+
 type customerInformation {
   address: String!
   addressNumber: String!
@@ -123,10 +142,9 @@ type paymentResponse {
   Ds_SignatureVersion: String!
 }
 
-input shippingFormData {
+input shippingFormInputs {
   address: String!
   addressNumber: String!
-  cif: String
   city: String!
   door: String!
   email: String!
@@ -136,11 +154,6 @@ input shippingFormData {
   postalcode: String!
   provincie: String!
   shippingComment: String
-}
-
-type shippingFormResponse {
-  error: Boolean!
-  message: [String]!
 }
 
 type subcriptionResponse {

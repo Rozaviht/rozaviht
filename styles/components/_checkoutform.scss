@@ -30,6 +30,38 @@
     bottom: 1rem;
   }
 
+  &--fixed {
+    border: 3px solid $maincolor;
+    padding: 1rem;
+    z-index: 800;
+    position: fixed;
+    width: 80vw;
+    max-width: 800px;
+    height: 80vh;
+    overflow-y: scroll;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    & > h2 {
+      width: 100%;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
+    }
+
+    & > button {
+      position: relative;
+      margin-top: 2rem;
+      bottom: 0;
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+
 
   @include respond-to(tabletLandscape, landscapeOrientation) {
     padding: 2rem 2rem 6rem 2rem;
@@ -38,6 +70,16 @@
 
     &__section:nth-child(1) {
       margin-right: 3rem;
+    }
+
+    &--fixed {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2rem;
+      &.hidden {
+        display: none;
+      }
     }
 
     & > button {

@@ -21,11 +21,6 @@ export const inputsParams = [
     inputType: 'number'
   },
   {
-    inputName: 'cif',
-    inputPlaceHolder: 'DNI / NIF / CIF',
-    inputType: 'text'
-  },
-  {
     inputName: 'postalcode',
     inputPlaceHolder: 'Código Postal',
     inputType: 'number'

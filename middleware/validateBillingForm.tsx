@@ -1,15 +1,15 @@
-import { shippingFormRules } from './validations'
+import { billingFormRules } from './validations'
 import { FieldResolver } from 'nexus';
 import * as yup from 'yup'
 
 
-export const validateShippingForm: FieldResolver<
+export const validateBillingForm: FieldResolver<
   'Mutation',
-  'validateShippingForm'
+  'validateBillingForm'
 > = async (_, {input}) => {
   try {
     console.log(input)
-    await shippingFormRules.validate(input)
+    await billingFormRules.validate(input)
     
     return {
       message: ['Se ha validado correctamente el formulario'],

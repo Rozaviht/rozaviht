@@ -1,9 +1,11 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
-import { checkoutFormDataType } from './CheckoutProvider'
+import { CheckoutForm, ShippingForm } from './CheckoutProvider'
 
 export type CheckoutContextProps = {
-  checkoutFormData: checkoutFormDataType,
-  setCheckoutFormData: Dispatch<SetStateAction<checkoutFormDataType>>,
+  shippingForm: ShippingForm,
+  setShippingForm: Dispatch<SetStateAction<ShippingForm>>,
+  billingForm: CheckoutForm,
+  SetBillingForm: Dispatch<SetStateAction<CheckoutForm>>,
   editingForm: boolean,
   setEditingForm: Dispatch<SetStateAction<boolean>>
 }

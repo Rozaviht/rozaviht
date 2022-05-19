@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client'
 
 import { CheckoutContext } from 'services/CheckoutContext'
 import { ErrorMessage, Field, Form, Formik, validateYupSchema, yupToFormErrors } from 'formik'
-import { customerInfoRules } from 'middleware/validations'
+import { shippingFormRules } from 'middleware/validations'
 import CheckoutInput from './CheckoutInput'
 
 import provinciasData from "../data/pronviciasData.json"
@@ -14,7 +14,7 @@ import { inputsParams } from '../data/checkoutInputsParams'
 
 
 const VALIDATE_CHECKOUT_FORM = gql`
-  mutation Mutation($input: shippingFormData) {
+  mutation Mutation($input: shippingFormInputs) {
     validateShippingForm(input: $input) {
       message
       error
@@ -24,7 +24,7 @@ const VALIDATE_CHECKOUT_FORM = gql`
 
 export default function checkoutForm () {
   const [ validateShippingForm ] = useMutation(VALIDATE_CHECKOUT_FORM)
-  const { checkoutFormData, setCheckoutFormData, setEditingForm } = useContext(CheckoutContext)
+  const { shippingForm, setShippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const firstInputs = inputsParams.slice(0, 4)
 
@@ -52,22 +52,21 @@ export default function checkoutForm () {
   return (
     <Formik 
       initialValues={{
-        name: checkoutFormData.name,
-        lastName: checkoutFormData.lastName,
-        email: checkoutFormData.email,
-        phone: checkoutFormData.phone,
-        cif: checkoutFormData.cif,
-        provincie: checkoutFormData.provincie,
-        city: checkoutFormData.city,
-        postalcode: checkoutFormData.postalcode,
-        address: checkoutFormData.address,
-        addressNumber: checkoutFormData.addressNumber,
-        door: checkoutFormData.door,
-        shippingComment: checkoutFormData.shippingComment
+        name: shippingForm.name,
+        lastName: shippingForm.lastName,
+        email: shippingForm.email,
+        phone: shippingForm.phone,
+        provincie: shippingForm.provincie,
+        city: shippingForm.city,
+        postalcode: shippingForm.postalcode,
+        address: shippingForm.address,
+        addressNumber: shippingForm.addressNumber,
+        door: shippingForm.door,
+        shippingComment: shippingForm.shippingComment
       }}
       validate={values => {
         try {
-          validateYupSchema(values, customerInfoRules, true, values)
+          validateYupSchema(values, shippingFormRules, true, values)
         } catch (err) {
           return yupToFormErrors(err)
         }
@@ -75,17 +74,18 @@ export default function checkoutForm () {
       }}
       onSubmit={(values, {setSubmitting}) => {
         const input = values
+        console.log(values)
         validateShippingForm({variables:  {input}})
         .then(({data}) => {
             if (data.validateShippingForm.error === true) {
               scrollToInvalidInput()
+              
             } else {
-              setCheckoutFormData({
+              setShippingForm({
                 name: values.name,
                 lastName: values.lastName,
                 phone: values.phone,
                 email: values.email,
-                cif: values.cif,
                 provincie: values.provincie,
                 city: values.city,
                 postalcode: values.postalcode,
@@ -95,6 +95,7 @@ export default function checkoutForm () {
                 shippingComment: values.shippingComment
               })
               setEditingForm(false)
+              
             }
           })
           .catch (err => {
@@ -141,7 +142,7 @@ export default function checkoutForm () {
               <ErrorMessage name='city' component={'span'} className="checkout-input-errmssg" />
             </div>
             {/* INPUT POSTALCODE */}
-            <CheckoutInput errors={errors} inputName={inputsParams[5].inputName} inputPlaceHolder={inputsParams[5].inputPlaceHolder} inputType={inputsParams[5].inputType} />
+            <CheckoutInput errors={errors} inputName={inputsParams[4].inputName} inputPlaceHolder={inputsParams[4].inputPlaceHolder} inputType={inputsParams[4].inputType} />
             {/* INPUT STREET & STREETNUMBER */}
             <div className="input-wrapper input-wrapper--multiple">
               <label htmlFor="address" className="checkout-label checkout-label--short">
@@ -156,7 +157,7 @@ export default function checkoutForm () {
               <ErrorMessage name='addressNumber' component={'span'} className="checkout-input-errmssg" />
             </div>
             {/* INPUT DOORDETAILS */}
-            <CheckoutInput errors={errors} inputName={inputsParams[6].inputName} inputPlaceHolder={inputsParams[6].inputPlaceHolder} inputType={inputsParams[6].inputType} />
+            <CheckoutInput errors={errors} inputName={inputsParams[5].inputName} inputPlaceHolder={inputsParams[5].inputPlaceHolder} inputType={inputsParams[5].inputType} />
             {/* INPUT SHIPPINGCOMMENTS */}
             <div className="input-wrapper">
               <label htmlFor="shippingComment" className="checkout-label" >
@@ -167,8 +168,8 @@ export default function checkoutForm () {
               <span className="note-span">*Opcional:  Escribe algún comentario que pueda facilitar la entrega al repartirdor.</span>
             </div>
           </div>
-            <button type="submit" className="checkoutform-bt" disabled={isSubmitting} >Verificar los datos</button>
-          </Form>
+          <button type="submit" className="checkoutform-bt" disabled={isSubmitting} >Verificar los datos</button>
+        </Form>
       )}
     </Formik>
   )

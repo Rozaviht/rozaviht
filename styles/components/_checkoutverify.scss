@@ -42,21 +42,6 @@
   }
 }
 
-.checkoutVerify__shippingdata {
-  width: 100%;
-  position: relative;
-  padding: 2rem 5rem 2rem 2rem;
-  border: 3px solid $maincolor;
-  border-radius: 5px;
-
-  & > strong {
-    font-size: 110%;
-  }
-
-  @include respond-to(tabletPortrait, protraitOrientation) {
-    font-size: 1.1rem;
-  }
-}
 
 .checkBox {
   position: relative;
@@ -125,6 +110,10 @@
   right: 5%;
   border: none;
   background-color: unset;
+
+  &--relative {
+    position: unset;
+  }
 }
 
 .checkoutVerify__price {

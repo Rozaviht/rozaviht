@@ -19,18 +19,18 @@ export default function checkoutPage ()  {
   const [paymentDone, setPaymentDone] = useState(false)
 
 
-  const {checkoutFormData, editingForm} = useContext(CheckoutContext)
+  const {shippingForm, editingForm} = useContext(CheckoutContext)
 
 
   useEffect(() => {
     window.scroll(0, 0)
-  },[checkoutFormData, orderVerified])
+  },[shippingForm, orderVerified])
 
   return (
     <div className="checkout-main">
       <CheckoutSteps orderVerified={orderVerified} />
       {/* shippingData && Object.keys(shippingData).length === 0 && Object.getPrototypeOf(shippingData) === Object.prototype, means object === undefined */}
-      {checkoutFormData && Object.keys(checkoutFormData).length === 0 && Object.getPrototypeOf(checkoutFormData) === Object.prototype || editingForm === true
+      {shippingForm && Object.keys(shippingForm).length === 0 && Object.getPrototypeOf(shippingForm) === Object.prototype || editingForm === true
       ?
         <CheckoutForm />
       : 

@@ -16,6 +16,7 @@ import { gql, useMutation } from '@apollo/client'
 import MiniTerms from './MiniTerms'
 import MiniPrivacy from './MiniPrivacy'
 import useScrollBlock from '@hooks/useScrollBlock'
+import BillingDataCard from './BillingDataCard'
 
 export type checkoutVerificationProps = {
   setOrderVerified: Dispatch<SetStateAction<boolean>>,
@@ -34,7 +35,7 @@ const PAYMENT_REQUEST = gql`
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
   const { cartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart } = useContext(AppContext)
-  const { checkoutFormData, setEditingForm } = useContext(CheckoutContext)
+  const { shippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
 
@@ -65,10 +66,10 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       totalPrice: totalCartPrice,
       subtotalPrice: subTotalCartPrice,
       iva: iva,
-      customerEmail: checkoutFormData.email,
+      customerEmail: shippingForm.email,
       items: cartProducts
     })
-  }, [cartProducts || checkoutFormData])
+  }, [cartProducts || shippingForm])
 
   useEffect(() => {
     paymentRequest({variables: {totalCartPrice}})
@@ -93,15 +94,15 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     <div className="checkoutVerify">
       <div className="checkoutVerify__content">
         <h2 className="font-LoraMedium">Datos de entrega</h2>
-        <div className="checkoutVerify__shippingdata">
-          <strong>{`${checkoutFormData.name} ${checkoutFormData.lastName}`}</strong>
-          <p style={{ 'marginTop': '2rem' }}>{checkoutFormData.email}</p>
-          <p>{`+34 ${checkoutFormData.phone}`}</p>
-          <p style={{ 'marginTop': '1rem' }}>{`${checkoutFormData.address} ${checkoutFormData.addressNumber}, ${checkoutFormData.door}`}</p>
-          <p>{`${checkoutFormData.city.toUpperCase()} ${provinciasData.filter(provincia =>
-              checkoutFormData.provincie === provincia.provincia_id
-              ).map(provincia => provincia.nombre.toUpperCase())}, ${checkoutFormData.postalcode}`}</p>
-          <p>{checkoutFormData.shippingComment}</p>
+        <div className="shippingdata-card">
+          <strong>{`${shippingForm.name} ${shippingForm.lastName}`}</strong>
+          <p style={{ 'marginTop': '2rem' }}>{shippingForm.email}</p>
+          <p>{`+34 ${shippingForm.phone}`}</p>
+          <p style={{ 'marginTop': '1rem' }}>{`${shippingForm.address} ${shippingForm.addressNumber}, ${shippingForm.door}`}</p>
+          <p>{`${shippingForm.city.toUpperCase()} ${provinciasData.filter(provincia =>
+              shippingForm.provincie === provincia.provincia_id
+              ).map(provincia => provincia.nombre.toUpperCase())}, ${shippingForm.postalcode}`}</p>
+          <p>{shippingForm.shippingComment}</p>
           <button className="editIcon" onClick={() => setEditingForm(true)}>
             <EditIcon />
           </button>
@@ -114,6 +115,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           </label>
           <span>Igual que la dirección de entrega</span>
         </div>
+        < BillingDataCard checkedCifAddress={checkedCifAddress}/>
         <div className="input-wrapper">
           <label htmlFor="cif" className="checkout-label" >
             <input  type='text' autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>

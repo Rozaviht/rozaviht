@@ -8,11 +8,11 @@ export type checkoutStepsProps = {
 
 export default function checkoutSteps ({ orderVerified}:checkoutStepsProps) {
 
-  const {checkoutFormData, editingForm} = useContext(CheckoutContext)
+  const {shippingForm, editingForm} = useContext(CheckoutContext)
 
   return (
     <>
-      {checkoutFormData && Object.keys(checkoutFormData).length === 0 && Object.getPrototypeOf(checkoutFormData) === Object.prototype || editingForm === true
+      {shippingForm && Object.keys(shippingForm).length === 0 && Object.getPrototypeOf(shippingForm) === Object.prototype || editingForm === true
         ?/*   ---- FIRST STEP: FORM ------   */
           <div className="checkout-steps-wrapper">
             <div className="checkout-steps-list">

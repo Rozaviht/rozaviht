@@ -63,12 +63,11 @@ const shippingComment = yup
   .string()
   .matches(/^$|^[ñA-Za-z0-9 -/_]*[ñA-Za-z0-9][ñA-Za-z0-9 -/_]*$/, 'Parece que hay un caracter no permitido en el campo de comentarios de envío.')
 
-export const customerInfoRules = yup.object().shape({
+export const shippingFormRules = yup.object().shape({
   name,
   lastName,
   email,
   phone,
-  cif,
   provincie,
   city,
   postalcode,
@@ -76,4 +75,17 @@ export const customerInfoRules = yup.object().shape({
   addressNumber,
   door,
   shippingComment
+})
+
+export const billingFormRules = yup.object().shape({
+  name,
+  lastName,
+  email,
+  phone,
+  provincie,
+  city,
+  postalcode,
+  address,
+  addressNumber,
+  door,
 })

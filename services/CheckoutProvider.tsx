@@ -7,32 +7,33 @@ interface props {
   children: JSX.Element | JSX.Element[] | ReactElement | ReactNode
 }
 
-export type checkoutFormDataType = {
+export type CheckoutForm = {
   name: string,
   lastName: string,
   email: string,
   phone: string,
-  cif: string,
   provincie: string,
   city: string,
   postalcode: string,
   address: string,
   addressNumber: string,
   door: string,
-  shippingComment: string
 }
+
+export type ShippingForm = CheckoutForm & {  shippingComment: string }
 
 
 
 
 
  export default function CheckoutProvider ({ children }: props) {
-  const [checkoutFormData, setCheckoutFormData] = useState<checkoutFormDataType>({} as checkoutFormDataType)
+  const [shippingForm, setShippingForm] = useState<ShippingForm>({} as ShippingForm)
+  const [billingForm, SetBillingForm] = useState<CheckoutForm>({} as CheckoutForm)
   const [editingForm, setEditingForm] = useState(false)
 
 
   return (
-    <CheckoutContext.Provider value={{checkoutFormData, setCheckoutFormData, editingForm, setEditingForm }}>
+    <CheckoutContext.Provider value={{shippingForm, setShippingForm, billingForm, SetBillingForm, editingForm, setEditingForm }}>
       {children}
     </CheckoutContext.Provider>
   )
