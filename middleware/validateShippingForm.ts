@@ -8,7 +8,6 @@ export const validateShippingForm: FieldResolver<
   'validateShippingForm'
 > = async (_, {input}) => {
   try {
-    console.log(input)
     await shippingFormRules.validate(input)
     
     return {

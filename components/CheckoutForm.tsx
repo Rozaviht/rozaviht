@@ -74,7 +74,6 @@ export default function checkoutForm () {
       }}
       onSubmit={(values, {setSubmitting}) => {
         const input = values
-        console.log(values)
         validateShippingForm({variables:  {input}})
         .then(({data}) => {
             if (data.validateShippingForm.error === true) {

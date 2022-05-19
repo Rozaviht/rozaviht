@@ -1,5 +1,5 @@
 const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY 
-import nc from 'next-connect'
+import prisma from 'lib/prisma'
 
 import { FieldResolver } from "nexus"
 
@@ -9,7 +9,6 @@ export const paymentRequest: FieldResolver<
 > = async (_, {orderAmount}) => {
 
   var cryptojs = require('crypto-js')
-
 
   var amountString = orderAmount.toString().split('.').join("")
 
@@ -21,24 +20,26 @@ export const paymentRequest: FieldResolver<
     amountString = `${amountString}0`
   }
 
-  console.log(amountString)
+  const orderNumber = await prisma.order_number.findMany()
+
+  const orderNumberZeroPad = orderNumber.length.toString().padStart(7, "0")
+
+  console.log(orderNumberZeroPad)
 
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
     DS_MERCHANT_MERCHANTCODE: "355542226",
-    DS_MERCHANT_ORDER: "1",/* 456789, 45879, 789456 */
+    DS_MERCHANT_ORDER: `10${orderNumberZeroPad}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
     DS_MERCHANT_MERCHANTURL: "http://localhost:3000/api/graphql"
   }
 
+  console.log(merchantData)
   // Base64 encoding of parameters
   var merchantWordArray = cryptojs.enc.Utf8.parse(JSON.stringify(merchantData))
   var merchantBase64 = merchantWordArray.toString(cryptojs.enc.Base64)
-
-  console.log(merchantWordArray)
-  console.log(merchantBase64)
 
     // Decode key
   var keyWordArray = cryptojs.enc.Base64.parse(TPV_MERCHANT_KEY);

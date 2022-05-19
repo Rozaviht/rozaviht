@@ -32,12 +32,21 @@ const PAYMENT_REQUEST = gql`
   }
 `
 
+const CREATE_ORDER_NUMBER_ =gql`
+  mutation Mutation {
+    createOrderNumber {
+      success
+    }
+  }
+`
+
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setShowCart, showCart } = useContext(AppContext)
   const { shippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
+  const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER_)
 
   const [shippingChecked, setShippingChecked] = useState(true)
   const [checkedCifAddress, setCheckedCifAddress] = useState(true)
@@ -72,19 +81,6 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
   }, [cartProducts || shippingForm])
 
 
-
-  useEffect(() => {
-    let orderAmount = 0
-    if ( shippingChecked === true ) {
-      orderAmount = totalCartPrice + 2
-    } else {
-      orderAmount = totalCartPrice + 3.5
-    }
-    paymentRequest({variables: {orderAmount}})
-  }, [totalCartPrice])
-
-
-
   const handleShowMiniTerms = (index:number) => {
     let showTermsCopy = [...showTerms]
     
@@ -97,6 +93,18 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     }
 
     setShowTerms(showTermsCopy)
+  }
+
+  const handleResysSubmit = () => {
+    let orderAmount = 0
+    if ( shippingChecked === true ) {
+      orderAmount = totalCartPrice + 2
+    } else {
+      orderAmount = totalCartPrice + 3.5
+    }
+    createOrderNumber().then(() =>{
+      paymentRequest({variables: {orderAmount}}).then(() => document.redSysForm.submit())
+    })
   }
 
   return (
@@ -180,12 +188,12 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" method='POST'>
-          <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? '' : data.paymentRequest.Ds_SignatureVersion} />
-          <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? '': data.paymentRequest.Ds_MerchantParameters} />
-          <input type="hidden" name="Ds_Signature" value={data === undefined ? '' : data.paymentRequest.Ds_Signature} />
-          <button className="checkoutform-bt" type='submit' value={'Submit'}>Pagar</button>
+        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" name="redSysForm" method='POST'>
+          <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? "" : data.paymentRequest.Ds_SignatureVersion} />
+          <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
+          <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />
         </form>
+        <button className="checkoutform-bt" type='button' onClick={handleResysSubmit}>Pagar</button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms(e.target.checked)}/>
