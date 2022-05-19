@@ -1,5 +1,7 @@
-import { enumType, objectType } from 'nexus'
+import { paymentRequest } from 'middleware/paymentRequest'
+import { enumType, extendType, floatArg, intArg, nonNull, objectType, stringArg } from 'nexus'
 import { OrderDetails } from './OrderDetails'
+
 
 export const PaymentDetails = objectType({
   name: 'PaymentDetails',
@@ -26,3 +28,23 @@ const PaymentStatus = enumType({
   members: ['OPEN', 'CLOS', 'PEND', 'PROG']
 })
 
+const PaymentResponse = objectType({
+  name: 'paymentResponse',
+  definition(t) {
+    t.nonNull.string('Ds_SignatureVersion')
+    t.nonNull.string('Ds_MerchantParameters')
+    t.nonNull.string('Ds_Signature')
+  }
+})
+
+
+export const sendPaymentReq = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.field('paymentRequest', {
+      type: PaymentResponse,
+      args: { totalCartPrice: nonNull(floatArg())},
+      resolve: paymentRequest,
+    })
+  } 
+})

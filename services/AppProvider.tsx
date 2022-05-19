@@ -30,6 +30,7 @@ export type CartItemType = {
  export default function AppProvider ({ children }: AppProviderProps) {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0)
+  const [showCart, setShowCart] = useState(false);
   /* This variable is only for now, for testing UI */
   const [cookiesManageShow, setCookiesManageShow] = useState(false)
 
@@ -54,7 +55,7 @@ export type CartItemType = {
   };
 
   return (
-    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart, cookiesManageShow, setCookiesManageShow }}>
+    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart, cookiesManageShow, setCookiesManageShow, showCart, setShowCart }}>
       {children}
     </AppContext.Provider>
   )

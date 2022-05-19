@@ -1,3 +1,51 @@
+.checkoutForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7F4F3;
+  padding: 1rem 1rem 6rem 1rem;
+  border-radius: 5px;
+  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+
+  &__section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  
+    &:nth-child(1) {
+      margin-bottom: 2rem;
+    }
+
+    & > h2 {
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
+    }
+  }
+
+  & > button {
+    position: absolute;
+    bottom: 1rem;
+  }
+
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    padding: 2rem 2rem 6rem 2rem;
+    flex-direction: row;
+    align-items: flex-start;
+
+    &__section:nth-child(1) {
+      margin-right: 3rem;
+    }
+
+    & > button {
+      bottom: 1rem;
+    }
+  }
+}
+
 .input-wrapper {
   margin-top: 2rem;
   position: relative;
@@ -143,10 +191,11 @@
 
 .checkoutform-bt {
   width: 80%;
+  max-width:500px;
   padding: 0.8rem 1rem 0.8rem 1rem;
-  margin-top: 2rem;
   color: $backgroundcolor;
   background-color: $maincolor;
   border-radius: 5px;
   font-size: 1.2rem;
+  align-self: center;
 }

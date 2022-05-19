@@ -109,10 +109,15 @@ export default function checkoutForm () {
         errors,
         values
       }) => (
-        <Form className="checkout-section">
+        <Form className="checkoutForm">
+          <div className="checkoutForm__section">
+            <h2>Datos del comprador</h2>
             {firstInputs.map( (input, index) =>
               <CheckoutInput key={index} errors={errors} inputName={input.inputName} inputPlaceHolder={input.inputPlaceHolder} inputType={input.inputType} />
             )}
+          </div>
+          <div className="checkoutForm__section">
+          <h2>Dirección de entrega</h2>
             {/* INPUT PROVINCIE */}
             <div className="select-wrapper">
               <Field as="select" className="checkout-select" name="provincie">
@@ -161,6 +166,7 @@ export default function checkoutForm () {
               <ErrorMessage name='shippingComment' component={'span'} className="checkout-input-errmssg" />
               <span className="note-span">*Opcional:  Escribe algún comentario que pueda facilitar la entrega al repartirdor.</span>
             </div>
+          </div>
             <button type="submit" className="checkoutform-bt" disabled={isSubmitting} >Verificar los datos</button>
           </Form>
       )}

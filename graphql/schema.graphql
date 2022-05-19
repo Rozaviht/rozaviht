@@ -38,6 +38,7 @@ type Image {
 
 type Mutation {
   createUser(email: String!): subcriptionResponse
+  paymentRequest(totalCartPrice: Float!): paymentResponse
   validateShippingForm(input: shippingFormData): shippingFormResponse
 }
 
@@ -114,6 +115,12 @@ type orderDetails {
   paymentDetails: PaymentDetails!
   paymentDetailsId: String!
   products: [Product]!
+}
+
+type paymentResponse {
+  Ds_MerchantParameters: String!
+  Ds_Signature: String!
+  Ds_SignatureVersion: String!
 }
 
 input shippingFormData {

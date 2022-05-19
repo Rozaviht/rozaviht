@@ -3,44 +3,62 @@ import { useContext, useEffect, useState } from 'react'
 
 import { AppContext } from 'services/AppContext'
 import { CheckoutContext } from 'services/CheckoutContext'
-import useCartActions from '@hooks/useCartActions'
 import { orderType } from '../pages/api/sendOrderMail'
 
 import type { Dispatch, SetStateAction } from 'react'
 
 import provinciasData from "../data/pronviciasData.json"
-import municipiosData from "../data/municipiosData.json"
 
 import EditIcon from '@img/edit-icon.svg'
+import Cart from './Cart'
+import { gql, useMutation } from '@apollo/client'
 
-export type provinciasDataProps = [{
-  nombre: string,
-  provincia_id: string
-}]
-
-export type municipiosDataProps = [{
-  nombre: string,
-  provincia_id: string,
-  municipio_id: string,
-  cmun: string,
-  dc: string,
-}]
+import MiniTerms from './MiniTerms'
+import MiniPrivacy from './MiniPrivacy'
+import useScrollBlock from '@hooks/useScrollBlock'
 
 export type checkoutVerificationProps = {
   setOrderVerified: Dispatch<SetStateAction<boolean>>,
 }
 
+const PAYMENT_REQUEST = gql`
+  mutation Mutation($totalCartPrice: Float!) {
+    paymentRequest(totalCartPrice: $totalCartPrice) {
+      Ds_SignatureVersion
+      Ds_MerchantParameters
+      Ds_Signature
+    }
+  }
+`
+
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, totalCartPrice } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart } = useContext(AppContext)
   const { checkoutFormData, setEditingForm } = useContext(CheckoutContext)
 
-  const { incrementAmount, decrementAmount, handleRemoveFromCart } = useCartActions()
+  const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
+
+  const [checked, setChecked] = useState(true)
+  const [checkedCifAddress, setCheckedCifAddress] = useState(true)
+  const [checkedTerms, setCheckedTerms] = useState(true)
+
+  const [showTerms, setShowTerms] = useState([false, false])
 
   const subTotalCartPrice = totalCartPrice / 1.21
   const iva = totalCartPrice - subTotalCartPrice
 
   const [orderDetails, setOrderDetails] = useState<orderType>({} as orderType)
+
+  const [blockScroll, allowScroll] = useScrollBlock()
+
+  useEffect(() => {
+    if (showTerms[0] === true || showTerms[1] === true) {
+      blockScroll()
+    }
+    else {
+      allowScroll()
+    }
+  }, [showTerms])
 
   useEffect(() => {
     setOrderDetails({
@@ -52,57 +70,121 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     })
   }, [cartProducts || checkoutFormData])
 
+  useEffect(() => {
+    paymentRequest({variables: {totalCartPrice}})
+    console.log(data)
+  }, [totalCartPrice])
+
+  const handleShowMiniTerms = (index:number) => {
+    let showTermsCopy = [...showTerms]
+    
+    if (index === 0) {
+      showTermsCopy[index] = !showTerms[index]
+      showTermsCopy[1] = false
+    } else {
+      showTermsCopy[index] = !showTerms[index]
+      showTermsCopy[0] = false
+    }
+
+    setShowTerms(showTermsCopy)
+  }
+
   return (
-    <div className="checkout-section">
-      <div className="checkout-data-card">
-        <h2 className="font-LoraMedium">Datos de envío</h2>
-          <p>{`${checkoutFormData.name}, ${checkoutFormData.lastName}`}</p>
-          <p>{checkoutFormData.email}</p>
-          <p>{checkoutFormData.phone}</p>
-          <p>{checkoutFormData.cif}</p>
-          <p style={{ 'marginTop': '1rem' }}>{provinciasData.filter(provincia =>
-            checkoutFormData.provincie === provincia.provincia_id
-            ).map(provincia => provincia.nombre)}</p>
-          <p>{`${checkoutFormData.city}, ${checkoutFormData.postalcode}`}</p>
-          <p>{`${checkoutFormData.address}, ${checkoutFormData.addressNumber}`}</p>
-          <p>{checkoutFormData.door}</p>
+    <div className="checkoutVerify">
+      <div className="checkoutVerify__content">
+        <h2 className="font-LoraMedium">Datos de entrega</h2>
+        <div className="checkoutVerify__shippingdata">
+          <strong>{`${checkoutFormData.name} ${checkoutFormData.lastName}`}</strong>
+          <p style={{ 'marginTop': '2rem' }}>{checkoutFormData.email}</p>
+          <p>{`+34 ${checkoutFormData.phone}`}</p>
+          <p style={{ 'marginTop': '1rem' }}>{`${checkoutFormData.address} ${checkoutFormData.addressNumber}, ${checkoutFormData.door}`}</p>
+          <p>{`${checkoutFormData.city.toUpperCase()} ${provinciasData.filter(provincia =>
+              checkoutFormData.provincie === provincia.provincia_id
+              ).map(provincia => provincia.nombre.toUpperCase())}, ${checkoutFormData.postalcode}`}</p>
           <p>{checkoutFormData.shippingComment}</p>
-        <button className="editIcon" onClick={() => setEditingForm(true)}>
-          <EditIcon />
-        </button>
-      </div>
-      <div className="checkout-order">
-        <h2 className="font-LoraMedium">Pedido</h2>
-        {cartProducts.map(cartProduct => 
-          <div key={cartProduct.id} className="checkout-product-card">
-            <button className="closeBt closeBt--left" onClick={() => handleRemoveFromCart(cartProduct.id)}>
-              <div className="closeBt__lineL"></div>
-              <div className="closeBt__lineR"></div>
-            </button>
+          <button className="editIcon" onClick={() => setEditingForm(true)}>
+            <EditIcon />
+          </button>
+        </div>
+        <h2 style={{ 'marginTop': '2rem' }}>Dirección de facturación</h2>
+        <div className="flexrow flexrow--separate flexrow--algncenter">
+          <label htmlFor="sameAddress" className="checkBox">
+            <input type="checkbox" name="sameAddress"  checked={checkedCifAddress} onClick={(e) => setCheckedCifAddress(e.target.checked)}/>
+            <div/>
+          </label>
+          <span>Igual que la dirección de entrega</span>
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="cif" className="checkout-label" >
+            <input  type='text' autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>
+            <span className="checkout-labelcontent">Número de Identificación fiscal (Opcional)</span>
+          </label>
+          <span style={{ 'fontSize': '70%' }}>*Este campo es opcional, para solicitar la factura ampliada con el DNI/NIF/CIF introducido.</span>
+        </div>
+        <h2 style={{ 'marginTop': '2rem' }}>Método de envío</h2>
+        <div className="flexcolum flexcolum--separate">
+          <label htmlFor="regularShip" className="shippingCheck">
+            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={checked} onClick={(e) => setChecked(e.target.checked)}/>
             <div>
-              <strong className="checkout-product-name">{cartProduct.name}</strong>
-              <div className="checkout-product-img">
-                <Image src={cartProduct.image.url} height={cartProduct.image.height} width={cartProduct.image.width} alt={cartProduct.image.alt} layout="responsive" />
+              <span className="checkCircle"></span>
+              <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
+              <p>El tiempo estimado de entrega es de 2 a 5 días hábiles. <strong>2,00€</strong></p>
+            </div>
+          </label>
+          <label htmlFor="expressShip" className="shippingCheck">
+            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!checked} onClick={(e) => setChecked(!e.target.checked)}/>
+            <div>
+              <span className="checkCircle"></span>
+              <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
+              <p>El tiempo estimado de entrega es de 1 a 3 días hábiles. <strong>3,50€</strong></p>
+            </div>
+          </label>
+        </div>
+        <h2 style={{ 'marginTop': '2rem' }}>Método de pago</h2>
+        <div className="flexcolum flexcolum--separate">
+          <label htmlFor="regularShip" className="shippingCheck">
+            <input type='checkbox' name="regularShip" className="checkoutVerify__shipping-method" checked/>
+            <div>
+              <span className="checkCircle"></span>
+              <h4>Tarjeta de Crédito</h4>
+              <div className="flexrow flexrow--separateall flexrow--nopd">
+                <div className="creditCardImg"><Image src={"/img/visa-logo.png"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
+                <div className="creditCardImg"><Image src={"/img/mastercard-logo.png"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
               </div>
             </div>
-            <div>
-              <p className="checkout-product-price">{`${cartProduct.price*cartProduct.amount},00€`}</p>
-              <div className="amount--cart checkout-product-amount">
-                <button className="amount-bt--cart" onClick={()=>decrementAmount(cartProduct)}>-</button>
-                <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled={true} />
-                <button className="amount-bt--cart" onClick={()=>incrementAmount(cartProduct)}>+</button>
-              </div>
-            </div>
-          </div>
-          )}
-          <div className="checkout-price-card">
-            <p>{`Subtotal: ${subTotalCartPrice.toFixed(2)}€`}</p>
-            <p>{`IVA: ${iva.toFixed(2)}€`}</p>
-            <p>envío: 2,5€</p>
-            <p>{`Total: ${(totalCartPrice + 2.5).toFixed(2)}€`}</p>
-          </div>
+          </label>
+          <span style={{ 'fontSize': '70%', 'opacity': '70%' }}>*Actualmente solo disponemos de un método de pago, en un próximo fúturo añadiremos PayPal</span>
+        </div>
       </div>
-      <button className="checkoutform-bt" onClick={() => setOrderVerified(true)} >Pagar</button>
+      <div className="checkoutVerify__content">
+        <h2>Resumen pedido</h2>
+        <div className="flexrow flexrow--nopd flexrow--between">
+          <p>{`${cartProducts.length} ${cartProducts.length > 1 ? 'artículos' : 'artículo'}`}</p>
+          <span style={{ 'color': '#9b532b', 'cursor': 'pointer', 'fontWeight': '600', 'textDecoration': 'underline' }} onClick={() => setShowCart(!showCart)} >Ver tu cesta de la compra</span>
+          < Cart ifCheckout={true} />
+        </div>
+        <div className="checkoutVerify__price">
+          <h2>Total <span>{`${(totalCartPrice + (checked === true ? 2 : 3.5)).toFixed(2)}€`}</span></h2>
+          <p>Subtotal <span>{`${subTotalCartPrice.toFixed(2)}€`}</span></p>
+          <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
+          <p>Costos de envío <span>{checked === true ? '2,00€' : '3,50€'}</span></p>
+        </div>
+        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" method='POST'>
+          <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? '' : data.paymentRequest.Ds_SignatureVersion} />
+          <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? '': data.paymentRequest.Ds_MerchantParameters} />
+          <input type="hidden" name="Ds_Signature" value={data === undefined ? '' : data.paymentRequest.Ds_Signature} />
+          <button className="checkoutform-bt" type='submit' value={'Submit'} >Pagar</button>
+        </form>
+        <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
+          <label htmlFor="termsChecked" className="checkBox">
+            <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms(e.target.checked)}/>
+            <div/>
+          </label>
+          <span style={{ 'maxWidth': '650px'}}>Al realizar un compra, confirmas que has leido y aceptado los <span className="spanTerms" onClick={() => handleShowMiniTerms(0)} >Términos y condiciones</span> y nuestra <span className="spanTerms" onClick={() => handleShowMiniTerms(1)}>Pólitica de Privacidad</span>.</span>
+          < MiniTerms showComponent={showTerms[0]} handleShowMiniTerms={handleShowMiniTerms} index={0}/>
+          < MiniPrivacy showComponent={showTerms[1]} handleShowMiniTerms={handleShowMiniTerms} index={1}/>
+        </div>
+      </div>
     </div>
   )
 }

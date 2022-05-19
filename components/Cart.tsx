@@ -8,21 +8,16 @@ import CartItem from './CartItem'
 import EmptyBasket from '@img/empty-cart-image.svg'
 import Logo from '@img/logo.svg'
 
-export type CartProps = {
-  showCart: boolean
-  handleShowCart: (event: React.MouseEvent<HTMLButtonElement>)=>void
-  setShowCart: Dispatch<SetStateAction<boolean>>
-}
 
 
-const Cart = ({handleShowCart, showCart, setShowCart}: CartProps) => {
+const Cart = ({ifCheckout}: {ifCheckout: boolean}) => {
 
-  const { cartProducts, totalCartPrice } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, showCart, setShowCart } = useContext(AppContext)
 
   return (
     <div className={showCart ? "cart cart--showed" : "cart"}>
       <div className="flexcolum flexcolum--around">
-        <button className="closeBtSlide closeBtSlide--topLeft" onClick={handleShowCart}>
+        <button className="closeBtSlide closeBtSlide--topLeft" onClick={() => setShowCart(!showCart)}>
           <div className="closeBtSlide__lineT"></div>
           <div className="closeBtSlide__lineC"></div>
           <div className="closeBtSlide__lineB"></div>
@@ -55,11 +50,13 @@ const Cart = ({handleShowCart, showCart, setShowCart}: CartProps) => {
                   <h2>Total en tu cesta:</h2>
                   <h2 style={{marginLeft: "2rem"}}>{totalCartPrice},00€</h2>
                 </div>
-                <Link href="/checkout" >
+                { ifCheckout === false ?
+                  <Link href="/checkout" >
                     <a className="link-cta" onClick={() => setShowCart(false)}>
                       COMPRAR
                     </a>
                 </Link>
+                  : <></>}
               </div>
             </>
         }

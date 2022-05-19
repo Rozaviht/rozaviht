@@ -35,6 +35,8 @@ export default function CheckoutInput ({errors, inputName, inputPlaceHolder, inp
         <Field  type='text' autoComplete="off" name={inputName} placeholder=" " className={error ? "checkout-input checkout-input--error" : "checkout-input"}/>
         <span className="checkout-labelcontent">{inputPlaceHolder}</span>
       </label>
+      { inputName === 'email' ? 
+        <span className="note-span">*Este email solo se usará con el motivo de enviarte la confirmación y nº de pedido.</span> : <></>}
       { inputName === 'cif' ? 
         <span className="note-span">*Este campo es opcional, para solicitar la factura ampliada con el DNI/NIF/CIF introducido.</span> : <></>}
       <ErrorMessage name={inputName} component={'span'} className="checkout-input-errmssg" />

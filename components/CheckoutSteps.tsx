@@ -29,7 +29,7 @@ export default function checkoutSteps ({ orderVerified}:checkoutStepsProps) {
                 <span className="checkout-step-title">Pago</span>
               </div>
             </div>
-            <h1 className="checkout-title" >Introduce tus datos de envío</h1>
+            <h1 className="checkout-title" >Introduce tus datos de entrega</h1>
           </div>
         :
           orderVerified === false 

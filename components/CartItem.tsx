@@ -36,7 +36,7 @@ export default function CartItem ({cartProduct}: CartItemProps) {
       </div>
       <div className="flexrow-between">
         <p>Cantidad:</p>
-        <div className="amount--cart">
+        <div className="amount--cart" style={{ 'maxHeight': '40px' }}>
           <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
           <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
           <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>

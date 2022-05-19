@@ -8,7 +8,10 @@ export type AppContextProps = {
     setTotalCartPrice: Dispatch<SetStateAction<number>>,
     handleRemoveFromCart: (productId: number) => void,
     cookiesManageShow: boolean,
-    setCookiesManageShow: Dispatch<SetStateAction<boolean>>
+    setCookiesManageShow: Dispatch<SetStateAction<boolean>>,
+    showCart: boolean,
+    setShowCart: Dispatch<SetStateAction<boolean>>,
+
 }
 
 export const AppContext = createContext<AppContextProps>({} as AppContextProps)

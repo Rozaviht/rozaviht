@@ -1,4 +1,7 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
+
+import { AppContext } from 'services/AppContext'
+
 import TopWarning from '@components/TopWarning'
 import Navbar from '@components/Navbar'
 import Footer from '@components/Footer'
@@ -12,7 +15,7 @@ type LayoutProps = {
 }
 
 const Layout = ({children}: LayoutProps) => {
-  const [showCart, setShowCart] = useState(false);
+  const { showCart } = useContext(AppContext)
   const [blockScroll, allowScroll] = useScrollBlock()
 
   useEffect(() => {
@@ -28,7 +31,7 @@ const Layout = ({children}: LayoutProps) => {
   return (
     <>
       <TopWarning/>
-      <Navbar showCart={showCart} setShowCart={setShowCart} />
+      <Navbar/>
       {children}
       <CookiesConsent/>
       <CookiesManage/>
