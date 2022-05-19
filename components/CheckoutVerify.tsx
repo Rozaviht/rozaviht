@@ -23,8 +23,8 @@ export type checkoutVerificationProps = {
 }
 
 const PAYMENT_REQUEST = gql`
-  mutation Mutation($totalCartPrice: Float!) {
-    paymentRequest(totalCartPrice: $totalCartPrice) {
+  mutation Mutation($orderAmount: Float!) {
+    paymentRequest(orderAmount: $orderAmount) {
       Ds_SignatureVersion
       Ds_MerchantParameters
       Ds_Signature
@@ -39,7 +39,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
 
-  const [checked, setChecked] = useState(true)
+  const [shippingChecked, setShippingChecked] = useState(true)
   const [checkedCifAddress, setCheckedCifAddress] = useState(true)
   const [checkedTerms, setCheckedTerms] = useState(true)
 
@@ -71,10 +71,19 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     })
   }, [cartProducts || shippingForm])
 
+
+
   useEffect(() => {
-    paymentRequest({variables: {totalCartPrice}})
-    console.log(data)
+    let orderAmount = 0
+    if ( shippingChecked === true ) {
+      orderAmount = totalCartPrice + 2
+    } else {
+      orderAmount = totalCartPrice + 3.5
+    }
+    paymentRequest({variables: {orderAmount}})
   }, [totalCartPrice])
+
+
 
   const handleShowMiniTerms = (index:number) => {
     let showTermsCopy = [...showTerms]
@@ -126,7 +135,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 style={{ 'marginTop': '2rem' }}>Método de envío</h2>
         <div className="flexcolum flexcolum--separate">
           <label htmlFor="regularShip" className="shippingCheck">
-            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={checked} onClick={(e) => setChecked(e.target.checked)}/>
+            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={(e) => setShippingChecked(e.target.checked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
@@ -134,7 +143,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             </div>
           </label>
           <label htmlFor="expressShip" className="shippingCheck">
-            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!checked} onClick={(e) => setChecked(!e.target.checked)}/>
+            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={(e) => setShippingChecked(!e.target.checked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
@@ -166,16 +175,16 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           < Cart ifCheckout={true} />
         </div>
         <div className="checkoutVerify__price">
-          <h2>Total <span>{`${(totalCartPrice + (checked === true ? 2 : 3.5)).toFixed(2)}€`}</span></h2>
+          <h2>Total <span>{`${(totalCartPrice + (shippingChecked === true ? 2 : 3.5)).toFixed(2)}€`}</span></h2>
           <p>Subtotal <span>{`${subTotalCartPrice.toFixed(2)}€`}</span></p>
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
-          <p>Costos de envío <span>{checked === true ? '2,00€' : '3,50€'}</span></p>
+          <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
         <form action="https://sis-t.redsys.es:25443/sis/realizarPago" method='POST'>
           <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? '' : data.paymentRequest.Ds_SignatureVersion} />
           <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? '': data.paymentRequest.Ds_MerchantParameters} />
           <input type="hidden" name="Ds_Signature" value={data === undefined ? '' : data.paymentRequest.Ds_Signature} />
-          <button className="checkoutform-bt" type='submit' value={'Submit'} >Pagar</button>
+          <button className="checkoutform-bt" type='submit' value={'Submit'}>Pagar</button>
         </form>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">

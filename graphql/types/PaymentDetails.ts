@@ -43,7 +43,7 @@ export const sendPaymentReq = extendType({
   definition(t) {
     t.field('paymentRequest', {
       type: PaymentResponse,
-      args: { totalCartPrice: nonNull(floatArg())},
+      args: { orderAmount: nonNull(floatArg())},
       resolve: paymentRequest,
     })
   } 

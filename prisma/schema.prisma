@@ -162,6 +162,16 @@ model order_details {
   deletedAt        DateTime             @default(now()) @map(name: "deleted_at")
 }
 
+//OrderNumer schema
+
+model order_number {
+  id        String   @id @default(uuid())
+  number    Int      @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  @@index([id, number])
+}
+
 //PaymentDetails schema
 
 model payment_details {

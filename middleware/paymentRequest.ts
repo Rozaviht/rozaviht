@@ -6,19 +6,28 @@ import { FieldResolver } from "nexus"
 export const paymentRequest: FieldResolver<
   'Mutation',
   'paymentRequest'
-> = async (_, {totalCartPrice}) => {
+> = async (_, {orderAmount}) => {
 
   var cryptojs = require('crypto-js')
 
-  var amountClenead = totalCartPrice.toString().split('.').join("")
 
-  console.log(amountClenead)
+  var amountString = orderAmount.toString().split('.').join("")
+
+  if (amountString.length === 2) {
+    amountString = `${amountString}00`
+  }
+
+  if (amountString.length === 3) {
+    amountString = `${amountString}0`
+  }
+
+  console.log(amountString)
 
   var merchantData = {
-    DS_MERCHANT_AMOUNT: amountClenead,
+    DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
     DS_MERCHANT_MERCHANTCODE: "355542226",
-    DS_MERCHANT_ORDER: "789456",/* 456789, 45879 */
+    DS_MERCHANT_ORDER: "1",/* 456789, 45879, 789456 */
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
     DS_MERCHANT_MERCHANTURL: "http://localhost:3000/api/graphql"
