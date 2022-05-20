@@ -15,7 +15,7 @@ export default function AddedToCartPopUp ({ productAdded, showAddedPopUp, setSho
   const popUpRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-      const handleClickOutside = (event) => {
+      const handleClickOutside = (event: any) => {
         if (popUpRef.current && !popUpRef.current.contains(event.target)) {
           setShowAddedPopUp(false)
         }
