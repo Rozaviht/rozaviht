@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import { AppProps } from 'next/app'
-import { SessionProvider } from 'next-auth/react'
-import Layout from '@components/Layout'
-=======
 import Head from 'next/head'
 import AppProvider from '../services/AppProvider'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from 'lib/apolloClient'
->>>>>>> develop
 
 import type { AppContext, AppProps } from 'next/app'
 import type { ReactElement, ReactNode } from 'react'
@@ -30,38 +24,6 @@ type AppPropsWithLayout = AppProps & {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-<<<<<<< HEAD
-    <SessionProvider session={pageProps.session}>
-      <Layout>
-        <Component {...pageProps} />
-        <style jsx global>{`
-          *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #3f3e3e;
-            font-family: DIN-Medium;
-          }
-
-          html {
-            height: 100vh;
-            font-size: 100%;
-          }
-
-          body,
-          #__next{
-            min-height: 100%;
-            display: contents;
-          }
-
-          .font-Lora {
-            font-family: Lora-Medium;
-          }
-        `}</style>
-      </Layout>
-    </SessionProvider>
-    )
-=======
     <>
       <Head>
           <link rel="stylesheet" href="../fonts/style.css" />
@@ -81,6 +43,5 @@ type AppPropsWithLayout = AppProps & {
     </>
 
   )
->>>>>>> develop
 }
 

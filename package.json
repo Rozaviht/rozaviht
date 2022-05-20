@@ -10,16 +10,10 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "scripts": {
-<<<<<<< HEAD
-    "dev": "next",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next build"
-=======
     "dev": "next dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "next build || next lint",
     "ts-node": "ts-node --compiler-options '{\\\"module\\\":\\\"commonjs\\\"}'"
->>>>>>> develop
   },
   "dependencies": {
     "@apollo/client": "^3.6.0",
@@ -46,11 +40,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@types/next-auth": "^3.15.0",
-=======
     "@svgr/webpack": "^6.2.1",
->>>>>>> develop
     "@types/node": "^16.11.10",
     "@types/react": "^17.0.37",
     "prisma": "^3.12.0",

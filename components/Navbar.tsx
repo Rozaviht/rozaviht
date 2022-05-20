@@ -1,14 +1,9 @@
 import { useContext, Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
 
-<<<<<<< HEAD
-import Logo from '@img/Logo.svg'
-import Cesta from '@img/Cesta.svg'
-=======
 import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
->>>>>>> develop
 
 import Logo from '@img/logo.svg'
 import CartIcon from '@img/cart-icon.svg'
@@ -55,13 +50,8 @@ const Navbar = () => {
             <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
           </div>
         </button>
-<<<<<<< HEAD
-    </div>
-  </div>
-=======
         <Cart ifCheckout={false}/>
       </div>
->>>>>>> develop
   )
 }
 
