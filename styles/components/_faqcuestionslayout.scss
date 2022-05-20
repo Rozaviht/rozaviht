@@ -1,0 +1,19 @@
+.faqCategory-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 1rem;
+  background-color: $maincolor;
+  width: 100%;
+
+
+  & > a {
+    color: $backgroundcolor;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}

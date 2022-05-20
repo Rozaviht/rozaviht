@@ -1,0 +1,327 @@
+.cbdPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > div:nth-child(n+2) {
+    margin-top: 5rem;
+  }
+}
+
+.product-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 2.5rem;
+    font-family: Lora-Regular;
+    font-weight: 500;
+  }
+
+  &__desc {
+    text-align: center;
+    font-family: 'Lora-MediumItalic';
+    margin-top: 1rem;
+  }
+
+  &__price {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    font-family: Lora-Regular;
+  }
+
+  &__cta {
+    padding: 1rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: unset;
+    border-radius: 5px;
+    background-color: $oilsectiontext;
+
+    color: #fff;
+
+    &-plus {
+      margin-right: 1rem;
+      &-line {
+        width: 1.2rem;
+        height: 0.2rem;
+        background-color: #fff;
+
+        &:nth-child(1) {
+          transform: rotate(90deg) translate(3px);
+        }
+      }
+    }
+  }
+
+  & .delivery-info {
+    margin-top: 1rem;
+    font-family: DIN-Bold;
+  }
+
+
+
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row;
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 1.4rem;
+    &__title {
+      font-size: 4rem;
+    }
+    &__price {
+      font-size: 2.3rem;
+    }
+
+    &__cta {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+
+.oil-percentage {
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &__list {
+    width: 100%;
+    margin-left: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1rem 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "first . second";
+  }
+  &__item {
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border: none;
+    background-color: unset;
+
+    &.selected {
+      background-color: $oilsectiontext;
+      color: $backgroundcolor;
+      border-radius: 5px;
+    }
+
+    &:nth-child(1) {
+      grid-area: first;
+    }
+    &:nth-child(2) {
+      grid-area: second;
+    }
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__item {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.amount {
+  background-color: $oilsectiontext;
+  border-radius: 5px;
+  max-height: 4rem;
+
+  display: flex;
+  flex-direction: row;
+
+  &__bts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 0.5px solid $backgroundcolor;
+    
+    & > button {
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: unset;
+      border: unset;
+      font-size: 1rem;
+      color: $backgroundcolor;
+      &:nth-child(1) {
+        border-bottom: 0.5px solid $backgroundcolor;
+      }
+    }
+  }
+
+
+  &__input {
+    display: flex;
+    max-width: 4rem;
+
+
+    background-color: unset;
+    border: unset;
+    color: $backgroundcolor;
+
+    text-align: center;
+  }
+
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__input {
+      font-size: 1.4rem;
+    }
+
+    &__bts {
+      & > button {
+        padding: 3px 8px 3px 8px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+
+/* PRODUCT FIRST SECTION */
+
+.product-frstSect {
+  background-color: $oilsectiontext;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+
+
+  &__text {
+    padding: 1.2rem;
+    height: 100%;
+
+    & > p {
+      font-size: 2.3rem;
+      color: $backgroundcolor;
+      font-weight: 600;
+      font-family: Lora-Medium;
+    }
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    padding: 5rem 10% 5rem 10%;
+
+    &__text {
+      & >p {
+        font-size: 3.5rem;
+      }
+    }
+    &__img {
+      padding: 3rem;
+      border: 2px solid $backgroundcolor;
+      width: 55%;
+    }
+  }
+
+}
+
+
+/* PRODUCT INFORMATION */
+
+
+.product-inf {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column ;
+  align-items: center;
+
+  &__content {
+    width: 100%;
+    padding: 1rem;
+    align-self: flex-start;
+    & > h1 {
+      color: $oilsectiontext;
+      margin-bottom: 2rem;
+    }
+  }
+
+
+  &__img {
+
+    padding: 1rem;
+    width: 100%;
+  }
+
+  & .information-content {
+    margin-top: 1rem;
+    display: none;
+
+    &.dropped {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-wrapper {
+      margin-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #000;
+    }
+
+    &-title {
+      margin-top: 0.5rem;
+      position: relative;
+
+      &::after {
+        content: '▼';
+        width: 1.5rem;
+        height: 1.5rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+      }
+
+      &.colored {
+        color: $oilsectiontext;
+
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row-reverse;
+
+    &__img {
+      border-left: 1px solid #000;
+    }
+
+    &__content {
+      margin-right: 2rem;
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    padding: 5rem 10% 5rem 10%;
+  }
+}

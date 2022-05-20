@@ -1,0 +1,518 @@
+.landingPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.landingPage__banner {
+    width: 100%;
+    display: block;
+  }
+
+
+
+.cta-secdry {
+  width: 12rem;
+  height: 2.5rem;
+
+  text-align: center;
+  font-size: 1.4rem;
+
+  border-radius: 10px;
+
+  &--rozavihtsection {
+    background-color: $maincolor;
+    border: 2px solid $maincolor;
+    & a {
+      color: $backgroundcolor;
+    }
+  }
+}
+
+/* ++++++++++++++CBD SECTION+++++++++++++++++ */
+
+.cbdSection {
+  max-height: 880px;
+  position: relative;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  background-color: $oilsectiontext;
+
+  overflow: hidden;
+  
+  &__img {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+
+    &-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    position: relative;
+      padding-top: 1rem;
+      padding-right: 3rem;
+      padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    & > div > h1, > div > p {
+      color: $backgroundcolor;
+    }
+  }
+
+  &__cta {
+    margin-left: 1rem;
+    padding: 1rem;
+    position: relative;
+
+    font-size: 1.4rem;
+
+    background-color: $backgroundcolor;
+    border: none;
+    border-radius: 5px;
+  }
+
+  &__link {
+    color: $oilsectiontext;
+  }
+
+  &__illustration {
+    align-self: flex-end;
+    margin-right: 3rem;
+    width: 15%;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    font-size: 1.4rem;
+
+    &__img{
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
+    }
+
+    &__content {
+      margin-left: 2rem;
+    }
+
+    &__illustration {
+      margin-right: 3rem;
+    }
+
+    &__cta {
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+
+    &__content {
+      padding-top: 1rem;
+      padding-right: 3rem;
+      padding-bottom: 2rem;
+    }
+    &__img {
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    font-size: 1.8rem;
+
+    &__img {
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
+    }
+
+
+    &__content {
+      padding-top: 5rem;
+      padding-right: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    &__illustration {
+      margin-right: 5rem;
+    }
+
+    &__cta {
+      font-size: 3rem;
+    }
+  }
+
+  @include respond-to(Largedesktop, noneOrientation) {
+    padding: 0;
+
+    &__content {
+      padding-top: 5rem;
+      padding-right: 10rem;
+      padding-bottom: 5rem;
+    }
+
+    &__img {
+      width: 120%;
+      bottom: -5%;
+      left: -20%;
+
+    }
+  }
+}
+
+/* ++++++++++++++ROZANEWS SECTION+++++++++++++++++ */
+
+.rozanewsSection {
+  position: relative;
+  padding: 5rem 0rem 5rem 0rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+  "img"
+  "content";
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    &::after{
+      position: absolute;
+      content: '';
+      bottom: -2rem;
+      height: 1px;
+      width: 90%;
+      background-color: $maincolor;
+
+    }
+  }
+
+  &__img {
+    grid-area: img;
+    width: 100%;
+  }
+
+  &__content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+    box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+  }
+
+  &__cta {
+    padding: 1rem;
+    width: fit-content;
+    align-self: flex-end;
+    border-bottom: 1px solid #000;
+    background-color: unset;
+    position: relative;
+  
+    font-size: 1.4rem;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 95%;
+        transform: translate(-50%, -50%);
+        width: 0.7rem;
+        height: 1.4rem;
+        background-color: $maincolor;
+        animation: blink 1s infinite 0.8s;
+      }
+  }
+
+  &__illustration {
+    margin-top: 1.5rem;
+    width: 30%;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    font-size: 1.1rem;
+
+
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    padding: 4rem 5% 5rem 4%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "content img";
+
+    &::after {
+      height: 100%;
+      width: 2px;
+    }
+
+    &__content {
+      padding: 2rem;
+    }
+
+    &__img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__cta {
+      font-size: 1.6rem;
+    }
+  }
+
+
+
+
+  @include respond-to(desktop, noneOrientation) {
+    padding: 5rem 10% 5rem 10%;
+
+    &__content {
+      padding: 2rem;
+      font-size: 1.8rem;
+      border-radius: 5px;
+      -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+      box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+
+      & > p {
+        margin-top: 2rem;
+      }
+    }
+
+    &__title {
+      margin-bottom: 3rem;
+
+      & > h1 {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &__cta {
+      font-size: 1.8rem;
+    }
+  }
+
+
+}
+
+
+  /* ++++++++++++ ROZAVIHT SECTION ++++++++++++ */
+
+.rozavihtSection {
+  padding: 5rem 1rem 5rem 1rem;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  &__img {
+    position: absolute;
+    top: 10%;
+    left: -30%;
+    width: 600%;
+    opacity: 0.15;
+  }
+
+  & > h1 {
+    color: $maincolor;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+    margin-bottom: 2rem;
+
+    & > li:nth-child(2) {
+      margin-left: 1rem;
+    }
+    & > li:nth-child(3) {
+      margin-left: 2rem;
+    }
+
+    & > li:nth-child(n) {
+      margin-bottom: 1rem;
+    }
+
+    & > li > h2 {
+      color: $maincolor;
+    }
+  }
+
+  &::before {
+    content: '';
+    height: 1px;
+    width: 90%;
+    position: absolute;
+    top: 0;
+    background-color: $maincolor;
+  }
+
+  &::after {
+    content: '';
+    height: 1px;
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    background-color: $maincolor;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    padding: 5rem 8% 5rem 8%;
+
+    &__img {
+      top: -10%;
+      left: -30%;
+      width: 450%;
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    font-size: 1.2rem;
+    padding: 5rem 10% 5rem 10%;
+
+    &__img {
+      top: -10%;
+      left: -30%;
+      width: 450%;
+    }
+
+    &__list {
+      & > li:nth-child(1) {
+        margin-left: 3rem;
+      }
+      & > li:nth-child(2) {
+        margin-left: 6rem;
+      }
+      & > li:nth-child(3) {
+        margin-left: 9rem;
+      }
+
+      & >li:nth-child(n) {
+        margin-bottom: 2rem;
+      }
+   }
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__img {
+      top: -10%;
+      left: -30%;
+      width: 300%;
+    }
+  }
+
+
+  @include respond-to(desktop, noneOrientation) {
+    padding: 5rem 12% 5rem 12%;
+    font-size: 1.4rem;
+
+    &__list {
+       & > li:nth-child(1) {
+         margin-left: 3rem;
+       }
+       & > li:nth-child(2) {
+         margin-left: 6rem;
+       }
+       & > li:nth-child(3) {
+         margin-left: 9rem;
+       }
+
+       & >li:nth-child(n) {
+         margin-bottom: 3rem;
+       }
+    }
+  }
+}
+
+
+.home-cta {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.image-container {
+  width: 100%;
+}
+
+
+.typewriter .section-tagline {
+  font-family: Lora-Italic;
+  border-right: 0.8rem solid $maincolor;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.13em;
+
+  &.aniON {
+    animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end);
+  }
+}
+
+/* -------- ANIMATIONS --------- */
+
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: $maincolor;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

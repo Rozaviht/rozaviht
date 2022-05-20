@@ -1,0 +1,140 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    & > div:first-child{
+      & > input, > button {
+        width: 50%;
+      }
+    }
+  }
+
+
+}
+
+.footer__sub {
+  width: 100%;
+  padding: 5rem 5% 2rem 5%;
+  display: flex;
+  flex-direction: column;
+  background-color: $yellowbackgroundcolor;
+
+  &-text {
+    & > h2 {
+      margin-bottom: 1rem;
+    }
+  }
+  
+  &-input {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+
+    & > button {
+      margin-top: 1rem;
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    padding: 6rem 15% 2rem 15%;
+  }
+  
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    flex-direction: row;
+  
+    &-input {
+      height: 4rem;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  
+      & > label {
+        width: 100%;
+      }
+  
+      & > button {
+        width: 70%;
+        margin-top: 0;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    padding: 6rem 12% 2rem 12%;
+  }
+}
+
+.footer__downSide {
+  position: relative;
+  padding: 1rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &::before {
+    content: '';
+    height: 2px;
+    width: 80%;
+    background-color: $maincolor;
+    position: absolute;
+    top: 0;
+    left: 10%;
+  }
+
+  & > div:nth-child(2n) {
+    margin-top: 2rem;
+  }
+
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    flex-direction: row;
+    align-items: flex-start;
+    height: 13.5rem;
+
+    & > div:nth-child(2n) {
+      margin: 0;
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  @include respond-to(desktop, noneOrientation) {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}
+
+.footer__mediaIcons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__mediaIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+
+  &:nth-child(2) {
+    margin-left: 1rem;
+  }
+  @include respond-to(mobileLandscape, landscapeOrientation) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}
+
+.footer__logoImg {
+  width: 6rem;
+  margin-bottom: 1rem;
+}

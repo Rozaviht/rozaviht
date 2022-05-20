@@ -1,54 +1,67 @@
-import { useState } from 'react'
+import { useContext, Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
+<<<<<<< HEAD
 import Logo from '@img/Logo.svg'
 import Cesta from '@img/Cesta.svg'
+=======
+import { AppContext } from 'services/AppContext'
 
-export type CartProps = {
-  showCart: boolean
-  handleShowCart: boolean
+import Cart from '@components/Cart'
+>>>>>>> develop
+
+import Logo from '@img/logo.svg'
+import CartIcon from '@img/cart-icon.svg'
+
+
+export const getStaticProps = async () => {
+  
 }
 
 const Navbar = () => {
-  const [showCart, setShowCart] = useState(false);
 
-  const handleShowCart = () => {
+  const { cartProducts, showCart, setShowCart } = useContext(AppContext)
+
+ 
+
+  const handleShowCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     setShowCart(!showCart)
   } 
 
 
-
   return (
-    <div className="nav">
-    <div className="nav-wrapper">
-      <Link href="/">
-        <a  className="nav-logo">
-          <Image src={Logo} alt="Logo"/>
-        </a>
-      </Link>
-      <div className="nav-menu">
-        <Link href="/aceite-cbd" >
-          <a className="nav-menu-item">
-            Aceite CBD
+      <div className="navbar">
+        <Link href="/">
+          <a  className="navbar__logoImg">
+            <Logo alt="Logo de Rozaviht"/>
           </a>
         </Link>
-        <Link href="/rozaday" >
-          <a className="nav-menu-item">
-            Rozaday
-          </a>
-        </Link>
-        <Link href="/about" >
-          <a className="nav-menu-item">
-            Sobre nosotros
-          </a>
-        </Link>
-      </div>
-      <button className="nav-basket" onClick={handleShowCart}>
-          <Image className="basket" src={Cesta} alt="Cesta de compra"  width={25} height={25}/>
+        <div className="navbar__menu">
+          <Link href="/aceite-cbd" >
+            <a>
+              Aceite CBD
+            </a>
+          </Link>
+          <Link href="/rozanews" >
+            <a>
+              Rozanews
+            </a>
+          </Link>
+        </div>
+        <button className="navbar__cartBt" onClick={() => setShowCart(!showCart)}>
+          <div className="navbar__cartIcon">
+            <CartIcon alt="Icono del carrito de la compra de Rozaviht" />
+            <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
+          </div>
         </button>
+<<<<<<< HEAD
     </div>
   </div>
+=======
+        <Cart ifCheckout={false}/>
+      </div>
+>>>>>>> develop
   )
 }
 

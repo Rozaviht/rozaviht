@@ -1,0 +1,31 @@
+.aboutPage {
+  display: flex;
+  flex-direction: column;
+
+  &__hero {
+    position: relative;
+    width: 100%;
+    
+    & > h1 {
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      top: 5rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $maincolor;
+    }
+    
+    & > p{
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      top: 7rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $maincolor;
+    }
+  }
+}

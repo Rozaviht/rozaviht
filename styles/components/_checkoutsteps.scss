@@ -1,0 +1,81 @@
+.checkout-steps-wrapper {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-title {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 3rem;
+  color: $maincolor;
+  font-family: Lora-Medium;
+  text-align: center;
+}
+
+.checkout-steps-list {
+  position: relative;
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  justify-content: space-between;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: rgba($color: $maincolor, $alpha: 0.1);
+    height: 1rem;
+    border-radius: 30px;
+    top: 10px;
+    left: 34px;
+    right: 20px;
+    display: inline-block;
+  }
+}
+
+.checkout-step {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-title {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 3rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0.7;
+  }
+}
+
+.circle {
+  background-color: $backgroundcolor;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+  border: 2px solid $maincolor;
+  border-radius: 50%;
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.checkout-step.current > .checkout-step-title {
+  font-weight: 700;
+  opacity: 1;
+}
+.checkout-step.current > .circle {
+  background-color: $maincolor;
+  color: $backgroundcolor;
+}
+
+.checkout-step.done > .circle {
+  background-color: $maincolor;
+  color: $backgroundcolor;
+}

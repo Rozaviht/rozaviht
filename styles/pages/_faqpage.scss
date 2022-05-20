@@ -1,0 +1,68 @@
+$faqCardAmoutn: 4;
+
+.faqPage {
+  padding: 2rem 0rem 0rem 0rem ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > *:nth-child(n) {
+    margin-top: 1rem;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > p:nth-child(n+2) {
+      margin-bottom: 2rem;
+    }
+  }
+
+
+  &__cuestions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    & > div:nth-child(n) {
+      margin-top: 1rem;
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    &__img {
+      width: 70%;
+    }
+
+    &__cuestions {
+      display: grid;
+      grid-template-columns: 1fr 2rem 1fr;
+      grid-template-rows: 1fr 2rem 1fr;
+      grid-template-areas: 
+      "faqCard1 . faqCard2"
+      ". . ."
+      "faqCard3 . faqCard4";
+
+      & > div:nth-child(1) {
+        grid-area: faqCard1;
+      }
+      & > div:nth-child(2) {
+        grid-area: faqCard2;
+      }
+      & > div:nth-child(3) {
+        grid-area: faqCard3;
+      }
+      & > div:nth-child(4) {
+        grid-area: faqCard4;
+      }
+
+    }
+  }
+}

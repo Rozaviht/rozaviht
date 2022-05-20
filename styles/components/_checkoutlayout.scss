@@ -1,0 +1,71 @@
+.checkoutPage {
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__nav {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+  
+    margin-bottom: 2rem;
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  
+    background-color: $maincolor;
+
+
+    & .goback-link {
+      position: absolute;
+      left: 10%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      color: $backgroundcolor;
+      &::before {
+        content: "˂";
+        font-size: 1rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &__logo {
+    width: 30%;
+  }
+
+  &__footer {
+    margin-top: 5rem;
+  }
+  @include respond-to(tabletPortrait, protraitOrientation) {
+
+    &__nav {
+      & .goback-link {
+        font-size: 1.2rem;
+      }
+    }
+
+    &__logo {
+      width: 15%;
+    }
+  }
+  @include respond-to(desktop, noneOrientation) {
+    &__logo {
+      width: 10%;
+    }
+  }
+}
+
+.checkout-section {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

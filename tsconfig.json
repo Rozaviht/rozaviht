@@ -7,15 +7,22 @@
       ],
       "@img/*": [
         "public/img/*"
+      ],
+      "@styles/*": [
+        "pages/styles/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
       ]
     },
-    "target": "es6",
+    "target": "es2017",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": false,
+    "experimentalDecorators": true,
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -25,7 +32,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "module": "ESNext",
+    "module": "esnext",
     "jsx": "preserve",
     "incremental": true
   },
