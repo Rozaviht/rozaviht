@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Link from 'next/link'
 import { gql, useMutation } from '@apollo/client'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
@@ -9,6 +9,7 @@ import SubcriptionAlert from './SubcriptionAlert'
 import Logo from '@img/logo.svg'
 import InstagramIcon from '@img/instagram-icon.svg'
 import FacebookIcon from '@img/facebook-icon.svg'
+import { AppContext } from 'services/AppContext'
 
 
 const CREATE_USER = gql`
@@ -22,6 +23,8 @@ const CREATE_USER = gql`
 
 const Footer = () => {
   const [ createUser ] = useMutation(CREATE_USER)
+
+  const { setCookiesManageShow} = useContext(AppContext)
 
   const [footerListDropped, setFooterListDropped] = useState(false)
   const [showSubAlert, setShowSubAlert] = useState(false)
@@ -59,6 +62,7 @@ const Footer = () => {
               }
               return {}
             }}
+            validationSchema={userValidation}
             onSubmit={(values, { setSubmitting }) => {
                 createUser({variables:  values})
                   .then(({data}) => {
@@ -79,8 +83,11 @@ const Footer = () => {
               isSubmitting
             }) => (
               <Form className="footer__sub-input">
-                  <Field name='email' type="email" placeholder="Introduce aquí tu correo" className="input--negative"/>
-                  < ErrorMessage name='email' component={'span'} />
+                  <label htmlFor='subEmail' className="customInput" >
+                    <Field type='email' autoComplete="off" name='subEmail' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
+                    <span className="customInput__label">Introduce aquí tu correo</span>
+                  </label>
+                  < ErrorMessage name='subEmail' className="customInput__errmssg" component={'span'} />
                   <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>UNIRSE</button>
               </Form>
             )}
@@ -99,10 +106,10 @@ const Footer = () => {
                     <Link href ="/preguntas-frecuentes"><a>- Preguntas frecuentes ( FAQ )</a></Link>
                   </li>
                   <li>
-                    <Link href ="/"><a>- Política de cookies</a></Link>
+                    <Link href ="/politica-cookies"><a>- Política de cookies</a></Link>
                   </li>
                   <li>
-                    <Link href ="/"><a>- Configuración de cookies</a></Link>
+                    <span onClick={() => setCookiesManageShow(true)} style={{'cursor': 'pointer'}}>- Configuración de cookies</span>
                   </li>
                 </ul>
             </div>

@@ -138,19 +138,21 @@ export default function index () {
         <div className="rozanewsSection__img">
           <Image src={'/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
-        <div className="rozanewsSection__content">
-          <div className="rozanewsSection__title">
-            <h1>ROZANEWS</h1>
-            <div className="typewriter">
-              <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+        <div className="flexcolum flexcolum--around flexcolum--nopd" style={{ 'width': '100%' }}>
+          <div className="rozanewsSection__content">
+            <div className="rozanewsSection__title">
+              <h1>ROZANEWS</h1>
+              <div className="typewriter">
+                <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+              </div>
             </div>
+            <p > 
+            Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
+            Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
+            </p>
+            <RozanewsIlustration className="rozanewsSection__illustration"/>
+            <button className="rozanewsSection__cta"><Link href="/rozanews"><a>Ir a Rozanews</a></Link></button>
           </div>
-          <p > 
-          Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
-          Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
-          </p>
-          <RozanewsIlustration className="rozanewsSection__illustration"/>
-          <button className="rozanewsSection__cta"><Link href="/rozanews"><a>Ir a Rozanews</a></Link></button>
         </div>
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}

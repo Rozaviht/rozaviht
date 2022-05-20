@@ -6,21 +6,27 @@
   align-items: center;
 
   &__hero {
+    position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     
-    > h4 {
+    > h1 {
+      font-size: 1rem;
+      position: absolute;
       margin-top: 0.5rem;
       text-align: center;
-      color: $maincolor;
+      color: #fff;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
-
+  
   &__logo {
-    width: 60%;
+    position: absolute;
+    width: 8rem;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &__banner {

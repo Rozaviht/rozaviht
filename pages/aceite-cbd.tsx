@@ -38,7 +38,7 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
       <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
         <ProductImageSlider productImageData={CbdProductsData.images} ></ProductImageSlider>
-        <div className="container--flexcolumn">
+        <div className="flexcolum flexcolum--around">
           <h1 className="product-hero__title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>
           <p className="product-hero__desc">
@@ -59,7 +59,7 @@ export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
               >20%</button>
             </div>
           </div>
-          <div className="container--flexrow">
+          <div className="flexrow">
             <div className="amount">
                 <input className="amount__input" type="number" value={currentProduct.amount} disabled={true}/>
                 <div className="amount__bts">

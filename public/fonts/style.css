@@ -19,6 +19,10 @@
   src: url("Lora-Medium.ttf");
 }
 @font-face {
+  font-family: "Lora-SemiBold";
+  src: url("Lora-SemiBold.ttf");
+}
+@font-face {
   font-family: "Lora-Italic";
   src: url("Lora-Italic.ttf");
 }

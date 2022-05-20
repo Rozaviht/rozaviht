@@ -185,10 +185,21 @@
   padding: 5rem 0rem 5rem 0rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: 
   "img"
   "content";
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   &__title {
     position: relative;
@@ -254,18 +265,24 @@
   }
 
   @include respond-to(mobileLandscape, landscapeOrientation) {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+
+
   }
 
   @include respond-to(tabletLandscape, landscapeOrientation) {
-    padding: 5rem 5% 5rem 5%;
-    grid-template-columns: 0.8fr 1fr;
+    padding: 4rem 5% 5rem 4%;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "content img";
 
+    &::after {
+      height: 100%;
+      width: 2px;
+    }
+
     &__content {
       padding: 2rem;
-      margin-right: 1rem;
     }
 
     &__img {
@@ -283,11 +300,10 @@
 
 
   @include respond-to(desktop, noneOrientation) {
-    padding: 5rem 10% 5rem 15%;
+    padding: 5rem 10% 5rem 10%;
 
     &__content {
       padding: 2rem;
-      margin-right: 1rem;
       font-size: 1.8rem;
       border-radius: 5px;
       -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
@@ -318,7 +334,6 @@
   /* ++++++++++++ ROZAVIHT SECTION ++++++++++++ */
 
 .rozavihtSection {
-  margin-top: 4rem;
   padding: 5rem 1rem 5rem 1rem;
   position: relative;
 
@@ -389,7 +404,7 @@
   }
 
   @include respond-to(tabletPortrait, protraitOrientation) {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     padding: 5rem 10% 5rem 10%;
 
     &__img {
@@ -426,7 +441,7 @@
 
   @include respond-to(desktop, noneOrientation) {
     padding: 5rem 12% 5rem 12%;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
 
     &__list {
        & > li:nth-child(1) {

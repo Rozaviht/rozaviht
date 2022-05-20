@@ -1,45 +1,27 @@
 import Image from 'next/image'
-import prisma from 'lib/prisma'
 
-import type { imageType } from 'services/AppProvider'
-import type { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 
 import Layout from '@components/Layout'
 
-export async function getStaticProps () {
-  const privacyBanners = await prisma.images.findMany({
-    where: {
-      url: {
-        in: ['https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-portrait.webp', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-landscape.webp']
-      }
-    },
-    select: {
-      url: true,
-      alt: true,
-      height: true,
-      width: true
-    }
-  })
-
-  return {
-    props: {privacyBanners}
-  }
-}
-
-interface rivacyPageProps {
-  privacyBanners: imageType[]
-}
 
 
-export default function PrivacyPage ({privacyBanners}:rivacyPageProps) {
-  console.log(privacyBanners)
+
+
+export default function PrivacyPage () {
+
   return (
     <div className="legalPage">
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >POLÍTICA DE PRIVACIDAD Y SEGURIDAD DE ROZAVIHT</h1>
-        <Image src={privacyBanners[0].url} height={privacyBanners[0].height} width={privacyBanners[0].width} alt={privacyBanners[0].alt} layout="responsive"/>
+        <div className="img16-9">
+          <Image src={"/img/privacy-banner-16-9.webp"} height={959} width={1280} alt={'hola'} layout="responsive"/>
+        </div>
+        <div className="img3-1">
+          <Image src={"/img/privacy-banner-3-1.webp"} height={426} width={1280} alt={'hola'} layout="responsive"/>
+        </div>
       </div>
-      <div className='flexcolum flexcolum--separate'>
+      <div className="legalPage__content">
         <h2>NOSOTROS</h2>
         <p>
           La marca Rozaviht, sita en calle palestina 17 Alcobendas 28100 Madrid (España). Con número de teléfono de atención al cliente y correo electrónico  attcliente@rozaviht.com.

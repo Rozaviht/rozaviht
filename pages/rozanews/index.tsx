@@ -1,4 +1,5 @@
 import prisma from 'lib/prisma'
+import Image from 'next/image'
 import { ReactElement, useState } from 'react'
 
 import type { imageType } from 'services/AppProvider'
@@ -118,13 +119,15 @@ export default function rozanews ({ articlesCategoriesData }: rozanewsProps) {
   return(
     <div className="rozanews">
       <div className="rozanews__hero">
-        <div className="rozanews__logo">
-          <RozanewsLogo />
+        <div className="img16-9">
+          <Image src={"/img/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'hola'} layout="responsive"/>
         </div>
-        <h4>Nunca te quedes desinformado de lo que te importa</h4>
-        <div className="rozanews__banner">
+        <div className="img3-1">
+          <Image src={"/img/rozanews-banner-3-1.webp"} height={427} width={1280} alt={'hola'} layout="responsive"/>
         </div>
-      </div>
+        <RozanewsLogo className="rozanews__logo" />
+        <h1>Nunca te quedes desinformado de lo que te importa</h1>
+    </div>
       <div className="rozanewsNav">
         <ArticlesCategories showCategories={showCategories} setShowCategories={setShowCategories} setCategorieSelected={setCategorieSelected} articlesCategoriesData={articlesCategoriesData} />
         <div className="flexrow flexrow--separate">

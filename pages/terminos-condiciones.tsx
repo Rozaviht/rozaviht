@@ -38,9 +38,14 @@ export default function termsPage ({termsBanners}:termsPageProps) {
     <div className="legalPage">
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >TERMINOS Y CONDICIONES DE USO</h1>
-        <Image src={termsBanners[1].url} height={termsBanners[1].height} width={termsBanners[1].width} alt={termsBanners[1].alt} layout="responsive"/>
+        <div className="img16-9">
+          <Image src={"/img/terms-banner-16-9.webp"} height={853} width={1280} alt={'hola'} layout="responsive"/>
+        </div>
+        <div className="img3-1">
+          <Image src={"/img/terms-banner-3-1.webp"} height={320} width={960} alt={'hola'} layout="responsive"/>
+        </div>
       </div>
-      <div className='flexcolum flexcolum--separate'>
+      <div className="legalPage__content">
         <h2>NUESTROS TERMINOS Y CONDICIONES DE USO DE LA PÁGINA WEB</h2>
         <p>Las ventas realizadas a través de la página web de www.rozaviht.com son gestionadas únicamente por Rozaviht, los presentes términos y condiciones de compra es el suministro de producto por parte de Rozaviht ofrecidos en la tienda online. Dicha marca, es también, la titular de la presente página web.
         </p>
