@@ -21,6 +21,10 @@
   &.hidden {
     display: none;
   }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    font-size: 1.1rem;
+  }
 }
 
 .cookies-manage-nav {
@@ -49,6 +53,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  & > button {
+    margin-top: 2rem;
+  }
 }
 
 .cookies-container {

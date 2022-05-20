@@ -187,6 +187,29 @@ body {
   }
 }
 
+.bt-primary {
+  padding: 0.4rem 1rem 0.4rem 1rem;
+  background-color: $maincolor;
+  border: none;
+  color: $backgroundcolor;
+  border-radius: 5px;
+  
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    font-size: 1.1rem;
+  }
+}
+
+.bt-scndry {
+  padding: 0.4rem 1rem 0.4rem 1rem;
+  background-color: unset;
+  border: 2px solid $maincolor;
+  color: $maincolor;
+  border-radius: 5px;
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    font-size: 1.1rem;
+  }
+}
+
 /* -------INPUTS------- */
 
 .input--negative {
@@ -345,31 +368,7 @@ body {
   margin-top: 2rem;
 }
 
-.bt-primary {
-  margin-top: 1rem;
-  background-color: $maincolor;
-  border: none;
-  color: $backgroundcolor;
-  border-radius: 5px;
 
-  &--small {
-    width: 8.5rem;
-    height: 2rem;
-  }
-}
-
-.bt-scndry {
-  margin-top: 1rem;
-  background-color: unset;
-  border: 2px solid $maincolor;
-  color: $maincolor;
-  border-radius: 5px;
-
-  &--small {
-    width: 8.5rem;
-    height: 2rem;
-  }
-}
 
 
 .link-negative {

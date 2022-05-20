@@ -40,46 +40,60 @@ export default function index () {
   }, [])
 
   useEffect(() => {
-    var windowWidth = window.matchMedia(' (max-width: 640px) ')
+    var windowWidth640 = window.matchMedia(' (max-width: 640px) ')
+    var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
     var landingVideo = document.getElementById('landingVideo')
-    var videoSource = document.createElement('source')
-    videoSource.id = 'videoSourceID'
-    videoSource.setAttribute('type', 'video/mp4')
-    landingVideo?.appendChild(videoSource)
+    var source = document.createElement('source')
+    source.id = 'videoSourceID'
+    source.setAttribute('type', 'video/mp4')
+    landingVideo?.appendChild(source)
 
-    if (windowWidth.matches) {
+    if (windowWidth640.matches) {
       landingVideo?.pause()
-      videoSource.removeAttribute('src')
-      videoSource.setAttribute('src', '/web-banner.mp4')
+      source.removeAttribute('src')
+      source.setAttribute('src', '/landing-video-5-4.mp4')
+      landingVideo?.load()
+      landingVideo?.play()
+    } else if (windowWidth960.matches) {
+      landingVideo?.pause()
+      source.removeAttribute('src')
+      source.setAttribute('src', '/landing-video-16-9.mp4')
       landingVideo?.load()
       landingVideo?.play()
     } else {
       landingVideo?.pause()
-      videoSource.removeAttribute('src')
-      videoSource.setAttribute('src', '/landing-video-horizontally.mp4')
+      source.removeAttribute('src')
+      source.setAttribute('src', '/landing-video-3-1.mp4')
       landingVideo?.load()
       landingVideo?.play()
+
     }
 
     window.addEventListener('resize', () => {
-      var windowWidth = window.matchMedia(' (max-width: 640px) ')
+      var windowWidth640 = window.matchMedia(' (max-width: 640px) ')
+      var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
       var landingVideo = document.getElementById('landingVideo')
-      var videoSource = document.createElement('videoSourceID')
-      videoSource.setAttribute('type', 'video/mp4')
-      landingVideo?.appendChild(videoSource)
+      var source = document.getElementById('videoSourceID')
   
-      if (windowWidth.matches) {
+      if (windowWidth640.matches) {
         landingVideo?.pause()
-        videoSource.removeAttribute('src')
-        videoSource.setAttribute('src', '/web-banner.mp4')
+        source.removeAttribute('src')
+        source.setAttribute('src', '/landing-video-5-4.mp4')
+        landingVideo?.load()
+        landingVideo?.play()
+      } else if (windowWidth960.matches) {
+        landingVideo?.pause()
+        source.removeAttribute('src')
+        source.setAttribute('src', '/landing-video-16-9.mp4')
         landingVideo?.load()
         landingVideo?.play()
       } else {
         landingVideo?.pause()
-        videoSource.removeAttribute('src')
-        videoSource.setAttribute('src', '/landing-video-horizontally.mp4')
+        source.removeAttribute('src')
+        source.setAttribute('src', '/landing-video-3-1.mp4')
         landingVideo?.load()
         landingVideo?.play()
+
       }
     })
   })

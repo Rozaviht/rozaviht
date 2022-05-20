@@ -14,9 +14,9 @@ export default function CookiesManage () {
       </div>
       <div className="cookies-manage-main">
         <h3>Listado e información de las cookies</h3>
-        <p>Explora cada categoría para obtener más información y modificar la configuración. Desactivar la recopilación de datos puede afectar a tu experiencia y a los servicios que podemos ofrecerte. Si necesitas más información y quieres ver más opciones, consulta la 
+        <p>Estan son las cookies que utilizamos es nuestro servicio web, puedes leerlas detenidamente y configurarlas como deseas. Desactivar la recopilación de datos puede afectar a tu experiencia y a los servicios que podemos ofrecerte. Si necesitas más información, consulta la 
           <Link href="/politica-seguridad">
-            <a style={{ 'textDecoration': 'underline' }}>Política de privacidad</a>
+            <a style={{ 'textDecoration': 'underline' }}>Política de cookies.</a>
           </Link>
         </p>
         <div className="cookies-container">
@@ -24,37 +24,17 @@ export default function CookiesManage () {
             <h4>Cookies estrictamente necesarias</h4>
             <p>Activas siempre</p>
           </div>
-          <p>Estas cookies son necesarias para habilitar las características y las funcionalidades básicas. No se pueden desactivar en nuestros sistemas. Puedes configurar tu navegador para que las bloquee o te avise de su presencia pero, en caso de hacerlo, habrá partes del sitio que no funcionarán. Esta configuración del navegador no afectará a la totalidad de tu cuenta.</p>
+          <p>Estas cookies son necesarias para habilitar las características y las funcionalidades básicas. No se pueden desactivar en nuestro servicio web. Puedes configurar tu navegador para que las bloqueé o te avise de su presencia pero, en caso de hacerlo, habrá partes del sitio o en sitio en si mísmo, que no funcionarán.</p>
         </div>
         <div className="cookies-container">
           <div className="cookies-container-top">
-            <h4>Cookies de rendimiento</h4>
+            <h4>Cookies de análisis de rendimiento</h4>
             <label htmlFor="cookies-checkbox-1" className="switch">
               <input type="checkbox" id="cookies-checkbox-1" />
               <div className="cookies-slider round"></div>
             </label>
           </div>
-          <p>Estas cookies nos permiten medir y analizar el uso, evaluar el rendimiento, comprender las interacciones de los usuarios y mejorar nuestros productos y servicios.</p>
-        </div>
-        <div className="cookies-container">
-          <div className="cookies-container-top">
-            <h4>Cookies funcionales</h4>
-            <label htmlFor="cookies-checkbox-2" className="switch">
-              <input type="checkbox" id="cookies-checkbox-2" />
-              <div className="cookies-slider round"></div>
-            </label>
-          </div>
-          <p>Estas cookies permiten que el servicio ofrezca una mayor funcionalidad y personalización. Además, nos ayudan a mejorar y medir los anuncios contextuales (no personalizados) y limitar la frecuencia con la que los ves.</p>
-        </div>
-        <div className="cookies-container">
-          <div className="cookies-container-top">
-            <h4>Cookies publicitarias</h4>
-            <label htmlFor="cookies-checkbox-3" className="switch">
-              <input type="checkbox" id="cookies-checkbox-3" />
-              <div className="cookies-slider round"></div>
-            </label>
-          </div>
-          <p>Nosotros o nuestras redes sociales y socios de publicidad podemos utilizar estas cookies para mostrarte anuncios publicitarios que sean de tu interés. Si no las autorizas, continuarás recibiendo anuncios, pero no serán personalizados.</p>
+          <p>Estas cookies nos permiten medir y analizar el uso, evaluar el rendimiento, y comprender las interacciones de los usuarios. Para poder mejorar nuestro servicio web y conseguir una mejor experiencia para los usuarios.</p>
         </div>
         <button className="bt-primary bt-primary--small" onClick={() => setCookiesManageShow(false)} >Guardar preferencias</button>
       </div>

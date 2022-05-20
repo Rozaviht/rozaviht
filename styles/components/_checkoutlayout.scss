@@ -42,10 +42,6 @@
   &__footer {
     margin-top: 5rem;
   }
-
-  @include respond-to(mobileLandscape, landscapeOrientation) {
-
-  }
   @include respond-to(tabletPortrait, protraitOrientation) {
 
     &__nav {
@@ -55,12 +51,12 @@
     }
 
     &__logo {
-      width: 20%;
+      width: 15%;
     }
   }
   @include respond-to(desktop, noneOrientation) {
     &__logo {
-      width: 15%;
+      width: 10%;
     }
   }
 }
