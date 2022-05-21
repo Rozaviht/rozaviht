@@ -13,11 +13,11 @@ type RecyclingAnimatinoProps = {
 export default function RecyclingAnimation ({ infoList}: RecyclingAnimatinoProps) {
 
   let sceneArray = [
-    <Scene1/>,
-    <Scene2/>,
-    <Scene3/>,
-    <Scene4/>,
-    <Scene5/>,
+    <Scene1 key={1}/>,
+    <Scene2 key={2}/>,
+    <Scene3 key={3}/>,
+    <Scene4 key={4}/>,
+    <Scene5 key={5}/>,
   ]
 
   useRecyclingAnimation({infoList})

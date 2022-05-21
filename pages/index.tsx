@@ -142,7 +142,7 @@ export default function LandingPage () {
             <div className="rozanewsSection__title">
               <h1>ROZANEWS</h1>
               <div className="typewriter">
-                <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+                <h3 className="section-tagline">&quotInformate de lo que te importa&quot</h3>
               </div>
             </div>
             <p > 
