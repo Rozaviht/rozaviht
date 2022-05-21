@@ -6,7 +6,7 @@ import LogoNegative from '../public/img/logo-negative.svg'
 
 
 
-export default function cbdInfo () {
+export default function CbdInfo () {
 
   const [blockScroll, allowScroll] = useScrollBlock()
 
@@ -102,7 +102,7 @@ export default function cbdInfo () {
   )
 }
 
-cbdInfo.getLayout = function getLayout(page: ReactElement) {
+CbdInfo.getLayout = function getLayout(page: ReactElement) {
   return (
     <>
       {page}

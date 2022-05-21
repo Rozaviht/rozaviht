@@ -27,7 +27,7 @@ export interface CbdPageProps  {
   CbdProductsData : CbdProductsData
 }
 
-export default function cbdPage ({ CbdProductsData}: CbdPageProps) {
+export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
 
   const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
 
@@ -160,7 +160,7 @@ export const getStaticProps = async () => {
 }
 
 
-cbdPage.getLayout = function getLayout(page: ReactElement) {
+CbdPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       {page}

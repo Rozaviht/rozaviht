@@ -6,7 +6,7 @@ export type checkoutStepsProps = {
 }
 
 
-export default function checkoutSteps ({ orderVerified}:checkoutStepsProps) {
+export default function CheckoutSteps ({ orderVerified}:checkoutStepsProps) {
 
   const {shippingForm, editingForm} = useContext(CheckoutContext)
 

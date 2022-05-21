@@ -62,7 +62,7 @@ export const getStaticProps = async ({params}: {params: {title:string}}) => {
   }
 }
 
-export default function faqCategoryPage ({faqCategory, faqCategoriesTitles}:faqCategoryProps) {
+export default function FaqCategoryPage ({faqCategory, faqCategoriesTitles}:faqCategoryProps) {
 
   const {setFaqTitles,faqTitles} = useContext(FaqContext)
 
@@ -93,7 +93,7 @@ export default function faqCategoryPage ({faqCategory, faqCategoriesTitles}:faqC
   )
 }
 
-faqCategoryPage.getLayout = function getLayout(page: ReactElement) {
+FaqCategoryPage.getLayout = function getLayout(page: ReactElement) {
 
 
 

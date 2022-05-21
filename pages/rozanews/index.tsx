@@ -110,7 +110,7 @@ export async function getStaticProps() {
 
 
 
-export default function rozanews ({ articlesCategoriesData }: rozanewsProps) {
+export default function Rozanews ({ articlesCategoriesData }: rozanewsProps) {
   const [showCategories, setShowCategories] = useState(false)
 
 
@@ -139,7 +139,7 @@ export default function rozanews ({ articlesCategoriesData }: rozanewsProps) {
   )
 }
 
-rozanews.getLayout = function getLayout(page: ReactElement) {
+Rozanews.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       {page}

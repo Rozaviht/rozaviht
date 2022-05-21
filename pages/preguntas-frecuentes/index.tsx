@@ -51,7 +51,7 @@ export default function FAQPage ({faqCategories}:FAQPageProps) {
   return (
     <div className="faqPage">
       <div className="faqPage__img">
-        <Image src={'/img/faq-banner.webp'} height={1352} width={1849} layout="responsive" />
+        <Image src={'/img/faq-banner.webp'} height={1352} width={1849} alt="" layout="responsive" />
       </div>
       <div className="faqPage__content">
         <p>En esta página encontrarás las preguntas frecuentes que podrían hacerse nuestros clientes, con sus respectivas soluciones.</p>

@@ -22,7 +22,7 @@ const VALIDATE_CHECKOUT_FORM = gql`
   }
 `
 
-export default function checkoutForm () {
+export default function CheckoutForm () {
   const [ validateShippingForm ] = useMutation(VALIDATE_CHECKOUT_FORM)
   const { shippingForm, setShippingForm, setEditingForm } = useContext(CheckoutContext)
 

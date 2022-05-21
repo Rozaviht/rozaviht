@@ -12,7 +12,7 @@ import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
 
 
 
-export default function index () {
+export default function LandingPage () {
   
   useEffect(() => {
     let observerOptions = {
@@ -184,7 +184,7 @@ export default function index () {
 }
 
 
-index.getLayout = function getLayout(page: ReactElement) {
+LandingPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       {page}

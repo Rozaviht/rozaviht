@@ -14,7 +14,7 @@ import CheckoutPayment from '@components/CheckoutPayment'
 
 
 
-export default function checkoutPage ()  {
+export default function CheckoutPage ()  {
   const [orderVerified, setOrderVerified] = useState(false)
   const [paymentDone, setPaymentDone] = useState(false)
 
@@ -53,7 +53,7 @@ export default function checkoutPage ()  {
 }
 
 
-checkoutPage.getLayout = function getLayout(page: ReactElement) {
+CheckoutPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <CheckoutProvider>
       <CheckoutLayout>
