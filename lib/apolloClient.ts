@@ -7,6 +7,8 @@ import { ApolloLink } from '@apollo/client'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
+const NEXT_PUBLIC_API_SERVER_URL = process.env.NEXT_PUBLIC_API_SERVER_URL
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
@@ -19,7 +21,7 @@ const errorLink = onError(({graphQLErrors, networkError}) => {
 })
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/api/graphql', //Server URL (must be absolute)
+  uri: NEXT_PUBLIC_API_SERVER_URL , //Server URL (must be absolute)
   credentials: 'same-origin' //Additional fetch() options like 'credentials' or 'headers'
 })
 
