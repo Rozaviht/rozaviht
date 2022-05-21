@@ -27,7 +27,7 @@ export type articleCategorieType = {
   articles: articleType[]
 }
 
-export const dateOptions = { year: 'numeric', month: 'long', day: 'numeric'}
+export const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric'}
 
 export async function getStaticProps() {
   const articlesRawData = await prisma.articles.findMany({

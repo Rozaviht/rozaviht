@@ -7,7 +7,6 @@ import type { ReactElement } from 'react'
 import Layout from '@components/Layout'
 
 import Logo from '@img/logo.svg'
-import Isotipo from '@img/Isotipo.svg'
 import RozanewsIlustration from '@img/rozanews-ilustration.svg'
 import CbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
 
@@ -42,7 +41,7 @@ export default function index () {
   useEffect(() => {
     var windowWidth640 = window.matchMedia(' (max-width: 640px) ')
     var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
-    var landingVideo = document.getElementById('landingVideo')
+    var landingVideo = document.getElementById('landingVideo') as HTMLVideoElement
     var source = document.createElement('source')
     source.id = 'videoSourceID'
     source.setAttribute('type', 'video/mp4')
@@ -72,8 +71,8 @@ export default function index () {
     window.addEventListener('resize', () => {
       var windowWidth640 = window.matchMedia(' (max-width: 640px) ')
       var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
-      var landingVideo = document.getElementById('landingVideo')
-      var source = document.getElementById('videoSourceID')
+      var landingVideo = document.getElementById('landingVideo') as HTMLVideoElement
+      var source = document.getElementById('videoSourceID')!
   
       if (windowWidth640.matches) {
         landingVideo?.pause()

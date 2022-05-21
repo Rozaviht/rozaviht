@@ -1,3 +1,3 @@
-export default async function (res, req) {
+export default async function (res: any, req: any) {
     
 }

@@ -24,7 +24,7 @@ export default function CartItem ({cartProduct}: CartItemProps) {
         <div className="closeBt__lineR"></div>
       </button>
       <div className="cartItem__img">
-        <Image src={cartProduct.image.url} width={cartProduct.image.width} height={cartProduct.image.height} layout='responsive' objectFit='contain' ></Image>
+        <Image src={cartProduct.image.url} width={cartProduct.image.width!} height={cartProduct.image.height!} layout='responsive' objectFit='contain' ></Image>
       </div>
       <div className="flexrow-between">
         <p>Producto:</p>
@@ -38,7 +38,7 @@ export default function CartItem ({cartProduct}: CartItemProps) {
         <p>Cantidad:</p>
         <div className="amount--cart" style={{ 'maxHeight': '40px' }}>
           <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
-          <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
+          <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled={true}/>
           <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
         </div>
       </div>

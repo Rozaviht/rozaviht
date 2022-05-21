@@ -1,7 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { productsCategories } from '../data/productsData'
-import { images } from '../data/imagesData'
-
 
 const prisma = new PrismaClient()
 
@@ -44,12 +41,6 @@ const load = async () => {
     })
   } */
 /*   console.log("Added products data") */
-
-
-  await prisma.images.createMany({
-    data: images
-  })
-  console.log("Added images data")
 
  /*  await prisma.article_categories.createMany({
     data: articlesCategories
