@@ -5,8 +5,8 @@ import { AppContext } from 'services/AppContext'
 
 import CartItem from './CartItem'
 
-import EmptyBasket from 'public/img/empty-cart-image.svg'
-import Logo from 'public/img/logo.svg'
+import EmptyBasket from '/public/img/empty-cart-image.svg'
+import Logo from '/public/img/logo.svg'
 
 
 
