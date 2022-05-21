@@ -103,7 +103,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       orderAmount = totalCartPrice + 3.5
     }
     createOrderNumber().then(() =>{
-      paymentRequest({variables: {orderAmount}}).then(() => document.redSysForm.submit())
+      paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
     })
   }
 
@@ -127,7 +127,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 style={{ 'marginTop': '2rem' }}>Dirección de facturación</h2>
         <div className="flexrow flexrow--separate flexrow--algncenter">
           <label htmlFor="sameAddress" className="checkBox">
-            <input type="checkbox" name="sameAddress"  checked={checkedCifAddress} onClick={(e) => setCheckedCifAddress(e.target.checked)}/>
+            <input type="checkbox" name="sameAddress"  checked={checkedCifAddress} onClick={(e) => setCheckedCifAddress((e.target as HTMLInputElement).checked)}/>
             <div/>
           </label>
           <span>Igual que la dirección de entrega</span>
@@ -143,7 +143,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 style={{ 'marginTop': '2rem' }}>Método de envío</h2>
         <div className="flexcolum flexcolum--separate">
           <label htmlFor="regularShip" className="shippingCheck">
-            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={(e) => setShippingChecked(e.target.checked)}/>
+            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
@@ -151,7 +151,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             </div>
           </label>
           <label htmlFor="expressShip" className="shippingCheck">
-            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={(e) => setShippingChecked(!e.target.checked)}/>
+            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
@@ -196,7 +196,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <button className="checkoutform-bt" type='button' onClick={handleResysSubmit}>Pagar</button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
-            <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms(e.target.checked)}/>
+            <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>
             <div/>
           </label>
           <span style={{ 'maxWidth': '650px'}}>Al realizar un compra, confirmas que has leido y aceptado los <span className="spanTerms" onClick={() => handleShowMiniTerms(0)} >Términos y condiciones</span> y nuestra <span className="spanTerms" onClick={() => handleShowMiniTerms(1)}>Pólitica de Privacidad</span>.</span>

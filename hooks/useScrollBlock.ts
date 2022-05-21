@@ -8,8 +8,8 @@ const safeDocument = typeof document !== 'undefined' ? document : {};
  */
 export default () => {
   const scrollBlocked = useRef<boolean | undefined>();
-  const html = safeDocument.documentElement;
-  const { body } = safeDocument;
+  const html = (safeDocument as any).documentElement;
+  const { body }: any = safeDocument;
 
   const blockScroll = () => {
     if (!body || !body.style || scrollBlocked.current) return;
