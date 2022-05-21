@@ -39,7 +39,15 @@ export const ArticlesQuery = extendType({
     t.nonNull.list.field('getArticles', {
       type: 'Article',
       resolve(_parent, _args, context) {
-        return context.prisma.articles.findMany()
+        return context.prisma.articles.findMany({
+          select: {
+            id: true,
+            title: true,
+            content: true,
+            published: true,
+            categoryId: true
+          }
+        })
       }
     })
   }
