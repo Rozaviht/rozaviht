@@ -31,3 +31,4 @@ yarn-error.log*
 *.webp
 *.mp4
 
+.vercel
