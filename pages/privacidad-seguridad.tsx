@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement } from "react"
 
 import Layout from '@components/Layout'
 

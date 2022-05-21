@@ -9,7 +9,7 @@ import type { Dispatch, SetStateAction } from 'react'
 
 import provinciasData from "../data/pronviciasData.json"
 
-import EditIcon from '@img/edit-icon.svg'
+import EditIcon from 'public/img/edit-icon.svg'
 import Cart from './Cart'
 import { gql, useMutation } from '@apollo/client'
 

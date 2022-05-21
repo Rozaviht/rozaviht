@@ -10,8 +10,6 @@ import Layout from "@components/Layout"
 import ProductImageSlider from '@components/ProductImageSlider'
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 import RecyclingAnimation from '@components/RecyclingAnimatino'
-import { initializeApollo } from 'lib/apolloClient'
-import { getImages } from 'graphql/types'
 
 export type CbdProductsData = {
   name: string

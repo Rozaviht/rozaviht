@@ -6,9 +6,9 @@ import type { ReactElement } from 'react'
 
 import Layout from '@components/Layout'
 
-import Logo from '@img/logo.svg'
-import RozanewsIlustration from '@img/rozanews-ilustration.svg'
-import CbdIlustrationNegative from '@img/cbd-ilustration-negative.svg'
+import Logo from '../public/img/logo.svg'
+import RozanewsIlustration from '../public/img/rozanews-ilustration.svg'
+import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
 
 
 

@@ -4,8 +4,7 @@ import FAQCard from "@components/FAQCard"
 import Layout from "@components/Layout"
 import prisma from "lib/prisma"
 
-import { ReactElement, useContext, useEffect } from "react"
-import { FaqContext } from "services/FaqContext"
+import { ReactElement } from "react"
 import FaqProvider from "services/FaqProvider"
 
 interface FAQPageProps {

@@ -8,7 +8,7 @@ import Layout from '@components/Layout'
 import ArticlesCategories from '@components/ArticlesCategories'
 import ArticlesBoard from '@components/ArticlesBoard'
 
-import RozanewsLogo from '@img/rozanews-logo.svg'
+import RozanewsLogo from 'public/img/rozanews-logo.svg'
 
 
 interface rozanewsProps {

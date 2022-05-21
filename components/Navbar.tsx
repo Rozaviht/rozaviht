@@ -5,8 +5,8 @@ import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
-import Logo from '@img/logo.svg'
-import CartIcon from '@img/cart-icon.svg'
+import Logo from 'public/img/logo.svg'
+import CartIcon from 'public/img/cart-icon.svg'
 
 
 export const getStaticProps = async () => {

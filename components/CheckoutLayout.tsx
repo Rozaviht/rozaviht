@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 
-import Logo from '@img/logo.svg'
-import LogoNegative from '@img/logo-negative.svg'
+import Logo from 'public/img/logo.svg'
+import LogoNegative from 'public/img/logo-negative.svg'
 
 type LayoutProps = {
   children?: React.ReactNode

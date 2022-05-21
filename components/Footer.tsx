@@ -6,9 +6,9 @@ import { userValidation } from '../middleware/validations'
 
 import SubcriptionAlert from './SubcriptionAlert'
 
-import Logo from '@img/logo.svg'
-import InstagramIcon from '@img/instagram-icon.svg'
-import FacebookIcon from '@img/facebook-icon.svg'
+import Logo from 'public/img/logo.svg'
+import InstagramIcon from 'public/img/instagram-icon.svg'
+import FacebookIcon from 'public/img/facebook-icon.svg'
 import { AppContext } from 'services/AppContext'
 
 

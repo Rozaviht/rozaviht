@@ -1,7 +1,5 @@
-import { useContext } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
-import { AppContext } from 'services/AppContext'
 import useCartActions from '@hooks/useCartActions'
 
 export type CartItemProps = {
