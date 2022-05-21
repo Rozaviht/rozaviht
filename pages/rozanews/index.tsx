@@ -8,7 +8,7 @@ import Layout from '@components/Layout'
 import ArticlesCategories from '@components/ArticlesCategories'
 import ArticlesBoard from '@components/ArticlesBoard'
 
-import RozanewsLogo from '@img/rozanews-logo.svg'
+import RozanewsLogo from 'public/img/rozanews-logo.svg'
 
 
 interface rozanewsProps {
@@ -27,7 +27,7 @@ export type articleCategorieType = {
   articles: articleType[]
 }
 
-export const dateOptions = { year: 'numeric', month: 'long', day: 'numeric'}
+export const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric'}
 
 export async function getStaticProps() {
   const articlesRawData = await prisma.articles.findMany({

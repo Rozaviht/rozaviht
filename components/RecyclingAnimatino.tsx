@@ -1,10 +1,10 @@
 import useRecyclingAnimation from '@hooks/useRecyclingAnimation'
 
-import Scene1 from '@img/recycling-scene-1.svg'
-import Scene2 from '@img/recycling-scene-2.svg'
-import Scene3 from '@img/recycling-scene-3.svg'
-import Scene4 from '@img/recycling-scene-4.svg'
-import Scene5 from '@img/recycling-scene-5.svg'
+import Scene1 from 'public/img/recycling-scene-1.svg'
+import Scene2 from 'public/img/recycling-scene-2.svg'
+import Scene3 from 'public/img/recycling-scene-3.svg'
+import Scene4 from 'public/img/recycling-scene-4.svg'
+import Scene5 from 'public/img/recycling-scene-5.svg'
 
 type RecyclingAnimatinoProps = {
   infoList: boolean[]

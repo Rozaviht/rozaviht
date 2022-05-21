@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react"
 
-import Logo from '@img/logo.svg'
+import Logo from 'public/img/logo.svg'
 
 interface SubcriptionAlertProps {
   showSubAlert: boolean

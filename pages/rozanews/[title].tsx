@@ -110,7 +110,7 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
     <div className="article-page" >
       <div className="article">
         <div className="article__banner">
-          < Image src={articleData.image[0].url} height={articleData.image[0].height} width={articleData.image[0].width} alt={articleData.image[0].alt} layout="responsive" />
+          < Image src={articleData.image[0].url} height={articleData.image[0].height!} width={articleData.image[0].width!} alt={articleData.image[0].alt} layout="responsive" />
         </div>
         <div className="article__content">
           <h1>{articleData.title}</h1>

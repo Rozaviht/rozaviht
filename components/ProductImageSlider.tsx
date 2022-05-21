@@ -34,7 +34,7 @@ const ProductImageSlider = ({productImageData}: ProductImageSliderProps) => {
           <div className={index === currentImage ? "slide-container active" : "slide-container"} key={index}>
             {index === currentImage && (
               <div className={ index === 0 || index == 1 ?  'slide slide--half' : 'slide'}>
-                <Image src={image.url} height={image.height} width={image.width} alt={image.alt}  layout="responsive" objectFit='contain' />
+                <Image src={image.url} height={image.height!} width={image.width!} alt={image.alt}  layout="responsive" objectFit='contain' />
               </div>
             )}
           </div>

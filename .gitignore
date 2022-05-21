@@ -10,8 +10,6 @@ node_modules
 #production
 /build
 
-#public
-/public
 
 #misc
 *.log
@@ -28,7 +26,6 @@ yarn-error.log*
 
 
 # multimedia
-*.svg
 *.png
 *.jpg
 *.webp

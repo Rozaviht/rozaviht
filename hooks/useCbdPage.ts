@@ -7,7 +7,7 @@ export  default  ({CbdProductsData}:CbdPageProps) => {
 
   const { setCartProducts } = useContext( AppContext )
   
-  var CbdProducts = CbdProductsData.products
+  var CbdProducts= CbdProductsData.products
 
   const [infoList, setInfoList] = useState([false, false, false, false])
   const [showAddedPopUp, setShowAddedPopUp] = useState(false)
