@@ -43,6 +43,7 @@ export async function getStaticProps ({params}: {params: {title:string}}) {
     }
   }
 
+
   const articlePageData = await prisma.articles.findUnique({
     where: {
       id: articleID
@@ -106,6 +107,7 @@ interface articlePageProps {
 export default function articlePage ({ articleData, articleCatagorieData }: articlePageProps) {
 
 
+
   return (
     <div className="article-page" >
       <div className="article">
@@ -117,6 +119,10 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
           <p>{articleData.content}</p>
         </div>
       </div>
+      {articleCatagorieData.articles.length < 2
+        ?
+        <></>
+      :
       <div className="recomendations">
         <h3>Otros artículos de la categoría <strong>{articleCatagorieData.name}</strong>, que te pueden interesar:</h3>
         <div className="recomendations__articles">
@@ -125,6 +131,7 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
         )}
         </div>
       </div>
+      }
     </div>
   )
 }
