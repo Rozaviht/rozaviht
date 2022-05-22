@@ -50,19 +50,19 @@ export default function LandingPage () {
     if (windowWidth640.matches) {
       landingVideo?.pause()
       source.removeAttribute('src')
-      source.setAttribute('src', '/landing-video-5-4.mp4')
+      source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-5-4.mp4')
       landingVideo?.load()
       landingVideo?.play()
     } else if (windowWidth960.matches) {
       landingVideo?.pause()
       source.removeAttribute('src')
-      source.setAttribute('src', '/landing-video-16-9.mp4')
+      source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-16-9.mp4')
       landingVideo?.load()
       landingVideo?.play()
     } else {
       landingVideo?.pause()
       source.removeAttribute('src')
-      source.setAttribute('src', '/landing-video-3-1.mp4')
+      source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-3-1.mp4')
       landingVideo?.load()
       landingVideo?.play()
 
@@ -77,19 +77,19 @@ export default function LandingPage () {
       if (windowWidth640.matches) {
         landingVideo?.pause()
         source.removeAttribute('src')
-        source.setAttribute('src', '/landing-video-5-4.mp4')
+        source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-5-4.mp4')
         landingVideo?.load()
         landingVideo?.play()
       } else if (windowWidth960.matches) {
         landingVideo?.pause()
         source.removeAttribute('src')
-        source.setAttribute('src', '/landing-video-16-9.mp4')
+        source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-16-9.mp4')
         landingVideo?.load()
         landingVideo?.play()
       } else {
         landingVideo?.pause()
         source.removeAttribute('src')
-        source.setAttribute('src', '/landing-video-3-1.mp4')
+        source.setAttribute('src', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-video-3-1.mp4')
         landingVideo?.load()
         landingVideo?.play()
 
@@ -108,7 +108,7 @@ export default function LandingPage () {
       <div className="cbdSection">
         <div className="cbdSection__img-wrapper">
           <div className="cbdSection__img">
-            <Image className="cbdSection__img-content" src='/img/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
+            <Image className="cbdSection__img-content" src='https://rozaviht-media.s3.eu-west-3.amazonaws.com/img/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
           </div>
         </div>
         <div className="cbdSection__content">
@@ -135,7 +135,7 @@ export default function LandingPage () {
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >
         <div className="rozanewsSection__img">
-          <Image src={'/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
+          <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
         <div className="flexcolum flexcolum--around flexcolum--nopd" style={{ 'width': '100%' }}>
           <div className="rozanewsSection__content">
