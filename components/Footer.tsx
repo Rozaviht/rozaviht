@@ -106,7 +106,7 @@ const Footer = () => {
                     <Link href ="/preguntas-frecuentes"><a>- Preguntas frecuentes ( FAQ )</a></Link>
                   </li>
                   <li>
-                    <Link href ="/preguntas-frecuentes"><a>- Contacto</a></Link>
+                    <Link href ="/contacto"><a>- Contacto</a></Link>
                   </li>
                   <li>
                     <Link href ="/politica-cookies"><a>- Política de cookies</a></Link>
