@@ -15,10 +15,10 @@ export default function PrivacyPage () {
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >POLÍTICA DE PRIVACIDAD Y SEGURIDAD DE ROZAVIHT</h1>
         <div className="img16-9">
-          <Image src={"/img/privacy-banner-16-9.webp"} height={959} width={1280} alt={'hola'} layout="responsive"/>
+          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-16-9.webp"} height={959} width={1280} alt={'hola'} layout="responsive"/>
         </div>
         <div className="img3-1">
-          <Image src={"/img/privacy-banner-3-1.webp"} height={426} width={1280} alt={'hola'} layout="responsive"/>
+          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/privacy-banner-3-1.webp"} height={426} width={1280} alt={'hola'} layout="responsive"/>
         </div>
       </div>
       <div className="legalPage__content">

@@ -1,32 +1,9 @@
 import Image from 'next/image'
-import prisma from 'lib/prisma'
 
 import type { ReactElement } from "react"
 import type { imageType } from 'services/AppProvider'
 
 import Layout from '@components/Layout'
-
-export async function getStaticProps () {
-  const termsBanners = await prisma.images.findMany({
-    where: {
-      url: {
-        in: ['https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-portrait.webp', 'https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-landscape.webp']
-      }
-    },
-    select: {
-      url: true,
-      alt: true,
-      height: true,
-      width: true
-    }
-  })
-
-  return {
-    props: {termsBanners}
-  }
-}
-
-
 
 interface termsPageProps {
   termsBanners: imageType[]
@@ -39,10 +16,10 @@ export default function termsPage ({termsBanners}:termsPageProps) {
       <div className="legalPage__banner">
         <h1 className="legalPage__title" >TERMINOS Y CONDICIONES DE USO</h1>
         <div className="img16-9">
-          <Image src={"/img/terms-banner-16-9.webp"} height={853} width={1280} alt={'hola'} layout="responsive"/>
+          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-16-9.webp"} height={853} width={1280} alt={'hola'} layout="responsive"/>
         </div>
         <div className="img3-1">
-          <Image src={"/img/terms-banner-3-1.webp"} height={320} width={960} alt={'hola'} layout="responsive"/>
+          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/terms-banner-3-1.webp"} height={320} width={960} alt={'hola'} layout="responsive"/>
         </div>
       </div>
       <div className="legalPage__content">

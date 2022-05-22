@@ -108,7 +108,7 @@ export default function LandingPage () {
       <div className="cbdSection">
         <div className="cbdSection__img-wrapper">
           <div className="cbdSection__img">
-            <Image className="cbdSection__img-content" src='https://rozaviht-media.s3.eu-west-3.amazonaws.com/img/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
+            <Image className="cbdSection__img-content" src='https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
           </div>
         </div>
         <div className="cbdSection__content">
@@ -135,7 +135,7 @@ export default function LandingPage () {
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >
         <div className="rozanewsSection__img">
-          <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/img/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
+          <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
         </div>
         <div className="flexcolum flexcolum--around flexcolum--nopd" style={{ 'width': '100%' }}>
           <div className="rozanewsSection__content">
