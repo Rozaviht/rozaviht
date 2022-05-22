@@ -1,0 +1,138 @@
+.contactPage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 4rem 1rem 3rem 1rem;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &:nth-child(1) {
+      align-items: center;
+      text-align: center;
+
+      & > h1 {
+        margin-bottom: 1rem;
+      }
+    }
+    &:nth-child(2) {
+      margin-top: 4rem;
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    padding: 6rem 15% 5rem 15%;
+  
+  }
+  @include respond-to(desktop, noneOrientation) {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+}
+
+.contactForm {
+   & > div > label > input {
+     max-width: 400px;
+   }
+   & > div > div > label > input {
+     max-width: 400px;
+   }
+
+   & > button {
+     margin-top: 2rem;
+   }
+
+   & > div:nth-child(2) {
+     margin-top: 2rem;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+   }
+
+   & .inputs-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   }
+
+
+   &__subject {
+     position: relative; 
+     padding-bottom: 1rem;
+     border-bottom: 3px solid $maincolor;
+     
+     &.selected {
+       border-bottom: 3px solid #4b9514;
+     }
+    
+      & > span {
+        font-size: 110%;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    
+    & > div:nth-child(2) {
+      flex-direction: row;
+    }
+  }
+}
+
+.subjectsList {
+  z-index: 900;
+  position: absolute;
+  background-color: $backgroundcolor;
+  top: 160%;
+  left: 0;
+  padding: 1rem;
+  border: 2px solid $maincolor;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  max-width: 600px;
+
+  &::before {
+    content: '';
+    z-index: 902;
+    position: absolute;
+    top: -1rem;
+    left: -3px;
+    width: 0;
+    height: 0;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+
+    border-bottom: 1rem solid $maincolor;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  & > ul {
+    margin: 1rem;
+
+
+
+    & > li:first-child{
+      margin-bottom: 10px;
+    }
+
+    & > li:nth-child(n+2) {
+      list-style-type: disc;
+      cursor: pointer;
+    }
+  }
+}
