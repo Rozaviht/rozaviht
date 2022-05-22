@@ -22,21 +22,16 @@ export const paymentRequest: FieldResolver<
 
   const orderNumber = await prisma.order_number.findMany()
 
-  const orderNumberZeroPad = orderNumber.length.toString().padStart(7, "0")
-
-  console.log(orderNumberZeroPad)
-
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
     DS_MERCHANT_MERCHANTCODE: "355542226",
-    DS_MERCHANT_ORDER: `10${orderNumberZeroPad}`, 
+    DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "http://localhost:3000/api/graphql"
+    DS_MERCHANT_MERCHANTURL: "http://rozaviht.vercel.app/api/graphql"
   }
 
-  console.log(merchantData)
   // Base64 encoding of parameters
   var merchantWordArray = cryptojs.enc.Utf8.parse(JSON.stringify(merchantData))
   var merchantBase64 = merchantWordArray.toString(cryptojs.enc.Base64)
