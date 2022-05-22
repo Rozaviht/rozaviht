@@ -1,3 +1,4 @@
+import prisma from 'lib/prisma'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect } from 'react'
@@ -9,10 +10,11 @@ import Layout from '@components/Layout'
 import Logo from '../public/img/logo.svg'
 import RozanewsIlustration from '../public/img/rozanews-ilustration.svg'
 import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
+import { articleType, dateOptions } from './rozanews'
 
 
 
-export default function LandingPage () {
+export default function LandingPage ({threeArticles}: {threeArticles: articleType[]}) {
   
   useEffect(() => {
     let observerOptions = {
@@ -142,7 +144,7 @@ export default function LandingPage () {
             <div className="rozanewsSection__title">
               <h1>ROZANEWS</h1>
               <div className="typewriter">
-                <h3 className="section-tagline">&quotInformate de lo que te importa&quot</h3>
+                <h3 className="section-tagline">"Informate de lo que te importa"</h3>
               </div>
             </div>
             <p > 
@@ -181,6 +183,40 @@ export default function LandingPage () {
       </div>
     </div>
   )
+}
+
+export const getStaticProps = async () => {
+  const articlesRawData = await prisma.articles.findMany({
+    where: {
+      published: true
+    },
+    select: {
+      title: true,
+      content: true,
+      image: {
+        select: {
+          id: true,
+          url: true,
+          alt: true,
+          height: true,
+          width: true
+        }
+      },
+      createdAt: true,
+    },
+    take: 3
+  })
+
+  const threeArticles: articleType[] = []
+  articlesRawData.forEach( article => threeArticles.push({
+    ...article,
+      createdAt: article.createdAt.toLocaleDateString('es-ES', dateOptions)
+  }))
+
+  return {
+    props: { threeArticles },
+    revalidate: 60 * 60 * 24 * 3
+  }
 }
 
 

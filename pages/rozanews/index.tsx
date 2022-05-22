@@ -119,6 +119,7 @@ export default function Rozanews ({ articlesCategoriesData }: rozanewsProps) {
   return(
     <div className="rozanews">
       <div className="rozanews__hero">
+        <div className="bannerBar"></div>
         <div className="img16-9">
           <Image src={"/img/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'hola'} layout="responsive"/>
         </div>

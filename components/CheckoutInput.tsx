@@ -20,7 +20,7 @@ interface CheckoutInputProps {
 }>
 }
 
-export default function CheckoutInput ({errors, inputName, inputPlaceHolder, inputType}: CheckoutInputProps) {
+export default function CheckoutInput ({errors, inputName, inputPlaceHolder}: CheckoutInputProps) {
 
   const readObjProp = (obj: any, prop: string) => {
     return obj[prop]
