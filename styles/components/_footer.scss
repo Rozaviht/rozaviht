@@ -17,7 +17,7 @@
 
 .footer__sub {
   width: 100%;
-  padding: 5rem 5% 2rem 5%;
+  padding: 5rem 5% 3rem 5%;
   display: flex;
   flex-direction: column;
   background-color: $yellowbackgroundcolor;
@@ -41,7 +41,7 @@
   }
 
   @include respond-to(tabletPortrait, protraitOrientation) {
-    padding: 6rem 15% 2rem 15%;
+    padding: 6rem 15% 3rem 15%;
   }
   
   @include respond-to(tabletLandscape, landscapeOrientation) {
@@ -66,7 +66,7 @@
   }
 
   @include respond-to(desktop, noneOrientation) {
-    padding: 6rem 12% 2rem 12%;
+    padding: 6rem 12% 3rem 12%;
   }
 }
 

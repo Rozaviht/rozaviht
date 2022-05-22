@@ -1,7 +1,7 @@
 $faqCardAmoutn: 4;
 
 .faqPage {
-  padding: 2rem 0rem 0rem 0rem ;
+  padding: 2rem 0rem 3rem 0rem ;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ $faqCardAmoutn: 4;
     align-items: center;
   
     & > div:nth-child(n) {
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
   }
 

@@ -94,9 +94,6 @@ export default function FaqCategoryPage ({faqCategory, faqCategoriesTitles}:faqC
 }
 
 FaqCategoryPage.getLayout = function getLayout(page: ReactElement) {
-
-
-
   return (
     <Layout>
       <FaqProvider>

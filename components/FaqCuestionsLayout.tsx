@@ -12,8 +12,9 @@ export default function FaqCuestionsLayout ({children}:FaqCuestionsLayoutProps) 
 
 
   return (
-    <>
+    <div className="faqLayout">
       <div className="faqCategory-menu">
+        <h2>Categorias</h2>
         {faqTitles!.map( (faqTitle, index) =>
           <Link key={index} href={`/preguntas-frecuentes/${faqTitle.toLowerCase()}`}>
             <a >{faqTitle}</a>
@@ -21,6 +22,6 @@ export default function FaqCuestionsLayout ({children}:FaqCuestionsLayoutProps) 
         )}
       </div>
       {children}
-    </>
+    </div>
   )
 }
