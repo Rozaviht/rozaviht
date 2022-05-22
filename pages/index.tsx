@@ -144,7 +144,7 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
             <div className="rozanewsSection__title">
               <h1>ROZANEWS</h1>
               <div className="typewriter">
-                <h3 className="section-tagline">"Informate de lo que te importa"</h3>
+                <h3 className="section-tagline">{`"Informate de lo que te importa"`}</h3>
               </div>
             </div>
             <p > 
