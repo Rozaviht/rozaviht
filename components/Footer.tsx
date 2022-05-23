@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors }
 import { userValidation } from '../middleware/validations'
 
 import SubcriptionAlert from './SubcriptionAlert'
+import LoadingDots from './LoadingDots'
 
 import Logo from 'public/img/logo.svg'
 import InstagramIcon from 'public/img/instagram-icon.svg'
@@ -88,7 +89,10 @@ const Footer = () => {
                     <span className="customInput__label">Introduce aquí tu correo</span>
                   </label>
                   < ErrorMessage name='subEmail' className="customInput__errmssg" component={'span'} />
-                  <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>UNIRSE</button>
+                  <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>
+                    UNIRSE
+                    <LoadingDots show={isSubmitting} />
+                  </button>
               </Form>
             )}
           </Formik>

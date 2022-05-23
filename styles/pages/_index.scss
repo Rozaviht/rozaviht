@@ -187,7 +187,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: 
-  "img"
+  "cards"
   "content";
 
   &__title {
@@ -208,9 +208,10 @@
     }
   }
 
-  &__img {
-    grid-area: img;
+  &__cards {
+    grid-area: cards;
     width: 100%;
+    position: relative;
   }
 
   &__content {
@@ -234,18 +235,6 @@
     position: relative;
   
     font-size: 1.4rem;
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 95%;
-        transform: translate(-50%, -50%);
-        width: 0.7rem;
-        height: 1.4rem;
-        background-color: $maincolor;
-        animation: blink 1s infinite 0.8s;
-      }
   }
 
   &__illustration {
@@ -255,15 +244,13 @@
 
   @include respond-to(mobileLandscape, landscapeOrientation) {
     font-size: 1.1rem;
-
-
   }
 
   @include respond-to(tabletLandscape, landscapeOrientation) {
     padding: 4rem 5% 5rem 4%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: "content img";
+    grid-template-areas: "content cards";
 
     &::after {
       height: 100%;
@@ -293,7 +280,7 @@
 
     &__content {
       padding: 2rem;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       border-radius: 5px;
       -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
       box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
@@ -472,20 +459,11 @@
   letter-spacing: 0.13em;
 
   &.aniON {
-    animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end);
+    animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end), stopBlink 1s step-start 5s forwards;
   }
 }
 
 /* -------- ANIMATIONS --------- */
-
-@keyframes blink {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 @keyframes blink-caret {
   from,
@@ -503,5 +481,14 @@
   }
   to {
     width: 100%;
+  }
+}
+
+@keyframes stopBlink {
+  from {
+    border-right: 0.8rem solid $maincolor;;
+  }
+  to{
+    border-right: none;
   }
 }

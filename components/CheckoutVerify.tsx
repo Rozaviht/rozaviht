@@ -146,7 +146,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
             <div>
               <span className="checkCircle"></span>
-              <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
+              <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/correos-logo.webp'} height={175} width={175} layout="responsive" /></div></h4>
               <p>El tiempo estimado de entrega es de 2 a 5 días hábiles. <strong>2,00€</strong></p>
             </div>
           </label>
@@ -154,7 +154,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
             <div>
               <span className="checkCircle"></span>
-              <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'/img/correos-logo.png'} height={175} width={175} layout="responsive" /></div></h4>
+              <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/correos-logo.webp'} height={175} width={175} layout="responsive" /></div></h4>
               <p>El tiempo estimado de entrega es de 1 a 3 días hábiles. <strong>3,50€</strong></p>
             </div>
           </label>
@@ -167,8 +167,9 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
               <span className="checkCircle"></span>
               <h4>Tarjeta de Crédito</h4>
               <div className="flexrow flexrow--separateall flexrow--nopd">
-                <div className="creditCardImg"><Image src={"/img/visa-logo.png"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
-                <div className="creditCardImg"><Image src={"/img/mastercard-logo.png"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
+                <div className="creditCardImg"><Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/visa-logo.webp"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
+                <div className="creditCardImg"><Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/mastercard-logo.webp"} height={265} width={443} alt="Logo de Visa" layout="responsive" /></div>
+                <div className="creditCardImg"><Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/maestro-logo.webp"} height={268} width={445} alt="Logo de Visa" layout="responsive" /></div>
               </div>
             </div>
           </label>

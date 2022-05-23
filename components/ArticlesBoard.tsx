@@ -25,7 +25,7 @@ export default function ArticlesBoard ({categorieSelected}: ArticlesBoardProps) 
       <h1>Categoría: {categorieSelected.name}</h1>
       <div className="articlesBoard">
         {categorieSelected.articles.map( (article, index) => 
-          < ArticleCard key={index} article={article} />
+          < ArticleCard key={index} article={article} type={"blog"} />
         )}
       </div>
     </div>

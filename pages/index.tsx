@@ -11,6 +11,7 @@ import Logo from '../public/img/logo.svg'
 import RozanewsIlustration from '../public/img/rozanews-ilustration.svg'
 import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
 import { articleType, dateOptions } from './rozanews'
+import ArticleCardSlider from '@components/ArticleCardSlider'
 
 
 
@@ -97,7 +98,7 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
 
       }
     })
-  })
+  }, [])
 
 
   return (
@@ -136,8 +137,8 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >
-        <div className="rozanewsSection__img">
-          <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-section-banner.webp'} alt={'Hombre escribiendo en un cuaderno el eslogan de Rozaviht con un cafe'}  width={1024} height={682} layout="responsive"/>
+        <div className="rozanewsSection__cards">
+          <ArticleCardSlider articles={threeArticles} />
         </div>
         <div className="flexcolum flexcolum--around flexcolum--nopd" style={{ 'width': '100%' }}>
           <div className="rozanewsSection__content">

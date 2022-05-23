@@ -35,7 +35,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
     <div className="cbdPage">
       <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
-        <ProductImageSlider productImageData={CbdProductsData.images} ></ProductImageSlider>
+        <ProductImageSlider productImages={CbdProductsData.images} ></ProductImageSlider>
         <div className="flexcolum flexcolum--around">
           <h1 className="product-hero__title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>

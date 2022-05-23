@@ -4,13 +4,13 @@ import Dots from '@components/SliderDots'
 
 import type { imageType } from 'services/AppProvider'
 
-type ProductImageSliderProps = {
-  productImageData: imageType[]
+interface ProductImageSliderProps {
+  productImages: imageType[]
 }
 
-const ProductImageSlider = ({productImageData}: ProductImageSliderProps) => {
+const ProductImageSlider = ({productImages}: ProductImageSliderProps) => {
 
-  const cleanedProductImgs = productImageData.slice(0,4)
+  const cleanedProductImgs = productImages.slice(0,4)
 
   const [currentImage, setCurrentImage] = useState(0)
 

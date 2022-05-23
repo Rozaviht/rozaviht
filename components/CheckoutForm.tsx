@@ -4,7 +4,9 @@ import { gql, useMutation } from '@apollo/client'
 import { CheckoutContext } from 'services/CheckoutContext'
 import { ErrorMessage, Field, Form, Formik, validateYupSchema, yupToFormErrors } from 'formik'
 import { shippingFormRules } from 'middleware/validations'
+
 import CheckoutInput from './CheckoutInput'
+import LoadingDots from './LoadingDots'
 
 import provinciasData from "../data/pronviciasData.json"
 import municipiosData from "../data/municipiosData.json"
@@ -167,7 +169,10 @@ export default function CheckoutForm () {
               <span className="note-span">*Opcional:  Escribe algún comentario que pueda facilitar la entrega al repartirdor.</span>
             </div>
           </div>
-          <button type="submit" className="checkoutform-bt" disabled={isSubmitting} >Verificar los datos</button>
+          <button type="submit" className="checkoutform-bt" disabled={isSubmitting}>
+            Verificar los datos
+            <LoadingDots show={isSubmitting} />
+          </button>
         </Form>
       )}
     </Formik>

@@ -166,6 +166,7 @@ body {
 }
 
 .cta {
+  position: relative;
   padding: 1rem 2rem 1rem 2rem;
   font-size: 1.2rem;
   border: unset;
@@ -487,5 +488,47 @@ body {
   display: none;
   @include respond-to(mobileLandscape, landscapeOrientation) {
       display: inline;
+  }
+}
+
+
+.show {
+  display: block;
+}
+
+.hidden{
+  display: none;
+}
+
+#loadingDots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#loadingDots #loadingDot1{
+  animation: load 1s infinite;
+}
+
+#loadingDots #loadingDot2{
+  animation: load 1s infinite;
+  animation-delay: 0.2s;
+}
+
+#loadingDots #loadingDot3{
+  animation: load 1s infinite;
+  animation-delay: 0.4s;
+}
+
+@keyframes loading{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
   }
 }
