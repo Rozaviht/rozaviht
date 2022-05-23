@@ -6,7 +6,7 @@ const name = yup
   .min(2, 'El nombre debe ser al menos de 2 caracteres.')
   .matches(/^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/, 'El nombre solo debe contener letras.')
 
-const email = yup
+const mail = yup
   .string()
   .required('El email es obligatorio.')
   .email('Este formato de email no es valido, verifica que sea como este formato: abc@email.com.')
@@ -30,7 +30,7 @@ const message = yup
 
 export const contactMessageRules = yup.object().shape({
   name,
-  email,
+  mail,
   subject,
   phone,
   message

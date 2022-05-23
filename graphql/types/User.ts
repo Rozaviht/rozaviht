@@ -11,10 +11,10 @@ export const User = objectType({
   }
 })
 
-const subcriptionResponse = objectType({
-  name: 'subcriptionResponse',
+export const PopUpResponse = objectType({
+  name: 'popUpResponse',
   definition(t) {
-    t.nonNull.string('message')
+    t.nonNull.list.string('message')
     t.nonNull.boolean('error')
   }
 })
@@ -23,7 +23,7 @@ export const createUser = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('createUser', {
-      type: subcriptionResponse,
+      type: PopUpResponse,
       args: { email: nonNull(stringArg()) },
       resolve: validateCreateUser,
     })

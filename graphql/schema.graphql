@@ -5,7 +5,7 @@
 type Article {
   category: ArticleCategory
   categoryId: String!
-  content: String!
+  content: String
   id: String!
   images: Image
   published: Boolean!
@@ -38,9 +38,10 @@ type Image {
 
 type Mutation {
   createOrderNumber: createOrderNumberRes
-  createUser(email: String!): subcriptionResponse
+  createUser(email: String!): popUpResponse
   paymentRequest(orderAmount: Float!): paymentResponse
   validateBillingForm(input: billingFormInputs): checkoutFormResponse
+  validateSendContactMail(input: contactMessageInputs): popUpResponse
   validateShippingForm(input: shippingFormInputs): checkoutFormResponse
 }
 
@@ -111,6 +112,14 @@ type checkoutFormResponse {
   message: [String]!
 }
 
+input contactMessageInputs {
+  mail: String!
+  message: String!
+  name: String!
+  orderNumber: String
+  subject: String!
+}
+
 type createOrderNumberRes {
   success: Boolean!
 }
@@ -152,6 +161,11 @@ type paymentResponse {
   Ds_SignatureVersion: String!
 }
 
+type popUpResponse {
+  error: Boolean!
+  message: [String]!
+}
+
 input shippingFormInputs {
   address: String!
   addressNumber: String!
@@ -164,9 +178,4 @@ input shippingFormInputs {
   postalcode: String!
   provincie: String!
   shippingComment: String
-}
-
-type subcriptionResponse {
-  error: Boolean!
-  message: String!
 }

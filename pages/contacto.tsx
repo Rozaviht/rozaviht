@@ -1,11 +1,29 @@
 import Layout from "@components/Layout"
 import { ErrorMessage, Field, Form, Formik, validateYupSchema, yupToFormErrors, useFormikContext } from "formik"
 import { contactMessageRules } from "middleware/validations/contactMessage"
-import { ReactElement, useState } from "react"
+import { ReactElement, useContext, useState } from "react"
+
+import PopUpAlert from '@components/PopUpAlerts'
 
 import { subjects } from "data/contactFormSubjects"
+import { AppContext } from "services/AppContext"
+import { gql, useMutation } from "@apollo/client"
+
+
+const SEND_CONTACT_MAIL = gql`
+  mutation ValidateSendContactMail($input: contactMessageInputs) {
+    validateSendContactMail(input: $input) {
+      message
+      error
+    }
+  }
+`
 
 export default function ContactPage () {
+
+  const { setShowPopUp, setPopUpMssg, popUpMssg } = useContext(AppContext)
+
+  const [ validateSendContactMail ] = useMutation(SEND_CONTACT_MAIL)
 
   const [showSubjects, setShowSubjects] = useState(false)
 
@@ -21,7 +39,7 @@ export default function ContactPage () {
           initialValues={{
             subject: 'ASUNTO DE TU DUDA',
             name: '',
-            email: '',
+            mail: '',
             orderNumber: '',
             message: ''
           }}
@@ -35,7 +53,21 @@ export default function ContactPage () {
             return {}
           }}
           onSubmit={(values, {setSubmitting}) => {
-
+            const input = values
+            validateSendContactMail({variables: {input}})
+            .then(({data}) => {
+              if (data.validateSendContactMail.error === true) {
+                setPopUpMssg(data.validateSendContactMail.message)
+                setShowPopUp(true)
+              } else {
+                setPopUpMssg(data.validateSendContactMail.message)
+                setShowPopUp(true)
+              }
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          setSubmitting(false)
           }}
         >
           {({
@@ -74,11 +106,11 @@ export default function ContactPage () {
                   <ErrorMessage name="name" component={'span'} className="checkout-input-errmssg" />
                 </div>
                 <div className="input-wrapper">
-                  <label htmlFor="email" className="checkout-label" >
-                    <Field  type='text' autoComplete="off" name="email" placeholder=" " className={errors.email ? "checkout-input checkout-input--error" : "checkout-input"}/>
+                  <label htmlFor="mail" className="checkout-label" >
+                    <Field  type='text' autoComplete="off" name="mail" placeholder=" " className={errors.mail ? "checkout-input checkout-input--error" : "checkout-input"}/>
                     <span className="checkout-labelcontent">Email</span>
                   </label>
-                  <ErrorMessage name="email" component={'span'} className="checkout-input-errmssg" />
+                  <ErrorMessage name="mail" component={'span'} className="checkout-input-errmssg" />
                 </div>
               </div>
               <div className="input-wrapper">
@@ -97,6 +129,7 @@ export default function ContactPage () {
                 <ErrorMessage name='message' component={'span'} className="checkout-input-errmssg" />
               </div>
               <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>Enviar tu pregunta</button>
+              <PopUpAlert/>
             </Form>
           )}
         </Formik>

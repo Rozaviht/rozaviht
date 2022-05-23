@@ -11,6 +11,10 @@ export type AppContextProps = {
     setCookiesManageShow: Dispatch<SetStateAction<boolean>>,
     showCart: boolean,
     setShowCart: Dispatch<SetStateAction<boolean>>,
+    showPopUp: boolean,
+    setShowPopUp: Dispatch<SetStateAction<boolean>>,
+    popUpMssg: string[]
+    setPopUpMssg: Dispatch<SetStateAction<string[]>>,
 
 }
 

@@ -15,7 +15,6 @@ export const validateShippingForm: FieldResolver<
       error: false
     }
   } catch (err) {
-    console.log(err)
     return {
       message: [(err as yup.ValidationError).message] || ['El formulario no es valido'],
       error: true

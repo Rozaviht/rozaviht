@@ -7,7 +7,7 @@ export const Article = objectType({
   definition(t) {
     t.nonNull.string('id')
     t.nonNull.string('title')
-    t.nonNull.string('content')
+    t.string('content')
     t.nonNull.boolean('published')
     t.nonNull.string('categoryId')
     t.field('images', {

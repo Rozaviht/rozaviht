@@ -13,7 +13,7 @@ export const validateCreateUser: FieldResolver<
     await userValidation.validate(email)
   } catch (err) {
     return {
-      message: (err as yup.ValidationError).message || 'Email no valido',
+      message: [ "Ups Vaya ha habido un error!!" ,(err as yup.ValidationError).message || 'Email no valido'],
       error: true
     }
   }
@@ -26,7 +26,7 @@ export const validateCreateUser: FieldResolver<
   
     if (userExist) {
       return {
-        message: 'Este email ya esta registrado',
+        message: ["Ups Vaya ha habido un error!!","Este email ya esta registrado"],
         error: true
       }
     }
@@ -39,7 +39,7 @@ export const validateCreateUser: FieldResolver<
       }
     })
       return {
-        message: 'Se ha registrado el email correctamente',
+        message: ["Muchas gracias por subscribirte!!!", "En el transcurso del día, recibirás un correo electrónico confirmando la subcripción."],
         error: false
       }
 }

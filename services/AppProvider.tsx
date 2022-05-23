@@ -31,8 +31,22 @@ export type CartItemType = {
   const [cartProducts, setCartProducts] = useState<CartItemType[]>([])
   const [totalCartPrice, setTotalCartPrice] = useState<number>(0)
   const [showCart, setShowCart] = useState(false);
+  const [showPopUp, setShowPopUp] = useState(false)
+  const [popUpMssg, setPopUpMssg] = useState(['', ''])
   /* This variable is only for now, for testing UI */
   const [cookiesManageShow, setCookiesManageShow] = useState(false)
+
+  useEffect(() => {
+
+    if (showPopUp === true) {
+      const popUpInterval = setTimeout(() => {
+        setShowPopUp(showPopUp => !showPopUp)
+      }, 7100)
+      return () => clearInterval(popUpInterval)
+    }
+
+
+  }, [showPopUp])
 
   useEffect(() => {
     if (window) {
@@ -55,7 +69,7 @@ export type CartItemType = {
   };
 
   return (
-    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart, cookiesManageShow, setCookiesManageShow, showCart, setShowCart }}>
+    <AppContext.Provider value={{cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, handleRemoveFromCart, cookiesManageShow, setCookiesManageShow, showCart, setShowCart, showPopUp, setShowPopUp, popUpMssg, setPopUpMssg }}>
       {children}
     </AppContext.Provider>
   )

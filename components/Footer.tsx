@@ -4,7 +4,7 @@ import { gql, useMutation } from '@apollo/client'
 import { Formik, Form, Field, ErrorMessage, validateYupSchema, yupToFormErrors } from 'formik'
 import { userValidation } from '../middleware/validations'
 
-import SubcriptionAlert from './SubcriptionAlert'
+import PopUpAlert from './PopUpAlerts'
 import LoadingDots from './LoadingDots'
 
 import Logo from 'public/img/logo.svg'
@@ -25,10 +25,10 @@ const CREATE_USER = gql`
 const Footer = () => {
   const [ createUser ] = useMutation(CREATE_USER)
 
-  const { setCookiesManageShow} = useContext(AppContext)
+  const { setCookiesManageShow, setShowPopUp, popUpMssg, setPopUpMssg} = useContext(AppContext)
 
   const [footerListDropped, setFooterListDropped] = useState(false)
-  const [showSubAlert, setShowSubAlert] = useState(false)
+
 
   const dropFooterList = () => setFooterListDropped(!footerListDropped)
 
@@ -68,9 +68,11 @@ const Footer = () => {
                 createUser({variables:  values})
                   .then(({data}) => {
                     if (data.createUser.error === true) {
-                      console.log(data.createUser)
+                      setPopUpMssg(data.createUser.message)
+                      setShowPopUp(true)
                     } else {
-                      setShowSubAlert(true)
+                      setPopUpMssg(data.createUser.message)
+                      setShowPopUp(true)
                     }
                   })
                   .catch(err => {
@@ -84,11 +86,11 @@ const Footer = () => {
               isSubmitting
             }) => (
               <Form className="footer__sub-input">
-                  <label htmlFor='subEmail' className="customInput" >
-                    <Field type='email' autoComplete="off" name='subEmail' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
+                  <label htmlFor='email' className="customInput" >
+                    <Field type='email' autoComplete="off" name='email' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
                     <span className="customInput__label">Introduce aquí tu correo</span>
                   </label>
-                  < ErrorMessage name='subEmail' className="customInput__errmssg" component={'span'} />
+                  <ErrorMessage name='email' className="customInput__errmssg" component={'span'} />
                   <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>
                     UNIRSE
                     <LoadingDots show={isSubmitting} />
@@ -96,7 +98,7 @@ const Footer = () => {
               </Form>
             )}
           </Formik>
-          <SubcriptionAlert showSubAlert={showSubAlert} setShowSubAlert={setShowSubAlert} /> 
+          <PopUpAlert /> 
         </div>
         <div className="footer__downSide">
           <div className="dropMenu">
@@ -140,7 +142,7 @@ const Footer = () => {
           <div className="footer__logoImg">
             <Logo alt="logo de Rozaviht" />
           </div>
-          <p style={{fontSize: "0.6rem"}}>Reservados todos los derechos @ 2022 Rozaviht</p>
+          <p style={{fontSize: "0.6rem"}}>Reservados todos los derechos © 2022 Rozaviht</p>
           <div className="flexrow">
             <Link href="/privacidad-seguridad" >
               <a style={{borderRight: "1px solid #9b532b", paddingRight: "0.5rem", fontSize: "0.6rem"}}>
