@@ -4,7 +4,7 @@ export default function functionName ({show}: {show: boolean}) {
     <title>dots</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="dots"  fill="#9b532b">
             <circle id="loadingDot1" cx="25" cy="30" r="13"></circle>
             <circle id="loadingDot2" cx="65" cy="30" r="13"></circle>
