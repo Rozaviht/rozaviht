@@ -25,11 +25,6 @@
     }
   }
 
-  & > button {
-    position: absolute;
-    bottom: 1rem;
-  }
-
   &--fixed {
     border: 3px solid $maincolor;
     padding: 1rem;
@@ -52,11 +47,6 @@
       border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
     }
 
-    & > button {
-      position: relative;
-      margin-top: 2rem;
-      bottom: 0;
-    }
     &.hidden {
       display: none;
     }
@@ -232,7 +222,8 @@
 }
 
 .checkoutform-bt {
-  position: relative;
+  position: absolute;
+  bottom: 0;
   width: 80%;
   max-width:500px;
   padding: 0.8rem 1rem 0.8rem 1rem;
@@ -241,4 +232,9 @@
   border-radius: 5px;
   font-size: 1.2rem;
   align-self: center;
+
+  &--fixed {
+    position: relative;
+    margin-top: 2rem;
+  }
 }

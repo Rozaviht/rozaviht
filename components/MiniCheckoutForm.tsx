@@ -111,6 +111,10 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
         values
       }) => (
         <Form className={showBillingForm === true ? "checkoutForm checkoutForm--fixed" : "checkoutForm checkoutForm--fixed hidden"}>
+            <button className="closeBt closeBt--topRight" onClick={() => setShowBillingForm(false)}>
+              <div className="closeBt__lineL"></div>
+              <div className="closeBt__lineR"></div>
+            </button>
             <h2>Datos de Facturación</h2>
             {firstInputs.map( (input, index) =>
               <CheckoutInput key={index} errors={errors} inputName={input.inputName} inputPlaceHolder={input.inputPlaceHolder} inputType={input.inputType} />
@@ -154,7 +158,7 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
               </div>
               {/* INPUT DOORDETAILS */}
               <CheckoutInput errors={errors} inputName={inputsParams[5].inputName} inputPlaceHolder={inputsParams[5].inputPlaceHolder} inputType={inputsParams[5].inputType} />
-            <button type="submit" className="checkoutform-bt" disabled={isSubmitting} >Verificar los datos</button>
+            <button type="submit" className="checkoutform-bt checkoutform-bt--fixed" disabled={isSubmitting} >Verificar los datos</button>
           </Form>
       )}
     </Formik>

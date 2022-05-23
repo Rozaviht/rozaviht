@@ -143,7 +143,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 style={{ 'marginTop': '2rem' }}>Método de envío</h2>
         <div className="flexcolum flexcolum--separate">
           <label htmlFor="regularShip" className="shippingCheck">
-            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
+            <input type='checkbox' name="regularShip" value={'standard_shipping'} className="checkoutVerify__shipping-method" checked={shippingChecked} onClick={() => setShippingChecked(shippingChecked => shippingChecked === true ? shippingChecked : !shippingChecked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Estandar <div style={{ 'width': '35px' }}>< Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/correos-logo.webp'} height={175} width={175} layout="responsive" /></div></h4>
@@ -151,7 +151,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
             </div>
           </label>
           <label htmlFor="expressShip" className="shippingCheck">
-            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={(e) => setShippingChecked((e.target as HTMLInputElement).checked)}/>
+            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={() => setShippingChecked(shippingChecked => shippingChecked === false ? shippingChecked : !shippingChecked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/correos-logo.webp'} height={175} width={175} layout="responsive" /></div></h4>
@@ -194,7 +194,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
           <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />
         </form>
-        <button className="checkoutform-bt" type='button' onClick={handleResysSubmit}>Pagar</button>
+        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleResysSubmit}>Pagar</button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>
