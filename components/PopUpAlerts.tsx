@@ -10,7 +10,7 @@ export default function PopUpAlerts () {
 
   return (
     <div className={showPopUp === true ? "subAlert aniOn" : "subAlert"}>
-      <h2>{popUpMssg[0]}</h2>
+      <h3>{popUpMssg[0]}</h3>
       <p>{popUpMssg[1]}</p>
       <div className={showPopUp === true ? "popup-bartime-1 aniOn" : "popup-bartime-1"}></div>
       <div className="popup-bartime-2"></div>

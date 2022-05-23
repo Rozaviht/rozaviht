@@ -36,7 +36,7 @@ const Footer = () => {
       <div className="footer">
         <div className="footer__sub">
           <div className="footer__sub-text">
-            <h2>¡Únete a la comunidad!</h2>
+            <h2>¡Únete a Rozaviht!</h2>
             <p>
               Mantente enterado de nuestras novedades, y tranquilo solo te escribiremos cuando publiquemos 
               nuevos artículos o saquemos un nuevo producto.
@@ -86,12 +86,12 @@ const Footer = () => {
               isSubmitting
             }) => (
               <Form className="footer__sub-input">
-                  <label htmlFor='email' className="customInput" >
+                  <label htmlFor='email' className="customInput customInput--bgcolor" >
                     <Field type='email' autoComplete="off" name='email' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
                     <span className="customInput__label">Introduce aquí tu correo</span>
                   </label>
                   <ErrorMessage name='email' className="customInput__errmssg" component={'span'} />
-                  <button className="cta cta--maincolor" type='submit' disabled={isSubmitting}>
+                  <button className="cta cta--negative" type='submit' disabled={isSubmitting}>
                     UNIRSE
                     <LoadingDots show={isSubmitting} />
                   </button>

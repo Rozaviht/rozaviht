@@ -32,7 +32,7 @@ const Cart = ({ifCheckout}: {ifCheckout: boolean}) => {
           ?
             <>
                 <h1>! Ups Vaya¡</h1>
-                <h2 className="h--aligncenter">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
+                <h2 className="h--aligncenter">Tu cesta de la compra esta vacía, a que esperas para llenarla</h2>
                 <div className="cart__emptyImg">
                   <EmptyBasket />
                 </div>

@@ -360,15 +360,6 @@
     background-color: $maincolor;
   }
 
-  &::after {
-    content: '';
-    height: 1px;
-    width: 90%;
-    position: absolute;
-    bottom: 0;
-    background-color: $maincolor;
-  }
-
   @include respond-to(mobileLandscape, landscapeOrientation) {
     padding: 5rem 8% 5rem 8%;
 

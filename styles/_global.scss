@@ -217,6 +217,15 @@ body {
 .customInput {
   position: relative;
 
+  &--bgcolor {
+    & .customInput__label {
+      color: $backgroundcolor;
+    }
+    & .customInput__input {
+      border: 3px solid $backgroundcolor;
+    }
+  }
+
   &__label {
     position: absolute;
     top: 0;
@@ -228,7 +237,7 @@ body {
     white-space: nowrap;
     transform: translate(0, 0);
     transform-origin: 0 0;
-    background-color: $yellowbackgroundcolor;
+    background-color: $maincolor;
     line-height: 1.2;
     transition: all 0.3s ease;
   }
@@ -435,7 +444,7 @@ body {
   &__title {
     width: 80%;
     position: absolute;
-    z-index: 201;
+    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -444,7 +453,7 @@ body {
   }
   
   &__content {
-    padding: 2rem;
+    padding: 2rem 2rem 4rem 2rem;
     width: 100%;
 
     & > *{
@@ -460,6 +469,9 @@ body {
   }
   
   @include respond-to(tabletLandscape, landscapeOrientation) {
+    &__title {
+      font-size: 300%;
+    }
     &__content {
       padding-left: 10%;
       padding-right: 10%;

@@ -50,18 +50,15 @@ export default function FAQPage ({faqCategories}:FAQPageProps) {
 
   return (
     <div className="faqPage">
-      <div className="faqPage__img">
-        <Image src={'/img/faq-banner.webp'} height={1352} width={1849} alt="" layout="responsive" />
-      </div>
-      <div className="faqPage__content">
+      <h1>Preguntas Frecuentes</h1>
         <h3>En esta página encontrarás las preguntas frecuentes que podrían hacerse nuestros clientes, con sus respectivas soluciones.</h3>
-        <h3>Si aún trás haber visto las posibles preguntas sigues teniendo alguna duda, no dudes en consultarnos en nuestro campo de contacto.</h3>
+        <h3>Si aún trás haber visto las posibles preguntas sigues teniendo alguna duda, consultarnos a través de nuestra página de contacto, rellenenando el formulario.</h3>
+        <div className="backgroundBar"></div>
         <div className="faqPage__cuestions">
           {faqCategories.map( (faqCategory, index) => 
             < FAQCard faqCategory={faqCategory} key={index}  />
           )}
         </div>
-      </div>
     </div>
   )
 }
