@@ -10,11 +10,6 @@ export default function ArticleCardSlider ({articles}: ArticleCardSliderProps) {
 
   const [currentArticle, setCurrentArticle] = useState(0)
 
-  
-  if (!Array.isArray(articles) || articles.length <= 0) {
-    return null
-  }
-
   useEffect(() => {
     const articlesInterval = setTimeout(() =>{
       setCurrentArticle(currentArticle => currentArticle === articles.length - 1 ? 0 : currentArticle + 1)
@@ -22,6 +17,10 @@ export default function ArticleCardSlider ({articles}: ArticleCardSliderProps) {
     
     return () => clearInterval(articlesInterval)
   }, [currentArticle])
+  
+  if (!Array.isArray(articles) || articles.length <= 0) {
+    return null
+  }
 
   return (
     <div className="">

@@ -98,6 +98,10 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
 
       }
     })
+
+    return () => {
+      document.removeEventListener("resize", () => {});
+    };
   }, [])
 
 
