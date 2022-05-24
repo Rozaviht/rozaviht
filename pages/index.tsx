@@ -195,41 +195,6 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
   )
 }
 
-export const getStaticProps = async () => {
-  const articlesRawData = await prisma.articles.findMany({
-    where: {
-      published: true
-    },
-    select: {
-      title: true,
-      content: true,
-      image: {
-        select: {
-          id: true,
-          url: true,
-          alt: true,
-          height: true,
-          width: true
-        }
-      },
-      createdAt: true,
-    },
-    take: 3
-  })
-
-  const threeArticles: articleType[] = []
-  articlesRawData.forEach( article => threeArticles.push({
-    ...article,
-      createdAt: article.createdAt.toLocaleDateString('es-ES', dateOptions)
-  }))
-
-  return {
-    props: { threeArticles },
-    revalidate: 60 * 60 * 24 * 3
-  }
-}
-
-
 LandingPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
