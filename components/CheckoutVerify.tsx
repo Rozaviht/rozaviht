@@ -17,6 +17,7 @@ import MiniTerms from './MiniTerms'
 import MiniPrivacy from './MiniPrivacy'
 import useScrollBlock from '@hooks/useScrollBlock'
 import BillingDataCard from './BillingDataCard'
+import PopUpAlerts from './PopUpAlerts'
 
 export type checkoutVerificationProps = {
   setOrderVerified: Dispatch<SetStateAction<boolean>>,
@@ -42,14 +43,14 @@ const CREATE_ORDER_NUMBER_ =gql`
 
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, totalCartPrice, setShowCart, showCart } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
   const { shippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
   const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER_)
 
   const [shippingChecked, setShippingChecked] = useState(true)
-  const [checkedCifAddress, setCheckedCifAddress] = useState(true)
+  const [checkedBillingForm, setCheckedBillingForm] = useState(true)
   const [checkedTerms, setCheckedTerms] = useState(true)
 
   const [showTerms, setShowTerms] = useState([false, false])
@@ -96,15 +97,23 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
   }
 
   const handleResysSubmit = () => {
-    let orderAmount = 0
-    if ( shippingChecked === true ) {
-      orderAmount = totalCartPrice + 2
+
+    if (checkedTerms === false ) {
+      setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
+      setShowPopUp(true)
+
     } else {
-      orderAmount = totalCartPrice + 3.5
+      let orderAmount = 0
+      if ( shippingChecked === true ) {
+        orderAmount = totalCartPrice + 2
+      } else {
+        orderAmount = totalCartPrice + 3.5
+      }
+      createOrderNumber().then(() =>{
+        paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
+      })
     }
-    createOrderNumber().then(() =>{
-      paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
-    })
+
   }
 
   return (
@@ -112,7 +121,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       <div className="checkoutVerify__content">
         <h2 className="font-LoraMedium">Datos de entrega</h2>
         <div className="shippingdata-card">
-          <strong>{`${shippingForm.name} ${shippingForm.lastName}`}</strong>
+          <strong>{`${shippingForm.name.toLowerCase().charAt(0).toUpperCase() + shippingForm.name.slice(1).toLowerCase()} ${shippingForm.lastName.toLowerCase().charAt(0).toUpperCase() + shippingForm.lastName.slice(1).toLowerCase()}`}</strong>
           <p style={{ 'marginTop': '2rem' }}>{shippingForm.email}</p>
           <p>{`+34 ${shippingForm.phone}`}</p>
           <p style={{ 'marginTop': '1rem' }}>{`${shippingForm.address} ${shippingForm.addressNumber}, ${shippingForm.door}`}</p>
@@ -127,12 +136,12 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         <h2 style={{ 'marginTop': '2rem' }}>Dirección de facturación</h2>
         <div className="flexrow flexrow--separate flexrow--algncenter">
           <label htmlFor="sameAddress" className="checkBox">
-            <input type="checkbox" name="sameAddress"  checked={checkedCifAddress} onClick={(e) => setCheckedCifAddress((e.target as HTMLInputElement).checked)}/>
+            <input type="checkbox" name="sameAddress"  checked={checkedBillingForm} onClick={(e) => setCheckedBillingForm((e.target as HTMLInputElement).checked)}/>
             <div/>
           </label>
           <span>Igual que la dirección de entrega</span>
         </div>
-        < BillingDataCard checkedCifAddress={checkedCifAddress}/>
+        < BillingDataCard checkedCifAddress={checkedBillingForm}/>
         <div className="input-wrapper">
           <label htmlFor="cif" className="checkout-label" >
             <input  type='text' autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>
@@ -177,6 +186,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         </div>
       </div>
       <div className="checkoutVerify__content">
+        <PopUpAlerts />
         <h2>Resumen pedido</h2>
         <div className="flexrow flexrow--nopd flexrow--between">
           <p>{`${cartProducts.length} ${cartProducts.length > 1 ? 'artículos' : 'artículo'}`}</p>

@@ -67,11 +67,14 @@ export default function CheckoutForm () {
         shippingComment: shippingForm.shippingComment
       }}
       validate={values => {
+        console.log(values)
         try {
           validateYupSchema(values, shippingFormRules, true, values)
+
         } catch (err) {
           return yupToFormErrors(err)
         }
+
         return {}
       }}
       onSubmit={(values, {setSubmitting}) => {
@@ -121,23 +124,23 @@ export default function CheckoutForm () {
           <div className="checkoutForm__section">
           <h2>Dirección de entrega</h2>
             {/* INPUT PROVINCIE */}
-            <div className="select-wrapper">
+            <div className={values.provincie === undefined ? "select-wrapper" : "select-wrapper selected"}>
               <Field as="select" className="checkout-select" name="provincie">
                 <option className="checkout-option">Elige tu provincia</option>
                 {provinciasData.map(provincia => (
-                  <option className="checkout-option" key={"provincia"+provincia.provincia_id} value={provincia.provincia_id} >{provincia.nombre}</option>
+                  <option className="checkout-option" key={"provincia"+provincia.provincia_id} value={provincia.provincia_id} >{provincia.nombre.toUpperCase()}</option>
                 ))}
               </Field>
               <ErrorMessage name='provincie' component={'span'} className="checkout-input-errmssg" />
             </div>
             {/* INPUT MUNICIPIE */}
-            <div className="select-wrapper">
+            <div className={values.city === undefined ? "select-wrapper" : "select-wrapper selected"}>
               <Field component="select" className="checkout-select" name="city">
                 <option className="checkout-option">Elige tu municipio</option>
                   {municipiosData.filter(municipio =>
                     municipio.provincia_id === values.provincie
                   ).map(municipio => (
-                    <option key={"municipio"+municipio.municipio_id} value={municipio.nombre} >{municipio.nombre}</option>
+                    <option className="checkout-option" key={"municipio"+municipio.municipio_id} value={municipio.nombre} >{municipio.nombre}</option>
                   ))}
               </Field>
               <ErrorMessage name='city' component={'span'} className="checkout-input-errmssg" />

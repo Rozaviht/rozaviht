@@ -127,7 +127,7 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
         <h3>Otros artículos de la categoría <strong>{articleCatagorieData.name}</strong>, que te pueden interesar:</h3>
         <div className="recomendations__articles">
         {articleCatagorieData.articles.map( (article, index) => 
-          < ArticleCard article={article} key={index} type={"blog"} />
+          < ArticleCard article={article} key={index} />
         )}
         </div>
       </div>

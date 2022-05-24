@@ -12,13 +12,12 @@ export const paymentRequest: FieldResolver<
 
   var amountString = orderAmount.toString().split('.').join("")
 
-  if (amountString.length === 2) {
+  if (orderAmount % 1 === 0) {
     amountString = `${amountString}00`
-  }
-
-  if (amountString.length === 3) {
+  } else {
     amountString = `${amountString}0`
   }
+
 
   var orderNumber = await prisma.order_number.findMany()
 

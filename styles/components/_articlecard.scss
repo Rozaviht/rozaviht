@@ -10,30 +10,49 @@
   -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
   box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
 
-  &--lndg {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%)  rotate(-5deg);
-  }
 
   &__img {
+    border-radius: 10px;
     width: 100%;
+    
+    & > * > img {
+      border-radius: 10px;
+    }
+  }
+
+  &__category {
+    margin-top: 0.5rem;
+    padding: 8px 10px 8px 10px;
+    color: $backgroundcolor;
+    background-color: $maincolor;
+    border-radius: 20px;
   }
 
   &__link {
-    font-size: 1.2rem;
-    color: $maincolor;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    border: 1px solid $maincolor;
-    border-radius: 10px;
+    width: 100%;
+    margin-top: 2rem;
+    text-align: end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    
+    cursor: pointer;
+
+    & > a {
+      font-size: 140%;
+      font-weight: 600;
+      color: $maincolor;
+      margin-right: 8px;
+    }
+
+    & > svg {
+      width: 3rem;
+    }
   }
 
   & > h2 {
-    text-align: center;
-  }
-
-  & > *:nth-child(n+2) {
     margin-top: 0.5rem;
+    text-align: center;
   }
 }

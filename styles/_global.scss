@@ -95,6 +95,34 @@ body {
     text-align: center;
   }
 }
+/* -------SCROLLBAR------- */
+
+::-webkit-scrollbar {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $backgroundcolor;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($maincolor, $alpha: 0.8);
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $maincolor;
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: rgba($maincolor, $alpha: 0.8) $backgroundcolor  ;
+    scrollbar-width: auto;
+  }
+}
+
 
 /* -------BUTTONS------- */
 
@@ -157,6 +185,36 @@ body {
   & .closeBtSlide__lineB {
     width: 1.2rem;
     transform: translateY(0.38rem) translateX(78%) rotate(-45deg);
+  }
+
+  &--leftUp {
+    top: 20%;
+    left: 93%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    
+    @include respond-to(tabletPortrait, protraitOrientation) {
+      top: 50%;
+      left: 90%;
+
+      & .closeBtSlide__lineT,
+        .closeBtSlide__lineC, .closeBtSlide__lineB {
+          width: 2rem;
+          height: 0.4rem;
+      }
+
+      & .closeBtSlide__lineT {
+        width: 1.8rem;
+        transform: translateY(-0.5rem) translateX(50%) rotate(45deg);
+      }
+      & .closeBtSlide__lineB {
+        width: 1.8rem;
+        transform: translateY(0.5rem) translateX(50%) rotate(-45deg);
+      }
+
+    }
+    @include respond-to(desktop, noneOrientation) {
+      left: 80%;
+    }
   }
 
   &--topLeft {

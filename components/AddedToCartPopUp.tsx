@@ -32,11 +32,12 @@ export default function AddedToCartPopUp ({ productAdded, showAddedPopUp, setSho
       <div className="popUp__img">
         <Image src={productAdded.image.url} height={productAdded.image.height!} width={productAdded.image.width!} alt="" layout="responsive" />
       </div>
-      <p>{`¡Genial!, se ha añadido ${productAdded.name} a tu cesta de la compra.`}</p>
-      <button className="closeBt closeBt--topRight" onClick={() => setShowAddedPopUp(false)}>
-          <div className="closeBt__lineL"></div>
-          <div className="closeBt__lineR"></div>
-        </button>
+      <p>{`¡Genial!, se ${productAdded.amount > 1 ? "han" : "ha"} añadido ${productAdded.amount} ${productAdded.name} a tu cesta de la compra.`}</p>
+      <button className="closeBtSlide closeBtSlide--leftUp" onClick={() => setShowAddedPopUp(!showAddedPopUp)}>
+          <div className="closeBtSlide__lineT"></div>
+          <div className="closeBtSlide__lineC"></div>
+          <div className="closeBtSlide__lineB"></div>
+      </button>
     </div>
   )
 }

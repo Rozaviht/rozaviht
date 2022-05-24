@@ -120,7 +120,7 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
               <CheckoutInput key={index} errors={errors} inputName={input.inputName} inputPlaceHolder={input.inputPlaceHolder} inputType={input.inputType} />
             )}
               {/* INPUT PROVINCIE */}
-              <div className="select-wrapper">
+              <div className={values.provincie === undefined ? "select-wrapper" : "select-wrapper selected"}>
                 <Field as="select" className="checkout-select" name="provincie">
                   <option className="checkout-option">Elige tu provincia</option>
                   {provinciasData.map(provincia => (
@@ -130,7 +130,7 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
                 <ErrorMessage name='provincie' component={'span'} className="checkout-input-errmssg" />
               </div>
               {/* INPUT MUNICIPIE */}
-              <div className="select-wrapper">
+              <div className={values.city === undefined ? "select-wrapper" : "select-wrapper selected"}>
                 <Field component="select" className="checkout-select" name="city">
                   <option className="checkout-option">Elige tu municipio</option>
                     {municipiosData.filter(municipio =>

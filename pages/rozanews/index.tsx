@@ -20,6 +20,9 @@ export type articleType = {
   content: string | null
   image: imageType[]
   createdAt: string
+  category: {
+    name: string
+  }
 }
 
 export type articleCategorieType = {
@@ -40,6 +43,11 @@ export async function getStaticProps() {
     select: {
       title: true,
       content: true,
+      category: {
+        select: {
+          name: true
+        }
+      },
       image: {
         select: {
           id: true,
@@ -60,6 +68,11 @@ export async function getStaticProps() {
         select: {
           title: true,
           content: true,
+          category: {
+            select: {
+              name: true
+            }
+          },
           image: {
             select: {
               id: true,

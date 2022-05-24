@@ -4,7 +4,7 @@ import { AppContext } from "services/AppContext"
 
 export default function PopUpAlerts () {
 
-  const { showPopUp, setShowPopUp, popUpMssg } = useContext(AppContext)
+  const { showPopUp, popUpMssg } = useContext(AppContext)
 
 
 
