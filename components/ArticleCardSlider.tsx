@@ -28,7 +28,7 @@ export default function ArticleCardSlider ({articles}: ArticleCardSliderProps) {
         return (
           <div key={index}>
             {index === currentArticle && (
-              <ArticleCard article={article} type={"landing"}/>
+              <ArticleCard article={article}/>
             )}
           </div>
         )
