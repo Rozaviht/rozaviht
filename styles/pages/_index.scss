@@ -182,13 +182,11 @@
 
 .rozanewsSection {
   position: relative;
+  height: 130vh;
   padding: 5rem 0rem 5rem 0rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-  "cards"
-  "content";
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   &__title {
     position: relative;
@@ -196,79 +194,163 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 3rem;
-
-    &::after{
-      position: absolute;
-      content: '';
-      bottom: -2rem;
-      height: 1px;
-      width: 90%;
-      background-color: $maincolor;
-
-    }
   }
 
   &__cards {
-    grid-area: cards;
+    height: 50%;
     width: 100%;
     position: relative;
   }
 
+  &__img {
+    display: none;
+  }
+
+  &__img-mobile {
+    display: inline;
+    z-index: 200;
+    position: absolute;
+    top: -10%;
+    right: 0;
+    width: 100%;
+  }
+
   &__content {
+    padding: 5%;
     grid-area: content;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-
-    background-color: #fff;
-    border-radius: 5px;
-    -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
-    box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+    align-items: center;
+    width: 100%;
+    height: 30%;
   }
 
   &__cta {
-    padding: 1rem;
-    width: fit-content;
+    margin-top: 2rem;
+    font-family: DIN-Bold;
+    font-weight: 600;
+    padding: 0.5rem;
     align-self: flex-end;
-    border-bottom: 1px solid #000;
-    background-color: unset;
-    position: relative;
+    border-bottom: 4px solid #000;
+    background-color: none;
   
     font-size: 1.4rem;
   }
 
   &__illustration {
-    margin-top: 1.5rem;
-    width: 30%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    & .svg {
+      z-index: -1;
+      position: absolute;
+      width: 130%;
+      top: 0;
+      right: 0;
+    }
   }
 
   @include respond-to(mobileLandscape, landscapeOrientation) {
-    font-size: 1.1rem;
-  }
+    height: 130vh;
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
-    padding: 4rem 5% 5rem 4%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "content cards";
-
-    &::after {
-      height: 100%;
-      width: 2px;
+    &__img-mobile {
+      display: none;
     }
 
     &__content {
-      padding: 2rem;
+      margin-top: 20%;
+    }
+    
+    &__img {
+      display: inline;
+      z-index: 200;
+      position: absolute;
+      top: -15%;
+      right: 5%;
+      width: 80%;
     }
 
-    &__img {
-      display: flex;
-      flex-direction: column;
+    &__illustration {
+      & .svg {
+        width: 100%;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+
+  @include respond-to(tabletPortrait, protraitOrientation) {
+    padding: 5% 0 0 3rem;
+    height: 70vh;
+
+    flex-direction: row-reverse;
+
+    &__cards {
+      height: 100%;
+    }
+
+    &__title{
+      margin-bottom: 3rem;
+      align-items: flex-start;
+      & > h1 {
+        font-size: 300%;
+      }
+    }
+
+    &__content {
+      padding: 0;
+      margin: 0;
+      width: 60%;
+      height: 100%;
       justify-content: center;
+      align-items: flex-start;
+    }
+
+
+
+    &__img {
+      top: 0;
+      right: 0;
+      width: 90%;
     }
 
     &__cta {
-      font-size: 1.6rem;
+      margin-top: 5rem;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 80%;
+        top: 0;
+        right: 0;
+      }
+    }
+
+
+
+  }
+  
+  
+  
+  @include respond-to(tabletLandscape, landscapeOrientation) {
+    height: 80vh;
+    padding: 5% 0 0 3rem;
+
+    &__img {
+      top: -10%;
+      right: 0;
+    }
+
+    &__content {
+      padding-right: 2rem;
+    }
+
+    &__cta {
+      font-size: 200%;
     }
   }
 
@@ -276,30 +358,40 @@
 
 
   @include respond-to(desktop, noneOrientation) {
-    padding: 5rem 10% 5rem 10%;
+    &__img {
+      width: 80%;
+      top: -10%;
+    }
 
+
+    &__title {
+      margin-bottom: 9rem;
+      & > h1 {
+        font-size: 400%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  @include respond-to(Largedesktop, noneOrientation) {
+    &__img {
+      width: 70%;
+      top: -23%;
+    }
+    
     &__content {
-      padding: 2rem;
       font-size: 1.4rem;
-      border-radius: 5px;
-      -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
-      box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
-
       & > p {
-        margin-top: 2rem;
+        font-size: 1.6rem;
       }
     }
 
     &__title {
-      margin-bottom: 3rem;
-
+      margin-bottom: 9rem;
       & > h1 {
+        font-size: 400%;
         margin-bottom: 1rem;
       }
-    }
-
-    &__cta {
-      font-size: 1.8rem;
     }
   }
 

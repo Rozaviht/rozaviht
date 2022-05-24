@@ -8,10 +8,9 @@ import type { ReactElement } from 'react'
 import Layout from '@components/Layout'
 
 import Logo from '../public/img/logo.svg'
-import RozanewsIlustration from '../public/img/rozanews-ilustration.svg'
+import RozanewsIllustration from '../public/img/rozanews-illustration.svg'
 import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
 import { articleType, dateOptions } from './rozanews'
-import ArticleCardSlider from '@components/ArticleCardSlider'
 
 
 
@@ -141,10 +140,17 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >
-        <div className="rozanewsSection__cards">
-          <ArticleCardSlider articles={threeArticles} />
+        <div className="rozanewsSection__illustration">
+          <RozanewsIllustration className="svg"/>
         </div>
-        <div className="flexcolum flexcolum--around flexcolum--nopd" style={{ 'width': '100%' }}>
+        <div className="rozanewsSection__cards">
+          <div className="rozanewsSection__img">
+            <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-section-img.webp'} height={1035} width={1054} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
+          </div>
+          <div className="rozanewsSection__img-mobile">
+            <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-section-mobile.webp'} height={1134} width={965} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
+          </div>
+        </div>
           <div className="rozanewsSection__content">
             <div className="rozanewsSection__title">
               <h1>ROZANEWS</h1>
@@ -156,10 +162,9 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
             Rozanews es nuestra sección donde publicamos artículos relacionados con el cuidado personal y el cuidado medioambiental.
             Queremos mantenerte informado sobre estos temas que tanto nos importan, priorizando la rigurosidad, pero contándotelo de una manera amena.
             </p>
-            <RozanewsIlustration className="rozanewsSection__illustration"/>
+            
             <button className="rozanewsSection__cta"><Link href="/rozanews"><a>Ir a Rozanews</a></Link></button>
           </div>
-        </div>
       </div>
       {/* ---------- ROZAVIHT SECTION --------- */}
       <div className="rozavihtSection" >

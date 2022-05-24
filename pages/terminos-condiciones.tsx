@@ -5,11 +5,7 @@ import type { imageType } from 'services/AppProvider'
 
 import Layout from '@components/Layout'
 
-interface termsPageProps {
-  termsBanners: imageType[]
-}
-
-export default function termsPage ({termsBanners}:termsPageProps) {
+export default function termsPage () {
 
   return (
     <div className="legalPage">
