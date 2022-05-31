@@ -4,7 +4,7 @@
   padding-bottom: 5rem;
   padding-top: 3rem;
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding-left: 10%;
     padding-right: 10%;
 
@@ -31,12 +31,12 @@
     color: $backgroundcolor;
   }
   
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     padding-left: 20%;
     padding-right: 20%;
   }
   
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     border-radius: 5px;
     padding: 3rem;
     font-size: 1.4rem;

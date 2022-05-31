@@ -32,19 +32,19 @@
     font-weight: 600;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     &__img {
       width: 70%;
     }
   }
   
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     &__img {
       width: 50%;
     }
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     height: 80vh;
     
     &__img {

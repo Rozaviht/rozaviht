@@ -33,7 +33,7 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 6rem;

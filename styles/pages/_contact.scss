@@ -24,16 +24,16 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding-left: 10%;
     padding-right: 10%;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     padding: 6rem 15% 5rem 15%;
   
   }
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     padding-left: 25%;
     padding-right: 25%;
   }
@@ -82,7 +82,7 @@
       }
     }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     
     & > div:nth-child(2) {
       flex-direction: row;

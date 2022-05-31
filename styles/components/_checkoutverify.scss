@@ -30,7 +30,7 @@
     
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     font-size: 110%;
     flex-direction: row;
     align-items: flex-start;

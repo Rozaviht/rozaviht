@@ -53,7 +53,7 @@
   }
 
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     padding: 2rem 2rem 6rem 2rem;
     flex-direction: row;
     align-items: flex-start;

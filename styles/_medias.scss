@@ -1,63 +1,29 @@
-$breakpoints: (
-  "mobilePortrait": (
-    min-width: 360px,
-  ),
-  "mobileLandscape": (
-    min-width: 640px,
-  ),
-  "tabletPortrait": (
-    min-width: 960px,
-  ),
-  "tabletLandscape": (
-    min-width: 1024px,
-  ),
-  "desktop": (
-    min-width: 1440px,
-  ),
-  "Largedesktop": (
-    min-width: 1600px,
-  ),
-);
 
-$orientations: (
-  "protraitOrientation": (
-    orientation: portrait,
-  ),
-  "landscapeOrientation": (
-    orientation: landscape,
-  ),
-  "noneOrientation": (
-    orientation: none,
-  )
-);
 
-@mixin respond-to($breakpoint, $orientation) {
-  // If the keys exists in the maps
-  @if map-has-key($orientations, $orientation) and map-has-key($breakpoints, $breakpoint) {
-    // Check the orientation variable and print a media based on orientation and breakpoint value
+@mixin respond-to($size) {
+  @if $size == mobile-portrait {
+    @media screen and (max-width: 600px) and (orientation: portrait) { @content; }
+    
+  } @else if $size == mobile-landscape {
+    @media screen and (min-width: 600px) and (orientation: landscape) { @content; }
 
-    @if $orientation == portrait {
-      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}, and , #{inspect(map-get($orientations, $orientation))}  {
-        @content;
-      }
-    }
+  } @else if $size == tablet-portrait {
+    @media screen and (min-width: 600px) and (orientation: portrait) { @content; }
 
-    @else if $orientation == landscape {
-      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}, and , #{inspect(map-get($orientations, $orientation))}  {
-        @content;
-      }
-    }
+  } @else if $size == tablet-landscape {
+    @media screen and (min-width: 900px) and (orientation: landscape) { @content; }
 
-    @else {
-      @media screen and #{inspect(map-get($breakpoints, $breakpoint))}  {
-        @content;
-      }
-    }
-  }
+  } @else if $size == desktop {
+    @media screen and (min-width: 1024px) { @content; }
 
-  // If the keys doesn't exist in the maps
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Please make sure it is defined in `$breakpoints` map.";
-  }
+  } @else if $size == desktop-large {
+    @media screen and (min-width: 1200px) { @content; }
+
+  } @else if $size == desktop-large-xl {
+    @media screen and (min-width: 1440px) { @content; }
+
+  } @else if $size == desktop-large-xxl {
+    @media screen and (min-width: 1600px) { @content; }
+
+  } 
 }

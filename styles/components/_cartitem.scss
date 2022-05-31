@@ -13,7 +13,7 @@
     align-self: center;
   }
   
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     & > div > p {
       margin-right: 1rem;
     }
@@ -22,7 +22,7 @@
     }
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     &__img {
       width: 30%;
     }

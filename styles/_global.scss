@@ -84,7 +84,7 @@ h3,h4,h5,h6 {
 body {
   font-size: 0.9rem;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     font-size: 1rem;
   }
 }
@@ -192,7 +192,7 @@ body {
     left: 93%;
     transform: translate(-50%, -50%) rotate(-90deg);
     
-    @include respond-to(tabletPortrait, protraitOrientation) {
+    @include respond-to(tabletoPortrait) {
       top: 50%;
       left: 90%;
 
@@ -212,7 +212,7 @@ body {
       }
 
     }
-    @include respond-to(desktop, noneOrientation) {
+    @include respond-to(desktop) {
       left: 80%;
     }
   }
@@ -254,7 +254,7 @@ body {
   color: $backgroundcolor;
   border-radius: 5px;
   
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     font-size: 1.1rem;
   }
 }
@@ -265,7 +265,7 @@ body {
   border: 2px solid $maincolor;
   color: $maincolor;
   border-radius: 5px;
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     font-size: 1.1rem;
   }
 }
@@ -458,7 +458,7 @@ body {
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     border: none;
 
     &__title {
@@ -519,14 +519,14 @@ body {
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     &__content {
       padding-left: 5%;
       padding-right: 5%;
     }
   }
   
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     &__title {
       font-size: 300%;
     }
@@ -536,7 +536,7 @@ body {
     }
   }
   
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     &__content {
       padding-left: 18%;
       padding-right: 18%;
@@ -548,7 +548,7 @@ body {
   width: 100%;
   display: inline;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
       display: none;
   }
 }
@@ -556,7 +556,7 @@ body {
 .img3-1 {
   width: 100%;
   display: none;
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
       display: inline;
   }
 }

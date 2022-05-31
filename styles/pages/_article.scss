@@ -47,14 +47,14 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     &__content {
       width: 70%;
       padding: 2rem;
     }
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     &__content {
       width: 60%;
     }

@@ -10,7 +10,7 @@
   "arrowLeft slide arrowRight"
   ". slideDots .";
 
-  @include respond-to(tabletLandscape,landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     width: 80%;
     grid-template-rows: 1fr 4rem;
   }

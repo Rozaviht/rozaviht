@@ -23,7 +23,7 @@
     width: 3rem;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     height: 100%;
   }
 }

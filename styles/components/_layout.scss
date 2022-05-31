@@ -2,7 +2,7 @@
   height: 100%;
 
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     grid-template-rows: 1% 5% 81% 12%;
   }
 }

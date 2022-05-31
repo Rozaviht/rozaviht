@@ -22,7 +22,7 @@
     display: none;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     font-size: 1.1rem;
   }
 }

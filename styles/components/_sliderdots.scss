@@ -23,7 +23,7 @@
     opacity: 1;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     width: 0.8rem;
     height: 0.8rem;
   }

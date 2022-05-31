@@ -42,7 +42,7 @@
   &__footer {
     margin-top: 5rem;
   }
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
 
     &__nav {
       & .goback-link {
@@ -54,7 +54,7 @@
       width: 15%;
     }
   }
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     &__logo {
       width: 10%;
     }

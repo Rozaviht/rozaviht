@@ -31,11 +31,11 @@
     width: 70%;
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     width: 30%;
   } 
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
 
     &__logoImg {
       width: 0;

@@ -68,11 +68,11 @@
 
 
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
 
     padding-left: 10%;
     padding-right: 10%;
@@ -130,7 +130,7 @@
     }
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape,) {
     &__item {
       font-size: 1.5rem;
     }
@@ -180,7 +180,7 @@
   }
 
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape,) {
     &__input {
       font-size: 1.4rem;
     }
@@ -220,12 +220,12 @@
     width: 100%;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     padding: 5rem 10% 5rem 10%;
 
     &__text {
@@ -310,7 +310,7 @@
     }
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row-reverse;
 
     &__img {
@@ -322,7 +322,7 @@
     }
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     padding: 5rem 10% 5rem 10%;
   }
 }

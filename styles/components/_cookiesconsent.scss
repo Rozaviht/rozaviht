@@ -47,18 +47,18 @@
 
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row;
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     &__bts {
       margin-left: 2rem;
     }
     padding: 1rem 10% 1rem 10%;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     padding: 2rem 15% 2rem 15%;
   }
 }

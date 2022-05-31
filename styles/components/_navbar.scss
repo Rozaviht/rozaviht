@@ -6,11 +6,11 @@
   flex-direction: column;
   align-items: center;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row;
     padding: 1rem 10% 1rem 10%;
   }
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding-left: 20%;
     padding-right: 20%;
   }
@@ -20,11 +20,11 @@
 .navbar__logoImg {
   width: 35%;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     width: 30%;
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     width: 25%;
   }
 }
@@ -44,7 +44,7 @@
     color: $maincolor;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row;
     margin: 0;
     padding: 0;
@@ -57,7 +57,7 @@
     }
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     padding-right: 8%;
     font-size: 1.4rem;
   }
@@ -69,7 +69,7 @@
   position: absolute;
   right: 1rem;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     position: initial;
   }
 }
@@ -80,13 +80,13 @@
   height: 25px;
 
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     height: 2rem;
     width: 2rem;
   }
 
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     height: 2.5rem;
     width: 2.5rem;
   }
@@ -110,7 +110,7 @@
   }
 
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     height: 1.5rem;
     width: 1.5rem;
     bottom: -9px;

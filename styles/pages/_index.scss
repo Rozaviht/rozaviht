@@ -105,7 +105,7 @@
     width: 15%;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     font-size: 1.4rem;
@@ -130,7 +130,7 @@
     }
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
 
     &__content {
       padding-top: 1rem;
@@ -144,7 +144,7 @@
     }
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 
@@ -172,7 +172,7 @@
     }
   }
 
-  @include respond-to(Largedesktop, noneOrientation) {
+  @include respond-to(desktop-xl) {
     padding: 0;
 
     &__content {
@@ -206,6 +206,10 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 3rem;
+    margin-top: 5%;
+    & > h1 {
+      font-size: 300%;
+    }
   }
 
   &__cards {
@@ -217,9 +221,8 @@
   &__img {
     display: none;
   }
-
+  
   &__img-mobile {
-    display: inline;
     z-index: 200;
     position: absolute;
     top: -10%;
@@ -228,6 +231,7 @@
   }
 
   &__content {
+    margin-top: 3rem;
     padding: 5%;
     grid-area: content;
     display: flex;
@@ -266,24 +270,24 @@
     }
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
-    height: 130vh;
-
-    &__img-mobile {
-      display: none;
-    }
+  @include respond-to(mobile-landscape) {
+    height: 200vh;
 
     &__content {
-      margin-top: 20%;
+      padding: 10%;
     }
     
     &__img {
-      display: inline;
       z-index: 200;
       position: absolute;
+      display: inline;
       top: -15%;
-      right: 5%;
-      width: 80%;
+      right: 10%;
+      width: 70%;
+    }
+
+    &__img-mobile {
+      display: none;
     }
 
     &__illustration {
@@ -295,7 +299,7 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding: 5% 0 0 3rem;
     height: 70vh;
 
@@ -308,9 +312,6 @@
     &__title{
       margin-bottom: 3rem;
       align-items: flex-start;
-      & > h1 {
-        font-size: 300%;
-      }
     }
 
     &__content {
@@ -348,12 +349,13 @@
   
   
   
-  @include respond-to(tabletLandscape, landscapeOrientation) {
-    height: 80vh;
+  @include respond-to(tablet-landscape) {
+    height: 85vh;
     padding: 5% 0 0 3rem;
 
     &__img {
-      top: -10%;
+      width: 100%;
+      top: 0;
       right: 0;
     }
 
@@ -370,9 +372,9 @@
 
 
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     &__img {
-      width: 80%;
+      width: 90%;
       top: -10%;
     }
 
@@ -386,10 +388,9 @@
     }
   }
 
-  @include respond-to(Largedesktop, noneOrientation) {
+  @include respond-to(desktop-xl) {
     &__img {
-      width: 70%;
-      top: -23%;
+      top: -20%;
     }
     
     &__content {
@@ -464,7 +465,7 @@
         position: absolute;
         left: 0;
         bottom: -8px;
-        width: 100%;
+        width: min-content;
       }
     }
 
@@ -482,7 +483,7 @@
     background-color: $maincolor;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     padding: 5rem 8% 5rem 8%;
 
     &__img {
@@ -492,7 +493,7 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     font-size: 1.2rem;
     padding: 5rem 10% 5rem 10%;
 
@@ -519,7 +520,7 @@
    }
   }
 
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     &__img {
       top: 10%;
       left: -10%;
@@ -528,7 +529,7 @@
   }
 
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     padding: 5rem 12% 5rem 12%;
     font-size: 1.4rem;
 

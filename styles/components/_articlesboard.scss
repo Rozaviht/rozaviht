@@ -9,7 +9,7 @@
     margin-top: 1rem;
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     flex-direction: initial;
     flex-wrap: wrap;
     & > div {

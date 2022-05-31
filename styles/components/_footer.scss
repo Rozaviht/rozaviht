@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     & > div:first-child{
       & > input, > button {
         width: 50%;
@@ -44,11 +44,11 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding: 6rem 15% 3rem 15%;
   }
   
-  @include respond-to(tabletLandscape, landscapeOrientation) {
+  @include respond-to(tablet-landscape) {
     flex-direction: row;
   
     &-input {
@@ -69,7 +69,7 @@
     }
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     padding: 6rem 12% 3rem 12%;
   }
 }
@@ -88,7 +88,7 @@
     margin-top: 2rem;
   }
 
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     flex-direction: row;
     align-items: flex-start;
     height: 13.5rem;
@@ -98,12 +98,12 @@
     }
   }
 
-  @include respond-to(tabletPortrait, protraitOrientation) {
+  @include respond-to(tablet-portrait) {
     padding-left: 15%;
     padding-right: 15%;
   }
 
-  @include respond-to(desktop, noneOrientation) {
+  @include respond-to(desktop) {
     padding-left: 12%;
     padding-right: 12%;
   }
@@ -122,7 +122,7 @@
   &:nth-child(2) {
     margin-left: 1rem;
   }
-  @include respond-to(mobileLandscape, landscapeOrientation) {
+  @include respond-to(mobile-landscape) {
     width: 1.6rem;
     height: 1.6rem;
   }
