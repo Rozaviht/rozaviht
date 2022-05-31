@@ -67,7 +67,6 @@ export default function CheckoutForm () {
         shippingComment: shippingForm.shippingComment
       }}
       validate={values => {
-        console.log(values)
         try {
           validateYupSchema(values, shippingFormRules, true, values)
 

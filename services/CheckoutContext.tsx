@@ -8,6 +8,8 @@ export type CheckoutContextProps = {
   SetBillingForm: Dispatch<SetStateAction<CheckoutForm>>,
   editingForm: boolean,
   setEditingForm: Dispatch<SetStateAction<boolean>>
+  paymentDone: boolean,
+  setPaymentDone: Dispatch<SetStateAction<boolean>>
 }
 
 

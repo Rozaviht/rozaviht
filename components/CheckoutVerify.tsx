@@ -43,7 +43,7 @@ const CREATE_ORDER_NUMBER_ =gql`
 
 export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
 
-  const { cartProducts, totalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
   const { shippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
@@ -96,7 +96,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     setShowTerms(showTermsCopy)
   }
 
-  const handleResysSubmit = () => {
+  const handleOrderVerify = () => {
 
     if (checkedTerms === false ) {
       setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
@@ -109,9 +109,9 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       } else {
         orderAmount = totalCartPrice + 3.5
       }
-      createOrderNumber().then(() =>{
-        paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
-      })
+
+      setTotalCartPrice(orderAmount)
+      setOrderVerified(true)
     }
 
   }
@@ -199,12 +199,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" name="redSysForm" method='POST'>
-          <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? "" : data.paymentRequest.Ds_SignatureVersion} />
-          <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
-          <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />
-        </form>
-        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleResysSubmit}>Pagar</button>
+        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleOrderVerify}>Pagar</button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>

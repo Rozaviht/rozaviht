@@ -40,7 +40,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
           <h1 className="product-hero__title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>
           <p className="product-hero__desc">
-            Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cañamo. No contiene nada de THC, y es completamente natural y vegano.
+            Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.
           </p>
           <h2 className="product-hero__price">{`${totalAmountPrice},00€`}</h2>
           <p>(IVA incluido)</p>

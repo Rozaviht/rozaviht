@@ -125,19 +125,14 @@ export async function getStaticProps() {
 
 export default function Rozanews ({ articlesCategoriesData }: rozanewsProps) {
   const [showCategories, setShowCategories] = useState(false)
-
-
   const [categorieSelected, setCategorieSelected] = useState<articleCategorieType>(articlesCategoriesData[0])
 
   return(
     <div className="rozanews">
       <div className="rozanews__hero">
         <div className="bannerBar"></div>
-        <div className="img16-9">
+        <div className="rozanews__img">
           <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'hola'} layout="responsive"/>
-        </div>
-        <div className="img3-1">
-          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-3-1.webp"} height={427} width={1280} alt={'hola'} layout="responsive"/>
         </div>
         <RozanewsLogo className="rozanews__logo" />
         <h1>Nunca te quedes desinformado de lo que te importa</h1>

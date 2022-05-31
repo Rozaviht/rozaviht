@@ -9,12 +9,13 @@ import Layout from '@components/Layout'
 
 import Logo from '../public/img/logo.svg'
 import RozanewsIllustration from '../public/img/rozanews-illustration.svg'
-import CbdIlustrationNegative from '../public/img/cbd-ilustration-negative.svg'
-import { articleType, dateOptions } from './rozanews'
+import LiquidBubbles from '../public/img/liquid-bubbles.svg'
+import UnderlineHandMade from '../public/img/underline-handmade.svg'
 
 
 
-export default function LandingPage ({threeArticles}: {threeArticles: articleType[]}) {
+
+export default function LandingPage () {
   
   useEffect(() => {
     let observerOptions = {
@@ -118,7 +119,6 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
           </div>
         </div>
         <div className="cbdSection__content">
-          <div className="flexcolum flexcolum--separate">
             <h1>ACEITE DE CBD</h1>
             <p>
               Los principales beneficios del aceite de CBD son la anti inflamación y la relajación,
@@ -129,14 +129,11 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
             <p>
               Y tranquilo que nuestro aceite contiene 0% de THC.
             </p>
-          </div>
-          <div className="flexrow flexrow--between">
             <button className="cbdSection__cta">
               <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
             </button>
-            <CbdIlustrationNegative className="cbdSection__illustration" />
-          </div>
         </div>
+        <LiquidBubbles className="liquidBubbles" />
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >
@@ -169,22 +166,22 @@ export default function LandingPage ({threeArticles}: {threeArticles: articleTyp
       {/* ---------- ROZAVIHT SECTION --------- */}
       <div className="rozavihtSection" >
         <Logo alt="" className="rozavihtSection__img" />
-        <h1>NUESTRO LEMA</h1>
+        <h1>Nuestro Lema</h1>
         <ul className='rozavihtSection__list' >
           <li>
-            <h2 >Te cuidas</h2>
+            <h2 >Te cuidas<UnderlineHandMade className="underline-handmade"/></h2>
             <p>
               Aunque nuestra misión en Rozaviht es buscar lo mejor para tu cuidado personal, nada funcionará si no eres tu el que realmente se preocupa de su salud. Por ello debes ser tú el que tome la desición de buscar lo mejor para tí y cuidar de tí.
             </p>
           </li>
           <li>
-            <h2 >Te cuidamos</h2>
+            <h2 >Te cuidamos<UnderlineHandMade className="underline-handmade"/></h2>
             <p>
               Por supuesto nuestra misión será siempre buscar los mejores productos para tu cuidado personal, y no solo lo haremos a través de productos físicos. También usaremos la vía digital para proporcinarte información que te sirva de ayuda para que te cuides de mejor manera.
             </p>
           </li>
           <li>
-            <h2>Y Lo cuidamos</h2>
+            <h2>Y Lo cuidamos<UnderlineHandMade className="underline-handmade"/></h2>
             <p>
               Además, y no menos importante, nos preocuremos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
             </p>

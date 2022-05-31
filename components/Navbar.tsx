@@ -1,4 +1,4 @@
-import { useContext, Dispatch, SetStateAction } from 'react'
+import { useContext } from 'react'
 import Link from 'next/link'
 
 import { AppContext } from 'services/AppContext'
@@ -16,14 +16,6 @@ export const getStaticProps = async () => {
 const Navbar = () => {
 
   const { cartProducts, showCart, setShowCart } = useContext(AppContext)
-
- 
-
-  const handleShowCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setShowCart(!showCart)
-  } 
-
 
   return (
       <div className="navbar">

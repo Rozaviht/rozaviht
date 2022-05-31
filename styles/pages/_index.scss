@@ -42,6 +42,13 @@
   background-color: $oilsectiontext;
 
   overflow: hidden;
+
+  & .liquidBubbles {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 45%;
+  }
   
   &__img {
     position: relative;
@@ -59,15 +66,20 @@
   &__content {
     height: 100%;
     position: relative;
-      padding-top: 1rem;
-      padding-right: 3rem;
-      padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-right: 3rem;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
-    & > div > h1, > div > p {
+    align-items: center;
+
+    & h1, > p {
       color: $backgroundcolor;
+    }
+
+    & > h1 {
+      font-size: 6rem;
     }
   }
 
@@ -76,11 +88,11 @@
     padding: 1rem;
     position: relative;
 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 
     background-color: $backgroundcolor;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
   }
 
   &__link {
@@ -156,7 +168,7 @@
     }
 
     &__cta {
-      font-size: 3rem;
+      font-size: 2.2rem;
     }
   }
 
@@ -172,7 +184,7 @@
     &__img {
       width: 120%;
       bottom: -5%;
-      left: -20%;
+      left: -25%;
 
     }
   }
@@ -422,7 +434,9 @@
 
   & > h1 {
     color: $maincolor;
+    font-size: 6rem;
     margin-bottom: 2rem;
+    font-family: Lora-Regular;
   }
 
   &__list {
@@ -440,13 +454,28 @@
     }
 
     & > li > h2 {
+      width: fit-content;
       color: $maincolor;
+      font-family: Lora-Regular;
+      font-size: 3rem;
+      position: relative;
+
+      & .underline-handmade {
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+      }
+    }
+
+    & li > p {
+      margin-top: 1.5rem;
     }
   }
 
   &::before {
     content: '';
-    height: 1px;
+    height: 5px;
     width: 90%;
     position: absolute;
     top: 0;
@@ -492,9 +521,9 @@
 
   @include respond-to(tabletLandscape, landscapeOrientation) {
     &__img {
-      top: -10%;
-      left: -30%;
-      width: 300%;
+      top: 10%;
+      left: -10%;
+      width: 180%;
     }
   }
 
