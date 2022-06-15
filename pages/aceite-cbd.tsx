@@ -11,6 +11,9 @@ import ProductImageSlider from '@components/ProductImageSlider'
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
 import RecyclingAnimation from '@components/RecyclingAnimatino'
 
+import LiquidSVGTop from '@img/liquid-svg-top.svg'
+import LiquidBubbles from '@img/liquid-bubbles.svg'
+
 export type CbdProductsData = {
   name: string
   description: string
@@ -76,6 +79,8 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
         </div>
       </div>
       <div className="product-frstSect">
+        <LiquidSVGTop className="liquidTop" />
+        <LiquidBubbles className="liquidBottom" />
         <div className="product-frstSect__text">
           <p>Este aceite te ayudara a relajar toda la tension que tengas acumulada, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
         </div>
@@ -99,7 +104,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
           <div className="information-content-wrapper">
             <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>COMO UTILIZARLO</h2>
             <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
-            <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual. La legislación española actual solo permite la venta de aceite de CBD de manera tópica, que es la manera en la que esta destinada nuestro producto.</p>
+            <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual. La legislación española actual solo permite la venta de aceite de CBD de manera tópica, que es la manera en la que esta destinada nuestro producto. Solo informamos del otro método de empleo ya que muchas personas lo utilizan de esa mánera.</p>
             <ul style={{ 'marginTop': '0.5rem' }}>
               <li style={{ 'marginTop': '0.5rem' }}>
                 <strong>-Empleo de manera tópica:</strong>

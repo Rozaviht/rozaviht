@@ -198,15 +198,35 @@
 /* PRODUCT FIRST SECTION */
 
 .product-frstSect {
+  overflow: hidden;
+  position: relative;
   background-color: $oilsectiontext;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  & .liquidTop {
+    position: absolute;
+    top: -15%;
+    left: 0;
+  }
+
+  & .liquidBottom {
+    position: absolute;
+    right: 0;
+    bottom: 47%;
+  }
 
 
   &__text {
+    text-align: center;
     padding: 1.2rem;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     & > p {
       font-size: 2.3rem;
@@ -217,12 +237,35 @@
   }
 
   &__img {
-    width: 100%;
+    margin-left: 5%;
+    width: 90%;
+
+    & > span > img {
+      border-radius: 20px;
+    }
   }
 
   @include respond-to(mobile-landscape) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+  }
+
+  @include respond-to(tablet-portrait) {
+    & .liquidTop {
+      top: -15%;
+      left: 0;
+      width: 70%;
+    }
+    
+    & .liquidBottom {
+      right: 0;
+      bottom: 47%;
+      width: 70%;
+    }
+
+    &__img {
+      width: 40%;
+    }
   }
 
   @include respond-to(tablet-landscape) {
@@ -234,9 +277,48 @@
       }
     }
     &__img {
-      padding: 3rem;
-      border: 2px solid $backgroundcolor;
-      width: 55%;
+      width: 60%;
+    }
+
+    & .liquidTop {
+      top: -25%;
+      left: 0;
+      width: 50%;
+    }
+  
+    & .liquidBottom {
+      right: 0;
+      bottom: 0;
+      width: 50%;
+    }
+  }
+
+  @include respond-to(desktop) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 10% 5rem 10%;
+
+    &__text {
+      & >p {
+        font-size: 4rem;
+      }
+    }
+    &__img {
+      width: 200%;
+    }
+
+    & .liquidTop {
+      top: -50%;
+      left: 0;
+      width: 50%;
+    }
+  
+    & .liquidBottom {
+      right: 0;
+      bottom: 0;
+      width: 40%;
     }
   }
 
@@ -252,6 +334,7 @@
   display: flex;
   flex-direction: column ;
   align-items: center;
+  padding-bottom: 2rem;
 
   &__content {
     width: 100%;
@@ -265,7 +348,6 @@
 
 
   &__img {
-
     padding: 1rem;
     width: 100%;
   }

@@ -31,13 +31,12 @@
 /* ++++++++++++++CBD SECTION+++++++++++++++++ */
 
 .cbdSection {
-  max-height: 880px;
   position: relative;
-  padding: 0;
+  padding: 1rem;
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 0.8fr;
 
   background-color: $oilsectiontext;
 
@@ -47,7 +46,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 45%;
+    width: 100%;
   }
   
   &__img {
@@ -66,20 +65,19 @@
   &__content {
     height: 100%;
     position: relative;
-    padding-top: 1rem;
-    padding-right: 3rem;
-    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    text-align: center;
 
     & h1, > p {
       color: $backgroundcolor;
+      margin-bottom: 1.2rem;
     }
 
     & > h1 {
-      font-size: 6rem;
+      font-size: 300%;
     }
   }
 
@@ -93,6 +91,7 @@
     background-color: $backgroundcolor;
     border: none;
     border-radius: 50px;
+    cursor: pointer;
   }
 
   &__link {
@@ -106,6 +105,7 @@
   }
 
   @include respond-to(mobile-landscape) {
+    padding: 0;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     font-size: 1.4rem;
@@ -131,7 +131,7 @@
   }
 
   @include respond-to(tablet-landscape) {
-
+    padding: 0;
     &__content {
       padding-top: 1rem;
       padding-right: 3rem;
@@ -145,14 +145,19 @@
   }
 
   @include respond-to(desktop) {
+    padding: 0;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+
+    & .liquidBubbles {
+      width: 50%;
+    }
 
     &__img {
       width: 120%;
-      bottom: -20%;
+      bottom: -25%;
       left: -30%;
     }
 
@@ -161,6 +166,14 @@
       padding-top: 5rem;
       padding-right: 5rem;
       padding-bottom: 5rem;
+
+      & h1, > p {
+        margin-bottom: 2rem;
+      }
+  
+      & > h1 {
+        font-size: 350%;
+      }
     }
 
     &__illustration {
@@ -172,21 +185,30 @@
     }
   }
 
-  @include respond-to(desktop-xl) {
-    padding: 0;
+  @include respond-to(desktop-large) {
+    font-size: 1.6rem;
+    &__img {
+      width: 120%;
+      bottom: -25%;
+      left: -30%;
+    }
+  }
 
+  @include respond-to(desktop-large-xl) {
+    font-size: 1.8rem;
     &__content {
-      padding-top: 5rem;
       padding-right: 10rem;
-      padding-bottom: 5rem;
     }
 
     &__img {
       width: 120%;
-      bottom: -5%;
-      left: -25%;
+      bottom: -23%;
+      left: -30%;
 
     }
+  }
+
+  @include respond-to(desktop-large-xxl) {
   }
 }
 
@@ -194,7 +216,6 @@
 
 .rozanewsSection {
   position: relative;
-  height: 130vh;
   padding: 5rem 0rem 5rem 0rem;
   display: flex;
   flex-direction: column;
@@ -213,9 +234,8 @@
   }
 
   &__cards {
-    height: 50%;
     width: 100%;
-    position: relative;
+    display: flex;
   }
 
   &__img {
@@ -223,22 +243,15 @@
   }
   
   &__img-mobile {
-    z-index: 200;
-    position: absolute;
-    top: -10%;
-    right: 0;
     width: 100%;
   }
 
   &__content {
-    margin-top: 3rem;
     padding: 5%;
-    grid-area: content;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 30%;
   }
 
   &__cta {
@@ -249,11 +262,13 @@
     align-self: flex-end;
     border-bottom: 4px solid #000;
     background-color: none;
+    cursor: pointer;
   
     font-size: 1.4rem;
   }
 
   &__illustration {
+    z-index: -1;
     overflow: hidden;
     position: absolute;
     top: 0;
@@ -271,19 +286,10 @@
   }
 
   @include respond-to(mobile-landscape) {
-    height: 200vh;
 
-    &__content {
-      padding: 10%;
-    }
-    
     &__img {
-      z-index: 200;
-      position: absolute;
       display: inline;
-      top: -15%;
-      right: 10%;
-      width: 70%;
+      width: 100%;
     }
 
     &__img-mobile {
@@ -300,17 +306,45 @@
   }
 
   @include respond-to(tablet-portrait) {
-    padding: 5% 0 0 3rem;
-    height: 70vh;
+    padding: 5% 0 5% 0;
 
-    flex-direction: row-reverse;
-
-    &__cards {
-      height: 100%;
-    }
 
     &__title{
       margin-bottom: 3rem;
+    }
+
+    &__content {
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    &__img-mobile {
+      position: relative;
+      width: 85%;
+    }
+
+    &__cta {
+      margin-top: 5rem;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 80%;
+      }
+    }
+
+
+
+  }
+  
+  
+  
+  @include respond-to(tablet-landscape) {
+    flex-direction: row-reverse;
+    padding: 5% 0 0 3rem;
+    align-items: center;
+
+    &__title{
       align-items: flex-start;
     }
 
@@ -323,49 +357,19 @@
       align-items: flex-start;
     }
 
-
-
-    &__img {
-      top: 0;
-      right: 0;
-      width: 90%;
-    }
-
-    &__cta {
-      margin-top: 5rem;
-    }
-
-    &__illustration {
-      & .svg {
-        width: 80%;
-        top: 0;
-        right: 0;
-      }
-    }
-
-
-
-  }
-  
-  
-  
-  @include respond-to(tablet-landscape) {
-    height: 85vh;
-    padding: 5% 0 0 3rem;
-
-    &__img {
-      width: 100%;
-      top: 0;
-      right: 0;
-    }
-
-    &__content {
-      padding-right: 2rem;
-      padding-bottom: 3rem;
+    &__cards {
+      padding-left: 2rem;
     }
 
     &__cta {
       font-size: 170%;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 70%;
+
+      }
     }
   }
 
@@ -373,14 +377,12 @@
 
 
   @include respond-to(desktop) {
-    &__img {
-      width: 90%;
-      top: -10%;
+    &__cards {
+      padding-left: 4rem;
     }
 
-
     &__title {
-      margin-bottom: 9rem;
+      margin-bottom: 5rem;
       & > h1 {
         font-size: 400%;
         margin-bottom: 1rem;
@@ -388,22 +390,20 @@
     }
   }
 
-  @include respond-to(desktop-xl) {
-    &__img {
-      top: -20%;
-    }
+  @include respond-to(desktop-large-xl) {
+
     
     &__content {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       & > p {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
       }
     }
 
     &__title {
       margin-bottom: 9rem;
       & > h1 {
-        font-size: 400%;
+        font-size: 420%;
         margin-bottom: 1rem;
       }
     }
@@ -416,7 +416,7 @@
   /* ++++++++++++ ROZAVIHT SECTION ++++++++++++ */
 
 .rozavihtSection {
-  padding: 5rem 1rem 5rem 1rem;
+  padding: 5rem 2rem 5rem 2rem;
   position: relative;
 
   display: flex;
@@ -427,27 +427,26 @@
 
   &__img {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: -30%;
-    width: 600%;
+    width: 500%;
     opacity: 0.15;
   }
 
   & > h1 {
     color: $maincolor;
-    font-size: 6rem;
+    font-size: 300%;
     margin-bottom: 2rem;
     font-family: Lora-Regular;
   }
 
   &__list {
-    margin-bottom: 2rem;
 
     & > li:nth-child(2) {
-      margin-left: 1rem;
+      margin-left: 20%;
     }
     & > li:nth-child(3) {
-      margin-left: 2rem;
+      margin-left: 10%;
     }
 
     & > li:nth-child(n) {
@@ -458,7 +457,7 @@
       width: fit-content;
       color: $maincolor;
       font-family: Lora-Regular;
-      font-size: 3rem;
+      font-size: 200%;
       position: relative;
 
       & .underline-handmade {

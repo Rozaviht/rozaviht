@@ -177,7 +177,7 @@ body {
     left: 0.5rem;
     top: 1.5rem;
   }
-
+  
   & .closeBtSlide__lineT {
     width: 1.2rem;
     transform: translateY(-0.38rem) translateX(78%) rotate(45deg);
@@ -185,6 +185,26 @@ body {
   & .closeBtSlide__lineB {
     width: 1.2rem;
     transform: translateY(0.38rem) translateX(78%) rotate(-45deg);
+  }
+  
+  &--centerDown {
+    width: 5rem;
+    position: relative;
+    transform: rotate(90deg);
+
+    & .closeBtSlide__lineT,
+    .closeBtSlide__lineC, .closeBtSlide__lineB {
+      background-color: #fff;
+    }
+
+    & .closeBtSlide__lineT, .closeBtSlide__lineB {
+      left: 3.2rem;
+    }
+
+    & .closeBtSlide__lineC {
+      width: 5rem;
+      left: 0;
+    }
   }
 
   &--leftUp {
@@ -460,6 +480,25 @@ body {
 
   @include respond-to(tablet-portrait) {
     border: none;
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+      cursor: auto;
+      &::after {
+        content: none;
+      }
+    }
+
+    &__content {
+      display: block;
+    }
+  }
+
+  @include respond-to(desktop) {
+    border: none;
+    display: flex;
+    flex-direction: column;
 
     &__title {
       cursor: auto;

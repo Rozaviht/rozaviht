@@ -28,19 +28,27 @@
   align-items: center;
   justify-content: center;
 
-
-  &.active {
-    opacity: 1;
-    transition-duration: 200ms;
-  }
-
   & .slide {
-    width: 90%;
+    width: 80%;
 
     &--half {
-      width: 35%;
+      width: 25%;
     }
-  } 
+  }
+
+  
+  &.active {
+    opacity: 1;
+    transition-duration: 500ms;
+
+    & .slide {
+      width: 90%;
+  
+      &--half {
+        width: 35%;
+      }
+    }
+  }
 
 }
 

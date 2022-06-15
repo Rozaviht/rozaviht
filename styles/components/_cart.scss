@@ -34,8 +34,9 @@
   @include respond-to(tablet-portrait) {
     width: 30%;
   } 
-
+  
   @include respond-to(tablet-landscape) {
+    width: 30%;
 
     &__logoImg {
       width: 0;

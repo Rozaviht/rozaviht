@@ -11,6 +11,8 @@ import {getAllArticlesUrl} from "../../lib/getAllArticlesUrl"
 import Layout from "@components/Layout"
 import ArticleCard from "@components/ArticleCard"
 
+import IsotipoBlack from "@img/isotipo-black.svg"
+
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -52,6 +54,7 @@ export async function getStaticProps ({params}: {params: {title:string}}) {
       title: true,
       content: true,
       image: true,
+      createdAt: true,
       category: {
         select: {
           name: true,
@@ -79,7 +82,8 @@ export async function getStaticProps ({params}: {params: {title:string}}) {
   const articleData = {
     title: articlePageData?.title,
     content: articlePageData?.content,
-    image: articlePageData?.image
+    image: articlePageData?.image,
+    createdAt: articlePageData?.createdAt.toLocaleDateString('es-ES', dateOptions)
   }
 
   const articleCatagorieData = {
@@ -106,7 +110,7 @@ interface articlePageProps {
 
 export default function articlePage ({ articleData, articleCatagorieData }: articlePageProps) {
 
-
+  console.log(articleData.createdAt)
 
   return (
     <div className="article-page" >
@@ -116,7 +120,9 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
         </div>
         <div className="article__content">
           <h1>{articleData.title}</h1>
+          <p>{articleData.createdAt}</p>
           <p>{articleData.content}</p>
+          < IsotipoBlack className="isotipo-black" />
         </div>
       </div>
       {articleCatagorieData.articles.length < 2

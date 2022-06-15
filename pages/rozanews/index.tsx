@@ -8,7 +8,8 @@ import Layout from '@components/Layout'
 import ArticlesCategories from '@components/ArticlesCategories'
 import ArticlesBoard from '@components/ArticlesBoard'
 
-import RozanewsLogo from 'public/img/rozanews-logo.svg'
+import RozanewsLogoBlack from 'public/img/rozanews-logo-black.svg'
+import ArticleCard from '@components/ArticleCard'
 
 
 interface rozanewsProps {
@@ -134,16 +135,31 @@ export default function Rozanews ({ articlesCategoriesData }: rozanewsProps) {
         <div className="rozanews__img">
           <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'hola'} layout="responsive"/>
         </div>
-        <RozanewsLogo className="rozanews__logo" />
+        <RozanewsLogoBlack className="rozanews__logo" />
         <h1>Nunca te quedes desinformado de lo que te importa</h1>
-    </div>
-      <div className="rozanewsNav">
-        <ArticlesCategories showCategories={showCategories} setShowCategories={setShowCategories} setCategorieSelected={setCategorieSelected} articlesCategoriesData={articlesCategoriesData} />
-        <div className="flexrow flexrow--separate">
-          <button className="rozanewsNav__bt" onClick={() => setShowCategories(true)}>CATEGORÍAS</button>
+        <div className="rozanews__hero__bt">
+          <p>Descubre nuestros artículos</p>
+          <button className="closeBtSlide closeBtSlide--centerDown">
+            <div className="closeBtSlide__lineT"></div>
+            <div className="closeBtSlide__lineC"></div>
+            <div className="closeBtSlide__lineB"></div>
+        </button>
         </div>
       </div>
-      <ArticlesBoard categorieSelected={categorieSelected}/>
+      <div className="flexcolum flexcolum--separate flexcolum--around" style={{ 'width': '100%'}}>
+        <div className="flexrow flexrow--between" style={{ 'width': '100%'}}>
+          <h1>Categoría: {categorieSelected.name}</h1>
+          <ArticlesCategories showCategories={showCategories} setShowCategories={setShowCategories} setCategorieSelected={setCategorieSelected} articlesCategoriesData={articlesCategoriesData} />
+          <div className="flexrow flexrow--separate">
+            <button className="rozanewsNav__bt" onClick={() => setShowCategories(true)}>Selecciona la categoría</button>
+          </div>
+        </div>
+        <div className="articlesBoard">
+          {categorieSelected.articles.map( (article, index) => 
+            < ArticleCard key={index} article={article} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

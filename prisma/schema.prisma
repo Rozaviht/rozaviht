@@ -20,7 +20,7 @@ model images {
   product           products?
   // An Image can has only one Article
   article           articles?           @relation(fields: [articleId], references: [id])
-  articleId         String?             @unique
+  articleId         String?
   // An Image can has only one ProductCategory
   productCategory   product_categories? @relation(fields: [productCategoryId], references: [id])
   productCategoryId String?

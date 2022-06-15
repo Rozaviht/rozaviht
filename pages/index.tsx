@@ -113,6 +113,7 @@ export default function LandingPage () {
       </div>
       {/* ---------- CBD SECTION --------- */}
       <div className="cbdSection">
+      <LiquidBubbles className="liquidBubbles" />
         <div className="cbdSection__img-wrapper">
           <div className="cbdSection__img">
             <Image className="cbdSection__img-content" src='https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-section.png' alt="" height={1499} width={1499} layout="responsive"/>
@@ -133,7 +134,6 @@ export default function LandingPage () {
               <Link href="/aceite-cbd"><a className="cbdSection__link">Ver el aceite</a></Link>
             </button>
         </div>
-        <LiquidBubbles className="liquidBubbles" />
       </div>
       {/* ---------- ROZANEWS SECTION --------- */}
       <div className="rozanewsSection" >

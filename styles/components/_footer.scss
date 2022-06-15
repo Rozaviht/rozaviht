@@ -38,6 +38,10 @@
     flex-direction: column;
     width: 100%;
     max-width: 600px;
+    
+    & > label > input {
+      color: $backgroundcolor;
+    }
 
     & > button {
       margin-top: 1rem;
