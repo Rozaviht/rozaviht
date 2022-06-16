@@ -96,11 +96,14 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     setShowTerms(showTermsCopy)
   }
 
-  const handleOrderVerify = () => {
+  const handleOrderVerify = (event: any) => {
+    event.preventDefault()
 
     if (checkedTerms === false ) {
       setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
       setShowPopUp(true)
+
+      return false
 
     } else {
       let orderAmount = 0
@@ -111,6 +114,11 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       }
 
       setTotalCartPrice(orderAmount)
+
+      createOrderNumber()
+        .then(() => {
+          
+        })
       setOrderVerified(true)
     }
 
@@ -199,7 +207,12 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleOrderVerify}>Pagar</button>
+        <form name="from" action="https://sis-t.redsys.es:25443/sis/realizarPago" method="POST" onSubmit={handleOrderVerify}>
+          <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1"/>
+          <input type="hidden" name="Ds_MerchantParameters" value=""/>
+          <input type="hidden" name="Ds_Signature" value=""/>	
+          <button className="checkoutform-bt checkoutform-bt--fixed" type='submit'>Pagar</button>
+        </form>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>

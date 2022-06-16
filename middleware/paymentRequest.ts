@@ -24,7 +24,7 @@ export const paymentRequest: FieldResolver<
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
-    DS_MERCHANT_MERCHANTCODE: "355542226",
+    DS_MERCHANT_MERCHANTCODE: "356725135",
     DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
