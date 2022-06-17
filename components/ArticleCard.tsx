@@ -11,8 +11,6 @@ type ArticleCardProps = {
 
 export default function ArticleCard ({article}:ArticleCardProps) {
 
-
-
   return (
       <div className="articleCard">
         <div className="articleCard__img">

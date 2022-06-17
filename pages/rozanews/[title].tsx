@@ -12,6 +12,8 @@ import Layout from "@components/Layout"
 import ArticleCard from "@components/ArticleCard"
 
 import IsotipoBlack from "@img/isotipo-black.svg"
+import ArrowLeftNegative from "@img/arrow-left-negative.svg"
+import Link from "next/link"
 
 
 
@@ -62,6 +64,11 @@ export async function getStaticProps ({params}: {params: {title:string}}) {
             select: {
               title: true,
               content: true,
+              category: {
+                select: {
+                  name: true
+                }
+              },
               image: {
                 select: {
                   id: true,
@@ -110,7 +117,7 @@ interface articlePageProps {
 
 export default function articlePage ({ articleData, articleCatagorieData }: articlePageProps) {
 
-  console.log(articleData.createdAt)
+  console.log(articleCatagorieData)
 
   return (
     <div className="article-page" >
@@ -125,12 +132,19 @@ export default function articlePage ({ articleData, articleCatagorieData }: arti
           < IsotipoBlack className="isotipo-black" />
         </div>
       </div>
-      {articleCatagorieData.articles.length < 2
+      {articleCatagorieData.articles.length < 1
         ?
         <></>
       :
       <div className="recomendations">
-        <h3>Otros artículos de la categoría <strong>{articleCatagorieData.name}</strong>, que te pueden interesar:</h3>
+        <div className="flexrow flexrow--between" style={{'width': '90%'}}>
+          <h2>Sigue leyendo artículos de la misma categoría:</h2>
+          <Link href={"/rozanews"}>
+            <a  className="recomendations__bt">
+              <ArrowLeftNegative /> O vuelve a atrás a elegir otra
+            </a>
+          </Link>
+        </div>
         <div className="recomendations__articles">
         {articleCatagorieData.articles.map( (article, index) => 
           < ArticleCard article={article} key={index} />
