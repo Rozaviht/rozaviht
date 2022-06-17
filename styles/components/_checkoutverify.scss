@@ -40,6 +40,17 @@
       margin-left: 2rem;
     }
   }
+
+  @include respond-to(tablet-landscape) {
+    font-size: 110%;
+    flex-direction: row;
+    align-items: flex-start;
+
+    & > div:nth-child(2) {
+      margin-top: 0;
+      margin-left: 2rem;
+    }
+  }
 }
 
 

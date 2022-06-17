@@ -28,7 +28,17 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "http://rozaviht.vercel.app/api/graphql"
+    DS_MERCHANT_MERCHANTURL: "http://rozaviht.vercel.app/api/graphql",
+    DS_MERCHANT_URLOK: "http://rozaviht.vercel.app/api/graphql",
+    DS_MERCHANT_URLKO: "http://rozaviht.vercel.app/api/graphql",
+    DS_MERCHANT_EMV3DS: {
+      threeDSInfo: "ChallengeResponse",
+      protocolVersion: "2.2.0",
+      browserAcceptHeader: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json",
+			browserUserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
+      browserLanguage: "ES-es",
+      browserJavaEnabled: "true"
+    }
   }
 
   console.log(merchantData)

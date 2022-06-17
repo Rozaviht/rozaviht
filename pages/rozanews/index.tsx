@@ -6,7 +6,6 @@ import type { imageType } from 'services/AppProvider'
 
 import Layout from '@components/Layout'
 import ArticlesCategories from '@components/ArticlesCategories'
-import ArticlesBoard from '@components/ArticlesBoard'
 
 import RozanewsLogoBlack from 'public/img/rozanews-logo-black.svg'
 import ArticleCard from '@components/ArticleCard'
@@ -128,30 +127,38 @@ export default function Rozanews ({ articlesCategoriesData }: rozanewsProps) {
   const [showCategories, setShowCategories] = useState(false)
   const [categorieSelected, setCategorieSelected] = useState<articleCategorieType>(articlesCategoriesData[0])
 
+  const scrollToArticles = () => {
+    const articlesBoard = document.getElementById("articlesBoard")!
+    articlesBoard.scrollIntoView({ block: 'start', behavior: 'smooth' })
+  }
+
   return(
     <div className="rozanews">
       <div className="rozanews__hero">
         <div className="bannerBar"></div>
-        <div className="rozanews__img">
-          <Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'hola'} layout="responsive"/>
+        <div className="rozanews__img__land">
+          <Image  src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-16-9.webp"} height={720} width={1280} alt={'Hombre escribiendo en un cuaderno y al lado el aceite de cbd de rozaviht'} layout="responsive"/>
+        </div>
+        <div className="rozanews__img__port">
+          <Image  src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/rozanews-banner-9-16.webp"} height={1816} width={1022} alt={'Hombre escribiendo en un cuaderno y al lado el aceite de cbd de rozaviht'} layout="responsive"/>
         </div>
         <RozanewsLogoBlack className="rozanews__logo" />
         <h1>Nunca te quedes desinformado de lo que te importa</h1>
         <div className="rozanews__hero__bt">
           <p>Descubre nuestros artículos</p>
-          <button className="closeBtSlide closeBtSlide--centerDown">
+          <button className="closeBtSlide closeBtSlide--centerDown" onClick={scrollToArticles}>
             <div className="closeBtSlide__lineT"></div>
             <div className="closeBtSlide__lineC"></div>
             <div className="closeBtSlide__lineB"></div>
         </button>
         </div>
       </div>
-      <div className="flexcolum flexcolum--separate flexcolum--around" style={{ 'width': '100%'}}>
+      <div id='articlesBoard' className="flexcolum flexcolum--separate flexcolum--around" style={{ 'width': '100%'}}>
         <div className="flexrow flexrow--between" style={{ 'width': '100%'}}>
           <h1>Categoría: {categorieSelected.name}</h1>
-          <ArticlesCategories showCategories={showCategories} setShowCategories={setShowCategories} setCategorieSelected={setCategorieSelected} articlesCategoriesData={articlesCategoriesData} />
-          <div className="flexrow flexrow--separate">
-            <button className="rozanewsNav__bt" onClick={() => setShowCategories(true)}>Selecciona la categoría</button>
+          <div className="flexcolum">
+            <button className="rozanewsNav__bt" onClick={() => setShowCategories(!showCategories)}>Selecciona la categoría</button>
+            <ArticlesCategories showCategories={showCategories} setShowCategories={setShowCategories} setCategorieSelected={setCategorieSelected} articlesCategoriesData={articlesCategoriesData} />
           </div>
         </div>
         <div className="articlesBoard">

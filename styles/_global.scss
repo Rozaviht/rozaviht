@@ -188,7 +188,7 @@ body {
   }
   
   &--centerDown {
-    width: 5rem;
+    width: 4rem;
     position: relative;
     transform: rotate(90deg);
 
@@ -198,11 +198,11 @@ body {
     }
 
     & .closeBtSlide__lineT, .closeBtSlide__lineB {
-      left: 3.2rem;
+      left: 2rem;
     }
 
     & .closeBtSlide__lineC {
-      width: 5rem;
+      width: 4rem;
       left: 0;
     }
   }

@@ -96,7 +96,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
     setShowTerms(showTermsCopy)
   }
 
-  const handleOrderVerify = (event: any) => {
+  const handleResysSubmit = (event: any) => {
     event.preventDefault()
 
     if (checkedTerms === false ) {
@@ -115,11 +115,11 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
 
       setTotalCartPrice(orderAmount)
 
-      createOrderNumber()
-        .then(() => {
-          
+      createOrderNumber().then(() => {
+          paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
         })
-      setOrderVerified(true)
+
+      setTotalCartPrice(0)
     }
 
   }
@@ -190,7 +190,6 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
               </div>
             </div>
           </label>
-          <span style={{ 'fontSize': '70%', 'opacity': '70%' }}>*Actualmente solo disponemos de un método de pago, en un próximo fúturo añadiremos PayPal</span>
         </div>
       </div>
       <div className="checkoutVerify__content">
@@ -207,12 +206,12 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <form name="from" action="https://sis-t.redsys.es:25443/sis/realizarPago" method="POST" onSubmit={handleOrderVerify}>
-          <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1"/>
-          <input type="hidden" name="Ds_MerchantParameters" value=""/>
-          <input type="hidden" name="Ds_Signature" value=""/>	
-          <button className="checkoutform-bt checkoutform-bt--fixed" type='submit'>Pagar</button>
+        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" name="redSysForm" method='POST'>
+          <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? "" : data.paymentRequest.Ds_SignatureVersion} />
+          <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
+          <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />
         </form>
+        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleResysSubmit}>Pagar</button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>

@@ -1,25 +1,38 @@
 .articlesCategories {
-  padding: 1rem;
+  padding: 0;
 
   z-index: 201;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  height: 0;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 
   border-radius: 10px;
-  background-color: rgba($lightmaincolor, $alpha: 0.7);
-  backdrop-filter: blur(5px);
+  background-color: $maincolor;
 
-  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
-  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
 
-  &.hidden {
-    display: none;
+
+  &.drop {
+    display: flex;
+    animation: dropCategories 400ms ease-in-out forwards;
+
+    &::before {
+      content: '';
+      z-index: 902;
+      position: absolute;
+      top: -1rem;
+      right: 25px;
+      width: 0;
+      height: 0;
+      border-left: 1rem solid transparent;
+      border-right: 1rem solid transparent;
+  
+      border-bottom: 1rem solid $maincolor;
+    }
   }
 
   
@@ -33,13 +46,22 @@
     display: flex;
     
     & .categorie-bt {
+      font-size: 100%;
       margin: 1rem;
-      padding: 0.3rem 0.7rem 0.3rem 0.7rem;
-      border-radius: 10px;
-      background-color: $maincolor;
       color: $backgroundcolor;
       font-family: DIN-Bold;
     }
   }
 
+}
+
+@keyframes dropCategories {
+  from {
+    height: 0;
+    padding: 0;
+  }
+  to {
+    height: 100%;
+    padding: 1rem;
+  }
 }

@@ -1,8 +1,11 @@
 .rozanews {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &__img__land {
+    display: none;
+  }
 
   &__hero {
     position: relative;
@@ -10,7 +13,7 @@
 
     &__bt {
       position: absolute;
-      top: 90%;
+      top: 85%;
       left: 50%;
       transform: translate(-50%, -50%);
       display: flex;
@@ -18,6 +21,7 @@
       align-items: center;
 
       & > p {
+        text-align: center;
         color: #fff;
         font-size: 120%;
         margin-bottom: 2rem;
@@ -37,8 +41,9 @@
     }
     
     > h1 {
+      width: 100%;
       z-index: 2;
-      font-size: 140%;
+      font-size: 120%;
       position: absolute;
       margin-top: 0.5rem;
       text-align: center;
@@ -52,8 +57,8 @@
   &__logo {
     z-index: 2;
     position: absolute;
-    width: 75%;
-    top: 45%;
+    width: 90%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -67,10 +72,54 @@
     margin-top: 2rem;
   }
 
+  @include respond-to(mobile-landscape) {
+    &__logo {
+      width: 45%;
+    }
+    &__img__land {
+      display: block;
+    }
+    &__img__port {
+      display: none;
+    }
+  }
+
   @include respond-to(tablet-portrait) {
     &__logo {
-      width: 40%;
+      width: 60%;
     }
+    &__img__land {
+      display: block;
+    }
+    &__img__port {
+      display: none;
+    }
+  }
+
+  @include respond-to(tablet-landscape) {
+    &__img__land {
+      display: block;
+    }
+    &__img__port {
+      display: none;
+    }
+    &__logo {
+      width: 60%;
+    }
+
+    &__hero {
+
+      & > h1 {
+        top: 65%;
+        font-size: 170%;
+        font-family: Lora-MediumItalic;
+      }
+
+      &__bt {
+        top: 77%;
+      }
+    }
+
   }
 }
 
@@ -85,9 +134,9 @@
   &__bt {
     color: $backgroundcolor;
     background-color: $maincolor;
-    padding: 0.8rem;
+    padding: 1rem;
     border-radius: 50px;
-    font-size: 100%;
+    font-size: 110%;
   }
 
 }

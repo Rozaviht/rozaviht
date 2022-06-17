@@ -6,6 +6,14 @@
   flex-direction: column;
   align-items: center;
 
+  &.rozanewsMode {
+    z-index: 999;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+  }
+
   @include respond-to(mobile-landscape) {
     flex-direction: row;
     padding: 1rem 10% 1rem 10%;
@@ -44,19 +52,31 @@
     color: $maincolor;
   }
 
+  &.rozanewsMode {
+    border-top: 1px solid $backgroundcolor;
+    & > a {
+      color: $backgroundcolor
+    }
+  }
+
   @include respond-to(mobile-landscape) {
     flex-direction: row;
     margin: 0;
     padding: 0;
-
+    padding-right: 8%;
+    
     border: none;
-
+    
     justify-content: flex-end;
     & > a {
       margin-left: 3rem;
     }
+    
+    &.rozanewsMode {
+      border: none;
+    }
   }
-
+  
   @include respond-to(tablet-landscape) {
     padding-right: 8%;
     font-size: 1.4rem;
@@ -87,8 +107,8 @@
 
 
   @include respond-to(desktop) {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 3rem;
+    width: 3rem;
   }
 }
 
@@ -107,6 +127,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  &.rozanewsMode {
+    background-color: $backgroundcolor;
+    color: $maincolor;
   }
 
 
