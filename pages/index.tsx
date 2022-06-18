@@ -142,10 +142,10 @@ export default function LandingPage () {
         </div>
         <div className="rozanewsSection__cards">
           <div className="rozanewsSection__img">
-            <Image src={'/img/landing-rozanews.webp'} height={894} width={1081} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
+            <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-rozanews.webp'} height={894} width={1081} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
           </div>
           <div className="rozanewsSection__img-mobile">
-            <Image src={'/img/landing-rozanews-mobile.webp'} height={905} width={855} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
+            <Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/landing-rozanews-mobile.webp'} height={905} width={855} alt={'Tres cartas de los tres primeros blogs agregados a rozanews'} layout="responsive" />
           </div>
         </div>
           <div className="rozanewsSection__content">
