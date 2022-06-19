@@ -20,7 +20,9 @@ export default function CookiesConsent () {
   })
 
   useEffect(() => {
-    localStorage.setItem("cookiesAccepted", "true")
+    if (cookiesAccepted === "true") {
+      localStorage.setItem("cookiesAccepted", "true")
+    }
   }, [cookiesAccepted])
 
   console.log(cookiesPref)
