@@ -117,13 +117,11 @@ interface articlePageProps {
 
 export default function articlePage ({ articleData, articleCatagorieData }: articlePageProps) {
 
-  console.log(articleCatagorieData)
-
   return (
     <div className="article-page" >
       <div className="article">
         <div className="article__banner">
-          < Image src={articleData.image[0].url} height={articleData.image[0].height!} width={articleData.image[0].width!} alt={articleData.image[0].alt} layout="responsive" />
+        <Image src={articleData.image[0].url.slice(articleData.image[0].url.length - 8) === "5-1.webp" ? articleData.image[0].url : articleData.image[1].url} height={articleData.image[0].url.slice(articleData.image[0].url.length - 8) === "5-1.webp" ? articleData.image[0].height! : articleData.image[1].height!} width={articleData.image[0].url.slice(articleData.image[0].url.length - 8) === "5-1.webp" ? articleData.image[0].width! : articleData.image[1].width!} alt={articleData.image[1].alt} layout="responsive" />
         </div>
         <div className="article__content">
           <h1>{articleData.title}</h1>
