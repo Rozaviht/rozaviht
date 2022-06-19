@@ -37,22 +37,21 @@ export type CartItemType = {
   const [cookiesManageShow, setCookiesManageShow] = useState(false)
 
   useEffect(() => {
-
     if (showPopUp === true) {
       const popUpInterval = setTimeout(() => {
         setShowPopUp(showPopUp => !showPopUp)
       }, 7100)
       return () => clearInterval(popUpInterval)
     }
-
-
   }, [showPopUp])
+
 
   useEffect(() => {
     if (window) {
       setCartProducts(JSON.parse(window.sessionStorage.getItem('cartProducts') || '[]') || [] as CartItemType[])
     }
   }, [])
+
 
   useEffect(() => {
     window.sessionStorage.setItem( 'cartProducts', JSON.stringify(cartProducts))
