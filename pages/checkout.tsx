@@ -10,14 +10,11 @@ import CheckoutVerify from '@components/CheckoutVerify'
 
 import CheckoutLayout from '@components/CheckoutLayout'
 import CheckoutForm from '@components/CheckoutForm'
-import CheckoutPayment from '@components/CheckoutPayment'
 
 
 
 export default function CheckoutPage ()  {
   const [orderVerified, setOrderVerified] = useState(false)
-
-
 
   const {shippingForm, editingForm, paymentDone} = useContext(CheckoutContext)
 
@@ -37,10 +34,11 @@ export default function CheckoutPage ()  {
         orderVerified === false 
           ?
             <CheckoutVerify setOrderVerified={setOrderVerified}/>
-          :
+            :
             paymentDone === false
             ?
-            < CheckoutPayment/>
+              <CheckoutVerify setOrderVerified={setOrderVerified}/>
+            
             : 
             <div className="checkout-section">
               <p style={{ 'fontSize': '1rem' }}>Deberías recibir un correo electrónico confirmando la compra realizada y con su factura correspondiente. Revisa en tu correo la bandeja de Spam en caso de no verlo en la bandeja principal.</p>

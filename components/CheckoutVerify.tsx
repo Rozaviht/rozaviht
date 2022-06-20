@@ -120,6 +120,7 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
         })
 
       setTotalCartPrice(0)
+      setOrderVerified(true)
     }
 
   }

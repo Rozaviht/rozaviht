@@ -28,9 +28,9 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "http://rozaviht.vercel.app/api/graphql",
-    DS_MERCHANT_URLOK: "http://rozaviht.vercel.app/api/graphql",
-    DS_MERCHANT_URLKO: "http://rozaviht.vercel.app/api/graphql",
+    DS_MERCHANT_MERCHANTURL: "http://rozaviht/",
+    DS_MERCHANT_URLOK: "http://rozaviht/",
+    DS_MERCHANT_URLKO: "http://rozaviht/",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",
@@ -41,7 +41,6 @@ export const paymentRequest: FieldResolver<
     }
   }
 
-  console.log(merchantData)
   // Base64 encoding of parameters
   var merchantWordArray = cryptojs.enc.Utf8.parse(JSON.stringify(merchantData))
   var merchantBase64 = merchantWordArray.toString(cryptojs.enc.Base64)
@@ -66,6 +65,7 @@ export const paymentRequest: FieldResolver<
     merchantParameters: merchantBase64,
     signature: signatureBase64
   }
+
 
 return {
   Ds_SignatureVersion: tpvResponse.signatureVersion,
