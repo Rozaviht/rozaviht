@@ -135,6 +135,7 @@ model customer_information {
   cif        String?
   provincie  String
   city       String
+  postalCode String
   address    String
   door       String
   comment    String?
@@ -155,8 +156,6 @@ model order_details {
   products         products[]
   amount           Int
   // An order can only has one payment details
-  paymentDetails   payment_details      @relation(fields: [paymentDetailsId], references: [id])
-  paymentDetailsId String               @unique
   createdAt        DateTime             @default(now()) @map(name: "created_at")
   modifiedAt       DateTime             @updatedAt @map(name: "modified_at")
   deletedAt        DateTime             @default(now()) @map(name: "deleted_at")
@@ -182,7 +181,6 @@ model payment_details {
   createdAt  DateTime       @default(now()) @map(name: "created_at")
   modifiedAt DateTime       @updatedAt @map(name: "modified_at")
   // A payment can only has one order
-  order      order_details?
 }
 
 enum payment_status {

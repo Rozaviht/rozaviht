@@ -33,7 +33,15 @@ const PAYMENT_REQUEST = gql`
   }
 `
 
-const CREATE_ORDER_NUMBER_ =gql`
+const CREATE_CUSTOMER = gql`
+  mutation Mutation($input: customerInformationInputs) {
+    createCustomer(input: $input) {
+      success
+    }
+  }
+`
+
+const CREATE_ORDER_NUMBER =gql`
   mutation Mutation {
     createOrderNumber {
       success
@@ -47,7 +55,8 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
   const { shippingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
-  const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER_)
+  const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER)
+  const [ createCustomer, ] = useMutation(CREATE_CUSTOMER)
 
   const [shippingChecked, setShippingChecked] = useState(true)
   const [checkedBillingForm, setCheckedBillingForm] = useState(true)
@@ -115,9 +124,13 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
 
       setTotalCartPrice(orderAmount)
 
-      createOrderNumber().then(() => {
-          paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
-        })
+      let input = shippingForm
+      createCustomer({variables: {input}})/* .then(() => 
+        createOrderNumber().then(() => {
+            paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
+          })
+      ) */
+
 
       setTotalCartPrice(0)
       setOrderVerified(true)

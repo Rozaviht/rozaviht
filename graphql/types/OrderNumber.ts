@@ -1,4 +1,4 @@
-import { extendType, intArg, nonNull, objectType } from "nexus";
+import { extendType, objectType } from "nexus";
 import {createOrderNumber} from 'middleware/createOrderNumber'
 
 export const OrderNumber = objectType({
@@ -9,7 +9,7 @@ export const OrderNumber = objectType({
   }
 })
 
-const CreateOrderNumberRes = objectType({
+export const SuccessResponse = objectType({
   name: 'createOrderNumberRes',
   definition(t) {
     t.nonNull.boolean('success')
@@ -20,7 +20,7 @@ export const storeOrderNumber = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('createOrderNumber', {
-      type: CreateOrderNumberRes,
+      type: SuccessResponse,
       resolve: createOrderNumber,
     })
   } 

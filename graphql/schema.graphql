@@ -37,6 +37,8 @@ type Image {
 }
 
 type Mutation {
+  createCustomer(input: customerInformationInputs): createOrderNumberRes
+  createOrderDetails(input: orderInputs): createOrderNumberRes
   createOrderNumber: createOrderNumberRes
   createUser(email: String!): popUpResponse
   paymentRequest(orderAmount: Float!): paymentResponse
@@ -140,14 +142,32 @@ type customerInformation {
   shippingComment: String
 }
 
+input customerInformationInputs {
+  address: String!
+  addressNumber: String!
+  cif: String
+  city: String!
+  door: String!
+  email: String!
+  lastName: String!
+  name: String!
+  phone: String!
+  postalcode: String!
+  provincie: String!
+  shippingComment: String
+}
+
 type orderDetails {
   amount: Int!
-  customer: customerInformation!
+  customer: customerInformation
   customerId: String!
   id: String!
-  paymentDetails: PaymentDetails!
-  paymentDetailsId: String!
   products: [Product]!
+}
+
+input orderInputs {
+  amount: String!
+  products: [String]!
 }
 
 type orderNumber {
