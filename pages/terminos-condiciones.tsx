@@ -20,6 +20,8 @@ export default function termsPage () {
       </div>
       <div className="legalPage__content">
         <h2>NUESTROS TERMINOS Y CONDICIONES DE USO DE LA PÁGINA WEB</h2>
+        <p>Última actualización: 23 de Junio de 2022</p>
+        <br />
         <p>Las ventas realizadas a través de la página web de www.rozaviht.com son gestionadas únicamente por Rozaviht, los presentes términos y condiciones de compra es el suministro de producto por parte de Rozaviht ofrecidos en la tienda online. Dicha marca, es también, la titular de la presente página web.
         </p>
         <p>
@@ -33,7 +35,7 @@ export default function termsPage () {
           Serán envíos únicamente de manera peninsular en ESPAÑA.
         </p>
         <p>
-          Los pedidos podrán ser cancelados únicamente si no se ha recibido ningún correo, con la notificación de su envío, escribiendo al correo electrónico o llamándonos. También podrá ser efecto de devolución si el producto tiene algún defecto, o su estado a la hora de entrega ha sido defectuoso. Contando con 7 días para informar de la incidencia y la devolución del producto, una vez este haya sido entregado. De lo contrato tendrá que pagar una penalización de devolución. Te lo detallamos todo en nuestro apartado de CANCELACIÓN/DEVOLUCIÓN.
+          Los pedidos podrán ser cancelados únicamente si no se ha recibido ningún correo, con la notificación de su envío, escribiendo al correo electrónico. También se podrá realizar una devolución por cualquier motivo, contando con 14 días para informar de la incidencia y la devolución del producto, una vez este haya sido entregado. De lo contrato tendrá que pagar una penalización de devolución. Te lo detallamos todo en nuestro apartado de DEVOLUCIÓN, de Preguntas Frecuentes.
         </p>
       </div>
     </div>

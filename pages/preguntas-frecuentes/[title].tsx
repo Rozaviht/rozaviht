@@ -1,11 +1,15 @@
-import FaqCuestionsLayout from "@components/FaqCuestionsLayout"
-import Layout from "@components/Layout"
-import prisma from "lib/prisma"
-import { GetStaticPaths } from "next/types"
 import { ReactElement, useContext, useEffect, useState } from "react"
+import prisma from "lib/prisma"
+
+import { GetStaticPaths } from "next/types"
+import type { faqCategory } from "."
+
 import { FaqContext } from "services/FaqContext"
 import FaqProvider from "services/FaqProvider"
-import type { faqCategory } from "."
+
+import FaqCuestionsLayout from "@components/FaqCuestionsLayout"
+import Layout from "@components/Layout"
+
 
 
 interface faqCategoryProps {
@@ -64,7 +68,7 @@ export const getStaticProps = async ({params}: {params: {title:string}}) => {
 
 export default function FaqCategoryPage ({faqCategory, faqCategoriesTitles}:faqCategoryProps) {
 
-  const {setFaqTitles,faqTitles} = useContext(FaqContext)
+  const {setFaqTitles} = useContext(FaqContext)
 
   useEffect(() => {
     setFaqTitles(faqCategoriesTitles.map( category => {return category.title}))

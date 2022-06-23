@@ -11,6 +11,14 @@
     flex-direction: row;
     align-items: flex-start;
   }
+
+  @include respond-to(tablet-landscape) {
+    padding-left: 10%;
+    padding-right: 10%;
+
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 .faqCategory-menu{
@@ -37,6 +45,23 @@
   }
   
   @include respond-to(tablet-portrait) {
+    border-radius: 5px;
+    padding: 3rem;
+    font-size: 1.4rem;
+    flex-direction: column;
+    width: 40%;
+    margin-right: 2rem;
+    
+    & > h2 {
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    & > a {
+      margin-bottom: 1rem;
+    }
+  }
+  @include respond-to(tablet-landscape) {
     border-radius: 5px;
     padding: 3rem;
     font-size: 1.4rem;

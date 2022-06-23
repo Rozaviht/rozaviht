@@ -23,8 +23,10 @@ export default function PrivacyPage () {
       </div>
       <div className="legalPage__content">
         <h2>NOSOTROS</h2>
+        <p>Última actualización: 23 de Junio de 2022</p>
+        <br />
         <p>
-          La marca Rozaviht, sita en calle palestina 17 Alcobendas 28100 Madrid (España). Con número de teléfono de atención al cliente y correo electrónico  attcliente@rozaviht.com.
+          La marca Rozaviht, sita en calle palestina 17 Alcobendas 28100 Madrid (España). Con correo electrónico de atención al cliente consultascliente@rozaviht.com.
         </p>
         <p>
           Pueden verificar de una manera rápida y sencilla todos nuestros términos y condiciones al igual que nuestra política de privacidad, ingresando en todo momento desde nuestra página principal.
