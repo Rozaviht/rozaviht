@@ -5,7 +5,9 @@ export default function handler(req: NextApiRequest,res: NextApiResponse) {
 
     var cryptojs = require('crypto-js')
 
-    console.log(res)
+    console.log(req)
+
+    
 
 
     var keyWordArray = cryptojs.enc.Base64.parse(TPV_MERCHANT_KEY);

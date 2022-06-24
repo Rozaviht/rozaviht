@@ -1,4 +1,4 @@
-import { useState, useEffect,useContext } from 'react'
+import { useEffect,useContext } from 'react'
 
 import type { ReactElement } from 'react'
 
@@ -14,9 +14,7 @@ import CheckoutForm from '@components/CheckoutForm'
 
 
 export default function CheckoutPage ()  {
-  const [orderVerified, setOrderVerified] = useState(false)
-
-  const {shippingForm, editingForm, paymentDone} = useContext(CheckoutContext)
+  const {shippingForm, editingForm, orderVerified} = useContext(CheckoutContext)
 
 
   useEffect(() => {
@@ -25,26 +23,23 @@ export default function CheckoutPage ()  {
 
   return (
     <div className="checkout-main">
-      <CheckoutSteps orderVerified={orderVerified} />
+      
       {/* shippingData && Object.keys(shippingData).length === 0 && Object.getPrototypeOf(shippingData) === Object.prototype, means object === undefined */}
       {shippingForm && Object.keys(shippingForm).length === 0 && Object.getPrototypeOf(shippingForm) === Object.prototype || editingForm === true
       ?
-        <CheckoutForm />
+        <>
+          <CheckoutSteps  stepStatus={"shippingForm"}/>
+          <CheckoutForm />
+        </>
       : 
         orderVerified === false 
           ?
-            <CheckoutVerify setOrderVerified={setOrderVerified}/>
-            :
-            paymentDone === false
-            ?
-              <CheckoutVerify setOrderVerified={setOrderVerified}/>
-            
-            : 
-            <div className="checkout-section">
-              <p style={{ 'fontSize': '1rem' }}>Deberías recibir un correo electrónico confirmando la compra realizada y con su factura correspondiente. Revisa en tu correo la bandeja de Spam en caso de no verlo en la bandeja principal.</p>
-              <p style={{ 'fontSize': '1rem', 'marginTop': '1rem' }}>Después te enviaremos un correo con tu número de pedido para que le puedas hacer seguimiento. En el propio correo te explicamos como puedes hacer dicho seguimiento.</p>
-              <p>De no ser así, ponte en contacto con nosotros, en nuestra página de contacto, para resolverte cualquier incidente.</p>
-            </div>
+            <>
+              <CheckoutSteps  stepStatus={"orderVerified"}/>
+              <CheckoutVerify />
+            </>
+          :
+            <></>
       }
     </div>
   )

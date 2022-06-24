@@ -22,6 +22,15 @@
     }
   }
 
+  @include respond-to(tablet-landscape) {
+    & > div > p {
+      margin-right: 1rem;
+    }
+    &__img {
+      width: 40%;
+    }
+  }
+
   @include respond-to(desktop) {
     &__img {
       width: 30%;

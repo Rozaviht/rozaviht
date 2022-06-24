@@ -5,8 +5,6 @@ import { AppContext } from 'services/AppContext'
 import { CheckoutContext } from 'services/CheckoutContext'
 import { orderType } from '../pages/api/sendOrderMail'
 
-import type { Dispatch, SetStateAction } from 'react'
-
 import provinciasData from "../data/pronviciasData.json"
 
 import EditIcon from 'public/img/edit-icon.svg'
@@ -19,9 +17,6 @@ import useScrollBlock from '@hooks/useScrollBlock'
 import BillingDataCard from './BillingDataCard'
 import PopUpAlerts from './PopUpAlerts'
 
-export type checkoutVerificationProps = {
-  setOrderVerified: Dispatch<SetStateAction<boolean>>,
-}
 
 const PAYMENT_REQUEST = gql`
   mutation Mutation($orderAmount: Float!) {
@@ -49,10 +44,10 @@ const CREATE_ORDER_NUMBER =gql`
   }
 `
 
-export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificationProps) {
+export default function CheckoutVerify () {
 
-  const { cartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
-  const { shippingForm, setEditingForm } = useContext(CheckoutContext)
+  const { cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
+  const { shippingForm, setEditingForm, setOrderVerified } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
   const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER)
@@ -125,17 +120,17 @@ export default function CheckoutVerify ({ setOrderVerified }:checkoutVerificatio
       setTotalCartPrice(orderAmount)
 
       let input = shippingForm
-      createCustomer({variables: {input}})/* .then(() => 
+
+      createCustomer({variables: {input}}).then(() => {
         createOrderNumber().then(() => {
-            paymentRequest({variables: {orderAmount}}).then(() => (document as any).redSysForm.submit())
+          paymentRequest({variables: {orderAmount}}).then(() => {
+            (document as any).redSysForm.submit()
+            setCartProducts([])
           })
-      ) */
+        })
+      })
 
-
-      setTotalCartPrice(0)
-      setOrderVerified(true)
     }
-
   }
 
   return (

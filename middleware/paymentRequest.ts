@@ -29,7 +29,7 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
     DS_MERCHANT_MERCHANTURL: "http://192.168.2.160:3000/api/paymentresponse",
-    DS_MERCHANT_URLOK: "http://192.168.2.160:3000/checkout",
+    DS_MERCHANT_URLOK: "http://192.168.2.160:3000/checkoutend",
     DS_MERCHANT_URLKO: "http://192.168.2.160:3000/checkout",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",

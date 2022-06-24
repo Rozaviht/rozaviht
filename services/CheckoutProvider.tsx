@@ -31,10 +31,11 @@ export type ShippingForm = CheckoutForm & {  shippingComment: string }
   const [billingForm, SetBillingForm] = useState<CheckoutForm>({} as CheckoutForm)
   const [editingForm, setEditingForm] = useState(false)
   const [paymentDone, setPaymentDone] = useState(false)
+  const [orderVerified, setOrderVerified] = useState(false)
 
 
   return (
-    <CheckoutContext.Provider value={{shippingForm, setShippingForm, billingForm, SetBillingForm, editingForm, setEditingForm,paymentDone, setPaymentDone }}>
+    <CheckoutContext.Provider value={{shippingForm, setShippingForm, billingForm, SetBillingForm, editingForm, setEditingForm,paymentDone, setPaymentDone, orderVerified, setOrderVerified }}>
       {children}
     </CheckoutContext.Provider>
   )

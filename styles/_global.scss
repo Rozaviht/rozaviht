@@ -495,7 +495,7 @@ body {
     }
   }
 
-  @include respond-to(desktop) {
+  @include respond-to(tablet-landscape) {
     border: none;
     display: flex;
     flex-direction: column;

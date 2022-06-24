@@ -38,7 +38,7 @@
     padding-right: 10%;
   }
   
-  @include respond-to(tablet-portrait, ) {
+  @include respond-to(tablet-portrait) {
     padding-left: 15%;
     padding-right: 15%;
     font-size: 1.4rem;
