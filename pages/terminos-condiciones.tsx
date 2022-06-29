@@ -37,6 +37,10 @@ export default function termsPage () {
         <p>
           Los pedidos podrán ser cancelados únicamente si no se ha recibido ningún correo, con la notificación de su envío, escribiendo al correo electrónico. También se podrá realizar una devolución por cualquier motivo, contando con 14 días para informar de la incidencia y la devolución del producto, una vez este haya sido entregado. De lo contrato tendrá que pagar una penalización de devolución. Te lo detallamos todo en nuestro apartado de DEVOLUCIÓN, de Preguntas Frecuentes.
         </p>
+        <p>
+          Este comerciante se compromete a no permitir ninguna transacción que sea ilegal, o se considere por las marcas de tarjetas de crédito o el banco adquiriente, que pueda o tenga el potencial de dañar la buena voluntad de los mismos o influir de manera negativa en ellos. Las siguientes actividades están prohibidas en virtud de los programas de las marcas de tarjetas: la venta u oferta de un producto o servicio que no sea de plena conformidad con todas las leyes aplicables al Comprador, Banco Emisor, Comerciante, Titular de la tarjeta, o tarjetas. Además, las siguientes actividades también están prohibidas explícitamente:
+        </p>
+        <p>-Vender medicamentos.</p>
       </div>
     </div>
   )

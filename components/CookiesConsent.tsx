@@ -25,8 +25,6 @@ export default function CookiesConsent () {
     }
   }, [cookiesAccepted])
 
-  console.log(cookiesPref)
-
   return (
     <div className={cookiesAccepted === "true" ? "cookies-consent hidden" : "cookies-consent"}>
       <div className="cookies-consent__txt">

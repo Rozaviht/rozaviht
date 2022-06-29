@@ -78,6 +78,13 @@ export default function CheckoutForm () {
       }}
       onSubmit={(values, {setSubmitting}) => {
         const input = values
+        fetch("http://192.168.2.160:3000/api/paymentresponse", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify("HELLOOOO")
+        })
         validateShippingForm({variables:  {input}})
         .then(({data}) => {
             if (data.validateShippingForm.error === true) {

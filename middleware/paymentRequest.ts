@@ -31,13 +31,25 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_MERCHANTURL: "http://192.168.2.160:3000/api/paymentresponse",
     DS_MERCHANT_URLOK: "http://192.168.2.160:3000/checkoutend",
     DS_MERCHANT_URLKO: "http://192.168.2.160:3000/checkout",
+    DS_MERCHANT_TITULAR: "",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",
       browserAcceptHeader: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json",
 			browserUserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
       browserLanguage: "ES-es",
-      browserJavaEnabled: "true"
+      browserJavaEnabled: "true",
+      cardholderName: "",
+      Email: "",
+      mobilePhone: {
+        cc: "",
+        subscriber: ""
+      },
+      shipAddrState: "",
+      shipAddrCity: "",
+      shipAddrPostCode: "",
+      shipAddrLine1: "",
+      shipAddrLine2: ""
     }
   }
 

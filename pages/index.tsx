@@ -183,7 +183,7 @@ export default function LandingPage () {
           <li>
             <h2>Y Lo cuidamos<UnderlineHandMade className="underline-handmade"/></h2>
             <p>
-              Además, y no menos importante, nos preocuremos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
+              Además, y no menos importante, nos preocuparemos siempre del cuidado medioambiental. Al final de nada vale el esfuerzo si no tenemos un medio adecuado en el que vivir. Así que buscaremos siempre minimizar la contaminación que generemos, y nos apoyaremos por ello de la vía digital para diferentes temas, ya que no contamina.
             </p>
           </li>
         </ul>
