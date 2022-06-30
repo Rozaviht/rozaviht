@@ -104,7 +104,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
           <div className="information-content-wrapper">
             <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>COMO UTILIZARLO</h2>
             <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
-            <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual. La legislación española actual solo permite la venta de aceite de CBD de manera tópica, que es la manera en la que esta destinada nuestro producto. Solo informamos del otro método de empleo ya que muchas personas lo utilizan de esa mánera.</p>
+            <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual.</p>
             <ul style={{ 'marginTop': '0.5rem' }}>
               <li style={{ 'marginTop': '0.5rem' }}>
                 <strong>-Empleo de manera tópica:</strong>

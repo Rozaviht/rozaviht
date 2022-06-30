@@ -1,4 +1,5 @@
-const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY 
+const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
+const DEVELOPMENT_MERCHANTIP  = process.env.DEVELOPMENT_MERCHANTIP
 import prisma from 'lib/prisma'
 
 import { FieldResolver } from "nexus"
@@ -28,9 +29,9 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "http://192.168.2.160:3000/api/paymentresponse",
-    DS_MERCHANT_URLOK: "http://192.168.2.160:3000/checkoutend",
-    DS_MERCHANT_URLKO: "http://192.168.2.160:3000/checkout",
+    DS_MERCHANT_MERCHANTURL: `${DEVELOPMENT_MERCHANTIP}/api/paymentresponse`,
+    DS_MERCHANT_URLOK: `${DEVELOPMENT_MERCHANTIP}/checkoutend`,
+    DS_MERCHANT_URLKO: `${DEVELOPMENT_MERCHANTIP}/checkout`,
     DS_MERCHANT_TITULAR: "",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",

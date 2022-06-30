@@ -155,6 +155,9 @@ model order_details {
   // An order can has many products
   products         products[]
   amount           Int
+  // An order can only has one order number
+  //orderNumber order_number @relation(fields: [orderNumberId], references: [id])
+  //orderNumberId String @unique
   // An order can only has one payment details
   createdAt        DateTime             @default(now()) @map(name: "created_at")
   modifiedAt       DateTime             @updatedAt @map(name: "modified_at")
@@ -167,6 +170,8 @@ model order_number {
   id        String   @id @default(uuid())
   number    Int      @unique
   createdAt DateTime @default(now()) @map(name: "created_at")
+  // An order number can only be attached to one order details
+  //orderDetails order_details?
 
   @@index([id, number])
 }
