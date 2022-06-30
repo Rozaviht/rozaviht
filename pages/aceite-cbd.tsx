@@ -104,7 +104,11 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
           <div className="information-content-wrapper">
             <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>COMO UTILIZARLO</h2>
             <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
+<<<<<<< HEAD
             <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual. </p>
+=======
+            <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual.</p>
+>>>>>>> develop
             <ul style={{ 'marginTop': '0.5rem' }}>
               <li style={{ 'marginTop': '0.5rem' }}>
                 <strong>-Empleo de manera tópica:</strong>

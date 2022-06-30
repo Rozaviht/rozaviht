@@ -1,4 +1,5 @@
-const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY 
+const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
+const DEVELOPMENT_MERCHANTIP  = process.env.DEVELOPMENT_MERCHANTIP
 import prisma from 'lib/prisma'
 
 import { FieldResolver } from "nexus"
