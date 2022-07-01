@@ -8,8 +8,7 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-//Image schema
-
+//*****Image schema*****
 model images {
   id                String              @id @default(uuid())
   url               String              @unique
@@ -28,8 +27,7 @@ model images {
   @@index([id, url])
 }
 
-//Product schema
-
+//*****Product schema*****
 model products {
   id                String             @id @default(uuid())
   name              String             @unique
@@ -84,8 +82,7 @@ model discounts {
   product     products[]
 }
 
-//Articles schema
-
+//*****Articles schema*****
 model articles {
   id         String             @id @default(uuid())
   title      String             @unique
@@ -113,8 +110,7 @@ model article_categories {
   articles   articles[]
 }
 
-//Users schema
-
+//*****Users schema*****
 model users {
   id         String   @id @default(uuid())
   name       String?
@@ -124,10 +120,27 @@ model users {
   deletedAt  DateTime @default(now()) @map(name: "deleted_at")
 }
 
-//CustomerInformation schema
+//*****ShippingInformation schema*****
+model shipping_information {
+  id         String         @id @default(uuid())
+  name       String
+  lastName   String
+  email      String
+  phone      String
+  provincie  String
+  city       String
+  postalCode String
+  address    String
+  comment    String?
+  createdAt  DateTime       @default(now()) @map(name: "created_at")
+  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
+  //A shipping information can only be attached to one order
+  order      order_details?
+}
 
-model customer_information {
-  id         String          @id @default(uuid())
+//*****BillingInformation schema*****
+model billing_information {
+  id         String         @id @default(uuid())
   name       String
   lastName   String
   email      String
@@ -137,66 +150,82 @@ model customer_information {
   city       String
   postalCode String
   address    String
-  door       String
-  comment    String?
-  createdAt  DateTime        @default(now()) @map(name: "created_at")
-  modifiedAt DateTime        @updatedAt @map(name: "modified_at")
-  //A customer can have many orders
-  order      order_details[]
+  createdAt  DateTime       @default(now()) @map(name: "created_at")
+  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
+  //A billing information can only be attached to one order
+  order      order_details?
 }
 
-//OrderDetails schema
-
+//*****OrderDetails schema*****
 model order_details {
-  id               String               @id @default(uuid())
+  id                String               @id @default(uuid())
   // An order can only has a customer
-  customer         customer_information @relation(fields: [customerId], references: [id])
-  customerId       String
+  shippingInfo      shipping_information @relation(fields: [shippingInfoId], references: [id])
+  shippingInfoId    String               @unique
+  // An order can only has a customer
+  billingInfo       billing_information  @relation(fields: [billingInfoId], references: [id])
+  billingInfoId     String               @unique
   // An order can has many products
-  products         products[]
-  amount           Int
+  products          products[]
+  amount            Int
   // An order can only has one order number
-  //orderNumber order_number @relation(fields: [orderNumberId], references: [id])
-  //orderNumberId String @unique
-  // An order can only has one payment details
-  createdAt        DateTime             @default(now()) @map(name: "created_at")
-  modifiedAt       DateTime             @updatedAt @map(name: "modified_at")
-  deletedAt        DateTime             @default(now()) @map(name: "deleted_at")
+  orderNumber       order_number         @relation(fields: [orderNumberId], references: [id])
+  orderNumberId     String               @unique
+  paymentStatus     payment_status
+  //An order details can only has one shipping details attached
+  shippingDetails   shipping_details     @relation(fields: [shippingDetailsId], references: [id])
+  shippingDetailsId String               @unique
+  createdAt         DateTime             @default(now()) @map(name: "created_at")
+  modifiedAt        DateTime             @updatedAt @map(name: "modified_at")
+  deletedAt         DateTime             @default(now()) @map(name: "deleted_at")
 }
 
-//OrderNumer schema
+//*****OrderNumer schema*****
+model shipping_details {
+  id              String           @id @default(uuid())
+  sendedAt        DateTime
+  deliveredAt     DateTime
+  shippingProcess shipping_process
+  //A shipping details can only be attached to one order details
+  order           order_details?
+  createdAt       DateTime         @default(now()) @map(name: "created_at")
+  modifiedAt      DateTime         @updatedAt @map(name: "modified_at")
+}
 
+enum shipping_process {
+  SEND
+  DELV
+}
+
+//*****OrderNumer schema*****
 model order_number {
-  id        String   @id @default(uuid())
-  number    Int      @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
+  id           String         @id @default(uuid())
+  number       Int            @unique
+  createdAt    DateTime       @default(now()) @map(name: "created_at")
   // An order number can only be attached to one order details
-  //orderDetails order_details?
+  orderDetails order_details?
 
   @@index([id, number])
 }
 
-//PaymentDetails schema
-
-model payment_details {
-  id         String         @id @default(uuid())
-  amount     Int
-  provider   String
-  status     payment_status
-  createdAt  DateTime       @default(now()) @map(name: "created_at")
-  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
-  // A payment can only has one order
-}
+//*****PaymentDetails schema*****
+//model payment_details {
+//  id         String         @id @default(uuid())
+//  amount     Int
+//  provider   String
+//  status     payment_status
+//  createdAt  DateTime       @default(now()) @map(name: "created_at")
+//  modifiedAt DateTime       @updatedAt @map(name: "modified_at")
+//}
 
 enum payment_status {
-  OPEN
-  CLOS
-  PEND
-  PROG
+  COMP //Completed: A payment has been complete successfuly
+  PEND //Pending: A payment is pending for w/e reason
+  PROS //Processed: A payment has been accepted
+  FAIL //Failed: A payment has been failed
 }
 
-//FAQ cuestions
-
+//*****FAQ cuestions*****
 model faq_category {
   id             String         @id @default(uuid())
   title          String         @unique
