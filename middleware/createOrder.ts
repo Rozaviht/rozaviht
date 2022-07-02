@@ -18,8 +18,8 @@ export const createOrder: FieldResolver<
     //Create the order details
     await prisma.order_details.create({
       data: {
-        amount: orderInputs!.amount,
         paymentStatus: "PEND",
+        amount: orderInputs!.amount,
         products: {
           connect: orderInputs?.products.map(product => ({name: product!}))
         },
