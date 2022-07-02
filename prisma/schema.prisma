@@ -183,8 +183,9 @@ model order_details {
 //*****OrderNumer schema*****
 model shipping_details {
   id              String           @id @default(uuid())
-  sendedAt        DateTime
-  deliveredAt     DateTime
+  shippingMode    shipping_modes
+  sendedAt        DateTime?
+  deliveredAt     DateTime?
   shippingProcess shipping_process
   //A shipping details can only be attached to one order details
   order           order_details?
@@ -192,15 +193,21 @@ model shipping_details {
   modifiedAt      DateTime         @updatedAt @map(name: "modified_at")
 }
 
+enum shipping_modes {
+  STAN //Standard method
+  EXPR //Express method
+}
+
 enum shipping_process {
-  SEND
-  DELV
+  NOTS //Not sended yet
+  SEND //Sended
+  DELV //Delivered
 }
 
 //*****OrderNumer schema*****
 model order_number {
   id           String         @id @default(uuid())
-  number       Int            @unique
+  number       String         @unique
   createdAt    DateTime       @default(now()) @map(name: "created_at")
   // An order number can only be attached to one order details
   orderDetails order_details?

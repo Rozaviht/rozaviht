@@ -19,8 +19,8 @@ import PopUpAlerts from './PopUpAlerts'
 
 
 const PAYMENT_REQUEST = gql`
-  mutation Mutation($orderAmount: Float!) {
-    paymentRequest(orderAmount: $orderAmount) {
+  mutation Mutation($orderAmount: Float!, $orderNumber: String!, $billingForm: billingFormInputs) {
+    paymentRequest(orderAmount: $orderAmount, orderNumber: $orderNumber, billingForm: $billingForm) {
       Ds_SignatureVersion
       Ds_MerchantParameters
       Ds_Signature
@@ -28,18 +28,11 @@ const PAYMENT_REQUEST = gql`
   }
 `
 
-const CREATE_CUSTOMER = gql`
-  mutation Mutation($input: customerInformationInputs) {
-    createCustomer(input: $input) {
+const CREATE_ORDER = gql`
+  mutation Mutation($orderInputs: orderInputs, $shippingForm: shippingFormInputs, $billingForm: billingFormInputs) {
+    createOrder(orderInputs: $orderInputs, shippingForm: $shippingForm, billingForm: $billingForm) {
       success
-    }
-  }
-`
-
-const CREATE_ORDER_NUMBER =gql`
-  mutation Mutation {
-    createOrderNumber {
-      success
+      orderNumber
     }
   }
 `
@@ -47,11 +40,10 @@ const CREATE_ORDER_NUMBER =gql`
 export default function CheckoutVerify () {
 
   const { cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
-  const { shippingForm, setEditingForm, setOrderVerified } = useContext(CheckoutContext)
+  const { shippingForm, billingForm, setBillingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
-  const [ createOrderNumber, ] = useMutation(CREATE_ORDER_NUMBER)
-  const [ createCustomer, ] = useMutation(CREATE_CUSTOMER)
+  const [ createOrder, ] = useMutation(CREATE_ORDER)
 
   const [shippingChecked, setShippingChecked] = useState(true)
   const [checkedBillingForm, setCheckedBillingForm] = useState(true)
@@ -100,13 +92,31 @@ export default function CheckoutVerify () {
     setShowTerms(showTermsCopy)
   }
 
+  useEffect(() => {
+    if (checkedBillingForm === true) {
+      setBillingForm({
+        name: shippingForm.name,
+        lastName: shippingForm.lastName,
+        email: shippingForm.email,
+        phone: shippingForm.phone,
+        provincie: shippingForm.provincie,
+        city: shippingForm.city,
+        postalcode: shippingForm.postalcode,
+        address: shippingForm.address,
+        addressNumber: shippingForm.addressNumber,
+        door: shippingForm.door,
+        cif: (document as any).getElementById("cifBox").value as string
+      })
+    }
+  },[])
+
+
   const handleResysSubmit = (event: any) => {
     event.preventDefault()
 
     if (checkedTerms === false ) {
       setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
       setShowPopUp(true)
-
       return false
 
     } else {
@@ -119,14 +129,20 @@ export default function CheckoutVerify () {
 
       setTotalCartPrice(orderAmount)
 
-      let input = shippingForm
+      let orderInputs = {
+        amount: orderAmount,
+        products: cartProducts.map(cartProduct => cartProduct.name),
+        shippingMethod: shippingChecked === true ? "STAN" : "EXPR"
+      }
 
-      createCustomer({variables: {input}}).then(() => {
-        createOrderNumber().then(() => {
-          paymentRequest({variables: {orderAmount}}).then(() => {
-            (document as any).redSysForm.submit()
-            setCartProducts([])
-          })
+
+
+      createOrder({variables: {orderInputs, shippingForm, billingForm}}).then(({data}) => {
+        console.log(data)
+        let orderNumber : string = data.createOrder.orderNumber
+        paymentRequest({variables: {orderAmount, billingForm, orderNumber}}).then(() => {
+          (document as any).redSysForm.submit()
+          setCartProducts([])
         })
       })
 
@@ -161,7 +177,7 @@ export default function CheckoutVerify () {
         < BillingDataCard checkedCifAddress={checkedBillingForm}/>
         <div className="input-wrapper">
           <label htmlFor="cif" className="checkout-label" >
-            <input  type='text' autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>
+            <input id='cifBox'  type='text' autoComplete="off" name="cif" placeholder=" " className="checkout-input"/>
             <span className="checkout-labelcontent">Número de Identificación fiscal (Opcional)</span>
           </label>
           <span style={{ 'fontSize': '70%' }}>*Este campo es opcional, para solicitar la factura ampliada con el DNI/NIF/CIF introducido.</span>
@@ -177,7 +193,7 @@ export default function CheckoutVerify () {
             </div>
           </label>
           <label htmlFor="expressShip" className="shippingCheck">
-            <input type="checkbox" name="expressShip" value={'express'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={() => setShippingChecked(shippingChecked => shippingChecked === false ? shippingChecked : !shippingChecked)}/>
+            <input type="checkbox" name="expressShip" value={'express_shipping'} className="checkoutVerify__shipping-method" checked={!shippingChecked} onClick={() => setShippingChecked(shippingChecked => shippingChecked === false ? shippingChecked : !shippingChecked)}/>
             <div>
               <span className="checkCircle"></span>
               <h4>Entrega Express <div style={{ 'width': '35px' }}>< Image src={'https://rozaviht-media.s3.eu-west-3.amazonaws.com/correos-logo.webp'} height={175} width={175} layout="responsive" /></div></h4>
@@ -215,7 +231,7 @@ export default function CheckoutVerify () {
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" name="redSysForm" method='POST'>
+        <form action="https://sis.redsys.es/sis/realizarPago" name="redSysForm" method='POST'>
           <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? "" : data.paymentRequest.Ds_SignatureVersion} />
           <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
           <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />

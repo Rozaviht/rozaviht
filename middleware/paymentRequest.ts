@@ -7,7 +7,7 @@ import { FieldResolver } from "nexus"
 export const paymentRequest: FieldResolver<
   'Mutation',
   'paymentRequest'
-> = async (_, {orderAmount}) => {
+> = async (_, {orderAmount, billingForm, orderNumber}) => {
 
   var cryptojs = require('crypto-js')
 
@@ -19,14 +19,11 @@ export const paymentRequest: FieldResolver<
     amountString = `${amountString}0`
   }
 
-
-  var orderNumber = await prisma.order_number.findMany()
-
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
     DS_MERCHANT_MERCHANTCODE: "356725135",
-    DS_MERCHANT_ORDER: `10${orderNumber.length.toString().padStart(7, "0")}`, 
+    DS_MERCHANT_ORDER: orderNumber, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
     DS_MERCHANT_MERCHANTURL: `${DEVELOPMENT_MERCHANTIP}/api/paymentresponse`,
@@ -40,17 +37,17 @@ export const paymentRequest: FieldResolver<
 			browserUserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
       browserLanguage: "ES-es",
       browserJavaEnabled: "true",
-      cardholderName: "",
-      Email: "",
+      cardholderName: `${billingForm?.name} ${billingForm?.lastName}`,
+      Email: billingForm?.email,
       mobilePhone: {
-        cc: "",
-        subscriber: ""
+        cc: "34",
+        subscriber: billingForm?.phone
       },
-      shipAddrState: "",
-      shipAddrCity: "",
-      shipAddrPostCode: "",
-      shipAddrLine1: "",
-      shipAddrLine2: ""
+      billAddrState: billingForm?.provincie,
+      billAddrCity: billingForm?.city,
+      billAddrPostCode: billingForm?.postalcode,
+      billAddrLine1: `${billingForm?.address} ${billingForm?.addressNumber}`,
+      billAddrLine2: `${billingForm?.door}`
     }
   }
 

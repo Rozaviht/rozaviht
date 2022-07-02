@@ -37,11 +37,10 @@ type Image {
 }
 
 type Mutation {
-  createCustomer(input: customerInformationInputs): createOrderNumberRes
-  createOrderDetails(input: orderInputs): createOrderNumberRes
+  createOrder(billingForm: billingFormInputs, orderInputs: orderInputs, shippingForm: shippingFormInputs): createOrderRes
   createOrderNumber: createOrderNumberRes
   createUser(email: String!): popUpResponse
-  paymentRequest(orderAmount: Float!): paymentResponse
+  paymentRequest(billingForm: billingFormInputs, orderAmount: Float!, orderNumber: String!): paymentResponse
   validateBillingForm(input: billingFormInputs): checkoutFormResponse
   validateSendContactMail(input: contactMessageInputs): popUpResponse
   validateShippingForm(input: shippingFormInputs): checkoutFormResponse
@@ -50,7 +49,6 @@ type Mutation {
 type PaymentDetails {
   amount: Int!
   id: String!
-  order: orderDetails!
   provider: String!
   status: PaymentStatus!
 }
@@ -99,6 +97,7 @@ type User {
 input billingFormInputs {
   address: String!
   addressNumber: String!
+  cif: String
   city: String!
   door: String!
   email: String!
@@ -126,6 +125,11 @@ type createOrderNumberRes {
   success: Boolean!
 }
 
+type createOrderRes {
+  orderNumber: String!
+  success: Boolean!
+}
+
 type customerInformation {
   address: String!
   addressNumber: String!
@@ -142,32 +146,20 @@ type customerInformation {
   shippingComment: String
 }
 
-input customerInformationInputs {
-  address: String!
-  addressNumber: String!
-  cif: String
-  city: String!
-  door: String!
-  email: String!
-  lastName: String!
-  name: String!
-  phone: String!
-  postalcode: String!
-  provincie: String!
-  shippingComment: String
-}
-
 type orderDetails {
   amount: Int!
-  customer: customerInformation
-  customerId: String!
+  billingInfo: customerInformation
+  billingInfoId: String!
   id: String!
   products: [Product]!
+  shippingInfo: customerInformation
+  shippingInfoId: String!
 }
 
 input orderInputs {
-  amount: String!
+  amount: Int!
   products: [String]!
+  shippingMethod: String!
 }
 
 type orderNumber {
