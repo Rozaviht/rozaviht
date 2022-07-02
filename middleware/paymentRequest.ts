@@ -19,6 +19,7 @@ export const paymentRequest: FieldResolver<
   }
 
   console.log(orderNumber)
+  console.log(orderAmount)
 
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
