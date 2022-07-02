@@ -94,6 +94,7 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
                 address: values.address,
                 addressNumber: values.addressNumber,
                 door: values.door,
+                cif: ""
               })
               setShowBillingForm(false)
             }
