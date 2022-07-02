@@ -18,8 +18,6 @@ export const paymentRequest: FieldResolver<
     amountString = `${amountString}0`
   }
 
-  console.log(orderNumber)
-  console.log(orderAmount)
 
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
@@ -28,9 +26,9 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: orderNumber, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "http://rozaviht.com/api/paymentresponse",
-    DS_MERCHANT_URLOK: "http://rozaviht.com/checkoutend",
-    DS_MERCHANT_URLKO: "http://rozaviht.com/checkout",
+    DS_MERCHANT_MERCHANTURL: "https://rozaviht.com/api/paymentresponse",
+    DS_MERCHANT_URLOK: "https://rozaviht.com/checkoutend",
+    DS_MERCHANT_URLKO: "https://rozaviht.com/checkout",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",
@@ -38,19 +36,21 @@ export const paymentRequest: FieldResolver<
 			browserUserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
       browserLanguage: "ES-es",
       browserJavaEnabled: "true",
-      cardholderName: `${billingForm?.name} ${billingForm?.lastName}`,
+      cardholderName: `${billingForm?.name}${billingForm?.lastName}`,
       Email: billingForm?.email,
       mobilePhone: {
         cc: "34",
         subscriber: billingForm?.phone
       },
-      billAddrState: billingForm?.provincie,
       billAddrCity: billingForm?.city,
       billAddrPostCode: billingForm?.postalcode,
-      billAddrLine1: `${billingForm?.address} ${billingForm?.addressNumber}`,
-      billAddrLine2: `${billingForm?.door}`
+      billAddrLine1: `${billingForm?.address}${billingForm?.addressNumber}`,
+      billAddrLine2: billingForm?.door
     }
   }
+
+  
+  console.log(merchantData)
 
   // Base64 encoding of parameters
   var merchantWordArray = cryptojs.enc.Utf8.parse(JSON.stringify(merchantData))

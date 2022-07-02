@@ -227,7 +227,7 @@ export default function CheckoutVerify () {
           <p>Iva <span>{`${iva.toFixed(2)}€`}</span></p>
           <p>Costos de envío <span>{shippingChecked === true ? '2,00€' : '3,50€'}</span></p>
         </div>
-        <form action="https://sis.redsys.es/sis/realizarPago" name="redSysForm" method='POST'>
+        <form action="https://sis-t.redsys.es:25443/sis/realizarPago" name="redSysForm" method='POST'>
           <input type="hidden" name="Ds_SignatureVersion" value={data === undefined ? "" : data.paymentRequest.Ds_SignatureVersion} />
           <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
           <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />

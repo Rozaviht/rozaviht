@@ -38,7 +38,6 @@ type Image {
 
 type Mutation {
   createOrder(billingForm: billingFormInputs, orderInputs: orderInputs, shippingForm: shippingFormInputs): createOrderRes
-  createOrderNumber: createOrderNumberRes
   createUser(email: String!): popUpResponse
   paymentRequest(billingForm: billingFormInputs, orderAmount: Float!, orderNumber: String!): paymentResponse
   validateBillingForm(input: billingFormInputs): checkoutFormResponse
