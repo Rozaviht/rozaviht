@@ -29,7 +29,7 @@ interface MiniCheckoutForm {
 
 export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}: MiniCheckoutForm) {
   const [ validateBillingForm ] = useMutation(VALIDATE_BILLING_FORM)
-  const { billingForm, SetBillingForm } = useContext(CheckoutContext)
+  const { billingForm, setBillingForm } = useContext(CheckoutContext)
 
   const firstInputs = inputsParams.slice(0, 4)
 
@@ -83,7 +83,7 @@ export default function MiniCheckoutForm ({showBillingForm, setShowBillingForm}:
             if (data.validateBillingForm.error === true) {
               scrollToInvalidInput()
             } else {
-              SetBillingForm({
+              setBillingForm({
                 name: values.name,
                 lastName: values.lastName,
                 phone: values.phone,

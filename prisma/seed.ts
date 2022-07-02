@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import {images} from '../data/images'
 
 const prisma = new PrismaClient()
 
@@ -20,6 +21,16 @@ const load = async () => {
   console.log("Deleted records in article table") 
 
 
+  for (let i=0; i < images.length - 1; i++) {
+    await prisma.images.create({
+      data: {
+        url: images[i].url,
+        alt: images[i].alt,
+        height: images[i].height,
+        width: images[i].width
+      }
+    })
+  }
 
 /*   await prisma.product_categories.create({
     data: productsCategories

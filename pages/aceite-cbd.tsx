@@ -85,13 +85,13 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
           <p>Este aceite te ayudara a relajar toda la tension que tengas acumulada, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
         </div>
         <div className='product-frstSect__img' >
-          < Image src={CbdProductsData.images[4].url} height={CbdProductsData.images[4].height!} width={CbdProductsData.images[4].width!} alt={CbdProductsData.images[4].alt} layout='responsive' />
+          < Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-image-section.webp"} height={1382} width={981} alt={"Aceite de CBD 20 porciento de Rozaviht con packaging encima de un tronco con un piñon y aceite goteando"} layout='responsive' />
         </div>
       </div>
       {/* PRODUCT INFORMATION */}
       <div className="product-inf">
         <div className='product-inf__img'>
-          < Image src={CbdProductsData.images[5].url} height={CbdProductsData.images[5].height!} width={CbdProductsData.images[5].width!} alt={CbdProductsData.images[5].alt} layout='responsive' />
+          < Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-info-image.webp"} height={682} width={1024} alt={"Packaging de los aceites de cbd de Rozaviht encima de unos libros y un hombre detras viendo informacion en tablet"} layout='responsive' />
         </div>
         <div className="product-inf__content">
           <h1 className="product-info__title">Información del Producto</h1> 

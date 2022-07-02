@@ -22,20 +22,20 @@ export type CheckoutForm = {
 
 export type ShippingForm = CheckoutForm & {  shippingComment: string }
 
-
+export type BillingForm = CheckoutForm & {cif: string}
 
 
 
  export default function CheckoutProvider ({ children }: props) {
   const [shippingForm, setShippingForm] = useState<ShippingForm>({} as ShippingForm)
-  const [billingForm, SetBillingForm] = useState<CheckoutForm>({} as CheckoutForm)
+  const [billingForm, setBillingForm] = useState<BillingForm>({} as BillingForm)
   const [editingForm, setEditingForm] = useState(false)
   const [paymentDone, setPaymentDone] = useState(false)
   const [orderVerified, setOrderVerified] = useState(false)
 
 
   return (
-    <CheckoutContext.Provider value={{shippingForm, setShippingForm, billingForm, SetBillingForm, editingForm, setEditingForm,paymentDone, setPaymentDone, orderVerified, setOrderVerified }}>
+    <CheckoutContext.Provider value={{shippingForm, setShippingForm, billingForm, setBillingForm, editingForm, setEditingForm,paymentDone, setPaymentDone, orderVerified, setOrderVerified }}>
       {children}
     </CheckoutContext.Provider>
   )

@@ -1,6 +1,6 @@
 import { paymentRequest } from 'middleware/paymentRequest'
-import { enumType, extendType, floatArg, intArg, nonNull, objectType, stringArg } from 'nexus'
-import { OrderDetails } from './OrderDetails'
+import { arg, enumType, extendType, floatArg, nonNull, objectType, stringArg } from 'nexus'
+import { BillingFormInputs } from './CustomerInformation'
 
 
 export const PaymentDetails = objectType({
@@ -10,16 +10,6 @@ export const PaymentDetails = objectType({
     t.nonNull.int('amount')
     t.nonNull.string('provider')
     t.nonNull.field('status', {type: PaymentStatus})
-    t.nonNull.field('order', {
-      type: OrderDetails,
-      async resolve(_parent, _args, context) {
-        return await context.prisma.order_details.findUnique({
-          where: {
-            paymentDetailsId: _parent.id
-          }
-        })
-      }
-    })
   }
 })
 
@@ -43,7 +33,13 @@ export const sendPaymentReq = extendType({
   definition(t) {
     t.field('paymentRequest', {
       type: PaymentResponse,
-      args: { orderAmount: nonNull(floatArg())},
+      args: { 
+        orderAmount: nonNull(floatArg()),
+        orderNumber: nonNull(stringArg()),
+        billingForm: arg({
+          type: BillingFormInputs
+        })
+      },
       resolve: paymentRequest,
     })
   } 
