@@ -138,11 +138,9 @@ export default function CheckoutVerify () {
 
 
       createOrder({variables: {orderInputs, shippingForm, billingForm}}).then(({data}) => {
-        console.log(data)
         let orderNumber : string = data.createOrder.orderNumber
         paymentRequest({variables: {orderAmount, billingForm, orderNumber}}).then(() => {
           (document as any).redSysForm.submit()
-          setCartProducts([])
         })
       })
 

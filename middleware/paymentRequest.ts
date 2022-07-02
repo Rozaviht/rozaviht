@@ -1,6 +1,5 @@
 const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
 const DEVELOPMENT_MERCHANTIP  = process.env.DEVELOPMENT_MERCHANTIP
-import prisma from 'lib/prisma'
 
 import { FieldResolver } from "nexus"
 
@@ -29,7 +28,6 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_MERCHANTURL: "http://rozaviht.com/api/paymentresponse",
     DS_MERCHANT_URLOK: "http://rozaviht.com/checkoutend",
     DS_MERCHANT_URLKO: "http://rozaviht.com/checkout",
-    DS_MERCHANT_TITULAR: "",
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",
