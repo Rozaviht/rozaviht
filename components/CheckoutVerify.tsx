@@ -127,8 +127,6 @@ export default function CheckoutVerify () {
         orderAmount = totalCartPrice + 3.5
       }
 
-      setTotalCartPrice(orderAmount)
-
       let orderInputs = {
         amount: orderAmount,
         products: cartProducts.map(cartProduct => cartProduct.name),

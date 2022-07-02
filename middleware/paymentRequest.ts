@@ -18,6 +18,8 @@ export const paymentRequest: FieldResolver<
     amountString = `${amountString}0`
   }
 
+  console.log(orderNumber)
+
   var merchantData = {
     DS_MERCHANT_AMOUNT: amountString,
     DS_MERCHANT_CURRENCY: "978",
