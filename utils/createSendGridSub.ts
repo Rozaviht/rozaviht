@@ -2,7 +2,7 @@
 export const createSendGridSub = async (email: string) => {
 
   const client = require('@sendgrid/client')
-  client.setApiKey(process.env.SENDGRID_API_KEY_ENV)
+  client.setApiKey(process.env.SENDGRID_API_KEY)
 
   const data = {
     "contacts": [
