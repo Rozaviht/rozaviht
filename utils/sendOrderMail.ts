@@ -36,7 +36,7 @@ export async function sendOrderMail (orderDetails: orderType) {
     from:  'no-rply@rozaviht.com',
     template_id: 'd-5b7f8dfebfb246f5be1efde4e1662610',
     dynamic_template_data: {
-      item: orderItems,
+      items: orderItems,
       subtotal: `${orderDetails.subtotalPrice}`,
       iva: `${orderDetails.iva}`,
       shippingCosts: '2,5',

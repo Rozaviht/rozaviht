@@ -25,9 +25,10 @@ const CREATE_USER = gql`
 const Footer = () => {
   const [ createUser ] = useMutation(CREATE_USER)
 
-  const { setCookiesManageShow, setShowPopUp, popUpMssg, setPopUpMssg} = useContext(AppContext)
+  const { setCookiesManageShow, setShowPopUp, setPopUpMssg} = useContext(AppContext)
 
   const [footerListDropped, setFooterListDropped] = useState(false)
+  const [loadingDots, setLoadingDots] = useState(false)
 
 
   const dropFooterList = () => setFooterListDropped(!footerListDropped)
@@ -64,21 +65,27 @@ const Footer = () => {
               return {}
             }}
             validationSchema={userValidation}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={(values, { setSubmitting, setFieldValue }) => {
+                setLoadingDots(true)
                 createUser({variables:  values})
                   .then(({data}) => {
                     if (data.createUser.error === true) {
                       setPopUpMssg(data.createUser.message)
                       setShowPopUp(true)
+                      setLoadingDots(false)
                     } else {
                       setPopUpMssg(data.createUser.message)
                       setShowPopUp(true)
+                      setLoadingDots(false)
                     }
                   })
                   .catch(err => {
                     console.log(err)
+                    setLoadingDots(false)
                   })
+                setFieldValue("email", "")
                 setSubmitting(false)
+
             }}
           >
             {({
@@ -87,13 +94,13 @@ const Footer = () => {
             }) => (
               <Form className="footer__sub-input">
                   <label htmlFor='email' className="customInput customInput--bgcolor" >
-                    <Field type='email' autoComplete="off" name='email' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
+                    <Field id="subEmail" type='email' autoComplete="off" name='email' placeholder=" " className={errors.email ? "customInput__input customInput__input--error" : "customInput__input"}/>
                     <span className="customInput__label">Introduce aquí tu correo</span>
                   </label>
                   <ErrorMessage name='email' className="customInput__errmssg" component={'span'} />
                   <button className="cta cta--negative" type='submit' disabled={isSubmitting}>
                     UNIRSE
-                    <LoadingDots show={isSubmitting} />
+                    <LoadingDots show={isSubmitting} type1={false} />
                   </button>
               </Form>
             )}

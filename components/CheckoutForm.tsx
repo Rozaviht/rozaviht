@@ -173,7 +173,7 @@ export default function CheckoutForm () {
           </div>
           <button type="submit" className="checkoutform-bt" disabled={isSubmitting}>
             Verificar los datos
-            <LoadingDots show={isSubmitting} />
+            <LoadingDots show={isSubmitting} type1={true} />
           </button>
         </Form>
       )}

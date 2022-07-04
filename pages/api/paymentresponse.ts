@@ -38,11 +38,37 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
        === cryptojs.enc.Base64.parse(signB).toString();
     }
 
+    const orderNumber = await prisma.order_number.findUnique({
+      where: {
+        number: merchantParamsDecoded.ORDER_NUMBER 
+      }
+    })
+
     if (merchantSignatureIsValid(signature, signatureBase64) && dsResponse > -1 && dsResponse < 100) {
       //TPV payment is OK
+      //Change paymentStatus in order
+      await prisma.order_details.update({
+        where: {
+          orderNumberId: orderNumber!.id
+        },
+        data: {
+          paymentStatus: "COMP"
+        }
+      })
 
     } else {
       //TPV payment is KO
+      //Change paymentStatus in order
+      await prisma.order_details.update({
+        where: {
+          orderNumberId: orderNumber!.id
+        },
+        data: {
+          paymentStatus: "FAIL"
+        }
+      })
+
+
       return res.status(200).end("Payment KO")
     }
 

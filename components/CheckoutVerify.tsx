@@ -16,6 +16,7 @@ import MiniPrivacy from './MiniPrivacy'
 import useScrollBlock from '@hooks/useScrollBlock'
 import BillingDataCard from './BillingDataCard'
 import PopUpAlerts from './PopUpAlerts'
+import LoadingDots from './LoadingDots'
 
 
 const PAYMENT_REQUEST = gql`
@@ -48,6 +49,9 @@ export default function CheckoutVerify () {
   const [shippingChecked, setShippingChecked] = useState(true)
   const [checkedBillingForm, setCheckedBillingForm] = useState(true)
   const [checkedTerms, setCheckedTerms] = useState(true)
+  
+  const [loadingDots, setLoadingDots] = useState(false)
+
 
   const [showTerms, setShowTerms] = useState([false, false])
 
@@ -111,9 +115,7 @@ export default function CheckoutVerify () {
   },[])
 
 
-  const handleResysSubmit = (event: any) => {
-    event.preventDefault()
-
+  const handleResysSubmit = () => {
     if (checkedTerms === false ) {
       setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
       setShowPopUp(true)
@@ -139,6 +141,7 @@ export default function CheckoutVerify () {
         let orderNumber : string = data.createOrder.orderNumber
         paymentRequest({variables: {orderAmount, billingForm, orderNumber}}).then(() => {
           (document as any).redSysForm.submit()
+          setLoadingDots(false)
         })
       })
 
@@ -232,7 +235,13 @@ export default function CheckoutVerify () {
           <input type="hidden" name="Ds_MerchantParameters" value={data === undefined ? "" : data.paymentRequest.Ds_MerchantParameters} />
           <input type="hidden" name="Ds_Signature" value={data === undefined ? "" : data.paymentRequest.Ds_Signature} />
         </form>
-        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={handleResysSubmit}>Pagar</button>
+        <button className="checkoutform-bt checkoutform-bt--fixed" type='button' onClick={() => {
+          handleResysSubmit()
+          setLoadingDots(true)
+        }}>
+          Pagar
+          <LoadingDots type1={true} show={loadingDots} />
+        </button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">
           <label htmlFor="termsChecked" className="checkBox">
             <input type="checkbox" name="termsChecked"  checked={checkedTerms} onClick={(e) => setCheckedTerms((e.target as HTMLInputElement).checked)}/>

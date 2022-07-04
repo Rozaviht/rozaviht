@@ -2,15 +2,13 @@ export async function sendSubMail (email: string) {
   
   const sgMail = require('@sendgrid/mail')
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY_ENV)
 
   const mailOptions = {
     to: email,
     from:  'no-rply@rozaviht.com',
     template_id: 'd-5bfbf963fd5e4f14ba6b2e2ba717d24a'
   }
-
-  console.log(process.env.SENDGRID_API_KEY)
 
   await sgMail.send(mailOptions)
       .then(() => {
