@@ -2,34 +2,31 @@ import Image from 'next/image'
 import { useState } from "react"
 import Dots from '@components/SliderDots'
 
+import { cbdImages } from '../data/cbdImagesSlider'
+
 import type { imageType } from 'services/AppProvider'
 
-interface ProductImageSliderProps {
-  productImages: imageType[]
-}
+const ProductImageSlider = () => {
 
-const ProductImageSlider = ({productImages}: ProductImageSliderProps) => {
-
-  const cleanedProductImgs = productImages.slice(0,4)
 
   const [currentImage, setCurrentImage] = useState(0)
 
   const nextSlide = () => {
-    setCurrentImage(currentImage === cleanedProductImgs.length - 1 ? 0 : currentImage + 1)
+    setCurrentImage(currentImage === cbdImages.length - 1 ? 0 : currentImage + 1)
   }
   
   const prevSlide = () => {
-    setCurrentImage(currentImage === 0 ? cleanedProductImgs.length - 1 : currentImage - 1)
+    setCurrentImage(currentImage === 0 ? cbdImages.length - 1 : currentImage - 1)
   }
 
-  if (!Array.isArray(cleanedProductImgs) || cleanedProductImgs.length <= 0) {
+  if (!Array.isArray(cbdImages) || cbdImages.length <= 0) {
     return null
   }
 
   return (
     <div className="slider-container">
       <button className={currentImage === 0 ? "btArrow btArrow--left hidden" : "btArrow btArrow--left"} onClick={prevSlide}></button>
-      {cleanedProductImgs.map((image, index) => {
+      {cbdImages.map((image, index) => {
         return (
           <div className={index === currentImage ? "slide-container active" : "slide-container"} key={index}>
             {index === currentImage && (
@@ -40,8 +37,8 @@ const ProductImageSlider = ({productImages}: ProductImageSliderProps) => {
           </div>
         )
       })}
-      <button className={currentImage === cleanedProductImgs.length - 1 ? "btArrow btArrow--right hidden" : "btArrow btArrow--right"} onClick={nextSlide}></button>
-      <Dots arrayParent={cleanedProductImgs} activeIndex={currentImage}/>
+      <button className={currentImage === cbdImages.length - 1 ? "btArrow btArrow--right hidden" : "btArrow btArrow--right"} onClick={nextSlide}></button>
+      <Dots arrayParent={cbdImages} activeIndex={currentImage}/>
     </div>
   )
 }

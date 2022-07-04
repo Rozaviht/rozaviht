@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import { AppContext } from 'services/AppContext'
 import { CheckoutContext } from 'services/CheckoutContext'
-import { orderType } from '../pages/api/sendOrderMail'
+import { orderType } from '../utils/sendOrderMail'
 
 import provinciasData from "../data/pronviciasData.json"
 

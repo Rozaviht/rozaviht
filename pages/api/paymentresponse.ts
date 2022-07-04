@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
 import prisma from "lib/prisma"
+import { sendOrderMail } from '../../utils/sendOrderMail'
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 
@@ -35,6 +36,14 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
     const  merchantSignatureIsValid = (signA: string, signB: string) => {
       return cryptojs.enc.Base64.parse(signA).toString()
        === cryptojs.enc.Base64.parse(signB).toString();
+    }
+
+    if (merchantSignatureIsValid(signature, signatureBase64) && dsResponse > -1 && dsResponse < 100) {
+      //TPV payment is OK
+
+    } else {
+      //TPV payment is KO
+      return res.status(200).end("Payment KO")
     }
 
 

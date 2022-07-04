@@ -2,7 +2,7 @@ import { userValidation } from './validations'
 import prisma from 'lib/prisma';
 import { FieldResolver } from 'nexus';
 import * as yup from 'yup'
-import { sendSubMail } from '../pages/api/sendSubMail'
+import { sendSubMail } from '../utils/sendSubMail'
 
 
 export const validateCreateUser: FieldResolver<
@@ -38,8 +38,8 @@ export const validateCreateUser: FieldResolver<
         email: email
       }
     })
-      return {
-        message: ["Muchas gracias por subscribirte!!!", "En el transcurso del día, recibirás un correo electrónico confirmando la subcripción."],
-        error: false
-      }
+    return {
+      message: ["Muchas gracias por subscribirte!!!", "En el transcurso del día, recibirás un correo electrónico confirmando la subcripción."],
+      error: false
+    }
 }

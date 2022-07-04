@@ -38,7 +38,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
     <div className="cbdPage">
       <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
       <div className="product-hero">
-        <ProductImageSlider productImages={CbdProductsData.images} ></ProductImageSlider>
+        <ProductImageSlider></ProductImageSlider>
         <div className="flexcolum flexcolum--around">
           <h1 className="product-hero__title">Aceite de CBD</h1>
           <p>0% THC | 10ml</p>
@@ -96,13 +96,13 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
         <div className="product-inf__content">
           <h1 className="product-info__title">Información del Producto</h1> 
           <div className="information-content-wrapper">
-            <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUE HACE</h2>
+            <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUÉ HACE</h2>
             <div className={ infoList[0] === true ? "information-content dropped" : "information-content" }>
               <p>Nuestro aceite de CBD cuenta con varios beneficios, entre ellas propiedades antiinflamatorias, antidepresivas, y relajante muscular; los cuales con tan solo un par de gotas notarás sus efectos casí de inmediato. Debido a estos beneficios podrás notar mejoras en tus dolores musculares e irritaciones, a la misma vez sintiéndote relajado. También gracias a él podrás mejorar el estrés del día a día y conciliar de una mejor manera el sueño, si lo aplicas antes de dormir.</p>
             </div>
           </div>
           <div className="information-content-wrapper">
-            <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>COMO UTILIZARLO</h2>
+            <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>CÓMO UTILIZARLO</h2>
             <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
             <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual.</p>
             <ul style={{ 'marginTop': '0.5rem' }}>
@@ -126,7 +126,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
             </div>
           </div>
           <div className="information-content-wrapper">
-            <h2 className={infoList[3] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(3)}>COMO RECICLARLO</h2>
+            <h2 className={infoList[3] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(3)}>CÓMO RECICLARLO</h2>
             <div className={ infoList[3] === true ? "information-content dropped" : "information-content" }>
               <p>- El packaging/estuche va en cartón.</p>
               <p>- En cuanto al envase del aceite, primero separa el tapón de la parte de vidrio del cuentagotas. Introduce el frasco en agua caliente para poder remover facilmente la etiqueta. Finalmente con las partes separdas, tira los objetos vidrio en su respectivo contenedor, y los de plastico en el suyo.</p>
