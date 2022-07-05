@@ -156,7 +156,7 @@ type orderDetails {
 }
 
 input orderInputs {
-  amount: Int!
+  amount: Float!
   products: [String]!
   shippingMethod: String!
 }

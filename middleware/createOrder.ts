@@ -51,7 +51,7 @@ export const createOrder: FieldResolver<
         },
         orderNumber: {
           create: {
-            number: `10${orderNumbersInDb.length.toString().padStart(9, "0")}`
+            number: `TEST${orderNumbersInDb.length.toString().padStart(4, "0")}`
           }
         },
         shippingDetails: {
@@ -65,7 +65,7 @@ export const createOrder: FieldResolver<
   
     return {
       success: true,
-      orderNumber: `10${orderNumbersInDb.length.toString().padStart(9, "0")}`
+      orderNumber: `TEST${orderNumbersInDb.length.toString().padStart(4, "0")}`
     }
   }
 

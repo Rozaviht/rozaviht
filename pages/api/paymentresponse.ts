@@ -56,6 +56,21 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
         }
       })
 
+      await prisma.order_details.findUnique({
+        where: {
+          orderNumberId: orderNumber!.id
+        },
+        select: {
+          amount: true,
+          products: {
+            select: {
+              name: true,
+              price: true,
+            }
+          }
+        }
+      })
+
     } else {
       //TPV payment is KO
       //Change paymentStatus in order

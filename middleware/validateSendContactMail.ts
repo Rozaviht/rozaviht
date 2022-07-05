@@ -1,7 +1,7 @@
 import { FieldResolver } from "nexus";
 import { contactMessageRules } from './validations'
 import * as yup from 'yup'
-import { sendContactMail } from "../pages/api/sendContactMail";
+import { sendContactMail } from "../utils/sendContactMail";
 
 export const validateSendContactMail: FieldResolver<
   'Mutation',
