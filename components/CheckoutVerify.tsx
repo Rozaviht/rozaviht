@@ -40,7 +40,7 @@ const CREATE_ORDER = gql`
 
 export default function CheckoutVerify () {
 
-  const { cartProducts, setCartProducts, totalCartPrice, setTotalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
   const { shippingForm, billingForm, setBillingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
@@ -58,8 +58,6 @@ export default function CheckoutVerify () {
   const subTotalCartPrice = totalCartPrice / 1.21
   const iva = totalCartPrice - subTotalCartPrice
 
-  const [orderDetails, setOrderDetails] = useState<orderType>({} as orderType)
-
   const [blockScroll, allowScroll] = useScrollBlock()
 
   useEffect(() => {
@@ -70,17 +68,6 @@ export default function CheckoutVerify () {
       allowScroll()
     }
   }, [showTerms])
-
-  useEffect(() => {
-    setOrderDetails({
-      totalPrice: totalCartPrice,
-      subtotalPrice: subTotalCartPrice,
-      iva: iva,
-      customerEmail: shippingForm.email,
-      items: cartProducts
-    })
-  }, [cartProducts || shippingForm])
-
 
   const handleShowMiniTerms = (index:number) => {
     let showTermsCopy = [...showTerms]
@@ -130,8 +117,9 @@ export default function CheckoutVerify () {
       }
 
       let orderInputs = {
-        amount: orderAmount,
-        products: cartProducts.map(cartProduct => cartProduct.name),
+        //Multiply for 1 million to store in DB as BigInt the currency
+        amount: orderAmount * 1000000,
+        products: cartProducts.map(cartProduct => ({ name: cartProduct.name, amount: cartProduct.amount})),
         shippingMethod: shippingChecked === true ? "STAN" : "EXPR"
       }
 
@@ -141,7 +129,6 @@ export default function CheckoutVerify () {
         let orderNumber : string = data.createOrder.orderNumber
         paymentRequest({variables: {orderAmount, billingForm, orderNumber}}).then(() => {
           (document as any).redSysForm.submit()
-          setLoadingDots(false)
         })
       })
 
@@ -239,7 +226,7 @@ export default function CheckoutVerify () {
           handleResysSubmit()
           setLoadingDots(true)
         }}>
-          Pagar
+          {loadingDots === true ? "" : "Pagar"}
           <LoadingDots type1={true} show={loadingDots} />
         </button>
         <div className="flexrow flexrow--separate flexrow--algncenter flexrow--nopd">

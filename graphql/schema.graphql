@@ -156,8 +156,8 @@ type orderDetails {
 }
 
 input orderInputs {
-  amount: Float!
-  products: [String]!
+  amount: Int!
+  products: [productInOrder]!
   shippingMethod: String!
 }
 
@@ -175,6 +175,11 @@ type paymentResponse {
 type popUpResponse {
   error: Boolean!
   message: [String]!
+}
+
+input productInOrder {
+  amount: Int!
+  name: String!
 }
 
 input shippingFormInputs {

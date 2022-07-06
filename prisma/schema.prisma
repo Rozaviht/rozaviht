@@ -47,7 +47,7 @@ model products {
   // A Product can have many Discounts
   discount          discounts[]
   // A Product can be in many orders
-  orders            order_details[]
+  orders            product_in_order[]
 }
 
 model product_categories {
@@ -156,6 +156,16 @@ model billing_information {
   order      order_details?
 }
 
+//*****Product Info in order*****
+model product_in_order {
+  id        String        @id @default(uuid())
+  amount    Int
+  product   products      @relation(fields: [productId], references: [id])
+  productId String
+  order     order_details @relation(fields: [orderId], references: [id])
+  orderId   String
+}
+
 //*****OrderDetails schema*****
 model order_details {
   id                String               @id @default(uuid())
@@ -166,8 +176,8 @@ model order_details {
   billingInfo       billing_information  @relation(fields: [billingInfoId], references: [id])
   billingInfoId     String               @unique
   // An order can has many products
-  products          products[]
-  amount            Int
+  products          product_in_order[]
+  amount            BigInt
   // An order can only has one order number
   orderNumber       order_number         @relation(fields: [orderNumberId], references: [id])
   orderNumberId     String               @unique
