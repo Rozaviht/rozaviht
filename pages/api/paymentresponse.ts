@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
 import prisma from "lib/prisma"
 import { sendOrderMail } from '../../utils/sendOrderMail'
+import { dateOptions } from "pages/rozanews";
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 
@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
     const merchantParamsDecoded = JSON.parse(cryptojs.enc.Base64.parse(merchantParams).toString(cryptojs.enc.Utf8))
 
     //Decode key
-    var keyWordArray = cryptojs.enc.Base64.parse(TPV_MERCHANT_KEY)
+    var keyWordArray = cryptojs.enc.Base64.parse(process.env.TPV_MERCHANT_KEY_ENV)
 
     var iv = cryptojs.enc.Hex.parse("0000000000000000")
     var cipher = cryptojs.TripleDES.encrypt(merchantParamsDecoded.Ds_Order, keyWordArray, {
@@ -40,9 +40,12 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
     const orderNumber = await prisma.order_number.findUnique({
       where: {
-        number: merchantParamsDecoded.ORDER_NUMBER 
+        number: merchantParamsDecoded.Ds_Order 
       }
     })
+    console.log( cryptojs.enc.Base64.parse(signature).toString())
+    console.log( cryptojs.enc.Base64.parse(signatureBase64).toString())
+    console.log(merchantSignatureIsValid(signature, signatureBase64))
 
     if (merchantSignatureIsValid(signature, signatureBase64) && dsResponse > -1 && dsResponse < 100) {
       //TPV payment is OK
@@ -56,20 +59,51 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
         }
       })
 
-      await prisma.order_details.findUnique({
+      const orderDetails = await prisma.order_details.findUnique({
         where: {
-          orderNumberId: orderNumber!.id
+          orderNumberId: orderNumber!.id,
         },
         select: {
+          createdAt: true,
           amount: true,
           products: {
             select: {
+              amount: true,
+              product: {
+                select: {
+                  name: true,
+                  price: true,
+                  image: true,
+                }
+              }
+            }
+          },
+          billingInfo: {
+            select: {
               name: true,
-              price: true,
+              email: true,
+            }
+          },
+          shippingDetails: {
+            select: {
+              shippingMode: true
             }
           }
         }
       })
+
+      const orderDetailsCleaned = {
+        amount: orderDetails?.amount,
+        items: orderDetails?.products,
+        customerEmail: orderDetails?.billingInfo.email,
+        customerName: orderDetails?.billingInfo.name,
+        date: orderDetails?.createdAt.toLocaleDateString('es-ES', dateOptions),
+        shippingCosts: orderDetails?.shippingDetails.shippingMode === 'STAN' ? "Envío Estandar -  2€" : "Envío Express - 3€"
+      }
+
+      await sendOrderMail(orderDetailsCleaned)
+
+      return res.status(200).end("Payment OK, email sended")
 
     } else {
       //TPV payment is KO
@@ -86,12 +120,6 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
       return res.status(200).end("Payment KO")
     }
-
-
-
-    return res.status(200).json(merchantSignatureIsValid(signature, signatureBase64))
-
-
   
 
   } else {
