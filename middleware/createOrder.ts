@@ -21,7 +21,7 @@ export const createOrder: FieldResolver<
         paymentStatus: "PEND",
         amount: orderInputs!.amount,
         products: {
-          create: orderInputs?.products.map((product) => ({
+          create: orderInputs?.products.map((product: {amount: number; name: string;} | null) => ({
             amount: product!.amount,
             product: {
               connect: {name: product?.name}
