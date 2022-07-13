@@ -43,13 +43,20 @@ export const OrderDetails = objectType({
   }
 })
 
+const ProductInOrder = inputObjectType({
+  name: 'productInOrder',
+  definition(t) {
+    t.nonNull.int('amount')
+    t.nonNull.string('name')
+  }
+})
 
 const OrderInputs = inputObjectType({
   name: 'orderInputs',
   definition(t) {
     t.nonNull.int('amount')
     t.nonNull.string('shippingMethod')
-    t.nonNull.list.string('products')
+    t.nonNull.list.field('products', { type: ProductInOrder })
   }
 })
 

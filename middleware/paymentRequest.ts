@@ -1,5 +1,4 @@
-const TPV_MERCHANT_KEY  = process.env.TPV_MERCHANT_KEY
-const DEVELOPMENT_MERCHANTIP  = process.env.DEVELOPMENT_MERCHANTIP
+ const DEVELOPMENT_MERCHANTIP  = process.env.DEVELOPMENT_MERCHANTIP
 
 import { FieldResolver } from "nexus"
 
@@ -26,9 +25,9 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: orderNumber, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: "https://rozaviht.com/api/paymentresponse",
-    DS_MERCHANT_URLOK: "https://rozaviht.com/checkoutend",
-    DS_MERCHANT_URLKO: "https://rozaviht.com/checkout",
+    DS_MERCHANT_MERCHANTURL: `http://${DEVELOPMENT_MERCHANTIP}/api/paymentresponse`,
+    DS_MERCHANT_URLOK: `http://${DEVELOPMENT_MERCHANTIP}/checkoutend`,
+    DS_MERCHANT_URLKO: `http://${DEVELOPMENT_MERCHANTIP}/checkout`,
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",
@@ -49,15 +48,13 @@ export const paymentRequest: FieldResolver<
     }
   }
 
-  
-  console.log(merchantData)
 
   // Base64 encoding of parameters
   var merchantWordArray = cryptojs.enc.Utf8.parse(JSON.stringify(merchantData))
   var merchantBase64 = merchantWordArray.toString(cryptojs.enc.Base64)
 
     // Decode key
-  var keyWordArray = cryptojs.enc.Base64.parse(TPV_MERCHANT_KEY);
+  var keyWordArray = cryptojs.enc.Base64.parse(process.env.TPV_MERCHANT_KEY_ENV);
 
   // Generate transaction key
   var iv = cryptojs.enc.Hex.parse("0000000000000000");
@@ -66,7 +63,6 @@ export const paymentRequest: FieldResolver<
     mode: cryptojs.mode.CBC,
     padding: cryptojs.pad.ZeroPadding
   });
-
   // Sign
   var signature = cryptojs.HmacSHA256(merchantBase64, cipher.ciphertext);
   var signatureBase64 = signature.toString(cryptojs.enc.Base64);

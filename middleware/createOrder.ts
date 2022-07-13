@@ -21,7 +21,12 @@ export const createOrder: FieldResolver<
         paymentStatus: "PEND",
         amount: orderInputs!.amount,
         products: {
-          connect: orderInputs?.products.map((product : string | null) => ({name: product!}))
+          create: orderInputs?.products.map((product) => ({
+            amount: product!.amount,
+            product: {
+              connect: {name: product?.name}
+            }
+          }))
         },
         shippingInfo: {
           create: {
@@ -51,7 +56,7 @@ export const createOrder: FieldResolver<
         },
         orderNumber: {
           create: {
-            number: `10${orderNumbersInDb.length.toString().padStart(9, "0")}`
+            number: `TEST${orderNumbersInDb.length.toString().padStart(4, "0")}`
           }
         },
         shippingDetails: {
@@ -65,7 +70,7 @@ export const createOrder: FieldResolver<
   
     return {
       success: true,
-      orderNumber: `10${orderNumbersInDb.length.toString().padStart(9, "0")}`
+      orderNumber: `TEST${orderNumbersInDb.length.toString().padStart(4, "0")}`
     }
   }
 

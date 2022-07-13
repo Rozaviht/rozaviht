@@ -1,5 +1,3 @@
-const SENDGRID_API_KEY  = process.env.SENDGRID_API_KEY 
-
 export type mailContentType = {
   subject: string
   orderNumber?: string | null | undefined
@@ -12,7 +10,7 @@ export async function sendContactMail (mailContent: mailContentType) {
   
   const sgMail = require('@sendgrid/mail')
 
-  sgMail.setApiKey(SENDGRID_API_KEY)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY_ENV)
 
   const mailOptions = {
     to: 'consultascliente@rozaviht.com',

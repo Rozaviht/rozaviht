@@ -24,3 +24,4 @@ export const cbdImages = [
     "width": 866
   }
 ]
+

@@ -1,6 +1,6 @@
 import CheckoutLayout from "@components/CheckoutLayout"
 import CheckoutSteps from "@components/CheckoutSteps"
-import { ReactElement, useEffect } from "react"
+import { ReactElement } from "react"
 import CheckoutProvider from "services/CheckoutProvider"
 
 
