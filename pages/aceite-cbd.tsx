@@ -35,61 +35,63 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
 
   const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
 
+  const productJsonLd = {
+    __html: `{
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Aceite de CBD",
+      "image": [
+        "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-10-withbox.png",
+        "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-20-withbox.png"
+      ],
+      "description": "Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Rozaviht"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "40",
+        "priceCurrency": "EUR",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value":  "2",
+            "currency": "EUR"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "ES"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "0",
+              "maxValue": "2"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "1",
+              "maxValue": "5"
+            },
+            "cutOffTime": "20:00-08:00",
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [ "https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday", "https://schema.org/Thursday", "https://schema.org/Friday" ]
+            }
+          }
+        }
+      }
+    }`
+  }
   return(
     <>
       <head>
         <title>Aceite de CBD</title>
         <meta name='description' content='Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.' />
-        <script type='application/ld+json'>
-          {
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Aceite de CBD",
-            "image": [
-              "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-10-withbox.png",
-              "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-20-withbox.png"
-            ],
-            "description": "Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.",
-            "brand": {
-              "@type": "Brand",
-              "name": "Rozaviht"
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "40",
-              "priceCurrency": "EUR",
-              "shippingDetails": {
-                "@type": "OfferShippingDetails",
-                "shippingRate": {
-                  "@type": "MonetaryAmount",
-                  "value":  "2",
-                  "currency": "EUR"
-                },
-                "shippingDestination": {
-                  "@type": "DefinedRegion",
-                  "addressCountry": "ES"
-                },
-                "deliveryTime": {
-                  "@type": "ShippingDeliveryTime",
-                  "handlingTime": {
-                    "@type": "QuantitativeValue",
-                    "minValue": "0",
-                    "maxValue": "2"
-                  },
-                  "transitTime": {
-                    "@type": "QuantitativeValue",
-                    "minValue": "1",
-                    "maxValue": "5"
-                  },
-                  "cutOffTime": "20:00-08:00",
-                  "businessDays": {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": [ "https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday", "https://schema.org/Thursday", "https://schema.org/Friday" ]
-                  }
-                }
-              }
-            }
-          }
+        <script type='application/ld+json' dangerouslySetInnerHTML={productJsonLd} key="cbd-jsonld">
         </script>
       </head>
       <div className="cbdPage">

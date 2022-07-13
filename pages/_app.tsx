@@ -23,6 +23,20 @@ type AppPropsWithLayout = AppProps & {
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
+  const appStructuredData = {
+    __html: `{
+      "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://rozaviht.com",
+            "logo": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/logo.png",
+            "address": 
+              "@type": "PostalAddress",
+              "addressLocality": "Madrid, Alcobendas",
+              "addressRegion": "ES",
+              "postalCode": "28100"
+    }`
+  }
+
   return (
     <>
       <Head>
@@ -34,19 +48,7 @@ type AppPropsWithLayout = AppProps & {
           <meta name="apple-mobile-web-app-title" content="Rozaviht: Te cuidas, Te cuidamos y Lo cuidamos"/>
           <meta name="format-detection" content="telephone=no"/>
           <meta name="format-detection" content="address=no"/>
-          <script type='application/ld+json'>
-            { 
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "url": "https://rozaviht.com",
-              "logo": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/logo.png",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Madrid, Alcobendas",
-                "addressRegion": "ES",
-                "postalCode": "28100"
-              }
-            }
+          <script type='application/ld+json' dangerouslySetInnerHTML={{ __html : JSON.stringify(appStructuredData)}} key="app-jsonld">
           </script>
       </Head>
       <ApolloProvider client={apolloClient} >
