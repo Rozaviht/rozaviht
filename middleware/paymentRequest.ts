@@ -25,9 +25,9 @@ export const paymentRequest: FieldResolver<
     DS_MERCHANT_ORDER: orderNumber, 
     DS_MERCHANT_TERMINAL: "1",
     DS_MERCHANT_TRANSACTIONTYPE: "0",
-    DS_MERCHANT_MERCHANTURL: `http://${DEVELOPMENT_MERCHANTIP}/api/paymentresponse`,
-    DS_MERCHANT_URLOK: `http://${DEVELOPMENT_MERCHANTIP}/checkoutend`,
-    DS_MERCHANT_URLKO: `http://${DEVELOPMENT_MERCHANTIP}/checkout`,
+    DS_MERCHANT_MERCHANTURL: `https://rozaviht.com/api/paymentresponse`,
+    DS_MERCHANT_URLOK: `https://rozaviht.com/checkoutend`,
+    DS_MERCHANT_URLKO: `https://rozaviht.com/checkout`,
     DS_MERCHANT_EMV3DS: {
       threeDSInfo: "ChallengeResponse",
       protocolVersion: "2.2.0",

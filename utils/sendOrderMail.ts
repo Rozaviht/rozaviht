@@ -26,7 +26,7 @@ export async function sendOrderMail (orderDetails: orderType) {
   
   const sgMail = require('@sendgrid/mail')
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY_ENV)
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
   const orderItems: orderItem[] = []
   orderDetails!.items!.forEach( item => orderItems.push({
