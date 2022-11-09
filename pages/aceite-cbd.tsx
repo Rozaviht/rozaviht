@@ -110,11 +110,11 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
               <h3>Porcentaje:</h3>
               <div className="oil-percentage__list">
                 <button 
-                className={currentProduct.price === 45 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                className={currentProduct.price === 40 ? "oil-percentage__item selected" : "oil-percentage__item"}
                 onClick={() => changeOil(10)}
                 >10%</button>
                 <button 
-                className={currentProduct.price === 65 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                className={currentProduct.price === 60 ? "oil-percentage__item selected" : "oil-percentage__item"}
                 onClick={() => changeOil(20)}
                 >20%</button>
               </div>
