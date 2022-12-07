@@ -1,61 +1,68 @@
-import React, { useState, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
-import Logo from '@img/Logo.svg'
-import CartIcon from '@img/cartIcon3.svg'
+import Logo from 'public/img/logo.svg'
+import LogoNegative from 'public/img/logo-negative.svg'
+import CartIcon from 'public/img/cart-icon.svg'
+import CartIconNegative from 'public/img/cart-icon-negative.svg'
 
 
+export const getStaticProps = async () => {
+  
+}
 
 const Navbar = () => {
-  const [showCart, setShowCart] = useState(false);
 
-  const { cartProducts } = useContext(AppContext)
+  const [rozanewsMode, setRozanewsMode] = useState(false)
 
-  const handleShowCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setShowCart(!showCart)
-  } 
+  const { cartProducts, showCart, setShowCart } = useContext(AppContext)
 
+  useEffect(() => {
+    let AllChangeableNavElements: NodeListOf<HTMLDivElement> = document.querySelectorAll(".navbar, .navbar__menu, .navbar__cartCounter")!
+    if(window.location.pathname === '/rozanews' ) {
+      AllChangeableNavElements.forEach(object => {
+        object.classList.add("rozanewsMode")
+      })
+      setRozanewsMode(true)
+    } else {
+      AllChangeableNavElements.forEach(object => {
+        object.classList.remove("rozanewsMode")
+      })
+      setRozanewsMode(false)
+    }
+  })
 
   return (
-    <div className="nav">
-      <div className="nav-wrapper">
+      <div className="navbar">
         <Link href="/">
-          <a  className="nav-logo">
-            <Image src={Logo} alt="Logo"/>
+          <a  className="navbar__logoImg">
+            {rozanewsMode === true ? <LogoNegative alt="Logo de Rozaviht en blanco" /> : <Logo alt="Logo de Rozaviht"/>}
           </a>
         </Link>
-        <button className="nav-cart" onClick={handleShowCart}>
-          <div className="nav-cart-container">
-            <Image src={CartIcon} alt="Cesta de compra"  width={25} height={25} layout="responsive"/>
-            <div className={cartProducts.length === 0 ? "products-counter" : "products-counter active"}>{`${cartProducts.length}`}</div>
-          </div>
-        </button>
-        <div className="nav-menu">
+        <div className="navbar__menu">
           <Link href="/aceite-cbd" >
-            <a className="nav-menu-item">
+            <a>
               Aceite CBD
             </a>
           </Link>
-          <Link href="/rozaday" >
-            <a className="nav-menu-item">
-              Rozaday
-            </a>
-          </Link>
-          <Link href="/about" >
-            <a className="nav-menu-item">
-              Sobre nosotros
+          <Link href="/rozanews" >
+            <a>
+              Rozanews
             </a>
           </Link>
         </div>
-        <Cart handleShowCart={handleShowCart} showCart={showCart}></Cart>
+        <button className="navbar__cartBt" onClick={() => setShowCart(!showCart)}>
+          <div className="navbar__cartIcon">
+            {rozanewsMode === true ? <CartIconNegative  alt="Icono del carrito de la compra de Rozaviht en blanco" /> : <CartIcon alt="Icono del carrito de la compra de Rozaviht" />}
+            <div className={cartProducts.length === 0 ? "navbar__cartCounter" : "navbar__cartCounter active"}>{`${cartProducts.length}`}</div>
+          </div>
+        </button>
+        <Cart ifCheckout={false}/>
       </div>
-    </div>
   )
 }
 

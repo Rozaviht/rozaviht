@@ -4,7 +4,7 @@ const TopWarning = () => {
   return (
     <div className="topwarning">
       <p className="topwarning-text">
-        Estamos empezando, solo realizamos envíos España Península.
+        Sentimos las molestias, estamos empezando, y solo realizamos envíos peninsulares ( España ).
       </p>
     </div>
   )

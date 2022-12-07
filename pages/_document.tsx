@@ -7,9 +7,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <link rel="stylesheet" href="/fonts/style.css" />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

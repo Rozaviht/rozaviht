@@ -1,75 +1,46 @@
-import { useContext, useState } from 'react'
 import Image from 'next/image'
 import { CartItemType } from '../services/AppProvider'
-import { AppContext } from 'services/AppContext'
+import useCartActions from '@hooks/useCartActions'
 
-import aceite10 from '@img/aceite10-concaja.png'
-
-
-type CartItemProps = {
-  removeFromCart: (id: number) => void
+export type CartItemProps = {
   cartProduct: CartItemType
 }
 
+export default function CartItem ({cartProduct}: CartItemProps) {
 
-const CartItem: React.FC<CartItemProps> = ({ removeFromCart, cartProduct}) => {
-
-  const { setCartProducts } = useContext(AppContext)
+  const { incrementAmount, decrementAmount, handleRemoveFromCart } = useCartActions()
 
   var totalItemPrice = cartProduct.amount * cartProduct.price
 
-  const incrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
 
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
-  
-  const decrementAmount = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
-
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount - 1 }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: 1 }];
-    });
-  };
 
 
   return (
-    <div className="cart-item">
-      <div className="image-cartitem-container">
-        <Image src={aceite10} width={200} height={200} layout='responsive'></Image>
-      </div>
-      <p className="p-name">Producto:</p>
-      <p className='cart-item-name'>{cartProduct.name}</p>
-      <button className="close-bt--cart" onClick={() => removeFromCart(cartProduct.id)}>
-        <div className="line-left"></div>
-        <div className="line-right"></div>
+    <div className="flexcolum cartItem">
+      <button className="closeBt closeBt--topRight" onClick={() => handleRemoveFromCart(cartProduct.id)}>
+        <div className="closeBt__lineL"></div>
+        <div className="closeBt__lineR"></div>
       </button>
-      <p className="p-price">Precio:</p>
-      <p className='cart-item-price'>{`${totalItemPrice},00€`}</p>
-      <p className="p-amount">Cantidad:</p>
-      <div className="amount--cart">
-        <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
-        <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled="disabled"/>
-        <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
+      <div className="cartItem__img">
+        <Image src={cartProduct.image.url} width={cartProduct.image.width!} height={cartProduct.image.height!} alt="" layout='responsive' objectFit='contain' ></Image>
+      </div>
+      <div className="flexrow-between">
+        <p>Producto:</p>
+        <h3>{cartProduct.name}</h3>
+      </div>
+      <div className="flexrow-between">
+        <p>Precio:</p>
+        <h3>{`${totalItemPrice},00€`}</h3>
+      </div>
+      <div className="flexrow-between">
+        <p>Cantidad:</p>
+        <div className="amount--cart" style={{ 'maxHeight': '40px' }}>
+          <button className="amount-bt--cart bt--minus" onClick={()=>decrementAmount(cartProduct)}>-</button>
+          <input className="amount-input--cart" type="number" value={cartProduct.amount} disabled={true}/>
+          <button className="amount-bt--cart bt--plus" onClick={()=>incrementAmount(cartProduct)}>+</button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default CartItem

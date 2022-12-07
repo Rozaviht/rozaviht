@@ -1,0 +1,123 @@
+.article-page {
+  margin-top: 2rem;
+
+  & p {
+    font-size: 1rem;
+  }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 8rem;
+
+  &__banner {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    margin-top: 15%;
+    width: 95%;
+    background-color: $backgroundcolor;
+    border-radius: 10px;
+    padding: 2rem;
+    -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+    box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+
+    & > h1, > p:nth-child(2) {
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+
+    & > p:nth-child(2) {
+      opacity: 0.8;
+      font-size: 110%;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1rem;
+        left: 5%;
+        height: 3px;
+        width: 90%;
+        background-color: $maincolor;
+      }
+    }
+  }
+
+  .isotipo-black {
+    margin-top: 2rem;
+    float: right;
+    width: 60px;
+  }
+
+  @include respond-to(tablet-portrait) {
+    &__content {
+      width: 70%;
+      padding: 2rem;
+    }
+  }
+
+  @include respond-to(desktop) {
+    &__content {
+      width: 60%;
+    }
+  }
+
+}
+
+.recomendations {
+  position: relative;
+  margin-top: 8rem;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > *:nth-child(n) {
+    margin-top: 1rem;
+  }
+
+  &::before{
+    content: '';
+    height: 4px;
+    width: 90%;
+    position: absolute;
+    top: -1.5rem;
+    left: 5%;
+    background-color: $maincolor;
+  }
+
+  &__articles {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__bt {
+    border-radius: 50px;
+    padding: 1rem;
+    background-color: $maincolor;
+    color: $backgroundcolor;
+    font-size: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    & > svg {
+      margin-right: 10px;
+      width: 2.5rem;
+    }
+  }
+}

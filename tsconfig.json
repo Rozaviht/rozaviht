@@ -15,7 +15,7 @@
         "hooks/*"
       ]
     },
-    "target": "es6",
+    "target": "es2017",
     "lib": [
       "dom",
       "dom.iterable",
@@ -32,7 +32,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "module": "ESNext",
+    "module": "esnext",
     "jsx": "preserve",
     "incremental": true
   },
@@ -40,8 +40,8 @@
     "node_modules"
   ],
   "include": [
-    "next-env.d.ts",
+    "types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "pages/index.js"  ]
 }

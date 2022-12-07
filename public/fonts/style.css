@@ -19,8 +19,16 @@
   src: url("Lora-Medium.ttf");
 }
 @font-face {
+  font-family: "Lora-SemiBold";
+  src: url("Lora-SemiBold.ttf");
+}
+@font-face {
   font-family: "Lora-Italic";
   src: url("Lora-Italic.ttf");
+}
+@font-face {
+  font-family: "Lora-MediumItalic";
+  src: url("Lora-MediumItalic.ttf");
 }
 @font-face {
   font-family: "GrechenFuemen-Regular";

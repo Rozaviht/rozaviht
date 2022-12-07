@@ -1,78 +1,64 @@
-import { useContext, useEffect, useState } from 'react'
-import Image from 'next/image'
+import { useContext } from 'react'
+import Link from 'next/link'
 
 import { AppContext } from 'services/AppContext'
 
 import CartItem from './CartItem'
 
-import emptyBasket from '@img/empty-cart.svg'
-import Logo from '@img/Logo.svg'
-import { CartItemType } from 'services/AppProvider'
-
-export type CartProps = {
-  showCart: boolean
-  handleShowCart: (event: React.MouseEvent<HTMLButtonElement>)=>void
-}
+import EmptyBasket from '/public/img/empty-cart-image.svg'
+import Logo from '/public/img/logo.svg'
 
 
-const Cart = ({handleShowCart, showCart}: CartProps) => {
-  const [totalCartPrice, setTotalCartPrice] = useState<number>()
 
-  const { cartProducts, setCartProducts } = useContext(AppContext)
+const Cart = ({ifCheckout}: {ifCheckout: boolean}) => {
 
-  const handleRemoveFromCart = (productId: number) => {
-    let elementProduct = cartProducts.find(element => element.id === productId)
-    setCartProducts(() =>
-      cartProducts.filter(function(element) {
-        return element != elementProduct
-      })
-    );
-  };
-
-  useEffect(() => {
-    setTotalCartPrice(cartProducts.reduce((ack: number, item) => ack + item.amount * item.price, 0))
-  }, [cartProducts])
-
+  const { cartProducts, totalCartPrice, showCart, setShowCart } = useContext(AppContext)
 
   return (
-    <div className={showCart ? "cart dropped" : "cart"}>
-      <div>
-        <button className="close-bt" onClick={handleShowCart}>
-          <div className="line-left"></div>
-          <div className="line-right"></div>
+    <div className={showCart ? "cart cart--showed" : "cart"}>
+      <div className="flexcolum flexcolum--around">
+        <button className="closeBtSlide closeBtSlide--topLeft" onClick={() => setShowCart(!showCart)}>
+          <div className="closeBtSlide__lineT"></div>
+          <div className="closeBtSlide__lineC"></div>
+          <div className="closeBtSlide__lineB"></div>
         </button>
-        <div className="logo-cart-container">
-          <Image src={Logo} height={30} width={80} layout="responsive"></Image>
+        <div className="cart__logoImg">
+          < Logo alt="Logo de Rozaviht"/>
         </div>
-        <h2 className="cart-title">Tu cesta de la compra</h2>
+        <h2 className="h--maincolor">Tu cesta de la compra</h2>
       </div>
-      <div className="containerflx--column extra-pd">
+      <div className="flexcolum flexcolum--around">
         { cartProducts.length === 0
           ?
-            <div className="empty-cart">
-              <div className="empty-cart-text-wrapper">
-                <h1 className="empty-cart-text">! Ups Vaya¡</h1>
-                <h2 className="empty-cart-text">Tu cesta de la compra esta vacía, que esperas para llenarla</h2>
-              </div>
-              <Image src={emptyBasket} width={200} height={200}/>
-            </div>
+            <>
+                <h1>! Ups Vaya¡</h1>
+                <h2 className="h--aligncenter">Tu cesta de la compra esta vacía, a que esperas para llenarla</h2>
+                <div className="cart__emptyImg">
+                  <EmptyBasket />
+                </div>
+            </>
           :
-            <div className="cart-items-container">
+            <>
               {cartProducts.map(item => (
                 <CartItem
                   key={item.id}
                   cartProduct={item}
-                  removeFromCart={handleRemoveFromCart}
                 />
                 ))}
-              <div className="total-price-container">
-                <div className="total-price">
-                  <h3 className="total-price-text">Total en tu cesta:</h3>
-                  <h3 className="total-price-number">{totalCartPrice},00€</h3>
+              <div className="flexcolum flexcolum--around">
+                <div className="flexrow">
+                  <h2>Total en tu cesta:</h2>
+                  <h2 style={{marginLeft: "2rem"}}>{totalCartPrice},00€</h2>
                 </div>
-                <button className="cart-cta-buy">COMPRAR</button>
+                { ifCheckout === false ?
+                  <Link href="/checkout" >
+                    <a className="link-cta" onClick={() => setShowCart(false)}>
+                      COMPRAR
+                    </a>
+                </Link>
+                  : <></>}
               </div>
-            </div>
+            </>
         }
       </div>
     </div>

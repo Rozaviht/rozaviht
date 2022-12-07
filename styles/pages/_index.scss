@@ -1,0 +1,607 @@
+.landingPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.landingPage__banner {
+    width: 100%;
+    display: block;
+  }
+
+
+
+.cta-secdry {
+  width: 12rem;
+  height: 2.5rem;
+
+  text-align: center;
+  font-size: 1.4rem;
+
+  border-radius: 10px;
+
+  &--rozavihtsection {
+    background-color: $maincolor;
+    border: 2px solid $maincolor;
+    & a {
+      color: $backgroundcolor;
+    }
+  }
+}
+
+/* ++++++++++++++CBD SECTION+++++++++++++++++ */
+
+.cbdSection {
+  position: relative;
+  padding: 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.8fr;
+
+  background-color: $oilsectiontext;
+
+  overflow: hidden;
+
+  & .liquidBubbles {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  &__img {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+
+    &-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    & h1, > p {
+      color: $backgroundcolor;
+      margin-bottom: 1.2rem;
+    }
+
+    & > h1 {
+      font-size: 300%;
+    }
+  }
+
+  &__cta {
+    margin-left: 1rem;
+    padding: 1rem;
+    position: relative;
+
+    font-size: 1.3rem;
+
+    background-color: $backgroundcolor;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  &__link {
+    color: $oilsectiontext;
+  }
+
+  &__illustration {
+    align-self: flex-end;
+    margin-right: 3rem;
+    width: 15%;
+  }
+
+  @include respond-to(mobile-landscape) {
+    padding: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    font-size: 1.4rem;
+
+    &__img{
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
+    }
+
+    &__content {
+      margin-left: 2rem;
+    }
+
+    &__illustration {
+      margin-right: 3rem;
+    }
+
+    &__cta {
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+
+  @include respond-to(tablet-landscape) {
+    padding: 0;
+    &__content {
+      padding-top: 1rem;
+      padding-right: 3rem;
+      padding-bottom: 2rem;
+    }
+    &__img {
+      width: 120%;
+      bottom: -20%;
+      left: -30%;
+    }
+  }
+
+  @include respond-to(desktop) {
+    padding: 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    font-size: 1.4rem;
+
+    & .liquidBubbles {
+      width: 50%;
+    }
+
+    &__img {
+      width: 120%;
+      bottom: -25%;
+      left: -30%;
+    }
+
+
+    &__content {
+      padding-top: 5rem;
+      padding-right: 5rem;
+      padding-bottom: 5rem;
+
+      & h1, > p {
+        margin-bottom: 2rem;
+      }
+  
+      & > h1 {
+        font-size: 350%;
+      }
+    }
+
+    &__illustration {
+      margin-right: 5rem;
+    }
+
+    &__cta {
+      font-size: 2.2rem;
+    }
+  }
+
+  @include respond-to(desktop-large) {
+    font-size: 1.6rem;
+    &__img {
+      width: 120%;
+      bottom: -25%;
+      left: -30%;
+    }
+  }
+
+  @include respond-to(desktop-large-xl) {
+    font-size: 1.8rem;
+    &__content {
+      padding-right: 10rem;
+    }
+
+    &__img {
+      width: 120%;
+      bottom: -23%;
+      left: -30%;
+
+    }
+  }
+
+  @include respond-to(desktop-large-xxl) {
+  }
+}
+
+/* ++++++++++++++ROZANEWS SECTION+++++++++++++++++ */
+
+.rozanewsSection {
+  position: relative;
+  padding: 5rem 0rem 5rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 5%;
+    & > h1 {
+      font-size: 300%;
+    }
+  }
+
+  &__cards {
+    width: 100%;
+    display: flex;
+  }
+
+  &__img {
+    display: none;
+  }
+  
+  &__img-mobile {
+    width: 100%;
+  }
+
+  &__content {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__cta {
+    margin-top: 2rem;
+    font-family: DIN-Bold;
+    font-weight: 600;
+    padding: 0.5rem;
+    align-self: flex-end;
+    border-bottom: 4px solid #000;
+    background-color: none;
+    cursor: pointer;
+  
+    font-size: 1.4rem;
+  }
+
+  &__illustration {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    & .svg {
+      z-index: -1;
+      position: absolute;
+      width: 130%;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  @include respond-to(mobile-landscape) {
+
+    &__img {
+      display: inline;
+      width: 100%;
+    }
+
+    &__img-mobile {
+      display: none;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 100%;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+
+  @include respond-to(tablet-portrait) {
+    padding: 5% 0 5% 0;
+
+
+    &__title{
+      margin-bottom: 3rem;
+    }
+
+    &__content {
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    &__img-mobile {
+      position: relative;
+      width: 85%;
+    }
+
+    &__cta {
+      margin-top: 5rem;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 80%;
+      }
+    }
+
+
+
+  }
+  
+  
+  
+  @include respond-to(tablet-landscape) {
+    flex-direction: row-reverse;
+    padding: 5% 0 0 3rem;
+    align-items: center;
+
+    &__title{
+      align-items: flex-start;
+    }
+
+    &__content {
+      padding: 0;
+      margin: 0;
+      width: 60%;
+      height: 100%;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    &__cards {
+      padding-left: 2rem;
+    }
+
+    &__cta {
+      font-size: 170%;
+    }
+
+    &__illustration {
+      & .svg {
+        width: 70%;
+
+      }
+    }
+  }
+
+
+
+
+  @include respond-to(desktop) {
+    &__cards {
+      padding-left: 4rem;
+    }
+
+    &__title {
+      margin-bottom: 5rem;
+      & > h1 {
+        font-size: 400%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  @include respond-to(desktop-large-xl) {
+
+    
+    &__content {
+      font-size: 1.8rem;
+      & > p {
+        font-size: 1.8rem;
+      }
+    }
+
+    &__title {
+      margin-bottom: 9rem;
+      & > h1 {
+        font-size: 420%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+
+}
+
+
+  /* ++++++++++++ ROZAVIHT SECTION ++++++++++++ */
+
+.rozavihtSection {
+  padding: 5rem 2rem 5rem 2rem;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  &__img {
+    position: absolute;
+    top: 20%;
+    left: -30%;
+    width: 500%;
+    opacity: 0.15;
+  }
+
+  & > h1 {
+    color: $maincolor;
+    font-size: 300%;
+    margin-bottom: 2rem;
+    font-family: Lora-Regular;
+  }
+
+  &__list {
+
+    & > li:nth-child(2) {
+      margin-left: 20%;
+    }
+    & > li:nth-child(3) {
+      margin-left: 10%;
+    }
+
+    & > li:nth-child(n) {
+      margin-bottom: 1rem;
+    }
+
+    & > li > h2 {
+      width: fit-content;
+      color: $maincolor;
+      font-family: Lora-Regular;
+      font-size: 200%;
+      position: relative;
+
+      & .underline-handmade {
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: min-content;
+      }
+    }
+
+    & li > p {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &::before {
+    content: '';
+    height: 5px;
+    width: 90%;
+    position: absolute;
+    top: 0;
+    background-color: $maincolor;
+  }
+
+  @include respond-to(mobile-landscape) {
+    padding: 5rem 8% 5rem 8%;
+
+    &__img {
+      top: -10%;
+      left: -30%;
+      width: 450%;
+    }
+  }
+
+  @include respond-to(tablet-portrait) {
+    font-size: 1.2rem;
+    padding: 5rem 10% 5rem 10%;
+
+    &__img {
+      top: -10%;
+      left: -30%;
+      width: 450%;
+    }
+
+    &__list {
+      & > li:nth-child(1) {
+        margin-left: 3rem;
+      }
+      & > li:nth-child(2) {
+        margin-left: 6rem;
+      }
+      & > li:nth-child(3) {
+        margin-left: 9rem;
+      }
+
+      & >li:nth-child(n) {
+        margin-bottom: 2rem;
+      }
+   }
+  }
+
+  @include respond-to(tablet-landscape) {
+    &__img {
+      top: 10%;
+      left: -10%;
+      width: 180%;
+    }
+  }
+
+
+  @include respond-to(desktop) {
+    padding: 5rem 12% 5rem 12%;
+    font-size: 1.4rem;
+
+    &__list {
+       & > li:nth-child(1) {
+         margin-left: 3rem;
+       }
+       & > li:nth-child(2) {
+         margin-left: 6rem;
+       }
+       & > li:nth-child(3) {
+         margin-left: 9rem;
+       }
+
+       & >li:nth-child(n) {
+         margin-bottom: 3rem;
+       }
+    }
+  }
+}
+
+
+.home-cta {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.image-container {
+  width: 100%;
+}
+
+
+.typewriter .section-tagline {
+  font-family: Lora-Italic;
+  border-right: 0.8rem solid $maincolor;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.13em;
+
+  &.aniON {
+    animation: blink-caret 0.75s step-end infinite, typing 4s steps(35, end), stopBlink 1s step-start 5s forwards;
+  }
+}
+
+/* -------- ANIMATIONS --------- */
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: $maincolor;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes stopBlink {
+  from {
+    border-right: 0.8rem solid $maincolor;;
+  }
+  to{
+    border-right: none;
+  }
+}

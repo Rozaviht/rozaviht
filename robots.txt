@@ -1,0 +1,8 @@
+#Tell Google not to crawl any URLs in the checkout, in the checkoutend and the error pages,
+#because they won't be useful in Google Search results.
+User-agent: googlebot
+Disallow: /checkout/
+Disallow: /checkoutend/
+Disallow: /404/
+Disallow: /500/
+Disallow: /cbdinfo/

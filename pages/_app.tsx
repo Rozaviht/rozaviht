@@ -1,61 +1,63 @@
-import { AppProps } from 'next/app'
-import Layout from '@components/Layout'
+import Head from 'next/head'
 import AppProvider from '../services/AppProvider'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from 'lib/apolloClient'
 
-import '../pages/styles/App.scss'
+import type { AppContext, AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from 'react'
+import type {NextPage} from 'next'
 
-function MyApp({ Component, pageProps }: AppProps) {
+import '../styles/App.scss'
 
-
-  return (
-    <AppProvider>
-      <Layout>
-        <Component {...pageProps} />
-        <style jsx global>{`
-          *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #3f3e3e;
-            font-family: DIN-Medium;
-          }
-
-          html {
-            font-size: 100%;
-            background-color: #F2F3FA;
-          }
-
-          body{
-            min-height: 100%;
-            display: contents;
-          }
-
-          .font-LoraMedium {
-            font-family: Lora-Medium;
-          }
-          .font-LoraRegular {
-            font-family: Lora-Medium;
-          }
-
-          h1{
-            font-weight: 500;
-          }
-        `}</style>
-      </Layout>
-    </AppProvider>
-    )
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
 
-export default MyApp
+ export default function MyApp({ Component, pageProps }: AppContext & AppPropsWithLayout) {
+
+  const apolloClient = useApollo(pageProps)
+
+  const getLayout = Component.getLayout ?? ((page) => page)
+
+  const appStructuredData = {
+    __html: `{
+      "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://rozaviht.com",
+            "logo": "https://rozaviht-media.s3.eu-west-3.amazonaws.com/logo.png",
+            "address": 
+              "@type": "PostalAddress",
+              "addressLocality": "Madrid, Alcobendas",
+              "addressRegion": "ES",
+              "postalCode": "28100"
+    }`
+  }
+
+  return (
+    <>
+      <Head>
+          <link rel="stylesheet" href="../fonts/style.css" />
+          <link rel="shortcut icon" sizes='224x256' type='image/ico' href="img/favicon.ico" />
+          <title>Rozaviht: Te cuidas, Te cuidamos y Lo cuidamos</title>
+          <meta name='description' content='En Rozaviht nuestro objetivo es proveer de productos a las personas que cuiden de ellas. Siempre sin dejar de lado el cuido medioambiental que nos define también como marca.' />
+          <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1' />
+          <meta name="apple-mobile-web-app-title" content="Rozaviht: Te cuidas, Te cuidamos y Lo cuidamos"/>
+          <meta name="format-detection" content="telephone=no"/>
+          <meta name="format-detection" content="address=no"/>
+          <script type='application/ld+json' dangerouslySetInnerHTML={{ __html : JSON.stringify(appStructuredData)}} key="app-jsonld">
+          </script>
+      </Head>
+      <ApolloProvider client={apolloClient} >
+        <AppProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </AppProvider>
+      </ApolloProvider>
+    </>
+
+  )
+}
+

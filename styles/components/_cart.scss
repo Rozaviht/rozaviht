@@ -1,0 +1,50 @@
+.cart {
+  z-index: 99999;
+  height: 100%;
+  width: 100%;
+
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  transform: translate(100vw);
+  transition: 700ms ease-in-out;
+
+  overflow: scroll;
+
+  border-left: 5px solid $maincolor;
+  background-color: $backgroundcolor;
+
+  display: flex;
+  flex-direction: column;
+
+  &--showed {
+    transform: translate(0rem);
+  }
+
+  &__logoImg {
+    width: 120px;
+  }
+
+  &__emptyImg {
+    margin-top: 3rem;
+    width: 70%;
+  }
+
+  @include respond-to(tablet-portrait) {
+    width: 30%;
+  } 
+  
+  @include respond-to(tablet-landscape) {
+    width: 30%;
+
+    &__logoImg {
+      width: 0;
+    }
+
+    &__emptyImg {
+      width: 30%;
+    }
+  }
+}
+

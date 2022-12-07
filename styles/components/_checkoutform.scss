@@ -1,0 +1,251 @@
+.checkoutForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7F4F3;
+  padding: 1rem 1rem 6rem 1rem;
+  border-radius: 5px;
+  -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+  box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+
+  &__section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  
+    &:nth-child(1) {
+      margin-bottom: 2rem;
+    }
+
+    & > h2 {
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
+    }
+  }
+
+  &--fixed {
+    border: 3px solid $maincolor;
+    padding: 1rem;
+    z-index: 800;
+    position: fixed;
+    width: 80vw;
+    max-width: 800px;
+    height: 80vh;
+    overflow-y: scroll;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    & > h2 {
+      width: 100%;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+
+  @include respond-to(tablet-landscape) {
+    padding: 2rem 2rem 6rem 2rem;
+    flex-direction: row;
+    align-items: flex-start;
+
+    &__section:nth-child(1) {
+      margin-right: 3rem;
+    }
+
+    &--fixed {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2rem;
+      &.hidden {
+        display: none;
+      }
+    }
+
+    & > button {
+      bottom: 1rem;
+    }
+  }
+}
+
+.input-wrapper {
+  margin-top: 2rem;
+  position: relative;
+  width: 100%;
+
+  &--multiple {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.checkout-label {
+  position: relative;
+
+  &--short {
+    width: 80%;
+  }
+
+  &--tiny {
+    margin-left: 2rem;
+    width: 40%;
+  }
+}
+
+.checkout-input {
+  border: 2px solid $maincolor;
+  background-color: unset;
+  display: block;
+  padding: calc(0.5rem * 1.5) 0.5rem;
+  width: 100%;
+  font-size: 100%;
+  outline: none;
+  border-radius: 5px;
+
+  &--textarea {
+    height: 6rem;
+  }
+
+  &:focus,
+  &:not(:placeholder-shown) {
+    border: 2px solid #4b9514;
+  }
+
+  &-errmssg {
+    font-size: 0.8rem;
+    color: #f01f1f;
+  }
+
+  &--error {
+    &:focus,
+    &:not(:placeholder-shown) {
+      border: 2px solid #f01f1f;
+    }
+  }
+}
+
+.checkout-labelcontent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: calc(0.5rem * 0.75) calc(0.5rem * 0.5);
+  margin: calc(0.5rem * 0.75 + 3px) calc(0.5rem * 0.5);
+  color: $maincolor;
+  opacity: 0.8;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background-color: $backgroundcolor;
+  line-height: 1.2;
+  transition: all 0.3s ease;
+}
+
+.checkout-input:focus + .checkout-labelcontent,
+.checkout-input:not(:placeholder-shown) + .checkout-labelcontent {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: #4b9514;
+  opacity: 1;
+}
+
+.checkout-input.checkout-input--error + .checkout-labelcontent {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: #f01f1f;
+  opacity: 1;
+}
+
+.select-wrapper {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+  line-height: 1.1;
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  border-bottom: 2px solid $maincolor;
+
+  &::after {
+    content: "";
+    width: 1rem;
+    height: 0.7rem;
+    background-color: $maincolor;
+    clip-path: polygon(100% 0%, 0% 0%, 50% 100%);
+    justify-self: end;
+  }
+  
+  &.selected {
+    border-bottom: 2px solid #4b9514;
+    
+    &::after {
+      background-color: #4b9514;
+
+    }
+  }
+}
+
+.select-wrapper,
+.select-wrapper::after,
+.checkout-select {
+  grid-area: select;
+}
+
+.checkout-select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  line-height: inherit;
+  outline: none;
+  font-size: 1rem;
+  color: $maincolor;
+
+
+}
+
+.checkout-option {
+  background-color: $backgroundcolor;
+  outline: none;
+  font-size: 1rem;
+  color: $maincolor;
+  margin-top: 5px;
+}
+
+.note-span {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.checkoutform-bt {
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  max-width:500px;
+  padding: 0.8rem 1rem 0.8rem 1rem;
+  color: $backgroundcolor;
+  background-color: $maincolor;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  align-self: center;
+
+  &--fixed {
+    position: relative;
+    margin-top: 2rem;
+  }
+}

@@ -10,6 +10,7 @@ node_modules
 #production
 /build
 
+
 #misc
 *.log
 .DS_Store
@@ -25,7 +26,9 @@ yarn-error.log*
 
 
 # multimedia
-*.svg
 *.png
 *.jpg
+*.webp
+*.mp4
 
+.vercel

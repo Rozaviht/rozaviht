@@ -1,197 +1,236 @@
-import { useState, useContext } from "react"
 import prisma from '../lib/prisma'
 import Image from 'next/image'
+import head from 'next/head'
 
-import { CartItemType } from "../services/AppProvider"
-import { AppContext } from 'services/AppContext'
+import useCbdPage from "@hooks/useCbdPage"
 
+import type { imageType } from "../services/AppProvider"
+import type { ReactElement } from "react"
 
+import Layout from "@components/Layout"
 import ProductImageSlider from '@components/ProductImageSlider'
+import AddedToCartPopUp from "@components/AddedToCartPopUp"
+import RecyclingAnimation from '@components/RecyclingAnimatino'
 
-import MartaBañoAceite from '@img/marta-aceite-baño.jpg'
-import ingredientsImage from '@img/img-cbd-page.png'
+import LiquidSVGTop from '@img/liquid-svg-top.svg'
+import LiquidBubbles from '@img/liquid-bubbles.svg'
 
-interface props  {
-  ProductDetails : [
-    {
-      id: number
-      price: number
-      name: string
-    }
-  ]
+export type CbdProductsData = {
+  name: string
+  description: string
+  images: imageType[]
+  products: {
+    id: number
+    name: string
+    price: number
+    image: imageType
+  }[]
 }
 
-
-export type CurrentProductProps = {
-    currentId: number
-    currentPrice: number
+export interface CbdPageProps  {
+  CbdProductsData : CbdProductsData
 }
 
+export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
 
+  const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
 
-export const getStaticProps = async () => {
-  const ProductDetails = await prisma.product.findMany({
-    select: {
-      id: true,
-      price: true,
-      name: true
-    }
-    })
-    return {
-      props: { ProductDetails }
-    }
-  }
-
-
-
-
-
-
-const cbdPage = ({ProductDetails}: props) => {
-  const { setCartProducts } = useContext( AppContext )
-
-  const [amountSelected, setAmountSelected] = useState(1)
-  const [currentPrice, setCurrentPrice] = useState(ProductDetails[0].price)
-  const [selected, setSelected] = useState(ProductDetails[0].id)
-  const [currentName, setCurrentName] = useState(ProductDetails[0].name)
-  const [listDropped, setListDropped] = useState([false, false, false, false])
-  
-  var currentProduct = {
-    id : selected,
-    price: currentPrice,
-    name: currentName,
-    amount: amountSelected
-  }
-  var totalAmountPrice: number = amountSelected * currentPrice
-
-
-
-  function decrementAmount () {
-    if (amountSelected > 1){
-      setAmountSelected(prevAmountSelected => prevAmountSelected - 1)
-    }
-  }
-  function incrementAmount () {
-    setAmountSelected(prevAmountSelected => prevAmountSelected + 1)
-  }
-
-  const changeOil = (oilType: number) => {
-      if (oilType === 1) {
-        setCurrentPrice(ProductDetails[0].price)
-        setSelected(ProductDetails[0].id)
-        setCurrentName(ProductDetails[0].name)
-        
+  const productJsonLd = {
+    __html: `{
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Aceite de CBD",
+      "image": [
+        "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-10-withbox.png",
+        "https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-oil-20-withbox.png"
+      ],
+      "description": "Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Rozaviht"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "40",
+        "priceCurrency": "EUR",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value":  "2",
+            "currency": "EUR"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "ES"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "0",
+              "maxValue": "2"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": "1",
+              "maxValue": "5"
+            },
+            "cutOffTime": "20:00-08:00",
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [ "https://schema.org/Monday", "https://schema.org/Tuesday", "https://schema.org/Wednesday", "https://schema.org/Thursday", "https://schema.org/Friday" ]
+            }
+          }
+        }
       }
-      else {
-        setCurrentPrice(ProductDetails[1].price)
-        setSelected(ProductDetails[1].id)
-        setCurrentName(ProductDetails[1].name)
-      }
-      setAmountSelected(1)
+    }`
   }
-
-
-  const handleAddToCart = (clickedItem: CartItemType) => {
-    setCartProducts(prev => {
-      const isItemInCart = prev.find(item => item.id === clickedItem.id);
-
-      if (isItemInCart) {
-        return prev.map(item =>
-          item.id === clickedItem.id
-            ? { ...item, amount: item.amount + amountSelected }
-            : item
-        );
-      }
-      return [...prev, { ...clickedItem, amount: amountSelected }];
-    });
-  };
-
-
   return(
-    <div className="product-page">
-      <div className="product-details">
-        <ProductImageSlider></ProductImageSlider>
-        <div className="container--flexcolumn">
-          <h1 className="product-title">Aceite de CBD</h1>
-          <p>0% THC | 10ml</p>
-          <p className="p--textCenter mrgtop">
-            Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cañamo. No contiene nada de THC, y es completamente natural y vegano.
-          </p>
-          <h2 className="product-price mrgtop">{`${totalAmountPrice},00€`}</h2>
-          <p>(IVA incluido)</p>
-          <div className="oil-percentage">
-            <h3>Porcentaje:</h3>
-            <div className="oil-percentage-list">
-              <button 
-              className={selected === 1 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
-              onClick={() => changeOil(1)}
-              >10%</button>
-              <button 
-              className={selected === 2 ? "oil-percentage-list-item selected" : "oil-percentage-list-item"}
-              onClick={() => changeOil(2)}
-              >20%</button>
-            </div>
-          </div>
-          <div className="container--flexrow">
-            <div className="amount">
-                <button className="amount-bt bt--plus" onClick={incrementAmount}>+</button>
-                <input className="amount-input" type="number" value={amountSelected} disabled="disabled"/>
-                <button className="amount-bt bt--minus" onClick={decrementAmount}>-</button>
-            </div>
-            <button className="product-details-cta" onClick={() => handleAddToCart(currentProduct)}>
-              <div className="cta-plus">
-                <div className="cta-plus-line"></div>
-                <div className="cta-plus-line"></div>
+    <>
+      <head>
+        <title>Aceite de CBD</title>
+        <meta name='description' content='Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.' />
+        <script type='application/ld+json' dangerouslySetInnerHTML={productJsonLd} key="cbd-jsonld">
+        </script>
+      </head>
+      <div className="cbdPage">
+        <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
+        <div className="product-hero">
+          <ProductImageSlider></ProductImageSlider>
+          <div className="flexcolum flexcolum--around">
+            <h1 className="product-hero__title">Aceite de CBD</h1>
+            <p>0% THC | 10ml</p>
+            <p className="product-hero__desc">
+              Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.
+            </p>
+            <h2 className="product-hero__price">{`${totalAmountPrice},00€`}</h2>
+            <p>(IVA incluido)</p>
+            <div className="oil-percentage">
+              <h3>Porcentaje:</h3>
+              <div className="oil-percentage__list">
+                <button 
+                className={currentProduct.price === 40 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                onClick={() => changeOil(10)}
+                >10%</button>
+                <button 
+                className={currentProduct.price === 60 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                onClick={() => changeOil(20)}
+                >20%</button>
               </div>
-              <h4 className="product-details-cta-text">
+            </div>
+            <div className="flexrow">
+              <div className="amount">
+                  <input className="amount__input" type="number" value={currentProduct.amount} disabled={true}/>
+                  <div className="amount__bts">
+                    <button onClick={incrementAmount}>+</button>
+                    <button onClick={decrementAmount}>-</button>
+                  </div>
+              </div>
+              <button className="product-hero__cta" onClick={() => handleAddToCart(currentProduct)}>
+                <div className="product-hero__cta-plus">
+                  <div className="product-hero__cta-plus-line"></div>
+                  <div className="product-hero__cta-plus-line"></div>
+                </div>
                 Añadir a la cesta
-              </h4>
-            </button> 
-          </div>
-          <p className="delivery-info">Envío Estandar (1,5€):  3 a 5 días laborales</p>
-          <p className="delivery-info">Envío Express (3€):  2 a 3 días laborales</p>
-          <p className="delivery-info">Envíos de momento solo España Península</p>
-        </div>
-      </div>
-      <div className="product-ingredients">
-        <div className="ingredients-image">
-          <Image src={ingredientsImage} height={1.7} width={1} layout="responsive"/>
-        </div>
-      </div>
-      {/* PRODCUT INFORMATION */}
-      <div className="product-information">
-        <div className="text-container">
-          <h1 className="product-information-title">Información del Producto</h1>
-          <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"} >QUE HACE</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
-              <p>Los principales beneficios del Aceite de CBD, son sus efectos antiinflamatorios, antidepresivos y relajantes; de hecho con tan solo un par de gotas notarás sus efectos casí de inmediato. Estas carácteristicas particulares del aceite te ayudaran con dolores e irritaciones, desinflamandola la zona a la vez que sientes una relajacion en la misma. También gracias a él, podrás manejar mejor la ansiedad y el estrés, ya que el CBD reduce estos valores en tu cuerpo; por lo que además te ayudara a conciliar mejor el sueño si lo aplicas antes de dormir.</p>
-            </div>
-          </div>
-          <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO UTILIZARLO</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
-            <p>En cuanto a como usar el aceite, existen diferentes formas, pero las más conocidas son el uso topico y el uso sublingual.Actualmente en Españá su venta esta restringido al uso topico solamente, por lo que te recomendamos emplear un par de gotas en la zona donde sientas dolor y masajear hasta que el aceite se haya completamente absorvido. Deberías notar los efectos calmantes casí al momento, ten en cuenta que a mayor porcentaje del producto mayor serán sus efectos por lo que para dolores mas agudos te recomendamos usar porcentajes mas altos, o si deseas emplear menos producto cada que vez que lo uses.</p>
-            </div>
-          </div>
-          <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>INGREDIENTES</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
-            <p>Como te hemos mencionado el aceite de CBD en España, de momento, solo se puede vender como uso topico, sin embargo este producto en varios paises de la Union Europea y en Estados Unidos ya esta disponible para venta con uso sublinguanl, donde se extrean los grandes beneficios del producto. Esto surgío a raiz de que la OMS lo considerará un suplemento alimenticio beneficioso para el ser humano, donde a continuación la Union Europea lo aprovo de la misma manera.</p> 
-            </div>
-          </div>
-          <div className="information-content-wrapper">
-            <h2 className={listDropped ? "information-content-title colored" : "information-content-title"}>COMO RECICLARLO</h2>
-            <div className={ listDropped ? "information-content dropped" : "information-content" }>
-            <p>Estos son los principales beneficios que contiene el aceite de CBD, sin embargo todavía hay más carácteristicas de este producto que explicamos más a fondo en uno de nuestros artículos de Rozaday, te recomendamos leerlo para que estes enterado de lo que estas cosumiendo y no tengas dudas al respecto, pincha aquí para leerlo.</p>
+              </button> 
             </div>
           </div>
         </div>
+        <div className="product-frstSect">
+          <LiquidSVGTop className="liquidTop" />
+          <LiquidBubbles className="liquidBottom" />
+          <div className="product-frstSect__text">
+            <p>Este aceite te ayudara a relajar toda la tension que tengas acumulada, ayudandote también a manejar el estrés y la ansiedad, todo con tan solo un par de gotas...</p>
+          </div>
+          <div className='product-frstSect__img' >
+            < Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-image-section.webp"} height={1382} width={981} alt={"Aceite de CBD 20 porciento de Rozaviht con packaging encima de un tronco con un piñon y aceite goteando"} layout='responsive' />
+          </div>
+        </div>
+        {/* PRODUCT INFORMATION */}
+        <div className="product-inf">
+          <div className='product-inf__img'>
+            < Image src={"https://rozaviht-media.s3.eu-west-3.amazonaws.com/cbd-page-info-image.webp"} height={682} width={1024} alt={"Packaging de los aceites de cbd de Rozaviht encima de unos libros y un hombre detras viendo informacion en tablet"} layout='responsive' />
+          </div>
+          <div className="product-inf__content">
+            <h1 className="product-info__title">Información del Producto</h1> 
+            <div className="information-content-wrapper">
+              <h2 className={infoList[0] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(0)} >QUÉ HACE</h2>
+              <div className={ infoList[0] === true ? "information-content dropped" : "information-content" }>
+                <p>Nuestro aceite de CBD cuenta con varios beneficios, entre ellas propiedades antiinflamatorias, antidepresivas, y relajante muscular; los cuales con tan solo un par de gotas notarás sus efectos casí de inmediato. Debido a estos beneficios podrás notar mejoras en tus dolores musculares e irritaciones, a la misma vez sintiéndote relajado. También gracias a él podrás mejorar el estrés del día a día y conciliar de una mejor manera el sueño, si lo aplicas antes de dormir.</p>
+              </div>
+            </div>
+            <div className="information-content-wrapper">
+              <h2 className={infoList[1] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(1)}>CÓMO UTILIZARLO</h2>
+              <div className={ infoList[1] === true ? "information-content dropped" : "information-content" }>
+              <p>El aceite de CBD se emplea generalmente de dos formas: de manera tópica o de manera sublingual.</p>
+              <ul style={{ 'marginTop': '0.5rem' }}>
+                <li style={{ 'marginTop': '0.5rem' }}>
+                  <strong>-Empleo de manera tópica:</strong>
+                  <p>Aplicar un par de gotas en la zona deseada y masajear la zona hasta que se haya absorbido completamente el aceite. De esta forma, se debería notar una relajación casi inmediata y una desinflamación en la zona aplicada.</p>
+                </li>
+                <li style={{ 'marginTop': '0.5rem' }}>
+                  <strong>-Empleo de manera sublingual:</strong>
+                  <p>Aplicar un par de gotas en la zona debajo de la lengua, y esperar por lo menos 1 minuto, para que se absorba completamente el aceite. Siempre se recomienda empezar con unas dos gotas de aceite e ir aumentando gradualmente la cantidad, si se cree necesario.</p>
+                </li>
+              </ul>
+              </div>
+            </div>
+            <div className="information-content-wrapper">
+              <h2 className={infoList[2] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(2)}>INGREDIENTES</h2>
+              <div className={ infoList[2] === true ? "information-content dropped" : "information-content" }>
+              <p>-Aceite de semilla de Cannabis Sativa ( Aceite de Cañamo )</p> 
+              <p>-Cannabidiol ( CBD )</p> 
+              <p>-Acetato de tocoferilo ( Vitamina E )</p> 
+              </div>
+            </div>
+            <div className="information-content-wrapper">
+              <h2 className={infoList[3] === true ? "information-content-title colored" : "information-content-title"} onClick={() => handleDropInfo(3)}>CÓMO RECICLARLO</h2>
+              <div className={ infoList[3] === true ? "information-content dropped" : "information-content" }>
+                <p>- El packaging/estuche va en cartón.</p>
+                <p>- En cuanto al envase del aceite, primero separa el tapón de la parte de vidrio del cuentagotas. Introduce el frasco en agua caliente para poder remover facilmente la etiqueta. Finalmente con las partes separdas, tira los objetos vidrio en su respectivo contenedor, y los de plastico en el suyo.</p>
+                < RecyclingAnimation  infoList={infoList} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
-export default cbdPage
+
+export const getStaticProps = async () => {
+  const CbdProductsData = await prisma.product_categories.findUnique({
+    where: {
+      name: "Aceite de CBD"
+    },
+    select: {
+      name: true,
+      description: true,
+      images: true,
+      products: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          image: true
+        }
+      }
+    }
+  })
+  return {
+    props: { CbdProductsData }
+  }
+}
+
+
+CbdPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}
 
 

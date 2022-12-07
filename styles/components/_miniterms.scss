@@ -1,0 +1,38 @@
+.miniTerms {
+  padding: 2rem;
+  z-index: 900;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 80vw;
+  height: 80vh;
+  max-width: 700px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: scroll;
+
+  background-color: #F7F4F3;
+  border: 2px solid $maincolor;
+  border-radius: 5px;
+
+  &.hidden {
+    display: none;
+  }
+
+  & > button {
+    top: 1rem;
+  }
+
+  & > h3 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $maincolor;
+  }
+
+  & > div {
+    padding-top: 1rem;
+  }
+}

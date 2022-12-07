@@ -7,9 +7,9 @@ export type SliderDotsProps = {
 const SliderDots = ({ arrayParent, activeIndex }:SliderDotsProps) => {
   
   return (
-    <div className="containerflex--row">
+    <div className="dots-container">
       {arrayParent.map((element, index) => (
-        <span key={element} className={activeIndex === index ? "dot active" : "dot"}/>
+        <span key={`${element}+${index}`} className={activeIndex === index ? "dot active" : "dot"}/>
       ))}
     </div>
   )

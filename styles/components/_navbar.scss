@@ -1,0 +1,144 @@
+.navbar {
+  position: relative;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.rozanewsMode {
+    z-index: 999;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+  }
+
+  @include respond-to(mobile-landscape) {
+    flex-direction: row;
+    padding: 1rem 10% 1rem 10%;
+  }
+  @include respond-to(tablet-portrait) {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
+
+.navbar__logoImg {
+  width: 35%;
+
+  @include respond-to(mobile-landscape) {
+    width: 30%;
+  }
+
+  @include respond-to(tablet-landscape) {
+    width: 25%;
+  }
+}
+
+.navbar__menu {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  border-top: 1px solid $maincolor;
+
+  & > a {
+    color: $maincolor;
+  }
+
+  &.rozanewsMode {
+    border-top: 1px solid $backgroundcolor;
+    & > a {
+      color: $backgroundcolor
+    }
+  }
+
+  @include respond-to(mobile-landscape) {
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    padding-right: 8%;
+    
+    border: none;
+    
+    justify-content: flex-end;
+    & > a {
+      margin-left: 3rem;
+    }
+    
+    &.rozanewsMode {
+      border: none;
+    }
+  }
+  
+  @include respond-to(tablet-landscape) {
+    padding-right: 8%;
+    font-size: 1.4rem;
+  }
+}
+
+
+
+.navbar__cartBt {
+  position: absolute;
+  right: 1rem;
+
+  @include respond-to(mobile-landscape) {
+    position: initial;
+  }
+}
+
+.navbar__cartIcon {
+  position: relative;
+  width: 25px;
+  height: 25px;
+
+
+  @include respond-to(mobile-landscape) {
+    height: 2rem;
+    width: 2rem;
+  }
+
+
+  @include respond-to(desktop) {
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+.navbar__cartCounter {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 1rem;
+  height: 1rem;
+  display: none;
+  background-color: $maincolor;
+  border-radius: 30%;
+  color: $backgroundcolor;
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.rozanewsMode {
+    background-color: $backgroundcolor;
+    color: $maincolor;
+  }
+
+
+  @include respond-to(tablet-landscape) {
+    height: 1.5rem;
+    width: 1.5rem;
+    bottom: -9px;
+    right: -9px;
+  }
+}

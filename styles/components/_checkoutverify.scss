@@ -1,0 +1,222 @@
+.checkoutVerify {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & > div:nth-child(2) {
+    margin-top: 2rem;
+  }
+  
+  
+  &__content {
+    display: flex;
+    flex-direction: column;
+    background-color: #F7F4F3;
+    padding: 1rem;
+    border-radius: 5px;
+    -webkit-box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1); 
+    box-shadow: 6px 10px 15px 3px rgba(0,0,0,0.1);
+    & > *:nth-child(n) {
+      margin-bottom: 1rem;
+    }
+
+    & > h2 {
+      padding: 1rem 1rem 1rem 0;
+      border-bottom: 3px solid rgba($maincolor, $alpha: 0.5);
+    }
+    
+  }
+
+  @include respond-to(tablet-portrait) {
+    font-size: 110%;
+    flex-direction: row;
+    align-items: flex-start;
+
+    & > div:nth-child(2) {
+      margin-top: 0;
+      margin-left: 2rem;
+    }
+  }
+
+  @include respond-to(tablet-landscape) {
+    font-size: 110%;
+    flex-direction: row;
+    align-items: flex-start;
+
+    & > div:nth-child(2) {
+      margin-top: 0;
+      margin-left: 2rem;
+    }
+  }
+}
+
+
+.checkBox {
+  position: relative;
+  width: 15px;
+  height: 15px;
+
+  & > div {
+    width: 100%;
+    height: 100%;
+    border: 2px solid $maincolor;
+    border-radius: 25%;
+    position: relative;
+  }
+
+
+  & > input {
+    z-index: 800;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ div {
+      background-color: $maincolor;
+      &::after {
+        content: '✓';
+        font-size: 60%;
+        color: $backgroundcolor;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+}
+
+.checkout-order {
+  width: 100%;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+  & > h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+
+.checkout-product-img {
+  width: 20%;
+}
+
+.checkout-product-amount {
+  width: 40%;
+  max-height: 2.5rem;
+}
+
+.editIcon {
+  position: absolute;
+  width: 10%;
+  max-width: 40px;
+  top: 10%;
+  right: 5%;
+  border: none;
+  background-color: unset;
+
+  &--relative {
+    position: unset;
+  }
+}
+
+.checkoutVerify__price {
+  margin-top: 2rem;
+  border-top: 3px solid rgba($maincolor, $alpha: 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  & > p, > h2 {
+    padding-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & > h2 > span {
+    color: $maincolor;
+    font-size: 120%;
+  }
+}
+
+.shippingCheck {
+  position: relative;
+  display: flex;
+
+  & > input {
+    position: absolute;
+    z-index: 800;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ div {
+      border: 3px solid $maincolor;
+      
+      & .checkCircle {
+        border: 5px solid $maincolor;
+      }
+    }
+  }
+
+  & > div {
+    width: 100%;
+    height: 100%;
+    padding: 1rem 1rem 1rem 6rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgba($color: #000000, $alpha: 0.3);
+    border-radius: 5px;
+
+    & > h4 {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      & > div {
+        margin-left: 1rem;
+      }
+    }
+
+    & > p > strong {
+      font-size: 110%;
+      margin-left: 1rem;
+    }
+
+    & .checkCircle {
+      position: absolute;
+      left: 5%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 35%;
+      border: 5px solid rgba($color: #000000, $alpha: 0.3);
+    }
+  }
+}
+
+.creditCardImg {
+  width: 50px;
+}
+
+.spanTerms {
+  color: $maincolor;
+  text-decoration: underline;
+  cursor: pointer;
+}
