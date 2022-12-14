@@ -1,5 +1,11 @@
 .navbar {
-  position: relative;
+  background-color: #fff;
+  z-index: 99999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
   padding: 1rem;
 
   display: flex;
@@ -15,6 +21,7 @@
   }
 
   @include respond-to(mobile-landscape) {
+    position: relative;
     flex-direction: row;
     padding: 1rem 10% 1rem 10%;
   }
