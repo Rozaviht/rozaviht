@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
-import { CartItemType } from './AppProvider'
+import { CartItemType, imageType } from './AppProvider'
 
 export type AppContextProps = {
     cartProducts: CartItemType[]
@@ -11,10 +11,12 @@ export type AppContextProps = {
     setCookiesManageShow: Dispatch<SetStateAction<boolean>>,
     showCart: boolean,
     setShowCart: Dispatch<SetStateAction<boolean>>,
-    showPopUp: boolean,
-    setShowPopUp: Dispatch<SetStateAction<boolean>>,
+    popUpOpen: boolean,
+    setPopUpOpen: Dispatch<SetStateAction<boolean>>,
     popUpMssg: string[]
     setPopUpMssg: Dispatch<SetStateAction<string[]>>,
+    popUpImg: imageType,
+    setPopUpImg: Dispatch<SetStateAction<imageType>>
 
 }
 

@@ -5,12 +5,11 @@ import type { CbdPageProps } from "pages/aceite-cbd"
 
 export  default  ({CbdProductsData}:CbdPageProps) => {
 
-  const { setCartProducts } = useContext( AppContext )
+  const { setCartProducts, setPopUpOpen, setPopUpMssg, setPopUpImg } = useContext( AppContext )
   
   var CbdProducts= CbdProductsData.products
 
   const [infoList, setInfoList] = useState([false, false, false, false])
-  const [showAddedPopUp, setShowAddedPopUp] = useState(false)
   const [currentProduct, setCurrentProduct] = useState<CartItemType>({
     ...CbdProducts[0],
     amount: 1
@@ -65,7 +64,9 @@ const handleAddToCart = (productSelected: CartItemType) => {
     return [...prev, { ...productSelected, amount: productSelected.amount }];
   });
   
-  setShowAddedPopUp(true)
+  setPopUpMssg(["¡Genial!", `Se ${productSelected.amount > 1 ? "han" : "ha"} añadido ${productSelected.amount} ${productSelected.name} a tu cesta de la compra.` ])
+  setPopUpImg(productSelected.image)
+  setPopUpOpen(true)
 };
 
 const handleDropInfo = (index:number) => {
@@ -74,5 +75,5 @@ const handleDropInfo = (index:number) => {
   setInfoList(infoCopy)
 }
 
-  return {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, setInfoList, currentProduct, setCurrentProduct, totalAmountPrice}
+  return {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, infoList, setInfoList, currentProduct, setCurrentProduct, totalAmountPrice}
 }

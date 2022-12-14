@@ -7,6 +7,7 @@ import useCbdPage from "@hooks/useCbdPage"
 import type { imageType } from "../services/AppProvider"
 import type { ReactElement } from "react"
 
+import PopUpAlert from '@components/PopUpAlerts'
 import Layout from "@components/Layout"
 import ProductImageSlider from '@components/ProductImageSlider'
 import AddedToCartPopUp from "@components/AddedToCartPopUp"
@@ -32,8 +33,9 @@ export interface CbdPageProps  {
 }
 
 export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
+  
 
-  const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, showAddedPopUp, setShowAddedPopUp, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
+  const {decrementAmount, incrementAmount, changeOil, handleDropInfo, handleAddToCart, infoList, currentProduct, totalAmountPrice} = useCbdPage({CbdProductsData})
 
   const productJsonLd = {
     __html: `{
@@ -95,7 +97,7 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
         </script>
       </head>
       <div className="cbdPage">
-        <AddedToCartPopUp  productAdded={currentProduct} showAddedPopUp={showAddedPopUp} setShowAddedPopUp={setShowAddedPopUp}/>
+        <PopUpAlert />
         <div className="product-hero">
           <ProductImageSlider></ProductImageSlider>
           <div className="flexcolum flexcolum--around">

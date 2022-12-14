@@ -21,7 +21,7 @@ const SEND_CONTACT_MAIL = gql`
 
 export default function ContactPage () {
 
-  const { setShowPopUp, setPopUpMssg, popUpMssg } = useContext(AppContext)
+  const { setShowPopUp, setPopUpMssg } = useContext(AppContext)
 
   const [ validateSendContactMail ] = useMutation(SEND_CONTACT_MAIL)
 
