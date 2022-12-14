@@ -5,21 +5,22 @@ import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
+import Isotipo from 'public/img/isotipo.svg'
 import Logo from 'public/img/logo.svg'
 import LogoNegative from 'public/img/logo-negative.svg'
 import CartIcon from 'public/img/cart-icon.svg'
 import CartIconNegative from 'public/img/cart-icon-negative.svg'
+import useScrollDirection from '@hooks/useScrollDirection'
 
-
-export const getStaticProps = async () => {
-  
-}
 
 const Navbar = () => {
-
   const [rozanewsMode, setRozanewsMode] = useState(false)
+  const [mobileMode, setMobileMode] = useState<boolean>()
 
   const { cartProducts, showCart, setShowCart } = useContext(AppContext)
+
+  const scrollDirection = useScrollDirection()
+
 
   useEffect(() => {
     let AllChangeableNavElements: NodeListOf<HTMLDivElement> = document.querySelectorAll(".navbar, .navbar__menu, .navbar__cartCounter")!
@@ -36,11 +37,43 @@ const Navbar = () => {
     }
   })
 
+  useEffect(() => {
+/*     var windowWidth640 = window.matchMedia(' (max-width: 640px) ') */
+    var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
+
+    if (windowWidth960.matches) {
+      setMobileMode(true)
+
+    } else {
+      setMobileMode(false)
+
+    }
+
+/*     window.addEventListener('resize', () => {
+      var windowWidth960 = window.matchMedia(' (max-width: 960px) ')
+  
+      if (windowWidth960.matches) {
+        setMobileMode(true)
+      } else {
+        setMobileMode(false)
+      }
+    })
+
+    return () => {
+      document.removeEventListener("resize", () => {});
+    }; */
+  }, [])
+
   return (
-      <div className="navbar">
+      <div className={scrollDirection === "down" ? "navbar hide" : "navbar"}>
         <Link href="/">
           <a  className="navbar__logoImg">
-            {rozanewsMode === true ? <LogoNegative alt="Logo de Rozaviht en blanco" /> : <Logo alt="Logo de Rozaviht"/>}
+            {mobileMode === true ?
+              <Isotipo alt="Isotipo de Rozaviht" />
+              : rozanewsMode === true ?
+                <LogoNegative alt="Logo de Rozaviht en blanco" />
+                :
+                <Logo alt="Logo de Rozaviht"/>}
           </a>
         </Link>
         <div className="navbar__menu">
