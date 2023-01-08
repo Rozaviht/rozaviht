@@ -14,7 +14,7 @@ export default function ArticleCard ({article}:ArticleCardProps) {
         <div className="articleCard">
           <div className="flexcolum flexcolum--nopd flexcolum--separate">
             <p style={{ 'fontSize': '22px', 'fontWeight': '700' }}>{article.title}</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard</p>
             <div className="flexrow flexrow--nopd flexrow--algncenter flexrow--separate" style={{ 'width': '100%' }}>
               <div className="articleCard__category">{article.category.name}</div>
               <p style={{ 'opacity': '0.6', 'fontSize': '13px' }} >{article.createdAt}</p>
