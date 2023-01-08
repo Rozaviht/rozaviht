@@ -25,7 +25,7 @@ const CREATE_USER = gql`
 const Footer = () => {
   const [ createUser ] = useMutation(CREATE_USER)
 
-  const { setCookiesManageShow, setShowPopUp, setPopUpMssg} = useContext(AppContext)
+  const { setCookiesManageShow, setPopUpOpen, setPopUpMssg} = useContext(AppContext)
 
   const [footerListDropped, setFooterListDropped] = useState(false)
   const [loadingDots, setLoadingDots] = useState(false)
@@ -71,11 +71,11 @@ const Footer = () => {
                   .then(({data}) => {
                     if (data.createUser.error === true) {
                       setPopUpMssg(data.createUser.message)
-                      setShowPopUp(true)
+                      setPopUpOpen(true)
                       setLoadingDots(false)
                     } else {
                       setPopUpMssg(data.createUser.message)
-                      setShowPopUp(true)
+                      setPopUpOpen(true)
                       setLoadingDots(false)
                     }
                   })
