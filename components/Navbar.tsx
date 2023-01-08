@@ -5,7 +5,7 @@ import { AppContext } from 'services/AppContext'
 
 import Cart from '@components/Cart'
 
-import Isotipo from 'public/img/isotipo.svg'
+import Isotipo from 'public/img/Isotipo.svg'
 import Logo from 'public/img/logo.svg'
 import LogoNegative from 'public/img/logo-negative.svg'
 import RozanewsIsotipo from 'public/img/rozanews-isotipo-maincolor.svg'
