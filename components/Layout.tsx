@@ -29,14 +29,13 @@ const Layout = ({children}: LayoutProps) => {
 
   
   return (
-    <>
-      <TopWarning/>
+    <div className="layout">
       <Navbar/>
       {children}
       <CookiesConsent/>
       <CookiesManage/>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -78,6 +78,7 @@ model discounts {
   id          String     @id @default(uuid())
   name        String     @unique
   description String?
+  percent     Int
   // A Discount can has many Product
   product     products[]
 }

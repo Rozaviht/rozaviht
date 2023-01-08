@@ -28,6 +28,7 @@
   &__price {
     margin-top: 2rem;
     font-size: 1.8rem;
+    font-weight: 600;
     font-family: Lora-Regular;
   }
 
@@ -99,6 +100,7 @@
   justify-content: center;
   align-items: center;
 
+
   &__list {
     width: 100%;
     margin-left: 2rem;
@@ -115,11 +117,16 @@
     font-size: 1rem;
     border: none;
     background-color: unset;
-
+      
+    background-color: rgba($oilsectiontext, $alpha: 0.5);
+    color: $backgroundcolor;
+    border-radius: 5px;
+    
     &.selected {
       background-color: $oilsectiontext;
       color: $backgroundcolor;
       border-radius: 5px;
+      opacity: 1;
     }
 
     &:nth-child(1) {

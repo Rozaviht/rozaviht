@@ -106,17 +106,20 @@ export default function CbdPage ({ CbdProductsData}: CbdPageProps) {
             <p className="product-hero__desc">
               Siente relajación y bienestar al usar nuestro aceite de CBD con aceite de cáñamo. No contiene nada de THC, y es completamente natural y vegano.
             </p>
-            <h2 className="product-hero__price">{`${totalAmountPrice},00€`}</h2>
+            <div className="flexrow flexrow--nopd flexrow--separate flexrow--algncenter">
+              <p className="product-hero__price">{`${totalAmountPrice},00€`}</p>
+              <p className="product-hero__price" style={{"opacity": 0.5, "fontSize": "1.5rem", "textDecoration": "line-through"}}>{currentProduct.price === 28 ? `${35*currentProduct.amount},00€` : `${50*currentProduct.amount},00€`}</p>
+            </div>
             <p>(IVA incluido)</p>
             <div className="oil-percentage">
               <h3>Porcentaje:</h3>
               <div className="oil-percentage__list">
                 <button 
-                className={currentProduct.price === 40 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                className={currentProduct.price === 28 ? "oil-percentage__item selected" : "oil-percentage__item"}
                 onClick={() => changeOil(10)}
                 >10%</button>
                 <button 
-                className={currentProduct.price === 60 ? "oil-percentage__item selected" : "oil-percentage__item"}
+                className={currentProduct.price === 40 ? "oil-percentage__item selected" : "oil-percentage__item"}
                 onClick={() => changeOil(20)}
                 >20%</button>
               </div>
@@ -216,7 +219,8 @@ export const getStaticProps = async () => {
           id: true,
           name: true,
           price: true,
-          image: true
+          image: true,
+          discount: true,
         }
       }
     }

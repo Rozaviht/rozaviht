@@ -5,4 +5,11 @@
   @include respond-to(mobile-landscape) {
     grid-template-rows: 1% 5% 81% 12%;
   }
+
+  @include respond-to(tablet-landscape) {
+    padding-top: 6rem;
+  }
+  @include respond-to(desktop) {
+    padding-top: 6rem;
+  }
 }
