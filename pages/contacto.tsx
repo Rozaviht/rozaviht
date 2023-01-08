@@ -21,7 +21,7 @@ const SEND_CONTACT_MAIL = gql`
 
 export default function ContactPage () {
 
-  const { setShowPopUp, setPopUpMssg } = useContext(AppContext)
+  const { setPopUpOpen, setPopUpMssg } = useContext(AppContext)
 
   const [ validateSendContactMail ] = useMutation(SEND_CONTACT_MAIL)
 
@@ -58,10 +58,10 @@ export default function ContactPage () {
             .then(({data}) => {
               if (data.validateSendContactMail.error === true) {
                 setPopUpMssg(data.validateSendContactMail.message)
-                setShowPopUp(true)
+                setPopUpOpen(true)
               } else {
                 setPopUpMssg(data.validateSendContactMail.message)
-                setShowPopUp(true)
+                setPopUpOpen(true)
               }
             })
             .catch(err => {
