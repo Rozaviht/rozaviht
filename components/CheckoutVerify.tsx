@@ -40,7 +40,7 @@ const CREATE_ORDER = gql`
 
 export default function CheckoutVerify () {
 
-  const { cartProducts, totalCartPrice, setShowCart, showCart, setShowPopUp, setPopUpMssg } = useContext(AppContext)
+  const { cartProducts, totalCartPrice, setShowCart, showCart, setPopUpOpen, setPopUpMssg } = useContext(AppContext)
   const { shippingForm, billingForm, setBillingForm, setEditingForm } = useContext(CheckoutContext)
 
   const [ paymentRequest, {data} ] = useMutation(PAYMENT_REQUEST)
@@ -105,7 +105,7 @@ export default function CheckoutVerify () {
   const handleResysSubmit = () => {
     if (checkedTerms === false ) {
       setPopUpMssg(["No se puede realizar la compra ", "Para poder realizar la compra tienes que aceptar nuestros términos."])
-      setShowPopUp(true)
+      setPopUpOpen(true)
       return false
 
     } else {
